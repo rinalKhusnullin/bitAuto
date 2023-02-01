@@ -204,7 +204,7 @@ header{
 
 .vk
 {
-    background-image: url('/img/vk_icon.svg');
+    background-image: url('../images/vk-icon.svg');
 }
 
 .vk:hover
@@ -225,7 +225,7 @@ header{
 
 .bitrix
 {
-    background-image: url('/img/favicon.svg');
+    background-image: url('../images/bitrix-icon.svg');
     background-position: center;
     background-repeat: no-repeat;
 }
