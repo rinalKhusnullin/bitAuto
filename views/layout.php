@@ -2,7 +2,6 @@
 /**
  * @var string $title
  * @var $content
- * @var Products[] $cars
  */
 ?>
 <!DOCTYPE html>
@@ -71,9 +70,7 @@
 <section class="main-content">
 	<div class="container">
 
-	<?php foreach ($cars as $car):?>
-		<?= \ES\View\TemplateEngine::view('components/productCard', ['car' => $car]) ?>
-	<?php endforeach?>
+		<?= $content ?>
 
 	</div>
 
