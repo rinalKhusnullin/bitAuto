@@ -2,6 +2,7 @@
 /**
  * @var string $title
  * @var $content
+ * @var Products[] $cars
  */
 ?>
 <!DOCTYPE html>
@@ -14,10 +15,11 @@
 	<link rel="stylesheet" href="styles/reset.css">
 	<link rel="stylesheet" href="styles/style.css">
 
+	<link rel="shortcut icon" href="images/logo.ico" type="image/x-icon">
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@200;300;400;500&display=swap" rel="stylesheet">
-	<title><?= $title?></title>
+	<title><?= $title ?></title>
 </head>
 
 <body>
@@ -67,7 +69,14 @@
 	</div>
 </header>
 <section class="main-content">
-	<?= $content /** Part for base content*/ ?>
+	<div class="container">
+
+	<?php foreach ($cars as $car):?>
+		<?= \ES\View\TemplateEngine::view('components/productCard', ['car' => $car]) ?>
+	<?php endforeach?>
+
+	</div>
+
 </section>
 <footer class="footer">
 	<div class="container">
