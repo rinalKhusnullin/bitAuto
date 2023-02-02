@@ -2,7 +2,8 @@
 
 require_once $_SERVER['DOCUMENT_ROOT'] . '/../boot.php';
 
-use \ES\Product\Product;
+use \ES\Model\Products\Product;
+use \ES\View\TemplateEngine;
 
 $cars = [
 	new Product(
@@ -15,16 +16,16 @@ $cars = [
 	),
 
 	new Product(
-		2, 
+		2,
 		'Mazda',
 		'Mazda CX-5',
 		'Кроссовер',
 		'АКПП',
 		2700000
 	),
-	
+
 	new Product(
-		3, 
+		3,
 		'Toyota',
 		'Toyota Camry',
 		'Седан',
@@ -33,7 +34,7 @@ $cars = [
 	),
 
 	new Product(
-		4, 
+		4,
 		'Toyota',
 		'Toyota Solara',
 		'Купе',
@@ -42,7 +43,7 @@ $cars = [
 	),
 
 	new Product(
-		5, 
+		5,
 		'Volkswagen',
 		'Volkswagen Multivan',
 		'Минивэн',
@@ -51,7 +52,7 @@ $cars = [
 	),
 
 	new Product(
-		6, 
+		6,
 		'Volkswagen',
 		'Volkswagen Passat',
 		'Универсал',
@@ -60,7 +61,19 @@ $cars = [
 	),
 ];
 
-echo \ES\View\TemplateEngine::view('layout', [
-	'title' => 'AUTOBIT',
-	'cars' => $cars,
-]);
+try
+{
+	echo TemplateEngine::view('layout', [
+		'title' => 'AUTOBIT',
+		'content' => TemplateEngine::view('pages/index', [
+			'cars' => $cars,
+			]),
+	]);
+}
+catch (Exception $e)
+{
+	echo TemplateEngine::view('layout', [
+		'title' => 'AUTOBIT',
+		'content' => 'Сервис временно не доступен',
+	]);
+}
