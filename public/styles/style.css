@@ -21,9 +21,6 @@ header{
     flex: 0 0 auto;
  }
 
-
-
-
 .header
 {
     display: flex;
@@ -70,7 +67,6 @@ header{
     width: 100%;
 }
 
-
 .header__search-form{
     display: flex;
     align-items: center;
@@ -108,13 +104,11 @@ header{
     height: 41.6px;
 }
 
-
 .header__side-header
 {
     background: #3d3f44;
     height: 38px;    
 }
-
 
 .header__menu
 {
@@ -124,7 +118,6 @@ header{
     line-height: 38px;
     text-align: center;
 }
-
 
 .header__menu-item
 {
@@ -145,15 +138,12 @@ header{
     transition: .4s;
 }
 
-
-
 .footer
 {
     background-color: #3d3f44;
     box-shadow: 0px 0px 23px rgb(0 0 0 / 50%);
     padding: 25px 0 25px 0;
 }
-
 
 .footer__info-list
 {
@@ -186,8 +176,6 @@ header{
     
 }
 
-
-
 .info-item__link
 {
     display: inline-block;
@@ -200,8 +188,6 @@ header{
     margin-right: 2px;
 }
 
-
-
 .vk
 {
     background-image: url('../images/vk-icon.svg');
@@ -211,7 +197,6 @@ header{
 {
     background-color: #48729e;
 }
-
 
 .info-item__social
 {
@@ -245,3 +230,108 @@ header{
     background: #c41230;
 }
 
+.main-content
+{
+    padding: 15px 0 15px 0;
+}
+
+.main-content .container
+{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.product-card
+{
+    color: #3d3f44;
+    display: flex;
+    height: 400px;
+    width: 48%;
+    align-items: center;
+    padding: 10px;
+    outline: 2px solid rgba(86, 85, 85, 0);
+    transition: .5s;
+    margin-bottom: 50px;
+}
+
+.product-card:hover
+{
+    outline: 2px solid rgba(86, 85, 85, 0.2);
+    transition: .5s;
+}
+
+.product-card__img-block
+{
+    position: relative;
+    width: 300px;
+    height: 300px;
+    margin-right: 20px;
+    overflow: hidden;
+}
+
+.product-card__img
+{
+    width: 100%;
+    height: 100%;
+    transition: 1s;
+    object-fit: contain;
+}
+
+.product-card:hover .product-card__img
+{
+    width: 110%;
+    height: 110%;
+    transition: 1s;
+}
+
+.product-card__title
+{
+    margin-bottom: 10px;
+}
+
+.product-card__hlink
+{
+    text-decoration: none;
+    color: #3d3f44;
+    font-size: 34px;
+}
+
+.product-card__chr-title
+{
+    font-size: 10px;
+    margin-bottom: 5px;
+}
+
+.product-card__chr-value
+{
+
+    font-weight: 400;
+}
+
+.product-card__chr
+{
+    margin-bottom: 15px;
+}
+
+.product-card__chr-list
+{
+    margin-bottom: 36px;
+}
+
+.product-card__more
+{
+    padding: 15px 30px 15px 30px;
+    border: 1px solid black;
+    font-size: 18px;
+    color: #3d3f44;
+    transition: .6s;
+}
+
+.product-card__more:hover
+{
+    color: white;
+    border: 1px solid white;
+    background: #c41230;
+    transition: .6s;
+}
