@@ -1,6 +1,6 @@
 <?php
 
-require_once $_SERVER['DOCUMENT_ROOT'] . '/boot.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/../boot.php';
 
 use \ES\Product\Product;
 
