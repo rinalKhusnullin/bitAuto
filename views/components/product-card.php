@@ -14,8 +14,9 @@
 		<img src="tmp-autoimg/auto-id-<?= $id ?>.png" alt="" class="product-card__img">
 	</div>
 	<div class="product-card__description">
-		<h2 class="product-card__title"><a href="/" class="product-card__hlink"><?= $title ?></a>
-		</h2> <!-- link to detailed page -->
+		<h2 class="product-card__title">
+			<a href="/" class="product-card__hlink"><?= $title ?></a> <!-- link to detailed page -->
+		</h2> 
 		<!-- chr - its characteristics -->
 		<ul class="product-card__chr-list">
 			<li class="product-card__chr">
@@ -37,6 +38,6 @@
 				<div class="product-card__chr-value"><?= $price ?></div>
 			</li>
 		</ul>
-		<a href="#" class="product-card__more">Купить</a> <!-- generate new product detailed page with id -->
+		<a href="#" class="product-card__more">Подробнее</a> <!-- generate new product detailed page with id -->
 	</div>
 </div>
