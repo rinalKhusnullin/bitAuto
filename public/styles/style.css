@@ -163,7 +163,6 @@ footer{
     top: 45px;
     min-width: 100%;
     width: auto;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
     padding: 10px 0;
     z-index: 10;
 }
@@ -402,3 +401,39 @@ footer{
     background: #c41230;
     transition: .6s;
 }
+
+/* pagination */
+.pagination{
+    margin: 0 auto;
+    width: 600px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 25px;
+}
+
+.pagination__item{
+    display: block;
+    font-size: 17px;
+    padding: 5px 10px;
+    outline: 1px solid #3d3f44;
+    color: #3d3f44;
+}
+
+.pagination__item:hover{
+    background: #c41230;
+    color: white;
+    transition: 0.4s;
+    
+}
+
+.pagination__item-dots{
+    align-self: end;
+    font-size: 20px;
+}
+
+.pagination-active, .pagination-active:hover{
+    background: #3d3f44;
+    color: white;
+}
+
