@@ -1,0 +1,8 @@
+.phpunit.result.cache
+composer.json
+composer.lock
+phpunit.xml
+/vendor
+phpunit.xml
+.gitignore
+.phpunit.cache/
