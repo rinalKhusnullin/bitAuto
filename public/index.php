@@ -4,6 +4,7 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/../boot.php';
 
 use \ES\Model\Products\Product;
 use \ES\View\TemplateEngine;
+use \ES\Routing\Router;
 
 $cars = [
 	new Product(
@@ -60,6 +61,36 @@ $cars = [
 		1150000
 	),
 ];
+
+
+Router::get('/', function () use ($cars) {
+	return TemplateEngine::view('layout', [
+		'title' => 'AUTOBIT',
+		'content' => TemplateEngine::view('pages/index', [
+			'cars' => $cars,
+		]),
+	]);
+});
+
+Router::get('/product/:id/', function ($id) {
+	return "product $id";
+});
+
+$route = Router::find($_SERVER['REQUEST_METHOD'], $_SERVER['REQUEST_URI']);
+if ($route)
+{
+	$action = $route->action;
+	echo $action();
+}
+else
+{
+	http_response_code(404);
+	echo TemplateEngine::view('layout', [
+		'title' => 'AUTOBIT',
+		'content' => 'page not found',
+	]);
+	exit;
+}
 
 try
 {
