@@ -60,7 +60,18 @@
 		<div class="container">
 			<ul class="header__menu">
 				<li class="header__menu-item"><a href="#" class="header__menu-link">Каталог</a></li> <!--link to catalog -->
-				<li class="header__menu-item"><a href="#" class="header__menu-link">Марки автомобилей</a></li>
+				<li class="header__menu-item">
+					<div class="header__dropdown-menu">
+						<a href="##" id="dropdown-btn" class="header__menu-link dropdown-btn undroped" onclick="dropdown(); return false">Марки автомобилей</a>
+						<div class="header__dropdown-tags" id="dropdown-content">
+							<a href="##" class="header__dropdown-link">Mazda</a> <!-- links to get products with need tag -->
+							<a href="##" class="header__dropdown-link">Toyota</a>
+							<a href="##" class="header__dropdown-link">Volkswagen</a>
+							<a href="##" class="header__dropdown-link">BMW</a>
+							<a href="##" class="header__dropdown-link">Tesla</a>
+						</div>
+					</div>
+				</li>
 				<li class="header__menu-item"><a href="#" class="header__menu-link">О компании</a></li> <!--link to about of company -->
 			</ul>
 		</div>
@@ -72,7 +83,6 @@
 		<?= $content ?>
 
 	</div>
-
 </section>
 <footer class="footer">
 	<div class="container">
@@ -159,6 +169,7 @@
 		</div>
 	</div>
 </footer>
+<script src="scripts/dropdown.js"></script>
 </body>
 
 </html>
