@@ -2,7 +2,7 @@
 
 namespace ES\controller;
 
-class Option
+class option
 {
 	static function getConfig(string $name, $defaultValue = null)
 	{
