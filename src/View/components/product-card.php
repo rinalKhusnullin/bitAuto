@@ -11,7 +11,7 @@
 
 <div class="product-card">
 	<div class="product-card__img-block">
-		<img src="tmp-autoimg/auto-id-<?= $id ?>.png" alt="" class="product-card__img">
+		<img src="/tmp-autoimg/auto-id-<?= $id ?>.png" alt="" class="product-card__img">
 	</div>
 	<div class="product-card__description">
 		<h2 class="product-card__title">
@@ -38,6 +38,6 @@
 				<div class="product-card__chr-value"><?= $price ?></div>
 			</li>
 		</ul>
-		<a href="#" class="product-card__more">Подробнее</a> <!-- generate new product detailed page with id -->
+		<a href="/product" class="product-card__more">Подробнее</a> <!-- generate new product detailed page with id -->
 	</div>
 </div>
