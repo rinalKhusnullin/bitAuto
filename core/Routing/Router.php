@@ -5,6 +5,7 @@ namespace ES\Routing;
 class Router {
 
 	/** @var Route */
+
 	private static array $routes = [];
 
 	public static function add(string $method, string $uri, callable $action)

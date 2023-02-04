@@ -1,8 +1,6 @@
 <?php
 
-namespace ES\View;
-
-use http\Exception\RuntimeException;
+namespace ES\Controller;
 
 class TemplateEngine
 {
@@ -13,7 +11,7 @@ class TemplateEngine
 			throw new \RuntimeException("Invalid template path");
 		}
 
-		$absolutePath = ROOT . "/views/$path.php";
+		$absolutePath = ROOT . "/src/View/$path.php";
 
 		if (!file_exists($absolutePath))
 		{

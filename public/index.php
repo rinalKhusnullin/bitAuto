@@ -2,9 +2,9 @@
 
 require_once $_SERVER['DOCUMENT_ROOT'] . '/../boot.php';
 
-use \ES\Model\Products\Product;
-use \ES\View\TemplateEngine;
-use \ES\Routing\Router;
+use ES\Routing\Router;
+use ES\Model\Products\Product;
+use ES\Controller\TemplateEngine;
 
 $cars = [
 	new Product(
@@ -63,7 +63,8 @@ $cars = [
 ];
 
 
-Router::get('/', function () use ($cars) {
+Router::get('/', function() use ($cars)
+{
 	return TemplateEngine::view('layout', [
 		'title' => 'AUTOBIT',
 		'content' => TemplateEngine::view('pages/index', [
@@ -72,7 +73,8 @@ Router::get('/', function () use ($cars) {
 	]);
 });
 
-Router::get('/product/:id/', function ($id) {
+Router::get('/product/:id/', function ($id)
+{
 	return "product $id";
 });
 
