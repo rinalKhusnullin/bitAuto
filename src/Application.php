@@ -18,15 +18,15 @@ class Application
 				$action = $route->action;
 				$variables = $route->getVariables();
 
-				// Проверка на число
-				if (empty($variables))
-				{
-					echo TemplateEngine::view('layout', [
-						'title' => Option::getConfig('TITLE'),
-						'content' => 'Ошибка: неверный тип данных для ID',
-					]);
-					exit;
-				}
+				// Проверку на число до сих пор не реализовал, но оставлю это здесь
+				// if (empty($variables))
+				// {
+				// 	echo TemplateEngine::view('layout', [
+				// 		'title' => Option::getConfig('TITLE'),
+				// 		'content' => 'Ошибка: неверный тип данных для ID',
+				// 	]);
+				// 	exit;
+				// }
 
 				echo $action(...$variables);
 			}

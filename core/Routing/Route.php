@@ -33,13 +33,6 @@ class Route
 		if ($result)
 		{
 			array_shift($matches);
-			foreach ($matches as $item)
-			{
-				if (!is_numeric($item))
-				{
-					return $result;
-				}
-			}
 			$this->variables = $matches;
 		}
 

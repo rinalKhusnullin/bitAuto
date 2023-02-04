@@ -71,9 +71,11 @@ Router::get('/', static function () use ($cars) {
 	]);
 });
 
-Router::get('/product/:id/', static function (int $id) {
+Router::get('/product/:id/', static function ($id) {
 	return TemplateEngine::view('layout', [
 		'title' => Option::getConfig('TITLE'),
-		'content' => "THIS IS A PRODUCT ID = $id PAGE", // @Todo add product page
+		'content' => TemplateEngine::view('pages/product-detailed', [
+			'cars' => '',
+		]), // @Todo add product page
 	]);
 });
