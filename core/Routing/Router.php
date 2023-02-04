@@ -2,7 +2,8 @@
 
 namespace ES\Routing;
 
-class Router {
+class Router
+{
 
 	/** @var Route */
 
@@ -23,13 +24,17 @@ class Router {
 		self::add('POST', $uri, $action);
 	}
 
-	public static function find(string $method, string $uri) :?Route
+	public static function find(string $method, string $uri): ?Route
 	{
 		foreach (self::$routes as $route)
 		{
-			if ($route->method!==$method) continue;
+			[$path] = explode('?', $uri);
 
-			if ($route->uri === $uri)
+			if ($route->method !== $method)
+			{
+				continue;
+			}
+			if ($route->match($path))
 			{
 				return $route;
 			}

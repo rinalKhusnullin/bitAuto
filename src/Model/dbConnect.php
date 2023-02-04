@@ -2,7 +2,7 @@
 
 namespace ES\model;
 
-use ES\controller\option;
+use ES\controller\Option;
 
 abstract class dbConnect
 {
@@ -12,10 +12,10 @@ abstract class dbConnect
 
 		if ($connection === null)
 		{
-			$dbHost = option::getConfig('DB_HOST');
-			$dbUser = option::getConfig('DB_USER');
-			$dbPassword = option::getConfig('DB_PASSWORD');
-			$dbName = option::getConfig('DB_NAME');
+			$dbHost = Option::getConfig('DB_HOST');
+			$dbUser = Option::getConfig('DB_USER');
+			$dbPassword = Option::getConfig('DB_PASSWORD');
+			$dbName = Option::getConfig('DB_NAME');
 
 			$connection = mysqli_init();
 
