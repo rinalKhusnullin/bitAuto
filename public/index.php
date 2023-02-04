@@ -69,13 +69,17 @@ Router::get('/', function() use ($cars)
 		'title' => 'AUTOBIT',
 		'content' => TemplateEngine::view('pages/index', [
 			'cars' => $cars,
+			'pagination' => TemplateEngine::view('components/pagination', []),
 		]),
 	]);
 });
 
-Router::get('/product/:id/', function ($id)
+Router::get('/product', function ()
 {
-	return "product $id";
+	return TemplateEngine::view('layout', [
+		'title' => 'AUTOBIT',
+		'content' => TemplateEngine::view('pages/product-detailed', []),
+	]);
 });
 
 $route = Router::find($_SERVER['REQUEST_METHOD'], $_SERVER['REQUEST_URI']);
@@ -94,19 +98,4 @@ else
 	exit;
 }
 
-try
-{
-	echo TemplateEngine::view('layout', [
-		'title' => 'AUTOBIT',
-		'content' => TemplateEngine::view('pages/index', [
-			'cars' => $cars,
-			]),
-	]);
-}
-catch (Exception $e)
-{
-	echo TemplateEngine::view('layout', [
-		'title' => 'AUTOBIT',
-		'content' => 'Сервис временно не доступен',
-	]);
-}
+
