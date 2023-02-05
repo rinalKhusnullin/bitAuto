@@ -4,6 +4,7 @@ namespace ES\Model;
 
 use ES\Controller\ConfigurationController;
 use ES\Model\DB;
+use ES\Model\Products\Product;
 
 class sqlDB extends DB
 {
@@ -54,9 +55,19 @@ class sqlDB extends DB
 		return $this->buildProduct($result,$connection);
 	}
 
-	function getDataByID($id): array
+
+	function getDataByID($id) : Product
 	{
-		// TODO: Implement getDataByID() method.
+		$connection = $this->connect();
+		$id = mysqli_real_escape_string($connection, $id);
+		$query = "SELECT p.id, p.name, p.IS_ACTIVE, b.brand, t.transmission, c.carcase, p.DATE_CREATION, p.DATE_UPDATE, p.SHORT_DESCRIPTION, p.FULL_DESCRIPTION, p.PRODUCT_PRIСE
+					FROM products p
+					inner join brand b on p.ID_BRAND = b.id
+					inner join carcase c on p.ID_CARCASE = c.id
+					inner join transmission t on p.ID_TRANSMISSION = t.id
+					where $id = p.id";
+		$result = mysqli_query($connection, $query);
+		return $this->buildProduct($result, $connection)[0];
 	}
 
 	function getDataByTeg(): array
