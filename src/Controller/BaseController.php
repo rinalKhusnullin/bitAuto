@@ -2,7 +2,7 @@
 
 namespace ES\Controller;
 
-class BaseController
+abstract class BaseController
 {
 	public function render(string $templateName, array $data)
 	{
