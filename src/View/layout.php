@@ -2,6 +2,7 @@
 /**
  * @var string $title
  * @var $content
+ * @var $pagination
  */
 ?>
 <!DOCTYPE html>
@@ -38,8 +39,8 @@
 				</form>
 			</div>
 			<div class="header__address">
-				<a href="https://yandex.ru/maps/org/bitriks24/1126159654/?ll=20.488308%2C54.719150&z=16.67" 
-					class="header__address-link" target="_blank"> <!--link to yandex maps with bitrix24 -->
+				<a href="https://yandex.ru/maps/org/bitriks24/1126159654/?ll=20.488308%2C54.719150&z=16.67"
+				   class="header__address-link" target="_blank"> <!--link to yandex maps with bitrix24 -->
 					<img src="/images/mark-map.svg" alt="" class="header__address-icon icon">
 				</a>
 				<p class="header__address-description">
@@ -59,7 +60,8 @@
 	<div class="header__side-header">
 		<div class="container">
 			<ul class="header__menu">
-				<li class="header__menu-item"><a href="#" class="header__menu-link">Каталог</a></li> <!--link to catalog -->
+				<li class="header__menu-item"><a href="#" class="header__menu-link">Каталог</a>
+				</li> <!--link to catalog -->
 				<li class="header__menu-item">
 					<div class="header__dropdown-menu">
 						<a href="##" id="dropdown-btn" class="header__menu-link dropdown-btn undroped" onclick="dropdown(); return false">Марки автомобилей</a>
@@ -72,7 +74,8 @@
 						</div>
 					</div>
 				</li>
-				<li class="header__menu-item"><a href="#" class="header__menu-link">О компании</a></li> <!--link to about of company -->
+				<li class="header__menu-item"><a href="#" class="header__menu-link">О компании</a>
+				</li> <!--link to about of company -->
 			</ul>
 		</div>
 	</div>
@@ -84,6 +87,9 @@
 
 	</div>
 </section>
+
+<?= $pagination ?>
+
 <footer class="footer">
 	<div class="container">
 		<ul class="footer__info-list">
@@ -169,6 +175,7 @@
 		</div>
 	</div>
 </footer>
+
 <script src="/scripts/dropdown.js"></script>
 </body>
 
