@@ -7,7 +7,7 @@ class Product
 	public function __construct(
 		public int $id,
 		public string $title,
-		public bool $is_active,
+		public bool $isActive,
 		public string $brand,
 		public string $transmission,
 		public string $carcaseType,
@@ -23,17 +23,17 @@ class Product
 	public function getData(): array
 	{
 		return [
-			'Id' => $this->id,
-			'Name' => $this->title,
-			'IS_ACTIVE' => $this->is_active,
-			'Brand' => $this->brand,
-			'Transmission' => $this->transmission,
-			'Carcase' => $this->carcaseType,
-			'DateCreation' => $this->dateCreation,
-			'DateUpdate' => $this->dateUpdate,
-			'ShortDesc' => $this->shortDesc,
-			'FullDesc' => $this->fullDesc,
-			'Price' => $this->price,
+			'id' => $this->id,
+			'title' => $this->title,
+			'isActive' => $this->isActive,
+			'brand' => $this->brand,
+			'transmission' => $this->transmission,
+			'carcaseType' => $this->carcaseType,
+			'dateCreation' => $this->dateCreation,
+			'dateUpdate' => $this->dateUpdate,
+			'shortDesc' => $this->shortDesc,
+			'fullDesc' => $this->fullDesc,
+			'price' => $this->price,
 		];
 	}
 }
