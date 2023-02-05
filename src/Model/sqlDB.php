@@ -2,7 +2,7 @@
 
 namespace ES\Model;
 
-use ES\Controller\Option;
+use ES\Controller\ConfigurationController;
 use ES\Model\DB;
 
 class sqlDB extends DB
@@ -14,10 +14,10 @@ class sqlDB extends DB
 
 		if ($connection === null)
 		{
-			$dbHost = Option::getConfig('DB_HOST');
-			$dbUser = Option::getConfig('DB_USER');
-			$dbPassword = Option::getConfig('DB_PASSWORD');
-			$dbName = Option::getConfig('DB_NAME');
+			$dbHost = ConfigurationController::getConfig('DB_HOST');
+			$dbUser = ConfigurationController::getConfig('DB_USER');
+			$dbPassword = ConfigurationController::getConfig('DB_PASSWORD');
+			$dbName = ConfigurationController::getConfig('DB_NAME');
 
 			$connection = mysqli_init();
 			$connected = mysqli_real_connect($connection, $dbHost, $dbUser, $dbPassword, $dbName);
@@ -42,7 +42,7 @@ class sqlDB extends DB
 	function getData($page = 0): array
 	{
 		if ($page > 1) $page = $page * 10 - 10;
-		$countProductsOnPage = option::getConfig('CountProductsOnPage');
+		$countProductsOnPage = ConfigurationController::getConfig('CountProductsOnPage');
 		$connection = $this->connect();
 		$query = "SELECT p.id, p.name, p.IS_ACTIVE, b.brand, t.transmission, c.carcase, p.DATE_CREATION, p.DATE_UPDATE, p.SHORT_DESCRIPTION, p.FULL_DESCRIPTION, p.PRODUCT_PRIСE
 					FROM products p

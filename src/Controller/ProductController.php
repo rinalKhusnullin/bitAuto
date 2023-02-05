@@ -12,7 +12,7 @@ class ProductController extends BaseController
 		$product = $db->getDataByID($id);
 
 		$this->render('layout', [
-			'title' => Option::getConfig('TITLE'),
+			'title' => ConfigurationController::getConfig('TITLE'),
 			'content' => TemplateEngine::view('Product/product-detailed', ['product' => $product,]),
 		]);
 	}

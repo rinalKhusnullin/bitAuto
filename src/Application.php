@@ -4,7 +4,7 @@ namespace ES;
 
 use ES\Routing\Router;
 use ES\Controller\TemplateEngine;
-use \ES\controller\Option;
+use \ES\controller\ConfigurationController;
 
 class Application
 {
@@ -22,7 +22,7 @@ class Application
 				// if (empty($variables))
 				// {
 				// 	echo TemplateEngine::view('layout', [
-				// 		'title' => Option::getConfig('TITLE'),
+				// 		'title' => ConfigurationController::getConfig('TITLE'),
 				// 		'content' => 'Ошибка: неверный тип данных для ID',
 				// 	]);
 				// 	exit;
@@ -34,7 +34,7 @@ class Application
 			{
 				http_response_code(404);
 				echo TemplateEngine::view('layout', [
-					'title' => Option::getConfig('TITLE'),
+					'title' => ConfigurationController::getConfig('TITLE'),
 					'content' => 'page not found',
 				]);
 				exit;
@@ -43,7 +43,7 @@ class Application
 		catch (Exception $e)
 		{
 			echo TemplateEngine::view('layout', [
-				'title' => Option::getConfig('TITLE'),
+				'title' => ConfigurationController::getConfig('TITLE'),
 				'content' => 'Сервис временно не доступен',
 			]);
 		}
