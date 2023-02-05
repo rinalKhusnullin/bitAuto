@@ -1,6 +1,6 @@
 <?php
 /**
- * @var ES\Model\Product[] $products
+ * @var $products
  */
 ?>
 
