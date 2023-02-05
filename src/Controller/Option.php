@@ -2,7 +2,7 @@
 
 namespace ES\controller;
 
-class option
+class Option
 {
 	static function getConfig(string $name, $defaultValue = null)
 	{
@@ -12,7 +12,7 @@ class option
 		if ($config === null)
 		{
 			$masterConfig = require_once ROOT . '/core/config/config.php';
-			if (file_exists(ROOT . '/config.local.php'))
+			if (file_exists(ROOT . '/core/config.local.php'))
 			{
 				$localConfig = require_once ROOT . '/core/config/config.local.php';
 			}

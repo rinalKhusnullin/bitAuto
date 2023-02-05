@@ -2,7 +2,7 @@
 
 namespace es\model;
 
-use ES\controller\option;
+use ES\controller\Option;
 use ES\Model\DB;
 
 class sqlDB extends DB
@@ -14,10 +14,10 @@ class sqlDB extends DB
 
 		if ($connection === null)
 		{
-			$dbHost = option::getConfig('DB_HOST');
-			$dbUser = option::getConfig('DB_USER');
-			$dbPassword = option::getConfig('DB_PASSWORD');
-			$dbName = option::getConfig('DB_NAME');
+			$dbHost = Option::getConfig('DB_HOST');
+			$dbUser = Option::getConfig('DB_USER');
+			$dbPassword = Option::getConfig('DB_PASSWORD');
+			$dbName = Option::getConfig('DB_NAME');
 
 			$connection = mysqli_init();
 			$connected = mysqli_real_connect($connection, $dbHost, $dbUser, $dbPassword, $dbName);

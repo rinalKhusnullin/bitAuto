@@ -62,20 +62,6 @@ $cars = [
 	),
 ];
 
-Router::get('/', static function () use ($cars) {
-	return TemplateEngine::view('layout', [
-		'title' => Option::getConfig('TITLE'),
-		'content' => TemplateEngine::view('pages/index', [
-			'cars' => $cars,
-		]),
-	]);
-});
+Router::get('/', [new \ES\Controller\IndexController($cars), 'indexAction']);
 
-Router::get('/product/:id/', static function ($id) {
-	return TemplateEngine::view('layout', [
-		'title' => Option::getConfig('TITLE'),
-		'content' => TemplateEngine::view('pages/product-detailed', [
-			'cars' => '',
-		]), // @Todo add product page
-	]);
-});
+Router::get('/product/:id/', [new \ES\controller\ProductController() , 'detailsAction']);
