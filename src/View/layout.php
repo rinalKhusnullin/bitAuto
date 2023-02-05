@@ -2,7 +2,6 @@
 /**
  * @var string $title
  * @var $content
- * @var $pagination
  */
 ?>
 <!DOCTYPE html>
@@ -87,8 +86,6 @@
 
 	</div>
 </section>
-
-<?= $pagination ?>
 
 <footer class="footer">
 	<div class="container">
