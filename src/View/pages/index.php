@@ -1,12 +1,9 @@
 <?php
 /**
- * @var $cars
+ * @var ES\Model\Product[] $products
  */
 ?>
 
-<?php foreach ($cars as $car):?>
-	<?= \ES\Controller\TemplateEngine::view('/components/product-card',$car->getData())?>
+<?php foreach ($products as $product):?>
+	<?= \ES\Controller\TemplateEngine::view('/Product/product-card',$product->getData())?>
 <?php endforeach?>
-
-<?= $pagination ?>
-
