@@ -1,14 +1,14 @@
 <?php
 
-namespace es\model;
+namespace ES\Model;
 
-use ES\controller\Option;
+use ES\Controller\Option;
 use ES\Model\DB;
 
 class sqlDB extends DB
 {
 
-	function connect(): ?mysqli
+	function connect()
 	{
 		static $connection = null;
 
@@ -39,15 +39,22 @@ class sqlDB extends DB
 		return $connection;
 	}
 
-	function getData(): array
+	function getData($page = 0): array
 	{
+		if ($page > 1) $page = $page * 10 - 10;
+		$countProductsOnPage = option::getConfig('CountProductsOnPage');
 		$connection = $this->connect();
-		$query = '';
+		$query = "SELECT p.id, p.name, p.IS_ACTIVE, b.brand, t.transmission, c.carcase, p.DATE_CREATION, p.DATE_UPDATE, p.SHORT_DESCRIPTION, p.FULL_DESCRIPTION, p.PRODUCT_PRIСE
+					FROM products p
+					inner join brand b on p.ID_BRAND = b.id
+					inner join carcase c on p.ID_CARCASE = c.id
+					inner join transmission t on p.ID_TRANSMISSION = t.id
+					limit $countProductsOnPage offset $page";
 		$result = mysqli_query($connection, $query);
-		return $result;
+		return $this->buildProduct($result,$connection);
 	}
 
-	function getDataByID(): array
+	function getDataByID($id): array
 	{
 		// TODO: Implement getDataByID() method.
 	}
@@ -70,5 +77,25 @@ class sqlDB extends DB
 	function deleteData()
 	{
 		// TODO: Implement deleteData() method.
+	}
+	function buildProduct($result,$connection): array
+	{
+		while ($row = mysqli_fetch_assoc($result))
+		{
+			$product[] = new Products\Product(
+				$row['id'],
+				$row['name'],
+				$row['IS_ACTIVE'],
+				$row['brand'],
+				$row['transmission'],
+				$row['carcase'],
+				$row['DATE_CREATION'],
+				$row['DATE_UPDATE'],
+				$row['SHORT_DESCRIPTION'],
+				$row['FULL_DESCRIPTION'],
+				$row['PRODUCT_PRIСE']
+			);
+		}
+		return $product;
 	}
 }

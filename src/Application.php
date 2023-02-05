@@ -8,7 +8,7 @@ use \ES\controller\Option;
 
 class Application
 {
-	public function run()
+	public function run() :void
 	{
 		try
 		{

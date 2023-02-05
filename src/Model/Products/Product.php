@@ -6,10 +6,15 @@ class Product
 {
 	public function __construct(
 		public int $id,
-		public string $brand,
 		public string $title,
-		public string $carcaseType,
+		public bool $is_active,
+		public string $brand,
 		public string $transmission,
+		public string $carcaseType,
+		public string $dateCreation,
+		public string $dateUpdate,
+		public string $shortDesc,
+		public string $fullDesc,
 		public int $price
 	)
 	{
@@ -19,11 +24,15 @@ class Product
 	{
 		return [
 			'id' => $this->id,
-			'brand' => $this->brand,
-			'title' => $this->title,
-			'carcaseType' => $this->carcaseType,
-			'transmission' => $this->transmission,
-			'price' => $this->price,
+			'Name' => $this->title,
+			'IS_ACTIVE' => $this->is_active,
+			'Brand' => $this->brand,
+			'Transmission' => $this->transmission,
+			'Carcase' => $this->carcaseType,
+			'DateCreation' => $this->dateCreation,
+			'DateUpdate' => $this->dateUpdate,
+			'ShortDesc' => $this->shortDesc,
+			'FullDesc' => $this->price
 		];
 	}
 }

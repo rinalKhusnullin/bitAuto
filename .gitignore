@@ -6,6 +6,6 @@ phpunit.xml
 phpunit.xml
 .gitignore
 .phpunit.cache/
-/core/config/localconfig.php
+/core/config/config.local.php
 core/config/config.local.php
 core/public/.htaccess
