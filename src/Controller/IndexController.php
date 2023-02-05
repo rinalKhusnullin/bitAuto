@@ -15,8 +15,10 @@ class IndexController extends BaseController
 
 		$this->render('layout', [
 			'title' => Option::getConfig('TITLE'),
-			'content' => TemplateEngine::view('pages/index', ['products' => $products,]),
-			'pagination' => TemplateEngine::view('components/pagination', []),
+			'content' => TemplateEngine::view('pages/index', [
+				'products' => $products,
+				'pagination' => TemplateEngine::view('components/pagination', []),
+				]),
 		]);
 	}
 }
