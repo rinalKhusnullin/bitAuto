@@ -1,53 +1,49 @@
+<?php
+/**
+ * @var int $id ,
+ * @var string $brand ,
+ * @var string $title ,
+ * @var string $carcaseType ,
+ * @var string $transmission ,
+ * @var int $price
+ */
+?>
 <div class="product-detailed__main">
-    <h1 class="product-detailed__main-title">MAZDA CX-5</h1> <!-- need to add title for product -->
+    <h1 class="product-detailed__main-title"> <?= $title ?> </h1> <!-- need to add title for product -->
 </div>
 <div class="product-detailed">
     <div class="product-detailed__img">
-        <img src="/tmp-autoimg/auto-id-2.png" alt=""> <!-- need to add src to img -->
+        <img src="/tmp-autoimg/auto-id-<?= $id ?>.png" alt=""> <!-- need to add src to img -->
         <h2 class="product-detailed__subtitle">Характеристики</h2>
         <div class="product-detailed__subdescription">
             <ul class="product-detailed__characteristics">
                 <li class="product-detailed__characteristic">
-                    <div class="product-detailed__name">Модель</div>
+                    <div class="product-detailed__name">Марка</div>
                     <div class="product-detailed__underline"></div>
-                    <div class="product-detailed__value">Mazda CX-5</div> <!-- need to add title for product -->
+                    <div class="product-detailed__value"><?= $brand ?></div> <!-- need to add title for product -->
                 </li>
                 <li class="product-detailed__characteristic">
                     <div class="product-detailed__name">Тип кузова</div>
                     <div class="product-detailed__underline"></div>
-                    <div class="product-detailed__value">Кроссовер</div> <!-- need to add carcaseType -->
+                    <div class="product-detailed__value"> <?= $carcaseType ?> </div> <!-- need to add carcaseType -->
                 </li>
                 <li class="product-detailed__characteristic">
                     <div class="product-detailed__name">КПП</div>
                     <div class="product-detailed__underline"></div>
-                    <div class="product-detailed__value">АКПП</div> <!-- need to add АКПП -->
+                    <div class="product-detailed__value"> <?= $transmission ?> </div> <!-- need to add АКПП -->
                 </li>
             </ul>
         </div>
         <div class="product-detailed__price">
             <div class="product-detailed__price-title">Цена</div>
             <div class="product-detailed__underline"></div>
-            <div class="product-detailed__price-value">2 700 00 &#8381</div> <!-- need to add price -->
+            <div class="product-detailed__price-value"><?= $price ?> &#8381</div> <!-- need to add price -->
         </div>
         <button id="buy-btn" onclick="PopUpShow();" class="product-detailed__buy-btn">Купить</button>
     </div>
     <div class="product-detailed__description">
         <h2 class="product-detailed__subtitle">Описание</h2> <!-- need to add description -->
-        <div class="product-detailed__subdescription">Mazda CX-5 пятиместный кроссовер.
-            Его габаритные размеры составляют: длина 4550 мм,
-            ширина 1840 мм, высота 1690 мм, колесная база 2700 мм,
-            а величина дорожного просвета равняется 192 миллиметрам.
-            Такой клиренс свойственен автомобилям, подготовленным к
-            тяжелым условиям эксплуатации . Они с легкостью перенесут
-            поездку по грунтовке, смогут штурмовать бордюры во время парковки
-            и сохранят приемлемую плавность хода во время движения по разбитой дороге
-            с твердым покрытием.
-            Багажник Mazda CX-5 обладает неплохой вместительностью.
-            При поднятых спинках второго ряда сидений, сзади остается вплоть
-            до 505 литров свободного пространства. Благодаря такому объему,
-            автомобиль отлично справится с повседневными задачами городского жителя
-            и не ударит в грязь лицом даже во время длительной поездки с обилием багажа
-            и несколькими пассажирами на борту.
+        <div class="product-detailed__subdescription"> <?= $fullDesc ?>
         </div>
     </div>
 </div>
@@ -59,13 +55,13 @@
 
             <div class="poppup__product-info">
                 <div class="poppup__img">
-                    <img src="/tmp-autoimg/auto-id-2.png" alt=""> <!-- need to add src to img -->
+                    <img src="/tmp-autoimg/auto-id-<?= $id ?>.png" alt=""> <!-- need to add src to img -->
                 </div>
-                <h2 class="poppup__product-name">MAZDA CX-5</h2> <!-- need to add title for product -->
+                <h2 class="poppup__product-name"><?= $title ?></h2> <!-- need to add title for product -->
                 <div class="poppup__price">
                     <div class="poppup__price-title">Цена</div>
                     <div class="product-detailed__underline"></div>
-                    <div class="poppup__price-value">2 700 000 &#8381</div> <!-- need to add price -->
+                    <div class="poppup__price-value"><?= $price ?> &#8381</div> <!-- need to add price -->
                 </div>
             </div>
             <form action="##" method="post"> <!-- need to add handler -->
@@ -89,15 +85,10 @@
 
 <script src="http://code.jquery.com/jquery-2.0.2.min.js"></script>
 <script>
-    $(document).ready(function() {
-        //Скрыть PopUp при загрузке страницы    
-        PopUpHide();
-    });
-    //Функция отображения PopUp
     function PopUpShow() {
         $("#popup").show();
     }
-    //Функция скрытия PopUp
+
     function PopUpHide() {
         $("#popup").hide();
     }
