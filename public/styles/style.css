@@ -406,36 +406,52 @@ footer{
 /* pagination */
 .pagination{
     margin: 0 auto;
-    width: 600px;
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: center;
     margin-bottom: 25px;
 }
 
 .pagination__item{
-    display: block;
-    font-size: 17px;
     padding: 5px 10px;
-    outline: 1px solid #3d3f44;
+    outline: 2px solid #3d3f44;
     color: #3d3f44;
+    transition: 0.2s;
+}
+
+.pagination__item:focus, .pagination__item:active{
+    outline: 2px solid #3d3f44;
 }
 
 .pagination__item:hover{
+    outline: 0;
     background: #c41230;
     color: white;
-    transition: 0.4s;
-    
+    transition: 0.2s;
+}
+
+.active-page-link{
+    background: #52555b;
+    color: white;
+}
+
+.active-page-link:hover{
+    background: #52555b;
+    color: white;
+    outline: 2px solid #3d3f44;   
+}
+
+.active-page-link:hover{
+    cursor: default;
+}
+
+.pagination__item:not(:last-child), .pagination__item-dots{
+    margin-right: 15px;
 }
 
 .pagination__item-dots{
     align-self: end;
     font-size: 20px;
-}
-
-.pagination-active, .pagination-active:hover{
-    background: #3d3f44;
-    color: white;
 }
 
 /* product-detailed */
@@ -489,7 +505,7 @@ footer{
 
 .product-detailed__img img{
     width: 100%;
-    height: 100%;
+    max-height: 590px;
     object-fit: contain;
 }
 
@@ -510,6 +526,19 @@ footer{
     border-bottom: 1px dotted #3d3f44;
     line-height: 30px;
     height: 20px;
+    margin: 0 3px;
+}
+
+.poppup__price .product-detailed__underline{
+    height: 16px;
+}
+
+.poppup__price .product-detailed__underline{
+    height: 16px;
+}
+
+.product-detailed__price .product-detailed__underline{
+    height: 18px;
 }
 
 .product-detailed__subdescription{
@@ -528,15 +557,6 @@ footer{
     font-size: 22px;
 }
 
-.product-detailed__name{
-    margin-right: 5px;
-}
-
-.product-detailed__value{
-    margin-left: 5px;
-}
-
-
 .product-detailed__characteristic {
     display: flex;
     justify-content: space-between;
@@ -548,6 +568,7 @@ footer{
 
 /* poppup */
 .popup{
+    display: none;
     width:100%;
     height:100%;
     background-color: rgba(0,0,0,0.8);
@@ -581,6 +602,18 @@ footer{
     background: white;
 }
 
+.poppup__img{
+    position: relative;
+    width: 100%;
+    height: auto;
+    margin-bottom: 30px;
+}
+
+.poppup__img img{
+    width: 100%;
+    object-fit: contain;
+}
+
 .poppup__title{
     margin-bottom: 20px;
     margin-left: 50px;
@@ -595,10 +628,12 @@ footer{
 
 .poppup__product-info {
     padding-top: 30px;
+    width: 45%;
 }
 
 .poppup__product-name {
     font-size: 30px;
+    margin-bottom: 15px;
 }
 
 .poppup__price {
@@ -635,6 +670,21 @@ footer{
 .big-input{
     height: 80px;
     max-height: 100px;
+}
+
+/* error 404 */ 
+
+.error_img{
+    margin: 0 auto;
+    width: 40%;
+    height: auto;
+    position: relative;
+}
+
+.error_img img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 
 
