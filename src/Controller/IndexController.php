@@ -4,7 +4,7 @@ namespace ES\Controller;
 
 use ES\Model\sqlDB;
 
-class IndexController
+class IndexController extends BaseController
 {
 	public function indexAction(): void
 	{
