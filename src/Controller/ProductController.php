@@ -10,10 +10,10 @@ class ProductController extends BaseController
 	{
 		$db = new sqlDB();
 		$product = $db->getDataByID($id);
-
+		
 		$this->render('layout', [
 			'title' => ConfigurationController::getConfig('TITLE'),
-			'content' => TemplateEngine::view('Product/product-detailed', ['product' => $product,]),
+			'content' => TemplateEngine::view('Product/product-detailed', $product->getData()),
 		]);
 	}
 }
