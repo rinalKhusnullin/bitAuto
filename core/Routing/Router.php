@@ -9,12 +9,12 @@ class Router
 
 	private static array $routes = [];
 
-	public static function add(string $method, string $uri, callable $action) : void
+	public static function add(string $method, string $uri, $action) : void
 	{
 		self::$routes[] = new Route($method, $uri, \Closure::fromCallable($action));
 	}
 
-	public static function get(string $uri, callable $action) : void
+	public static function get(string $uri, $action) : void
 	{
 		self::add('GET', $uri, $action);
 	}

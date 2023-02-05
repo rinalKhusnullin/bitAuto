@@ -12,7 +12,7 @@ class Option
 		if ($config === null)
 		{
 			$masterConfig = require_once ROOT . '/core/config/config.php';
-			if (file_exists(ROOT . '/core/config.local.php'))
+			if (file_exists(ROOT . '/core/config/config.local.php'))
 			{
 				$localConfig = require_once ROOT . '/core/config/config.local.php';
 			}

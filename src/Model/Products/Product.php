@@ -12,7 +12,7 @@ class Product
 		public string $transmission,
 		public string $carcaseType,
 		public string $dateCreation,
-		public string $dateUpdate,
+		public ?string $dateUpdate,
 		public string $shortDesc,
 		public string $fullDesc,
 		public int $price
@@ -23,7 +23,7 @@ class Product
 	public function getData(): array
 	{
 		return [
-			'id' => $this->id,
+			'Id' => $this->id,
 			'Name' => $this->title,
 			'IS_ACTIVE' => $this->is_active,
 			'Brand' => $this->brand,
@@ -32,7 +32,8 @@ class Product
 			'DateCreation' => $this->dateCreation,
 			'DateUpdate' => $this->dateUpdate,
 			'ShortDesc' => $this->shortDesc,
-			'FullDesc' => $this->price
+			'FullDesc' => $this->fullDesc,
+			'Price' => $this->price,
 		];
 	}
 }

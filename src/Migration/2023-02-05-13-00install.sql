@@ -1,5 +1,3 @@
--- Убираем все миграции
-drop database `db_es_shop`;
 
 -- Создаем новую БД
 create database db_e_shop;
