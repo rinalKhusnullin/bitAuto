@@ -14,7 +14,7 @@ class IndexController extends BaseController
 		$products = $db->getData($indexPage);
 
 		$this->render('layout', [
-			'title' => Option::getConfig('TITLE'),
+			'title' => ConfigurationController::getConfig('TITLE'),
 			'content' => TemplateEngine::view('pages/index', [
 				'products' => $products,
 				'pagination' => TemplateEngine::view('components/pagination', []),
