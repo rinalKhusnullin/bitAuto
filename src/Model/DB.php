@@ -4,7 +4,6 @@ namespace ES\Model;
 
 abstract class DB
 {
-	abstract function connect();
 	abstract function getData() : array;
 	abstract function getDataByID($id) : ?Products\Product;
 	abstract function getDataByTeg() : array;

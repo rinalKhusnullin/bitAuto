@@ -7,43 +7,11 @@ use ES\Model\Products\Product;
 
 class sqlDB extends DB
 {
-
-	function connect()
-	{
-		static $connection = null;
-
-		if ($connection === null)
-		{
-			$dbHost = ConfigurationController::getConfig('DB_HOST');
-			$dbUser = ConfigurationController::getConfig('DB_USER');
-			$dbPassword = ConfigurationController::getConfig('DB_PASSWORD');
-			$dbName = ConfigurationController::getConfig('DB_NAME');
-
-			$connection = mysqli_init();
-			$connected = mysqli_real_connect($connection, $dbHost, $dbUser, $dbPassword, $dbName);
-
-			if (!$connected)
-			{
-				$error = mysqli_connect_errno() . ': ' . mysqli_connect_error();
-				throw new Exception($error);
-			}
-
-			$encodingResult = mysqli_set_charset($connection, 'utf8');
-
-			if (!$encodingResult)
-			{
-				throw new Exception(mysqli_error($connection));
-			}
-		}
-
-		return $connection;
-	}
-
 	function getData($page = 0): array
 	{
 		$countProductsOnPage = ConfigurationController::getConfig('CountProductsOnPage');
 		if ($page > 1) $page = $page * $countProductsOnPage - $countProductsOnPage;
-		$connection = $this->connect();
+		$connection = DbConnection::getInstance()->getConnection();
 		$query = "SELECT p.id, p.name, p.IS_ACTIVE, b.brand, t.transmission, c.carcase, p.DATE_CREATION, p.DATE_UPDATE, p.SHORT_DESCRIPTION, p.FULL_DESCRIPTION, p.PRODUCT_PRIСE
 					FROM products p
 					inner join brand b on p.ID_BRAND = b.id
@@ -57,7 +25,7 @@ class sqlDB extends DB
 
 	function getDataByID($id) : ?Product
 	{
-		$connection = $this->connect();
+		$connection = DbConnection::getInstance()->getConnection();
 		$id = mysqli_real_escape_string($connection, $id);
 		$query = "SELECT p.id, p.name, p.IS_ACTIVE, b.brand, t.transmission, c.carcase, p.DATE_CREATION, p.DATE_UPDATE, p.SHORT_DESCRIPTION, p.FULL_DESCRIPTION, p.PRODUCT_PRIСE
 					FROM products p
@@ -111,7 +79,7 @@ class sqlDB extends DB
 
 	function getPageCount()
 	{
-		$connection = $this->connect();
+		$connection = DbConnection::getInstance()->getConnection();
 		$countProductOnPage = ConfigurationController::getConfig('CountProductsOnPage');
 		$query = 'SELECT Count(id)
 					from products;';
