@@ -74,6 +74,7 @@
 					</div>
 				</li>
 				<li class="header__menu-item"><a href="#" class="header__menu-link">О компании</a>
+				<li class="header__menu-item"><a href="#" class="header__menu-link">Контакты</a> <!-- need to add contacts link -->
 				</li> <!--link to about of company -->
 			</ul>
 		</div>
