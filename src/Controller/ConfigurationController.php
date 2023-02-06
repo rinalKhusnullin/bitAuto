@@ -2,8 +2,13 @@
 
 namespace ES\controller;
 
+use ES\Exceptions\ConfigurationException;
+
 class ConfigurationController
 {
+	/**
+	 * @throws ConfigurationException
+	 */
 	static function getConfig(string $name, $defaultValue = null)
 	{
 		/** @var array $config */
@@ -34,6 +39,6 @@ class ConfigurationController
 			return $defaultValue;
 		}
 
-		throw new Exception("Configuration option $name not found");
+		throw new ConfigurationException("Configuration option $name not found");
 	}
 }

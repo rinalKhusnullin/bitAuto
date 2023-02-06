@@ -2,6 +2,9 @@
 
 namespace ES;
 
+use ES\Exceptions\ConfigurationException;
+use ES\Exceptions\MySqlException;
+use ES\Exceptions\PathException;
 use ES\Routing\Router;
 use ES\Controller\TemplateEngine;
 use \ES\controller\ConfigurationController;
@@ -40,12 +43,17 @@ class Application
 				exit;
 			}
 		}
-		catch (Exception $e)
+		catch (MySqlException|\mysqli_sql_exception|ConfigurationException|PathException $e)
 		{
 			echo TemplateEngine::view('layout', [
-				'title' => ConfigurationController::getConfig('TITLE'),
+				'title' => 'ERROR',
 				'content' => 'Сервис временно не доступен',
 			]);
+
+			$log = date('Y-m-d H:i:s') .' '. $e->getCode() . $e->getMessage() . ' in file ' . $e->getFile() . ' on line ' . $e->getLine() .PHP_EOL;
+			file_put_contents(__DIR__ . '/errorLog.txt', $log, FILE_APPEND);
+
+
 		}
 	}
 }
