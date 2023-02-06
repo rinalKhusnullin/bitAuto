@@ -17,23 +17,5 @@ class Product
 		public string $fullDesc,
 		public int $price
 	)
-	{
-	}
-
-	public function getProductCarcase(): array
-	{
-		return [
-			'id' => $this->id,
-			'title' => $this->title,
-			'isActive' => $this->isActive,
-			'brand' => $this->brand,
-			'transmission' => $this->transmission,
-			'carcaseType' => $this->carcaseType,
-			'dateCreation' => $this->dateCreation,
-			'dateUpdate' => $this->dateUpdate,
-			'shortDesc' => $this->shortDesc,
-			'fullDesc' => $this->fullDesc,
-			'price' => $this->price,
-		];
-	}
+	{}
 }
