@@ -331,6 +331,7 @@ footer{
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
+    margin-bottom: 30px;
 }
 
 .product-card{
@@ -679,8 +680,63 @@ footer{
     max-height: 100px;
 }
 
-/* error 404 */ 
+/*  contacts */
+.contacts__main-title {
+    font-size: 50px;
+    font-weight: 500;
+    margin-bottom: 50px;
+}
 
+.contacts__team-item {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 50px;
+}
+
+.contacts__team-title {
+    flex: 0 0 40%;
+}
+
+.contacts__right-line{
+    border-right: 1px solid #3d3f44;
+    width: 10%;
+    padding-left: 5%;
+    margin-right: 5%;
+}
+
+.contacts__team-name{
+    font-size: 30px;
+    font-weight: 400;
+    margin-bottom: 6px;
+}
+
+.contacts__team-prof{
+    font-weight: 300;
+    font-style: italic;
+}
+
+.contacts__team-tel{
+    flex: 0 0 20%;
+    align-self: center;
+}
+
+.contacts__team-tel-subtitle, .contacts__team-email-subtitle{
+    font-size: 15px;
+    margin-bottom: 3px;
+    font-weight: 300;
+}
+
+.contacts__team-numberphone, .contacts__team-email-value{
+    font-size: 20px;
+    font-weight: 400;
+}
+
+.contacats__team-email{
+    flex: 0 0 20%;
+    align-self: center;
+}
+
+/* error 404 */ 
 .error_img{
     margin: 0 auto;
     width: 40%;
@@ -693,7 +749,3 @@ footer{
     height: 100%;
     object-fit: cover;
 }
-
-
-
-
