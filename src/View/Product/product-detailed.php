@@ -9,40 +9,40 @@
  */
 ?>
 <div class="product-detailed__main">
-    <h1 class="product-detailed__main-title"> <?= $title ?> </h1> <!-- need to add title for product -->
+    <h1 class="product-detailed__main-title"> <?= $title ?> </h1> 
 </div>
 <div class="product-detailed">
     <div class="product-detailed__img">
-        <img src="/tmp-autoimg/auto-id-<?= $id ?>.png" alt=""> <!-- need to add src to img -->
+        <img src="/tmp-autoimg/auto-id-<?= $id ?>.png" alt="">
         <h2 class="product-detailed__subtitle">Характеристики</h2>
         <div class="product-detailed__subdescription">
             <ul class="product-detailed__characteristics">
                 <li class="product-detailed__characteristic">
                     <div class="product-detailed__name">Марка</div>
                     <div class="product-detailed__underline"></div>
-                    <div class="product-detailed__value"><?= $brand ?></div> <!-- need to add title for product -->
+                    <div class="product-detailed__value"><?= $brand ?></div>
                 </li>
                 <li class="product-detailed__characteristic">
                     <div class="product-detailed__name">Тип кузова</div>
                     <div class="product-detailed__underline"></div>
-                    <div class="product-detailed__value"> <?= $carcaseType ?> </div> <!-- need to add carcaseType -->
+                    <div class="product-detailed__value"> <?= $carcaseType ?> </div>
                 </li>
                 <li class="product-detailed__characteristic">
                     <div class="product-detailed__name">КПП</div>
                     <div class="product-detailed__underline"></div>
-                    <div class="product-detailed__value"> <?= $transmission ?> </div> <!-- need to add АКПП -->
+                    <div class="product-detailed__value"> <?= $transmission ?> </div>
                 </li>
             </ul>
         </div>
         <div class="product-detailed__price">
             <div class="product-detailed__price-title">Цена</div>
             <div class="product-detailed__underline"></div>
-            <div class="product-detailed__price-value"><?= $price ?> &#8381</div> <!-- need to add price -->
+            <div class="product-detailed__price-value"><?= $price ?> &#8381</div>
         </div>
         <button id="buy-btn" onclick="PopUpShow();" class="product-detailed__buy-btn">Купить</button>
     </div>
     <div class="product-detailed__description">
-        <h2 class="product-detailed__subtitle">Описание</h2> <!-- need to add description -->
+        <h2 class="product-detailed__subtitle">Описание</h2> 
         <div class="product-detailed__subdescription"> <?= $fullDesc ?>
         </div>
     </div>
@@ -55,13 +55,13 @@
 
             <div class="poppup__product-info">
                 <div class="poppup__img">
-                    <img src="/tmp-autoimg/auto-id-<?= $id ?>.png" alt=""> <!-- need to add src to img -->
+                    <img src="/tmp-autoimg/auto-id-<?= $id ?>.png" alt="">
                 </div>
-                <h2 class="poppup__product-name"><?= $title ?></h2> <!-- need to add title for product -->
+                <h2 class="poppup__product-name"><?= $title ?></h2>
                 <div class="poppup__price">
                     <div class="poppup__price-title">Цена</div>
                     <div class="product-detailed__underline"></div>
-                    <div class="poppup__price-value"><?= $price ?> &#8381</div> <!-- need to add price -->
+                    <div class="poppup__price-value"><?= $price ?> &#8381</div>
                 </div>
             </div>
             <form action="##" method="post"> <!-- need to add handler -->
