@@ -42,8 +42,8 @@ class sqlDB extends DB
 
 	function getData($page = 0): array
 	{
-		if ($page > 1) $page = $page * 10 - 10;
 		$countProductsOnPage = ConfigurationController::getConfig('CountProductsOnPage');
+		if ($page > 1) $page = $page * $countProductsOnPage - $countProductsOnPage;
 		$connection = $this->connect();
 		$query = "SELECT p.id, p.name, p.IS_ACTIVE, b.brand, t.transmission, c.carcase, p.DATE_CREATION, p.DATE_UPDATE, p.SHORT_DESCRIPTION, p.FULL_DESCRIPTION, p.PRODUCT_PRIСE
 					FROM products p
