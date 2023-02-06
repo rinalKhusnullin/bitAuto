@@ -51,7 +51,7 @@ class Application
 			]);
 
 			$log = date('Y-m-d H:i:s') .' '. $e->getCode() . $e->getMessage() . ' in file ' . $e->getFile() . ' on line ' . $e->getLine() .PHP_EOL;
-			file_put_contents(__DIR__ . '/errorLog.txt', $log, FILE_APPEND);
+			file_put_contents(ROOT . '/errorLog.txt', $log, FILE_APPEND);
 
 
 		}
