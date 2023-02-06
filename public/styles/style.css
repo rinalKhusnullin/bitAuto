@@ -317,8 +317,9 @@ footer{
 /* main-content */
 .main-content .container{
     display: flex;
-    flex-wrap: wrap;
+    flex-direction: column;
     justify-content: space-between;
+    height: 100%;
 }
 
 .main-content{
@@ -326,6 +327,12 @@ footer{
 }
 
 /* product-card */
+.product-card__container{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
 .product-card{
     color: #3d3f44;
     display: flex;
@@ -416,7 +423,7 @@ footer{
     padding: 5px 10px;
     outline: 2px solid #3d3f44;
     color: #3d3f44;
-    transition: 0.2s;
+    transition: 0.5s;
 }
 
 .pagination__item:focus, .pagination__item:active{
@@ -424,10 +431,10 @@ footer{
 }
 
 .pagination__item:hover{
-    outline: 0;
+    outline: 2px solid #c41230;
     background: #c41230;
     color: white;
-    transition: 0.2s;
+    transition: 0.5s;
 }
 
 .active-page-link{
