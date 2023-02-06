@@ -20,7 +20,7 @@ class Product
 	{
 	}
 
-	public function getData(): array
+	public function getProductCarcase(): array
 	{
 		return [
 			'id' => $this->id,

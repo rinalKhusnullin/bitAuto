@@ -1,4 +1,3 @@
-
 -- Создаем новую БД
 create database db_e_shop;
 use db_e_shop;

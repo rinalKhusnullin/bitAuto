@@ -3,12 +3,10 @@
 namespace ES\Model;
 
 use ES\Controller\ConfigurationController;
-// use ES\Model\DB;
 use ES\Model\Products\Product;
 
 class sqlDB extends DB
 {
-	private $conection= DbConnection::getInstance();
 
 	function connect()
 	{
@@ -109,5 +107,22 @@ class sqlDB extends DB
 			);
 		}
 		return $product;
+	}
+
+	function getPageCount()
+	{
+		$connection = $this->connect();
+		$countProductOnPage = ConfigurationController::getConfig('CountProductsOnPage');
+		$query = 'SELECT Count(id)
+					from products;';
+		$result = mysqli_query($connection, $query);
+		$row = mysqli_fetch_row($result);
+		return ceil($row[0] / $countProductOnPage);
+
+	}
+
+	function createOrder()
+	{
+		// TODO: Implement createOrder() method.
 	}
 }
