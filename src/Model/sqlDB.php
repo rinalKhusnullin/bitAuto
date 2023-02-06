@@ -3,7 +3,6 @@
 namespace ES\Model;
 
 use ES\Controller\ConfigurationController;
-use ES\Model\DB;
 use ES\Model\Products\Product;
 
 class sqlDB extends DB

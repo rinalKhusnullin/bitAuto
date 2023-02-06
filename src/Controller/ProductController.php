@@ -13,7 +13,7 @@ class ProductController extends BaseController
 		
 		$this->render('layout', [
 			'title' => ConfigurationController::getConfig('TITLE'),
-			'content' => TemplateEngine::view('Product/product-detailed', $product->getData()),
+			'content' => TemplateEngine::view('Product/product-detailed', $product->getProductCarcase()),
 		]);
 	}
 }
