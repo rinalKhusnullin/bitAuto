@@ -35,7 +35,7 @@ class Application
 				http_response_code(404);
 				echo TemplateEngine::view('layout', [
 					'title' => ConfigurationController::getConfig('TITLE'),
-					'content' => 'page not found',
+					'content' => TemplateEngine::view('pages/404', []),
 				]);
 				exit;
 			}
