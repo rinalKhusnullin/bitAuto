@@ -15,7 +15,7 @@
 	</div>
 	<div class="product-card__description">
 		<h2 class="product-card__title">
-			<a href="/product/<?= $id ?>" class="product-card__hlink"><?= $title ?></a>
+			<a href="/product/<?= $id ?>/" class="product-card__hlink"><?= $title ?></a>
 		</h2> 
 		<!-- chr - its characteristics -->
 		<ul class="product-card__chr-list">
@@ -38,6 +38,6 @@
 				<div class="product-card__chr-value"><?= $price ?></div>
 			</li>
 		</ul>
-		<a href="/product/<?= $id ?>" class="product-card__more">Подробнее</a>
+		<a href="/product/<?= $id ?>/" class="product-card__more">Подробнее</a>
 	</div>
 </div>

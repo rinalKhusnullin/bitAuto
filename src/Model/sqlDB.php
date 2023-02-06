@@ -55,7 +55,7 @@ class sqlDB extends DB
 	}
 
 
-	function getDataByID($id) : Product
+	function getDataByID($id) : ?Product
 	{
 		$connection = $this->connect();
 		$id = mysqli_real_escape_string($connection, $id);
@@ -88,7 +88,7 @@ class sqlDB extends DB
 	{
 		// TODO: Implement deleteData() method.
 	}
-	function buildProduct($result,$connection): array
+	function buildProduct($result,$connection): ?array
 	{
 		while ($row = mysqli_fetch_assoc($result))
 		{
