@@ -109,4 +109,21 @@ class sqlDB extends DB
 		}
 		return $product;
 	}
+
+	function getPageCount()
+	{
+		$connection = $this->connect();
+		$countProductOnPage = ConfigurationController::getConfig('CountProductsOnPage');
+		$query = 'SELECT Count(id)
+					from products;';
+		$result = mysqli_query($connection, $query);
+		$row = mysqli_fetch_row($result);
+		return ceil($row[0] / $countProductOnPage);
+
+	}
+
+	function createOrder()
+	{
+		// TODO: Implement createOrder() method.
+	}
 }
