@@ -11,7 +11,7 @@ class IndexController extends BaseController
 		$indexPage = (isset($_GET['page']))? (int)$_GET['page']: 0;
 
 		$db = new sqlDB();
-		$products = $db->getData($indexPage);
+		$products = $db->getData(true, $indexPage);
 
 		$this->render('layout', [
 			'title' => ConfigurationController::getConfig('TITLE'),
