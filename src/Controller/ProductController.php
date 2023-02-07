@@ -21,7 +21,7 @@ class ProductController extends BaseController
 
 		if (!empty($_POST))
 		{
-			$db->createOrder(new Order(
+			$result = $db->createOrder(new Order(
 				$_POST['userLastname'],
 				$_POST["userName"],
 				$_POST["userTel"],
@@ -31,8 +31,8 @@ class ProductController extends BaseController
 				$product,
 				date('Y-m-d H:i:s')
 			));
+			$result ? header('Location: /') : header('Location: /byed');
 
-			header('Location: /byed');
 		}
 
 		$this->render('layout', [
