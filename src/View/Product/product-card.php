@@ -11,7 +11,7 @@
 
 <div class="product-card">
 	<div class="product-card__img-block">
-		<img src="/tmp-autoimg/<?= $id ?>/<?= $id ?>.png" alt="" class="product-card__img">
+		<img src="/tmp-autoimg/<?= $id ?>/<?= 1 ?>.png" alt="" class="product-card__img">
 	</div>
 	<div class="product-card__description">
 		<h2 class="product-card__title">

@@ -14,7 +14,7 @@
 </div>
 <div class="product-detailed">
     <div class="product-detailed__img">
-        <img src="/tmp-autoimg/<?= $id ?>/<?= $id ?>.png" alt="">
+        <img src="/tmp-autoimg/<?= $id ?>/<?= 1 ?>.png" alt="">
         <h2 class="product-detailed__subtitle">Характеристики</h2>
         <div class="product-detailed__subdescription">
             <ul class="product-detailed__characteristics">
