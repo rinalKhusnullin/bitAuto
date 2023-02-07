@@ -7,7 +7,7 @@ use ES\Model\Products\Product;
 
 class sqlDB extends DB
 {
-	function getData($page = 0): array
+	function getData($isPublic, $page = 0): array
 	{
 		$countProductsOnPage = ConfigurationController::getConfig('CountProductsOnPage');
 		if ($page > 1) $page = $page * $countProductsOnPage - $countProductsOnPage;
@@ -16,8 +16,17 @@ class sqlDB extends DB
 					FROM products p
 					inner join brand b on p.ID_BRAND = b.id
 					inner join carcase c on p.ID_CARCASE = c.id
-					inner join transmission t on p.ID_TRANSMISSION = t.id
-					limit $countProductsOnPage offset $page";
+					inner join transmission t on p.ID_TRANSMISSION = t.id";
+		if ($isPublic)
+		{
+			$query .= "\n" ."where p.IS_ACTIVE = true
+						limit $countProductsOnPage offset $page";
+
+		}
+		else
+		{
+			$query .= "\n" . "limit $countProductsOnPage offset $page";
+		}
 		$result = mysqli_query($connection, $query);
 		return $this->buildProduct($result,$connection);
 	}
@@ -37,9 +46,18 @@ class sqlDB extends DB
 		return $this->buildProduct($result, $connection)[0];
 	}
 
-	function getDataByTeg(): array
+	function getDataByTeg($teg): array
 	{
-		// TODO: Implement getDataByTeg() method.
+		// $connection = DbConnection::getInstance()->getConnection();
+		// $id = mysqli_real_escape_string($connection, $id);
+		// $query = "SELECT p.id, p.name, p.IS_ACTIVE, b.brand, t.transmission, c.carcase, p.DATE_CREATION, p.DATE_UPDATE, p.SHORT_DESCRIPTION, p.FULL_DESCRIPTION, p.PRODUCT_PRIСE
+		// 			FROM products p
+		// 			inner join brand b on p.ID_BRAND = b.id
+		// 			inner join carcase c on p.ID_CARCASE = c.id
+		// 			inner join transmission t on p.ID_TRANSMISSION = t.id
+		// 			where $id = p.id ";
+		// $result = mysqli_query($connection, $query);
+		return [];
 	}
 
 	function updateData()
@@ -89,7 +107,23 @@ class sqlDB extends DB
 
 	}
 
-	function createOrder(Order $order)
+	function createOrder(Order $order) :bool
 	{
+		$connection =DbConnection::getInstance()->getConnection();
+
+		$productId = $order->product->id;
+		$productPrice = $order->product->price;
+		$status = mysqli_real_escape_string($connection, $order->status);
+		$dateCreation = $order->dateCreation;
+		$fullName = mysqli_real_escape_string($connection, $order->fullName);
+		$phone = mysqli_real_escape_string($connection, $order->phone);
+		$mail = mysqli_real_escape_string($connection, $order->mail);
+		$comment = mysqli_real_escape_string($connection, $order->comment);
+
+		$query = "INSERT INTO orders (product_id, product_price, status, date_creation, customer_name, customer_phone, customer_mail, comment)
+					values ( $productId, $productPrice, '$status', CURRENT_DATE(), '$fullName', '$phone', '$mail', '$comment' )";
+
+		return mysqli_query($connection,$query);
+
 	}
 }
