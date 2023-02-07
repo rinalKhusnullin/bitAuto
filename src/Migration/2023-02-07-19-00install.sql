@@ -1,4 +1,5 @@
 use db_e_shop;
+
 INSERT INTO brand
 VALUES (4, 'Nissan'),
        (5, 'Lexus'),
