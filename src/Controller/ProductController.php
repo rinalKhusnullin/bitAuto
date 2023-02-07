@@ -22,6 +22,11 @@ class ProductController extends BaseController
 		}
 
 		
+		// echo '<pre>';
+		// print_r($product);
+		// echo print_r($_POST);
+		// echo '</pre>';
+		
 		$this->render('layout', [
 			'title' => ConfigurationController::getConfig('TITLE'),
 			'content' => TemplateEngine::view('Product/product-detailed', (array)$product),
