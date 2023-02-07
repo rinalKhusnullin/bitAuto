@@ -6,7 +6,7 @@ abstract class DB
 {
 	abstract function getData($isPublic, $page) : array;
 	abstract function getDataByID($id) : ?Products\Product;
-	abstract function getDataByTeg($teg) : array;
+	abstract function getDataByTeg($brand, $carcase, $transmission, $page) : ?array;
 	abstract function updateData();
 	abstract function createData();
 	abstract function deleteData();
