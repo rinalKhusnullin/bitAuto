@@ -9,3 +9,4 @@ phpunit.xml
 /core/config/config.local.php
 core/config/config.local.php
 core/public/.htaccess
+errorLog.txt
