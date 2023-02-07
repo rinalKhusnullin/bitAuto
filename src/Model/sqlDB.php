@@ -10,7 +10,14 @@ class sqlDB extends DB
 	function getData($isPublic, $page = 0): array
 	{
 		$countProductsOnPage = ConfigurationController::getConfig('CountProductsOnPage');
-		if ($page > 1) $page = $page * $countProductsOnPage - $countProductsOnPage;
+		if ($page > 1)
+		{
+			$page = $page * $countProductsOnPage - $countProductsOnPage;
+		}
+		else
+		{
+			$page = 0;
+		}
 		$connection = DbConnection::getInstance()->getConnection();
 		$query = "SELECT p.id, p.name, p.IS_ACTIVE, b.brand, t.transmission, c.carcase, p.DATE_CREATION, p.DATE_UPDATE, p.SHORT_DESCRIPTION, p.FULL_DESCRIPTION, p.PRODUCT_PRIСE
 					FROM products p
@@ -46,18 +53,45 @@ class sqlDB extends DB
 		return $this->buildProduct($result, $connection)[0];
 	}
 
-	function getDataByTeg($teg): array
+	function getDataByTeg($brand, $carcase, $transmission, $page = 0 ): ?array
 	{
-		// $connection = DbConnection::getInstance()->getConnection();
-		// $id = mysqli_real_escape_string($connection, $id);
-		// $query = "SELECT p.id, p.name, p.IS_ACTIVE, b.brand, t.transmission, c.carcase, p.DATE_CREATION, p.DATE_UPDATE, p.SHORT_DESCRIPTION, p.FULL_DESCRIPTION, p.PRODUCT_PRIСE
-		// 			FROM products p
-		// 			inner join brand b on p.ID_BRAND = b.id
-		// 			inner join carcase c on p.ID_CARCASE = c.id
-		// 			inner join transmission t on p.ID_TRANSMISSION = t.id
-		// 			where $id = p.id ";
-		// $result = mysqli_query($connection, $query);
-		return [];
+		$countProductsOnPage = ConfigurationController::getConfig('CountProductsOnPage');
+		if ($page > 1)
+		{
+			$page = $page * $countProductsOnPage - $countProductsOnPage;
+		}
+		else
+		{
+			$page = 0;
+		}
+		$connection = DbConnection::getInstance()->getConnection();
+		$query = "SELECT p.id, p.name, p.IS_ACTIVE, b.brand, t.transmission, c.carcase, p.DATE_CREATION, p.DATE_UPDATE, p.SHORT_DESCRIPTION, p.FULL_DESCRIPTION, p.PRODUCT_PRIСE
+					FROM products p
+	 				inner join brand b on p.ID_BRAND = b.id
+					inner join carcase c on p.ID_CARCASE = c.id
+					inner join transmission t on p.ID_TRANSMISSION = t.id
+					where ";
+		$tegs = [];
+		if (isset($brand))
+		{
+			$tegs[] = "b.brand = '$brand'";
+		}
+		if (isset($carcase))
+		{
+			$tegs[] = "c.carcase = '$carcase'";
+		}
+		if (isset($transmissoin))
+		{
+			$tegs[] = "t.transmission = '$transmission'";
+		}
+		if (empty($tegs))
+		{
+			return $this->getData(true);
+		}
+		$query .= implode(' and ', $tegs);
+		$query .= "\n" . "limit $countProductsOnPage offset $page";
+		$result = mysqli_query($connection, $query);
+		return $this->buildProduct($result,$connection);
 	}
 
 	function updateData()
