@@ -59,7 +59,7 @@
 	<div class="header__side-header">
 		<div class="container">
 			<ul class="header__menu">
-				<li class="header__menu-item"><a href="#" class="header__menu-link">Каталог</a>
+				<li class="header__menu-item"><a href="/" class="header__menu-link">Каталог</a>
 				</li> <!--link to catalog -->
 				<li class="header__menu-item">
 					<div class="header__dropdown-menu">
@@ -73,9 +73,9 @@
 						</div>
 					</div>
 				</li>
-				<li class="header__menu-item"><a href="#" class="header__menu-link">О компании</a>
-				<li class="header__menu-item"><a href="#" class="header__menu-link">Контакты</a> <!-- need to add contacts link -->
-				</li> <!--link to about of company -->
+				<li class="header__menu-item"><a href="/about-company" class="header__menu-link">О компании</a>
+				<li class="header__menu-item"><a href="/contacts" class="header__menu-link">Контакты</a> 
+				</li> 
 			</ul>
 		</div>
 	</div>
