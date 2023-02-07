@@ -8,7 +8,7 @@ class IndexController extends BaseController
 {
 	public function indexAction(): void
 	{
-		$indexPage = (isset($_GET['page']))? (int)$_GET['page']: 0;
+		$indexPage = (isset($_GET['page'])) ? (int)$_GET['page'] : 0;
 
 		$db = new sqlDB();
 		$products = $db->getData($indexPage);
@@ -17,7 +17,10 @@ class IndexController extends BaseController
 			'title' => ConfigurationController::getConfig('TITLE'),
 			'content' => TemplateEngine::view('pages/index', [
 				'products' => $products,
-				'pagination' => TemplateEngine::view('components/pagination', []),
+				'pagination' => TemplateEngine::view('components/pagination', [
+					'currentPage' => $indexPage,
+					'countPage' => $db->getPageCount(),
+					]),
 				]),
 		]);
 	}
