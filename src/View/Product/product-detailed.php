@@ -1,15 +1,16 @@
 <?php
 /**
- * @var int $id ,
- * @var string $brand ,
- * @var string $title ,
- * @var string $carcaseType ,
- * @var string $transmission ,
+ * @var int $id
  * @var int $price
+ * @var string $brand
+ * @var string $title
+ * @var string $carcaseType
+ * @var string $transmission
+ * @var string $fullDesc
  */
 ?>
 <div class="product-detailed__main">
-    <h1 class="product-detailed__main-title"> <?= $title ?> </h1> 
+    <h1 class="product-detailed__main-title"> <?= $title ?> </h1>
 </div>
 <div class="product-detailed">
     <div class="product-detailed__img">
@@ -42,7 +43,7 @@
         <button id="buy-btn" onclick="PopUpShow();" class="product-detailed__buy-btn">Купить</button>
     </div>
     <div class="product-detailed__description">
-        <h2 class="product-detailed__subtitle">Описание</h2> 
+        <h2 class="product-detailed__subtitle">Описание</h2>
         <div class="product-detailed__subdescription"> <?= $fullDesc ?>
         </div>
     </div>
@@ -64,7 +65,7 @@
                     <div class="poppup__price-value"><?= $price ?> &#8381</div>
                 </div>
             </div>
-            <form action="##" method="post"> <!-- need to add handler -->
+            <form action="" method="post"> <!-- need to add handler -->
                 <div class="poppup__subtitle">Фамилия*</div>
                 <input type="text" class="poppup__input" name="userLastname" required>
                 <div class="poppup__subtitle">Имя*</div>
