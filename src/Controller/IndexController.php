@@ -17,7 +17,10 @@ class IndexController extends BaseController
 			'title' => ConfigurationController::getConfig('TITLE'),
 			'content' => TemplateEngine::view('pages/index', [
 				'products' => $products,
-				'pagination' => TemplateEngine::view('components/pagination', []),
+				'pagination' => TemplateEngine::view('components/pagination', [
+						'currentPage' => $indexPage,
+						'countPage' => $db->getPageCount(),
+					]),
 				]),
 		]);
 	}
