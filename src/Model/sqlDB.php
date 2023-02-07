@@ -89,7 +89,6 @@ class sqlDB extends DB
 			return $this->getData(true);
 		}
 		$query .= implode(' and ', $tegs);
-		$query .= "\n" . "limit $countProductsOnPage offset $page";
 		$result = mysqli_query($connection, $query);
 		return $this->buildProduct($result,$connection);
 	}
