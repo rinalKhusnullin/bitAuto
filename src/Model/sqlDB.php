@@ -89,8 +89,7 @@ class sqlDB extends DB
 
 	}
 
-	function createOrder()
+	function createOrder(Order $order)
 	{
-		// TODO: Implement createOrder() method.
 	}
 }
