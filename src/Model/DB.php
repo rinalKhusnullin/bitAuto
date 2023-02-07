@@ -10,7 +10,7 @@ abstract class DB
 	abstract function updateData();
 	abstract function createData();
 	abstract function deleteData();
-	abstract function buildProduct($result,$connection) : ?array;
+	abstract function buildProduct($result) : ?array;
 	abstract function getPageCount();
 	abstract function createOrder(Order $order) :bool;
 }
