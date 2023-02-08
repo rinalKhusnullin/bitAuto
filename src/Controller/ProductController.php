@@ -9,8 +9,21 @@ class ProductController extends BaseController
 {
 	public function getDetailAction($id): void
 	{
-		(is_numeric($id)) ? $id = (int)$id : header('Location: /error');
+		$db = new sqlDB();
+		$product = $db->getDataByID((int)$id);
 
+		if ($product === null)
+		{
+			header('Location: /error');
+		}
+
+		$this->render('layout', [
+			'title' => ConfigurationController::getConfig('TITLE'),
+			'content' => TemplateEngine::view('Product/product-detailed', (array)$product)
+		]);
+	}
+	public function postDetailAction($id): void
+	{
 		$db = new sqlDB();
 		$product = $db->getDataByID((int)$id);
 
@@ -33,10 +46,5 @@ class ProductController extends BaseController
 			));
 			$result ? header('Location: /') : header('Location: /byed');
 		}
-
-		$this->render('layout', [
-			'title' => ConfigurationController::getConfig('TITLE'),
-			'content' => TemplateEngine::view('Product/product-detailed', (array)$product)
-		]);
 	}
 }
