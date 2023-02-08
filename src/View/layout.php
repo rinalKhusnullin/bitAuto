@@ -27,7 +27,7 @@
 	<div class="header__main-header">
 		<div class="container">
 			<div class="header__logo">
-				<a href="/" class="header__logo-link"><!--link to main page-->
+				<a href="/" class="header__logo-link">
 					<img src="/images/logo.svg" alt="" class="header__logo-img">
 				</a>
 			</div>
@@ -66,12 +66,8 @@
 				<li class="header__menu-item">
 					<div class="header__dropdown-menu">
 						<a href="##" id="dropdown-btn" class="header__menu-link dropdown-btn undroped" onclick="dropdown(); return false">Марки автомобилей</a>
-						<div class="header__dropdown-tags" id="dropdown-content">
-							<a href="##" class="header__dropdown-link">Mazda</a> <!-- links to get products with need tag -->
-							<a href="##" class="header__dropdown-link">Toyota</a>
-							<a href="##" class="header__dropdown-link">Volkswagen</a>
-							<a href="##" class="header__dropdown-link">BMW</a>
-							<a href="##" class="header__dropdown-link">Tesla</a>
+						<div class="header__dropdown-tags di" id="dropdown-content">
+							<?= \ES\Controller\TemplateEngine::view('components/tags', []) ?>
 						</div>
 					</div>
 				</li>
