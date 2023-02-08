@@ -1,9 +1,0 @@
-2023-02-07 21:24:11 1064You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'p.IS_ACTIVE = true
-						limit 10 offset 0' at line 5 in file C:\OSPanel\domains\dev.bx\eshop\src\Model\sqlDB.php on line 29
-2023-02-07 21:24:15 1064You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'p.IS_ACTIVE = true
-						limit 10 offset 0' at line 5 in file C:\OSPanel\domains\dev.bx\eshop\src\Model\sqlDB.php on line 29
-2023-02-07 21:25:14 1064You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '10 offset 1' at line 5 in file C:\OSPanel\domains\dev.bx\eshop\src\Model\sqlDB.php on line 29
-2023-02-07 21:25:15 1064You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '10 offset 1' at line 5 in file C:\OSPanel\domains\dev.bx\eshop\src\Model\sqlDB.php on line 29
-2023-02-07 21:26:48 1064You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 6 in file C:\OSPanel\domains\dev.bx\eshop\src\Model\sqlDB.php on line 29
-2023-02-07 21:26:49 1064You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 6 in file C:\OSPanel\domains\dev.bx\eshop\src\Model\sqlDB.php on line 29
-2023-02-07 21:27:03 1064You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 6 in file C:\OSPanel\domains\dev.bx\eshop\src\Model\sqlDB.php on line 29
