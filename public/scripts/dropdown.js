@@ -17,7 +17,7 @@ function dropdown() {
 
 window.onclick = function (event) 
 {
-    if (!event.target.matches('.dropdown-btn')) 
+    if (!event.target.matches('.dropdown-btn') && (!event.target.matches('.di'))) 
     {
         if (document.getElementById("dropdown-content").classList.contains("visible"))
         {

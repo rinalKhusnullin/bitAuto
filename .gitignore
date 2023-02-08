@@ -1,0 +1,12 @@
+.phpunit.result.cache
+composer.json
+composer.lock
+phpunit.xml
+/vendor
+phpunit.xml
+.gitignore
+.phpunit.cache/
+/core/config/config.local.php
+core/config/config.local.php
+core/public/.htaccess
+errorLog.txt

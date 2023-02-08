@@ -3,7 +3,6 @@
 spl_autoload_register(function ($class)
 {
 	$prefix = 'ES\\';
-
 	$directories = ['/src/', '/core/'];
 
 	$len = strlen($prefix);
