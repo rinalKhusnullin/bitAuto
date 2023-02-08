@@ -36,7 +36,7 @@ class Application
 			else
 			{
 				http_response_code(404);
-				$action = Router::find('GET','/error')->action;
+				$action = Router::find('GET','/error/')->action;
 				$action();
 				exit;
 			}
@@ -44,7 +44,7 @@ class Application
 		catch (\Exception|MySqlException|\mysqli_sql_exception|ConfigurationException|PathException $e)
 		{
 			http_response_code(404);
-			$action = Router::find('GET','/error')->action;
+			$action = Router::find('GET','/error/')->action;
 			$action($e);
 		}
 	}
