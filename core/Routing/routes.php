@@ -10,6 +10,20 @@ Router::get('/product/:id/', [new \ES\Controller\ProductController() , 'getDetai
 
 Router::post('/product/:id/', [new \ES\Controller\ProductController() , 'postDetailAction']);
 
-Router::get('/contacts', [new \ES\Controller\ContactsController(),'getContactsAction']);
+Router::get('/contacts/', [new \ES\Controller\ContactsController(),'getContactsAction']);
 
-Router::get('/error', [new \ES\Controller\ErrorController(),'getSystemErrorAction']);
+Router::get('/error/', [new \ES\Controller\ErrorController(),'getSystemErrorAction']);
+
+Router::get('/success/', function () {
+    echo TemplateEngine::view('layout', [
+        'title' => ConfigurationController::getConfig('TITLE', 'AutoBit'),
+        'content' => TemplateEngine::view('pages/success', []),
+    ]);
+});
+
+Router::get('/failed/', function () {
+    echo TemplateEngine::view('layout',[
+        'title' => ConfigurationController::getConfig('TITLE', 'AutoBit'),
+        'content' => TemplateEngine::view('pages/failed', []),
+    ]);
+});
