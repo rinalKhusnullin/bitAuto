@@ -2,7 +2,7 @@
 
 namespace ES\Model;
 
-use ES\controller\ConfigurationController;
+use ES\Controller\ConfigurationController;
 
 class DbConnection
 {
