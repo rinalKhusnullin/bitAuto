@@ -36,24 +36,16 @@ class Application
 			else
 			{
 				http_response_code(404);
-				echo TemplateEngine::view('layout', [
-					'title' => ConfigurationController::getConfig('TITLE'),
-					'content' => TemplateEngine::view('pages/404', []),
-				]);
+				$action = Router::find('GET','/error')->action;
+				$action();
 				exit;
 			}
 		}
-		catch (MySqlException|\mysqli_sql_exception|ConfigurationException|PathException $e)
+		catch (\Exception|MySqlException|\mysqli_sql_exception|ConfigurationException|PathException $e)
 		{
-			echo TemplateEngine::view('layout', [
-				'title' => 'ERROR',
-				'content' => 'Сервис временно не доступен',
-			]);
-
-			$log = date('Y-m-d H:i:s') .' '. $e->getCode() . $e->getMessage() . ' in file ' . $e->getFile() . ' on line ' . $e->getLine() .PHP_EOL;
-			file_put_contents(ROOT . '/errorLog.txt', $log, FILE_APPEND);
-
-
+			http_response_code(404);
+			$action = Router::find('GET','/error')->action;
+			$action($e);
 		}
 	}
 }
