@@ -8,11 +8,8 @@ Router::get('/', [new \ES\Controller\IndexController(), 'indexAction']);
 
 Router::get('/product/:id/', [new \ES\Controller\ProductController() , 'getDetailAction']);
 
-Router::post('/product/:id/', [new \ES\Controller\ProductController() , 'getDetailAction']);
+Router::post('/product/:id/', [new \ES\Controller\ProductController() , 'postDetailAction']);
 
-Router::get('/contacts', function () {
-    echo TemplateEngine::view('layout', [
-        'title' => ConfigurationController::getConfig('TITLE', 'AutoBit'),
-        'content' => TemplateEngine::view('pages/contacts', [])
-    ]);
-});
+Router::get('/contacts', [new \ES\Controller\ContactsController(),'getContactsAction']);
+
+Router::get('/error', [new \ES\Controller\ErrorController(),'getSystemErrorAction']);
