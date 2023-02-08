@@ -14,7 +14,7 @@ class ProductController extends BaseController
 
 		if ($product === null)
 		{
-			header('Location: /error');
+			header('Location: /error/');
 		}
 
 		$this->render('layout', [
@@ -29,10 +29,10 @@ class ProductController extends BaseController
 
 		if ($product === null)
 		{
-			header('Location: /error');
+			header('Location: /error/');
 		}
 
-		if (!empty($_POST))
+		if (!empty($_POST)) // its not working
 		{
 			$result = $db->createOrder(new Order(
 				$_POST['userLastname'],
@@ -44,7 +44,11 @@ class ProductController extends BaseController
 				$product,
 				date('Y-m-d H:i:s')
 			));
-			$result ? header('Location: /') : header('Location: /byed');
+			$result ? header('Location: /success/') : header('Location: /failed/');
+		}
+		else
+		{
+			header("Location: /product/$product->id/");
 		}
 	}
 }
