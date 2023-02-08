@@ -32,15 +32,11 @@ class ProductController extends BaseController
 				date('Y-m-d H:i:s')
 			));
 			$result ? header('Location: /') : header('Location: /byed');
-
 		}
 
 		$this->render('layout', [
 			'title' => ConfigurationController::getConfig('TITLE'),
-			'content' => TemplateEngine::view('Product/product-detailed', [...(array)$product, 
-				'slider' => TemplateEngine::view('components/slider', [
-					'id' => $product->id,
-				])]),
+			'content' => TemplateEngine::view('Product/product-detailed', (array)$product)
 		]);
 	}
 }
