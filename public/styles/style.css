@@ -162,8 +162,7 @@ footer{
     background-color: #3d3f44;
     color: white;
     top: 45px;
-    min-width: 100%;
-    width: auto;
+    left: -120px;
     padding: 10px 0;
     z-index: 10;
 }
@@ -463,7 +462,6 @@ footer{
 }
 
 /* product-detailed */
-
 .product-detailed__main
 {
     display: flex;
@@ -795,4 +793,59 @@ footer{
 
 .swiper-button-disabled{
     display: none;
+}
+
+/* tags */
+.dropdown__form{
+    display: flex;
+    flex-direction: column;
+}
+
+.dropdown__wraper {
+    padding: 0 15px 0 15px;
+    display: flex;
+    flex: 1 1 auto;
+    width: 650px;
+    margin-bottom: 15px;
+}
+
+.dropdown__tag{
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: flex-start;
+    flex: 1 0 auto;
+    margin: 0 5px;
+}
+
+label{
+    display: inline-block;
+}
+
+.dropdown__tag-name{
+    font-size: 18px;
+    border-bottom: 1px solid white;
+    margin-bottom: 10px;
+    width: 100%;
+    text-align: left;
+    padding-bottom: 0;
+}
+
+.dropdown__btn{
+    display: block;
+    align-self: flex-end; 
+    width: 200px;
+    height: 40px;
+    margin-right: 15px;
+    color: white;
+    background: #3d3f44;
+    border: 1px solid white;
+    font-size: 20px;
+    font-family: 'Unbounded';
+    transition: .4s;
+}
+
+.dropdown__btn:hover{
+    background: #c41230;
+    transition: .4s;
 }
