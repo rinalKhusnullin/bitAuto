@@ -37,7 +37,10 @@ class ProductController extends BaseController
 
 		$this->render('layout', [
 			'title' => ConfigurationController::getConfig('TITLE'),
-			'content' => TemplateEngine::view('Product/product-detailed', (array)$product),
+			'content' => TemplateEngine::view('Product/product-detailed', [...(array)$product, 
+				'slider' => TemplateEngine::view('components/slider', [
+					'id' => $product->id,
+				])]),
 		]);
 	}
 }
