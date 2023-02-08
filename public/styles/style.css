@@ -849,3 +849,37 @@ label{
     background: #c41230;
     transition: .4s;
 }
+
+.order-status {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+}
+.order-status__img {
+    width: 600px;
+    height: 500px;
+}
+
+.order-status__img img{
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.order-status__desc-block {
+    padding-top: 20px;
+    display: flex;
+    flex-direction: column;
+}
+.order-status__title {
+    font-size: 50px;
+    margin-bottom: 20px;
+    font-weight: 300;
+}
+.order-status__description {
+    font-weight: 100;
+    font-size: 25px;
+    line-height: 28px;
+}
+
