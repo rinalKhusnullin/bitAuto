@@ -18,10 +18,10 @@ class IndexController extends BaseController
 			'content' => TemplateEngine::view('pages/index', [
 				'products' => $products,
 				'pagination' => TemplateEngine::view('components/pagination', [
-						'currentPage' => $indexPage,
-						'countPage' => $db->getPageCount(),
-					]),
+					'currentPage' => $indexPage,
+					'countPage' => $db->getPageCount(),
 				]),
+			]),
 		]);
 	}
 }
