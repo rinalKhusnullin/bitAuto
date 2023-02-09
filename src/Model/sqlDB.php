@@ -16,14 +16,7 @@ class sqlDB extends DB
 	function getData($isPublic, $page = 0): array
 	{
 		$countProductsOnPage = ConfigurationController::getConfig('CountProductsOnPage');
-		if ($page > 1)
-		{
-			$page = $page * $countProductsOnPage - $countProductsOnPage;
-		}
-		else
-		{
-			$page = 0;
-		}
+		$page = ($page > 1) ? $page * $countProductsOnPage - $countProductsOnPage : 0;
 		$query = "SELECT p.id, p.name, p.IS_ACTIVE, b.brand, t.transmission, c.carcase, p.DATE_CREATION, p.DATE_UPDATE, p.SHORT_DESCRIPTION, p.FULL_DESCRIPTION, p.PRODUCT_PRIСE
 					FROM products p
 					inner join brand b on p.ID_BRAND = b.id
@@ -32,8 +25,7 @@ class sqlDB extends DB
 		if ($isPublic)
 		{
 			$query .= "\n" ."where p.IS_ACTIVE = true
-						limit $countProductsOnPage offset $page";
-
+				limit $countProductsOnPage offset $page";
 		}
 		else
 		{
@@ -57,43 +49,64 @@ class sqlDB extends DB
 		return $this->buildProduct($result)[0];
 	}
 
+	function getDataBySQuery(string $sQuery, int $page = 0) : array
+	{
+		$countProductOnPage = ConfigurationController::getConfig('CountProductsOnPage');
+		$page = ($page > 1) ? $page * $countProductOnPage - $countProductOnPage : 0;
+		$sQuery = strtolower($sQuery);
+		$sQuery = mysqli_real_escape_string($this->connection, $sQuery);
+
+		$query = "SELECT p.id, p.name, p.IS_ACTIVE, b.brand, t.transmission, c.carcase, p.DATE_CREATION, p.DATE_UPDATE, p.SHORT_DESCRIPTION, p.FULL_DESCRIPTION, p.PRODUCT_PRIСE
+			FROM products p
+			inner join brand b on p.ID_BRAND = b.id
+			inner join carcase c on p.ID_CARCASE = c.id
+			inner join transmission t on p.ID_TRANSMISSION = t.id
+			where LOWER(p.name) LIKE '%$sQuery%' or LOWER(p.SHORT_DESCRIPTION) LIKE '%$sQuery%'";
+
+		$result = mysqli_query($this->connection, $query);
+
+		//Узнаем сколько страниц (пагинация)
+		$pageCount = ceil(mysqli_num_rows($result) / $countProductOnPage);
+
+		//Залимитить под пагинацию
+		$query .= " limit $countProductOnPage offset $page";
+
+		//вернуть массив из продуктов и сколько всего записей
+		$result = mysqli_query($this->connection, $query);
+		return [$this->buildProduct($result), $pageCount];
+
+	}
+
 	function getDataByTeg($brand, $carcase, $transmission, $page = 0 ): ?array
 	{
-		$countProductsOnPage = ConfigurationController::getConfig('CountProductsOnPage');
-		if ($page > 1)
-		{
-			$page = $page * $countProductsOnPage - $countProductsOnPage;
-		}
-		else
-		{
-			$page = 0;
-		}
+		$countProductOnPage = ConfigurationController::getConfig('CountProductsOnPage');
+		$page = ($page > 1) ? $page * $countProductOnPage - $countProductOnPage : 0;
 		$query = "SELECT p.id, p.name, p.IS_ACTIVE, b.brand, t.transmission, c.carcase, p.DATE_CREATION, p.DATE_UPDATE, p.SHORT_DESCRIPTION, p.FULL_DESCRIPTION, p.PRODUCT_PRIСE
 					FROM products p
 	 				inner join brand b on p.ID_BRAND = b.id
 					inner join carcase c on p.ID_CARCASE = c.id
 					inner join transmission t on p.ID_TRANSMISSION = t.id
 					where ";
+
 		$tegs = [];
-		if (isset($brand))
-		{
-			$tegs[] = "b.brand = '$brand'";
-		}
-		if (isset($carcase))
-		{
-			$tegs[] = "c.carcase = '$carcase'";
-		}
-		if (isset($transmissoin))
-		{
-			$tegs[] = "t.transmission = '$transmission'";
-		}
-		if (empty($tegs))
-		{
-			return $this->getData(true);
-		}
+		if (isset($brand)) $tegs[] = "b.brand = '$brand'";
+		if (isset($carcase)) $tegs[] = "c.carcase = '$carcase'";
+		if (isset($transmission)) $tegs[] = "t.transmission = '$transmission'";
+
+		if (empty($tegs)) return $this->getData(true);
+
 		$query .= implode(' and ', $tegs);
 		$result = mysqli_query($this->connection, $query);
-		return $this->buildProduct($result);
+
+		//Узнать сколько будет страниц с учетом пагинации
+		$pageCount = ceil(mysqli_num_rows($result) / $countProductOnPage);
+
+		//Залимитить под пагинацию
+		$query .= " limit $countProductOnPage offset $page";
+
+		//вернуть массив из продуктов и сколько всего записей
+		$result = mysqli_query($this->connection, $query);
+		return [$this->buildProduct($result), $pageCount];
 	}
 
 	function updateData()
@@ -112,6 +125,7 @@ class sqlDB extends DB
 	}
 	function buildProduct($result): ?array
 	{
+		$product = [];
 		while ($row = mysqli_fetch_assoc($result))
 		{
 			$product[] = new Products\Product(
