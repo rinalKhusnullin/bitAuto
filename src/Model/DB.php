@@ -11,6 +11,6 @@ abstract class DB
 	abstract function createData();
 	abstract function deleteData();
 	abstract function buildProduct($result) : ?array;
-	abstract function getPageCount();
+	abstract function getPageCount($isQuery = false, $argument = null);
 	abstract function createOrder(Order $order) :bool;
 }

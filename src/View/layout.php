@@ -71,7 +71,7 @@
 						</div>
 					</div>
 				</li>
-				<li class="header__menu-item"><a href="/about-company/" class="header__menu-link">О компании</a>
+<!--				<li class="header__menu-item"><a href="/about-company/" class="header__menu-link">О компании</a>-->
 				<li class="header__menu-item"><a href="/contacts/" class="header__menu-link">Контакты</a> 
 				</li> 
 			</ul>
