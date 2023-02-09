@@ -1,6 +1,6 @@
 <?php
 
-namespace ES\controller;
+namespace ES\Controller;
 
 use ES\Exceptions\ConfigurationException;
 

@@ -1,8 +1,8 @@
 <?php
 
-namespace ES\Model;
+namespace ES\Model\sqlDAO;
 
-use ES\controller\ConfigurationController;
+use ES\Controller\ConfigurationController;
 
 class DbConnection
 {

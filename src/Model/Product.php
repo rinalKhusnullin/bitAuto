@@ -1,6 +1,6 @@
 <?php
 
-namespace ES\Model\Products;
+namespace ES\Model;
 
 class Product
 {

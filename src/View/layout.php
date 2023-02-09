@@ -13,7 +13,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="stylesheet" href="/styles/reset.css">
 	<link rel="stylesheet" href="/styles/style.css">
-	<link rel="shortcut icon" href="/images/logo.ico" type="image/x-icon">
+	<link rel="shortcut icon" href="/images/header/logo.ico" type="image/x-icon">
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@200;300;400;500&display=swap" rel="stylesheet">
@@ -28,21 +28,21 @@
 		<div class="container">
 			<div class="header__logo">
 				<a href="/" class="header__logo-link">
-					<img src="/images/logo.svg" alt="" class="header__logo-img">
+					<img src="/images/header/logo.svg" alt="" class="header__logo-img">
 				</a>
 			</div>
 			<div class="header__search">
 				<form class="header__search-form" action="/" method="get"><!--get request to search into database-->
 					<input class="header__search-input" type="text" name="search_query" placeholder="Введите название автомобиля">
 					<button class="header__search-btn">
-						<img src="/images/search-icon.svg" alt="search" class="header__search-icon">
+						<img src="/images/header/search-icon.svg" alt="search" class="header__search-icon">
 					</button>
 				</form>
 			</div>
 			<div class="header__address">
 				<a href="https://yandex.ru/maps/org/bitriks24/1126159654/?ll=20.488308%2C54.719150&z=16.67"
 				   class="header__address-link" target="_blank"> <!--link to yandex maps with bitrix24 -->
-					<img src="/images/mark-map.svg" alt="" class="header__address-icon icon">
+					<img src="/images/header/mark-map.svg" alt="" class="header__address-icon icon">
 				</a>
 				<p class="header__address-description">
 					Калининград <br> Гостиная, 3
@@ -50,7 +50,7 @@
 			</div>
 			<div class="header__contacts">
 				<a href="tel:+78002501860" class="header__contacts-link"> <!-- bitrix24 tel -->
-					<img src="/images/contacts.svg" alt="" class="header__contacts-icon icon">
+					<img src="/images/header/contacts.svg" alt="" class="header__contacts-icon icon">
 				</a>
 				<p class="header__contacts-description">
 					8-800-250-18-60
@@ -65,14 +65,14 @@
 				</li> <!--link to catalog -->
 				<li class="header__menu-item">
 					<div class="header__dropdown-menu">
-						<a href="##" id="dropdown-btn" class="header__menu-link dropdown-btn undroped" onclick="dropdown(); return false">Марки автомобилей</a>
+						<a href="##" id="dropdown-btn" class="header__menu-link dropdown-btn undroped" onclick="dropdown(); return false">Категории</a>
 						<div class="header__dropdown-tags di" id="dropdown-content">
 							<?= \ES\Controller\TemplateEngine::view('components/tags', []) ?>
 						</div>
 					</div>
 				</li>
-				<li class="header__menu-item"><a href="/about-company" class="header__menu-link">О компании</a>
-				<li class="header__menu-item"><a href="/contacts" class="header__menu-link">Контакты</a> 
+<!--				<li class="header__menu-item"><a href="/about-company/" class="header__menu-link">О компании</a>-->
+				<li class="header__menu-item"><a href="/contacts/" class="header__menu-link">Контакты</a> 
 				</li> 
 			</ul>
 		</div>

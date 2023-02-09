@@ -13,7 +13,7 @@ class Order
 		public string $mail,
 		public string $address,
 		public ?string $comment,
-		public Products\Product $product,
+		public \ES\Model\Product $product,
 		public ?string $dateCreation,
 		public string $status = 'processing',
 	)

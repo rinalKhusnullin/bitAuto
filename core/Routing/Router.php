@@ -19,7 +19,7 @@ class Router
 		self::add('GET', $uri, $action);
 	}
 
-	public static function post(string $uri, callable $action) : void
+	public static function post(string $uri, $action) : void
 	{
 		self::add('POST', $uri, $action);
 	}

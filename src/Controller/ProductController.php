@@ -3,23 +3,36 @@
 namespace ES\Controller;
 
 use ES\Model\Order;
-use ES\Model\sqlDB;
+use ES\Model\sqlDAO\sqlDB;
 
 class ProductController extends BaseController
 {
 	public function getDetailAction($id): void
 	{
-		(is_numeric($id)) ? $id = (int)$id : header('Location: /error');
-
 		$db = new sqlDB();
 		$product = $db->getDataByID((int)$id);
 
 		if ($product === null)
 		{
-			header('Location: /error');
+			header('Location: /error/');
 		}
 
-		if (!empty($_POST))
+		$this->render('layout', [
+			'title' => ConfigurationController::getConfig('TITLE'),
+			'content' => TemplateEngine::view('Product/product-detailed', (array)$product)
+		]);
+	}
+	public function postDetailAction($id): void
+	{
+		$db = new sqlDB();
+		$product = $db->getDataByID((int)$id);
+
+		if ($product === null)
+		{
+			header('Location: /error/');
+		}
+
+		if (!empty($_POST)) // its not working
 		{
 			$result = $db->createOrder(new Order(
 				$_POST['userLastname'],
@@ -31,12 +44,11 @@ class ProductController extends BaseController
 				$product,
 				date('Y-m-d H:i:s')
 			));
-			$result ? header('Location: /') : header('Location: /byed');
+			$result ? header('Location: /success/') : header('Location: /failed/');
 		}
-
-		$this->render('layout', [
-			'title' => ConfigurationController::getConfig('TITLE'),
-			'content' => TemplateEngine::view('Product/product-detailed', (array)$product)
-		]);
+		else
+		{
+			header("Location: /product/$product->id/");
+		}
 	}
 }
