@@ -2,7 +2,7 @@
 
 namespace ES\Controller;
 
-use ES\Model\sqlDB;
+use ES\Model\sqlDAO\sqlDB;
 
 class IndexController extends BaseController
 {

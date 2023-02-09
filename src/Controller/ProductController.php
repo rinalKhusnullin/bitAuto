@@ -3,7 +3,7 @@
 namespace ES\Controller;
 
 use ES\Model\Order;
-use ES\Model\sqlDB;
+use ES\src\Model\sqlDAO\sqlDB;
 
 class ProductController extends BaseController
 {

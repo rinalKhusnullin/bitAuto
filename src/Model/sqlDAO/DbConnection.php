@@ -1,6 +1,6 @@
 <?php
 
-namespace ES\Model;
+namespace ES\Model\sqlDAO;
 
 use ES\Controller\ConfigurationController;
 

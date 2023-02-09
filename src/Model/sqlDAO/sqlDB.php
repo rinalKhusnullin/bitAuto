@@ -1,9 +1,11 @@
 <?php
 
-namespace ES\Model;
+namespace ES\Model\sqlDAO;
 
 use ES\Controller\ConfigurationController;
-use ES\Model\Products\Product;
+use ES\Model\DB;
+use ES\Model\Order;
+use ES\Model\Product;
 
 class sqlDB extends DB
 {
@@ -128,7 +130,7 @@ class sqlDB extends DB
 		$product = [];
 		while ($row = mysqli_fetch_assoc($result))
 		{
-			$product[] = new Products\Product(
+			$product[] = new \ES\Model\Product(
 				$row['id'],
 				$row['name'],
 				$row['IS_ACTIVE'],
