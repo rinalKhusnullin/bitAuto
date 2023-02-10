@@ -27,3 +27,10 @@ Router::get('/failed/', function () {
         'content' => TemplateEngine::view('pages/failed', []),
     ]);
 });
+
+Router::get('/admin/', function () {
+	echo TemplateEngine::view('adminPanelLayout',[
+		'title' => 'admin',
+		'content' => [],
+	]);
+} );
