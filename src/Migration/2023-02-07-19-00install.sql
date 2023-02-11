@@ -5,7 +5,7 @@ VALUES (4, 'Nissan'),
        (5, 'Lexus'),
        (6, 'Audi');
 
-INSERT INTO products (ID, NAME, SHORT_DESCRIPTION,FULL_DESCRIPTION, IS_ACTIVE, DATE_CREATION, PRODUCT_PRIСE,ID_BRAND, ID_CARCASE, ID_TRANSMISSION)
+INSERT INTO products (ID, NAME, SHORT_DESCRIPTION,FULL_DESCRIPTION, IS_ACTIVE, DATE_CREATION, PRODUCT_PRICE,ID_BRAND, ID_CARCASE, ID_TRANSMISSION)
 VALUES (7, 'Mazda 6', 'Мазда 6- это модель Гольф класса, выпускающаяся в двух вариантах
 исполнения: пятидверный хэтчбек и седан.', 'Мазда 6- это модель Гольф класса, выпускающаяся в двух вариантах
 исполнения: пятидверный хэтчбек и седан.

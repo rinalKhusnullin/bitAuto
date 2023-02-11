@@ -30,7 +30,7 @@ CREATE TABLE IF NOT EXISTS products
 	NAME varchar(255) not null,
 	SHORT_DESCRIPTION varchar(500) not null,
 	FULL_DESCRIPTION varchar(2000) not null,
-	PRODUCT_PRIСE int not null,
+	PRODUCT_PRICE int not null,
 	IS_ACTIVE bit,
 	ID_BRAND int not null,
 	ID_TRANSMISSION int not null,
@@ -118,7 +118,7 @@ values (1, 'АКПП'),
 	   (2, 'МКПП'),
 	   (3, 'Вариатор');
 
-INSERT INTO products (ID, NAME, SHORT_DESCRIPTION,FULL_DESCRIPTION, IS_ACTIVE, DATE_CREATION, PRODUCT_PRIСE,ID_BRAND, ID_CARCASE, ID_TRANSMISSION)
+INSERT INTO products (ID, NAME, SHORT_DESCRIPTION,FULL_DESCRIPTION, IS_ACTIVE, DATE_CREATION, PRODUCT_PRICE,ID_BRAND, ID_CARCASE, ID_TRANSMISSION)
 VALUES (1, 'Mazda 3', 'Мазда 3- это модель Гольф класса, выпускающаяся в двух вариантах
 исполнения: пятидверный хэтчбек и седан.', 'Мазда 3- это модель Гольф класса, выпускающаяся в двух вариантах
 исполнения: пятидверный хэтчбек и седан.

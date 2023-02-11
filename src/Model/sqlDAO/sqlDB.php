@@ -19,7 +19,7 @@ class sqlDB extends DB
 	{
 		$countProductsOnPage = ConfigurationController::getConfig('CountProductsOnPage');
 		$page = ($page > 1) ? $page * $countProductsOnPage - $countProductsOnPage : 0;
-		$query = "SELECT p.id, p.name, p.IS_ACTIVE, b.brand, t.transmission, c.carcase, p.DATE_CREATION, p.DATE_UPDATE, p.SHORT_DESCRIPTION, p.FULL_DESCRIPTION, p.PRODUCT_PRIСE
+		$query = "SELECT p.id, p.name, p.IS_ACTIVE, b.brand, t.transmission, c.carcase, p.DATE_CREATION, p.DATE_UPDATE, p.SHORT_DESCRIPTION, p.FULL_DESCRIPTION, p.PRODUCT_PRICE
 					FROM products p
 					inner join brand b on p.ID_BRAND = b.id
 					inner join carcase c on p.ID_CARCASE = c.id
@@ -41,7 +41,7 @@ class sqlDB extends DB
 	function getDataByID($id) : ?Product
 	{
 		$id = mysqli_real_escape_string($this->connection, $id);
-		$query = "SELECT p.id, p.name, p.IS_ACTIVE, b.brand, t.transmission, c.carcase, p.DATE_CREATION, p.DATE_UPDATE, p.SHORT_DESCRIPTION, p.FULL_DESCRIPTION, p.PRODUCT_PRIСE
+		$query = "SELECT p.id, p.name, p.IS_ACTIVE, b.brand, t.transmission, c.carcase, p.DATE_CREATION, p.DATE_UPDATE, p.SHORT_DESCRIPTION, p.FULL_DESCRIPTION, p.PRODUCT_PRICE
 					FROM products p
 					inner join brand b on p.ID_BRAND = b.id
 					inner join carcase c on p.ID_CARCASE = c.id
@@ -59,7 +59,7 @@ class sqlDB extends DB
 		$pageCount = $this->getPageCount(true,$sQuery);
 		$sQuery = mysqli_real_escape_string($this->connection, $sQuery);
 
-		$query = "SELECT p.id, p.name, p.IS_ACTIVE, b.brand, t.transmission, c.carcase, p.DATE_CREATION, p.DATE_UPDATE, p.SHORT_DESCRIPTION, p.FULL_DESCRIPTION, p.PRODUCT_PRIСE
+		$query = "SELECT p.id, p.name, p.IS_ACTIVE, b.brand, t.transmission, c.carcase, p.DATE_CREATION, p.DATE_UPDATE, p.SHORT_DESCRIPTION, p.FULL_DESCRIPTION, p.PRODUCT_PRICE
 			FROM products p
 			inner join brand b on p.ID_BRAND = b.id
 			inner join carcase c on p.ID_CARCASE = c.id
@@ -77,7 +77,7 @@ class sqlDB extends DB
 	{
 		$countProductOnPage = ConfigurationController::getConfig('CountProductsOnPage');
 		$page = ($page > 1) ? $page * $countProductOnPage - $countProductOnPage : 0;
-		$query = "SELECT p.id, p.name, p.IS_ACTIVE, b.brand, t.transmission, c.carcase, p.DATE_CREATION, p.DATE_UPDATE, p.SHORT_DESCRIPTION, p.FULL_DESCRIPTION, p.PRODUCT_PRIСE
+		$query = "SELECT p.id, p.name, p.IS_ACTIVE, b.brand, t.transmission, c.carcase, p.DATE_CREATION, p.DATE_UPDATE, p.SHORT_DESCRIPTION, p.FULL_DESCRIPTION, p.PRODUCT_PRICE
 					FROM products p
 	 				inner join brand b on p.ID_BRAND = b.id
 					inner join carcase c on p.ID_CARCASE = c.id
@@ -135,7 +135,7 @@ class sqlDB extends DB
 				$row['DATE_UPDATE'],
 				$row['SHORT_DESCRIPTION'],
 				$row['FULL_DESCRIPTION'],
-				$row['PRODUCT_PRIСE']
+				$row['PRODUCT_PRICE']
 			);
 		}
 		return $product;
