@@ -5,24 +5,22 @@ use PHPUnit\Framework\TestCase;
 
 class TemplateEngineTest extends TestCase
 {
-
-	/** @test */
-	public function TestInvalidPath(): void
+	public function testInvalidPath(): void
 	{
 		$this->expectExceptionMessage('Invalid template path');
 		TemplateEngine::view('this is in!@#$%*()_correct path');
 	}
 
-	/** @test */
-	public function TestFileNotFound() : void
+	public function testFileNotFound() : void
 	{
 		$this->expectExceptionMessage('Template not found');
 		TemplateEngine::view('thisIsNotExistentFileName');
 	}
 
-	/** @test */
-	public function TestViewFunc() : void
+	public function testCorrectWork() : void
 	{
-		$this->assertEquals('12451' , \ES\Controller\TemplateEngine::view('layout', []));
+		$expected = require_once ROOT . '/src/View/layout.php';
+		$result = TemplateEngine::view('layout', []);
+		$this->assertStringContainsString($expected,$result);
 	}
 }
