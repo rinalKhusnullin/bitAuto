@@ -10,7 +10,7 @@ class Migrator
 	{
 		function getMigrationFiles($connection) {
 
-			$base_dir = ROOT . '/src/Migrator/';
+			$base_dir = ROOT . '/core/Migration/';
 			$sqlFolder = str_replace('\\', '/', realpath($base_dir) . '/');
 			$allFiles = glob($sqlFolder . '*.sql');
 
