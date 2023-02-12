@@ -11,6 +11,7 @@ class IndexController extends BaseController
 	{
 		$indexPage = (isset($_GET['page'])) ? (int)$_GET['page'] : 1;
 		$db = new sqlDB();
+		$tags = $db->getTegs();
 
 		if (isset($_GET['brand']) || isset($_GET['transmission']) || isset($_GET['carcase'])) //Если пользователь выбрал категории
 		{
@@ -19,7 +20,7 @@ class IndexController extends BaseController
 			$transmission =  isset($_GET['transmission']) ? $_GET['transmission'] : null;
 
 			// Возвращает массив из товаров и количества позиций
-			[$products, $pageCount] = $db->getDataByTeg($brand, $carcase, $transmission, $indexPage);
+			[$products, $pageCount] = $db->getProductDataByTeg($brand, $carcase, $transmission, $indexPage);
 		}
 		else if (isset($_GET['search_query']))
 		{
@@ -31,7 +32,7 @@ class IndexController extends BaseController
 		else
 		{
 			// Иначе получаем все товары
-			[$products, $pageCount] = [$db->getData(true, $indexPage), $db->getPageCount()];
+			[$products, $pageCount] = [$db->getProductData(true, $indexPage), $db->getPageCount()];
 		}
 
 		if (empty($products))
@@ -41,6 +42,7 @@ class IndexController extends BaseController
 
 		$this->render('layout', [
 			'title' => ConfigurationController::getConfig('TITLE'),
+			'tags' => $tags,
 			'content' => TemplateEngine::view('pages/index', [
 				'products' => $products,
 				'pagination' => TemplateEngine::view('components/pagination', [

@@ -15,7 +15,7 @@ class sqlDB extends DB
 		$this->connection = DbConnection::getInstance()->getConnection();
 	}
 
-	function getData($isPublic, $page = 0): array
+	function getProductData($isPublic, $page = 0): array
 	{
 		$countProductsOnPage = ConfigurationController::getConfig('CountProductsOnPage');
 		$page = ($page > 1) ? $page * $countProductsOnPage - $countProductsOnPage : 0;
@@ -38,7 +38,7 @@ class sqlDB extends DB
 	}
 
 
-	function getDataByID($id) : ?Product
+	function getProductDataByID($id) : ?Product
 	{
 		$id = mysqli_real_escape_string($this->connection, $id);
 		$query = "SELECT p.id, p.name, p.IS_ACTIVE, b.brand, t.transmission, c.carcase, p.DATE_CREATION, p.DATE_UPDATE, p.SHORT_DESCRIPTION, p.FULL_DESCRIPTION, p.PRODUCT_PRICE
@@ -73,7 +73,7 @@ class sqlDB extends DB
 
 	}
 
-	function getDataByTeg($brand, $carcase, $transmission, $page = 0 ): ?array
+	function getProductDataByTeg($brand, $carcase, $transmission, $page = 0 ): ?array
 	{
 		$countProductOnPage = ConfigurationController::getConfig('CountProductsOnPage');
 		$page = ($page > 1) ? $page * $countProductOnPage - $countProductOnPage : 0;
@@ -89,7 +89,7 @@ class sqlDB extends DB
 		if (isset($carcase)) $tegs[] = "c.carcase = '$carcase'";
 		if (isset($transmission)) $tegs[] = "t.transmission = '$transmission'";
 
-		if (empty($tegs)) return $this->getData(true);
+		if (empty($tegs)) return $this->getProductData(true);
 
 		$query .= implode(' and ', $tegs);
 		$result = mysqli_query($this->connection, $query);
@@ -171,5 +171,41 @@ class sqlDB extends DB
 
 		return mysqli_query($this->connection,$query);
 
+	}
+
+	function getTegs(): ?array
+	{
+		$queryBrand = 'Select BRAND
+					   from brand';
+		$resultBrand = mysqli_query($this->connection,$queryBrand);
+		$brand = [];
+			while ($row = mysqli_fetch_assoc($resultBrand))
+			{
+				$brand[] = $row;
+			}
+
+		$queryCarcase = 'Select CARCASE
+						 from carcase';
+		$resultCarcase = mysqli_query($this->connection,$queryCarcase);
+		$carcase = [];
+		while ($row = mysqli_fetch_assoc($resultCarcase))
+		{
+			$carcase[] = $row;
+		}
+
+		$queryTransmission = 'Select TRANSMISSION
+							  from transmission';
+		$resultTransmissoin = mysqli_query($this->connection,$queryTransmission);
+		$transmission = [];
+		while ($row = mysqli_fetch_assoc($resultTransmissoin))
+		{
+			$transmission[] = $row;
+		}
+
+
+		$tegs[0] = $brand;
+		$tegs[1] = $carcase;
+		$tegs[2] = $transmission;
+		return $tegs;
 	}
 }

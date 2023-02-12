@@ -11,7 +11,7 @@ class ProductController extends BaseController
 	public function getDetailAction($id): void
 	{
 		$db = new sqlDB();
-		$product = $db->getDataByID((int)$id);
+		$product = $db->getProductDataByID((int)$id);
 
 		if ($product === null)
 		{
@@ -26,7 +26,7 @@ class ProductController extends BaseController
 	public function postDetailAction($id): void
 	{
 		$db = new sqlDB();
-		$product = $db->getDataByID((int)$id);
+		$product = $db->getProductDataByID((int)$id);
 
 		if ($product === null)
 		{

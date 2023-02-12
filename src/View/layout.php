@@ -2,6 +2,7 @@
 /**
  * @var string $title
  * @var $content
+ * @var array $tags
  */
 ?>
 <!DOCTYPE html>
@@ -67,7 +68,7 @@
 					<div class="header__dropdown-menu">
 						<a href="##" id="dropdown-btn" class="header__menu-link dropdown-btn undroped" onclick="dropdown(); return false">Категории</a>
 						<div class="header__dropdown-tags di" id="dropdown-content">
-							<?= \ES\Controller\TemplateEngine::view('components/tags', []) ?>
+							<?= \ES\Controller\TemplateEngine::view('components/tags', ['tags' => $tags]) ?>
 						</div>
 					</div>
 				</li>
