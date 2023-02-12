@@ -2,10 +2,10 @@
 
 namespace ES\Model\sqlDAO;
 
-use ES\Controller\ConfigurationController;
 use ES\Model\DB;
 use ES\Model\Order;
 use ES\Model\Product;
+use ES\config\ConfigurationController;
 
 class sqlDB extends DB
 {

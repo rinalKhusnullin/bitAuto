@@ -2,6 +2,7 @@
 
 namespace ES\Controller;
 
+use ES\config\ConfigurationController;
 
 class ContactsController extends BaseController
 {

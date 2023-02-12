@@ -2,15 +2,15 @@
 
 namespace ES;
 
-use ES\Controller\ConfigurationController;
+use ES\config\ConfigurationController;
 
-class Migration
+class Migrator
 {
 	public static function migrate($connection): void
 	{
 		function getMigrationFiles($connection) {
 
-			$base_dir = ROOT . '/src/Migration/';
+			$base_dir = ROOT . '/src/Migrator/';
 			$sqlFolder = str_replace('\\', '/', realpath($base_dir) . '/');
 			$allFiles = glob($sqlFolder . '*.sql');
 

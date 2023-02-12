@@ -4,6 +4,7 @@ namespace ES\Controller;
 
 use ES\Model\Order;
 use ES\Model\sqlDAO\sqlDB;
+use ES\config\ConfigurationController;
 
 class ProductController extends BaseController
 {

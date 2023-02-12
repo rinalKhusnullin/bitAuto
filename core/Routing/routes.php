@@ -1,6 +1,6 @@
 <?php
 
-use ES\controller\ConfigurationController;
+use ES\config\ConfigurationController;
 use ES\Controller\TemplateEngine;
 use ES\Routing\Router;
 

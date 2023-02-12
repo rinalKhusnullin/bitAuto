@@ -2,6 +2,7 @@
 
 namespace ES\Controller;
 
+use ES\config\ConfigurationController;
 use ES\Model\sqlDAO\sqlDB;
 
 class IndexController extends BaseController
@@ -13,7 +14,7 @@ class IndexController extends BaseController
 
 		if (isset($_GET['brand']) || isset($_GET['transmission']) || isset($_GET['carcase'])) //Если пользователь выбрал категории
 		{
-			$brand = isset($_GET['brand']) ? $_GET['brand'] : null; 
+			$brand = isset($_GET['brand']) ? $_GET['brand'] : null;
 			$carcase = isset($_GET['carcase']) ? $_GET['carcase'] : null;
 			$transmission =  isset($_GET['transmission']) ? $_GET['transmission'] : null;
 
@@ -25,7 +26,7 @@ class IndexController extends BaseController
 			$searchQuery = $_GET['search_query'];
 
 			//Ищем по поисковой строке
-			[$products, $pageCount] = $db->getDataBySQuery($searchQuery, $indexPage); 
+			[$products, $pageCount] = $db->getDataBySQuery($searchQuery, $indexPage);
 		}
 		else
 		{

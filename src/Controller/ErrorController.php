@@ -2,12 +2,10 @@
 
 namespace ES\Controller;
 
+use ES\config\ConfigurationController;
+
 class ErrorController extends BaseController
 {
-	public function getUserErrorAction() : void
-	{
-
-	}
 	public function getSystemErrorAction(\Exception $e = null) : void
 	{
 		if($e !== null)
