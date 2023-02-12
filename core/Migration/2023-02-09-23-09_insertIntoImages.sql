@@ -1,5 +1,11 @@
 insert into images(id, is_main, id_product, PATH)
-values (7, true, 7, 'eshop/public/tmp-autoimg'),
+values (1, true, 1, 'eshop/public/tmp-autoimg'),
+	   (2, true, 2, 'eshop/public/tmp-autoimg'),
+	   (3, true, 3, 'eshop/public/tmp-autoimg'),
+	   (4, true, 4, 'eshop/public/tmp-autoimg'),
+	   (5, true, 5, 'eshop/public/tmp-autoimg'),
+	   (6, true, 6, 'eshop/public/tmp-autoimg'),
+       (7, true, 7, 'eshop/public/tmp-autoimg'),
        (8, true, 8, 'eshop/public/tmp-autoimg'),
        (9, true, 9, 'eshop/public/tmp-autoimg'),
        (10, true, 10, 'eshop/public/tmp-autoimg'),
