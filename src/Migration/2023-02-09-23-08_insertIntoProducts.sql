@@ -1,11 +1,10 @@
-use db_e_shop;
-
-INSERT INTO brand
-VALUES (4, 'Nissan'),
-       (5, 'Lexus'),
-       (6, 'Audi');
-
-INSERT INTO products (ID, NAME, SHORT_DESCRIPTION,FULL_DESCRIPTION, IS_ACTIVE, DATE_CREATION, PRODUCT_PRICE,ID_BRAND, ID_CARCASE, ID_TRANSMISSION)
+INSERT INTO products
+(
+ 	ID,
+ 	NAME,
+ 	SHORT_DESCRIPTION,
+ 	FULL_DESCRIPTION,
+ 	IS_ACTIVE, DATE_CREATION, PRODUCT_PRICE,ID_BRAND, ID_CARCASE, ID_TRANSMISSION)
 VALUES (7, 'Mazda 6', 'Мазда 6- это модель Гольф класса, выпускающаяся в двух вариантах
 исполнения: пятидверный хэтчбек и седан.', 'Мазда 6- это модель Гольф класса, выпускающаяся в двух вариантах
 исполнения: пятидверный хэтчбек и седан.
@@ -402,29 +401,3 @@ Nissan Quest B8 впервые был показан в потсдамском �
  33 мм прибавилось к длине салона. Ширина увеличилась на 12 мм (до 1832 мм),
  а высота уменьшилась на 14 мм (1456 мм). Свесы кузова стали короче на 67 мм спереди
 и 13 мм сзади.', true, CURRENT_DATE(), 1140000,4,5,2);
-
-insert into images(id, is_main, id_product, PATH)
-values (7, true, 7, 'eshop/public/tmp-autoimg'),
-       (8, true, 8, 'eshop/public/tmp-autoimg'),
-       (9, true, 9, 'eshop/public/tmp-autoimg'),
-       (10, true, 10, 'eshop/public/tmp-autoimg'),
-       (11, true, 11, 'eshop/public/tmp-autoimg'),
-       (12, true, 12, 'eshop/public/tmp-autoimg'),
-       (13, true, 13, 'eshop/public/tmp-autoimg'),
-       (14, true, 14, 'eshop/public/tmp-autoimg'),
-       (15, true, 15, 'eshop/public/tmp-autoimg'),
-       (16, true, 16, 'eshop/public/tmp-autoimg'),
-       (17, true, 17, 'eshop/public/tmp-autoimg'),
-       (18, true, 18, 'eshop/public/tmp-autoimg'),
-       (19, true, 19, 'eshop/public/tmp-autoimg'),
-       (20, true, 20, 'eshop/public/tmp-autoimg'),
-       (21, true, 21, 'eshop/public/tmp-autoimg'),
-       (22, true, 22, 'eshop/public/tmp-autoimg'),
-       (23, true, 23, 'eshop/public/tmp-autoimg'),
-       (24, true, 24, 'eshop/public/tmp-autoimg'),
-       (25, true, 25, 'eshop/public/tmp-autoimg'),
-       (26, true, 26, 'eshop/public/tmp-autoimg'),
-       (27, true, 27, 'eshop/public/tmp-autoimg'),
-       (28, true, 28, 'eshop/public/tmp-autoimg'),
-       (29, true, 29, 'eshop/public/tmp-autoimg'),
-       (30, true, 20, 'eshop/public/tmp-autoimg');
