@@ -3,7 +3,7 @@
 namespace ES\Model\sqlDAO;
 
 use ES\config\ConfigurationController;
-use ES\Migrator;
+use ES\Migration;
 
 class DbConnection
 {
@@ -53,7 +53,7 @@ class DbConnection
 			throw new \Exception(mysqli_error($this->connection));
 		}
 
-		Migrator::migrate($this->connection);
+		Migration::migrate($this->connection);
 	}
 
 	public function getConnection()

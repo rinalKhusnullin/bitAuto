@@ -4,9 +4,10 @@ namespace ES\Model;
 
 abstract class DB
 {
-	abstract function getData($isPublic, $page) : array;
-	abstract function getDataByID($id) : ?\ES\Model\Product;
-	abstract function getDataByTeg($brand, $carcase, $transmission, $page) : ?array;
+	abstract function getProductData($isPublic, $page) : array;
+	abstract function getProductDataByID($id) : ?\ES\Model\Product;
+	abstract function getProductDataByTeg($brand, $carcase, $transmission, $page) : ?array;
+	abstract function getTegs() :?array;
 	abstract function updateData();
 	abstract function createData();
 	abstract function deleteData();
