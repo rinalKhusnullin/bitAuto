@@ -2,6 +2,7 @@
 
 return [
 	'TITLE' => 'BitAuto',
+	'Title_Log_In' => 'Log In',
 	'CountProductsOnPage' => 10,
 	'DB_HOST' => '',
 	'DB_NAME' => '',
