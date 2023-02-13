@@ -42,8 +42,8 @@
 		</label>
 	</header>
 	<container>
-		<?= \ES\Controller\TemplateEngine::view('pages/adminTable' ,[ 'columns' => $columns , 'content' => $content])?>
+		<?= $content ?>
 	</container>
 </wrapper>
 </body>
-
+<html>

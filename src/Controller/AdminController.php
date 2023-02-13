@@ -8,15 +8,18 @@ class AdminController extends BaseController
 	public function adminAction() : void
 	{
 		$products = new sqlDB();
-		$product1 = $products->getProductDataByID(1);
-		$columns = array_keys((array)$product1);
+		$product1 = $products->getProductData(false);
+		$columns = array_keys((array)$product1[0]);
 
 		$this->render('adminPanelLayout',[
 			'title' => 'admin',
-			'table' => TemplateEngine::view('adminPanelLayout', [
-				'columns' => $columns,
-				'content' => $product1,
-			]),
+			'content' => \ES\Controller\TemplateEngine::view('pages/adminTable' ,
+				[
+					'columns' => $columns ,
+					'content' => TemplateEngine::view('components/adminTableRows',
+						['content' => $product1,])
+				]
+			)
 		]);
 	}
 }
