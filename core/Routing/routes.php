@@ -9,6 +9,8 @@ Router::get('/', [new \ES\Controller\IndexController(), 'indexAction']);
 Router::get('/login/', [new \ES\Controller\LoginController(),'getLoginAction']);
 Router::post('/login/', [new \ES\Controller\LoginController(),'getLoginAction']);
 
+Router::get('/logout/', [new \ES\Controller\LogoutController(),'LogoutAction']);
+
 Router::get('/product/:id/', [new \ES\Controller\ProductController() , 'getDetailAction']);
 Router::post('/product/:id/', [new \ES\Controller\ProductController() , 'postDetailAction']);
 

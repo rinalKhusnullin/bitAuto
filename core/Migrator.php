@@ -9,7 +9,6 @@ class Migrator
 	public static function migrate($connection): void
 	{
 		function getMigrationFiles($connection) {
-
 			$base_dir = ROOT . '/core/Migration/';
 			$sqlFolder = str_replace('\\', '/', realpath($base_dir) . '/');
 			$allFiles = glob($sqlFolder . '*.sql');

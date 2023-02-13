@@ -41,7 +41,7 @@ class LoginController extends BaseController
 					session_start();
 
 					$_SESSION['USER'] = $user;
-					header('Location: /');
+					header('Location: /admin/');
 					exit();
 				}
 			}
@@ -50,7 +50,7 @@ class LoginController extends BaseController
 
 
 		$this->render('layout', [
-			'title' => ConfigurationController::getConfig('Title_Log_In', 'AutoBit Log In'),
+			'title' => ConfigurationController::getConfig('TITLE_LOG_IN', 'AutoBit Log In'),
 			'content' => TemplateEngine::view('pages/login', [
 					'errors' => $errors,
 				]),

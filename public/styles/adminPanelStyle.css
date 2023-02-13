@@ -23,6 +23,8 @@ HEADER
 .header {
 
 	height: 100px;
+	padding: 0 20px;
+	box-sizing: border-box;
 	background: #4e555b;
 	display: flex;
 	align-items: center;
@@ -125,6 +127,8 @@ CONTENT
 container {
 	height: 100%;
 	background: #e7e7e7;
+	padding: 20px;
+	box-sizing: border-box;
 }
 caption {
 	height: 30px;

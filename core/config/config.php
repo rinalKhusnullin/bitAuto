@@ -2,6 +2,8 @@
 
 return [
 	'TITLE' => 'BitAuto',
-	'Title_Log_In' => 'Log In',
+	'TITLE_LOG_IN' => 'Log In',
 	'CountProductsOnPage' => 10,
+	'PAGE_MAIN' => '/',
+	'PAGE_MAIN_TITLE' => 'Главная',
 ];

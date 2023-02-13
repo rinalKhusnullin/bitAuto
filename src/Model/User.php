@@ -11,7 +11,7 @@ class User
 			return [
 				[
 					'id' => 1,
-					'login' => 'tania',
+					'login' => 'admin',
 					'password' => '111',
 				]
 			];

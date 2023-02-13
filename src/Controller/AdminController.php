@@ -7,6 +7,12 @@ class AdminController extends BaseController
 {
 	public function adminAction() : void
 	{
+		session_start();
+		if (!isset($_SESSION['USER']))
+		{
+			header('Location: /login/');
+		}
+
 		$indexPage = (isset($_GET['page'])) ? (int)$_GET['page'] : 1;
 		$db = new sqlDB;
 

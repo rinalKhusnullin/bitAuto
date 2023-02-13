@@ -39,8 +39,9 @@
 		</label>
 		<label class="user-info">
 			<span>Пользователь: admin</span> <!-- Имя пользователя -->
-			<input type="button" value="На сайт" href="#">
-			<input type="button" value="Logout" href="#">
+			<a href="/" target="_blank">На сайт</a>
+			<a href="/logout/">Logout</a>
+
 		</label>
 	</header>
 	<container>
