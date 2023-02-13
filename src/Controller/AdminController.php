@@ -7,9 +7,49 @@ class AdminController extends BaseController
 {
 	public function adminAction() : void
 	{
-		$products = new sqlDB();
-		$product1 = $products->getProductData(false);
-		$columns = array_keys((array)$product1[0]);
+		$indexPage = (isset($_GET['page'])) ? (int)$_GET['page'] : 1;
+		$db = new sqlDB;
+
+		if (isset($_GET['products']))
+		{
+			$content = $db->getProductData(false);
+			$columns = array_keys((array)$content[0]);
+		}
+		elseif(isset($_GET['orders']))
+		{
+			$columns = '';
+			$content = 'ЗАКАЗЫ';
+		}
+		elseif (isset($_GET['users']))
+		{
+			$columns = '';
+			$content = 'МЕШКИ ДЕНЕГ';
+		}
+		elseif (isset($_GET['brands']))
+		{
+			$columns = '';
+			$content = 'БИБИКИ';
+		}
+		elseif (isset($_GET['carcases']))
+		{
+			$columns = '';
+			$content = 'каркасссы';
+		}
+		elseif (isset($_GET['transmissions']))
+		{
+			$columns = '';
+			$content = 'КПППППППППППП';
+		}
+		elseif (isset($_GET['config']))
+		{
+			$content = include ROOT . '/core/config/config.php';
+			$columns = array_keys($content);
+		}
+		else
+		{
+			$columns = '';
+			$content = 'Выберите пункт меню';
+		}
 
 		$this->render('adminPanelLayout',[
 			'title' => 'admin',
@@ -18,10 +58,10 @@ class AdminController extends BaseController
 					'columns' => $columns ,
 					'content' => TemplateEngine::view('components/adminTableRows',
 						[
-							'content' => $product1,
+							'content' => $content,
 							'pagination' => TemplateEngine::view('components/pagination', [
-								'currentPage' => $indexPage,
-								'countPage' => $pageCount,
+								'currentPage' => '$indexPage',
+								'countPage' => '$pageCount',
 							]),
 						])
 				]

@@ -1,5 +1,11 @@
 <?php
 /** @var $content */
+if (!is_array($content))
+{
+	echo $content;
+}
+else
+{
 foreach ($content as $items) {
 	if (is_object($items)) { ?>
 		<tr>
@@ -10,7 +16,7 @@ foreach ($content as $items) {
 			<td><a href="#">Удалить</a></td>
 		</tr>
 	<?php }
-}
+}}
 
 ?>
 

@@ -9,9 +9,11 @@ body {
 }
 
 wrapper	{
-	width: 100vw;
+	width: calc(100vw - 300px);
 	display: flex;
 	flex-direction: column;
+	margin-left: 300px;
+
 }
 /*
 
@@ -69,6 +71,9 @@ NAV MENU
 	width: 300px;
 	background: #4e555b;
 	height: 100vh;
+	position: fixed;
+	top: 0;
+	left: 0;
 }
 
 .nav > p {

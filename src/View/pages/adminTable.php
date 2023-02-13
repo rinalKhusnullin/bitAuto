@@ -1,12 +1,11 @@
 <?php
 /**
  * @var array $columns
+ * @var $content
  */
-
+if(is_array($columns))
+{
 ?>
-
-
-
 <table>
 	<caption> Редактирование продукции</caption>
 	<tr>
@@ -14,7 +13,7 @@
 		<th><?= $column?></th>
 		<?php } ?>
 		<th class="td__change"></th>
-		<th class="td__delete"> </th>
+		<th class="td__delete"></th>
 	</tr>
-		<?= $content ?>
+		<?php } echo $content; ?>
 </table>
