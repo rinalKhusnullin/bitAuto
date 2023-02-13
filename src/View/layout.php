@@ -14,6 +14,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="stylesheet" href="/styles/reset.css">
 	<link rel="stylesheet" href="/styles/style.css">
+	<link rel="stylesheet" href="/styles/adaptive.css">
 	<link rel="shortcut icon" href="/images/header/logo.ico" type="image/x-icon">
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -61,6 +62,12 @@
 	</div>
 	<div class="header__side-header">
 		<div class="container">
+			<div class="mb__header-side">
+				<a class="mb__header-logo">
+					<img src="/images/header/logo.svg" alt="">
+				</a>
+				
+			</div>
 			<ul class="header__menu">
 				<li class="header__menu-item"><a href="/" class="header__menu-link">Каталог</a>
 				</li> <!--link to catalog -->
@@ -76,6 +83,10 @@
 				<li class="header__menu-item"><a href="/contacts/" class="header__menu-link">Контакты</a> 
 				</li> 
 			</ul>
+			<div class="mb__hamburger-icon">
+				<img src="/images/header/hamburger.png" alt="">
+			</div>
+			<div class="mb__hamburger"></div>
 		</div>
 	</div>
 </header>
