@@ -28,9 +28,4 @@ Router::get('/failed/', function () {
     ]);
 });
 
-Router::get('/admin/', function () {
-	echo TemplateEngine::view('adminPanelLayout',[
-		'title' => 'admin',
-		'content' => [],
-	]);
-} );
+Router::get('/admin/', [new \ES\Controller\AdminController(), 'adminAction']);

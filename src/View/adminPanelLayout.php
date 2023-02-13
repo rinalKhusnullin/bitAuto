@@ -3,7 +3,10 @@
 <?php
 /**
  * @var string $title
+ * @var $content
+ * @var array $columns
  */
+
 ?>
 
 <head>
@@ -39,25 +42,7 @@
 		</label>
 	</header>
 	<container>
-		<table>
-			<caption> Редактирование продукции</caption>
-			<tr>
-				<th>ID</th>
-				<th>NAME</th>
-				<th>BRAND</th>
-				<th>PRICE</th>
-				<th></th>
-				<th></th>
-			</tr>
-			<tr>
-				<td>1</td>
-				<td>MAZDA 3</td>
-				<td>MAZDA</td>
-				<td>200000</td>
-				<td class="td__change"><a href="#">Изменить</a></td>
-				<td class="td__delete"><a href="#">Удалить</a></td>
-			</tr>
-		</table>
+		<?= \ES\Controller\TemplateEngine::view('pages/adminTable' ,[ 'columns' => $columns , 'content' => $content])?>
 	</container>
 </wrapper>
 </body>
