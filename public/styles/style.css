@@ -162,7 +162,7 @@ footer{
     background-color: #3d3f44;
     color: white;
     top: 45px;
-    left: -120px;
+    right: -134px;
     padding: 10px 0;
     z-index: 10;
 }
@@ -883,3 +883,37 @@ label{
     line-height: 28px;
 }
 
+/* mobile */
+.mb__header-side{
+    display: none;
+}
+
+.mb__header-logo{
+    display: block;
+    width: 200px;
+    height: 38px;
+    position: relative;
+}
+
+.mb__header-logo img{
+    height: 200%;
+    width: 100%;
+    position: absolute;
+    top: -2px;
+}
+
+.mb__hamburger{
+    display: none;
+}
+
+.mb__hamburger-icon{
+    display: none;
+    position: relative;
+    height: 38px;
+}
+
+.mb__hamburger-icon img{
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+}
