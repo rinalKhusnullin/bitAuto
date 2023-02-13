@@ -13,7 +13,6 @@ class Product
 		public string $carcaseType,
 		public string $dateCreation,
 		public ?string $dateUpdate,
-		public string $shortDesc,
 		public string $fullDesc,
 		public int $price
 	)

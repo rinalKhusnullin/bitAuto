@@ -2,7 +2,6 @@ CREATE TABLE IF NOT EXISTS products
 (
 	ID int not null auto_increment,
 	NAME varchar(255) not null,
-	SHORT_DESCRIPTION varchar(500) not null,
 	FULL_DESCRIPTION varchar(2000) not null,
 	PRODUCT_PRICE int not null,
 -- 	PRODUCT_PRIСE int not null,

@@ -19,7 +19,7 @@ class sqlDB extends DB
 	{
 		$countProductsOnPage = ConfigurationController::getConfig('CountProductsOnPage');
 		$page = ($page > 1) ? $page * $countProductsOnPage - $countProductsOnPage : 0;
-		$query = "SELECT p.id, p.name, p.IS_ACTIVE, b.brand, t.transmission, c.carcase, p.DATE_CREATION, p.DATE_UPDATE, p.SHORT_DESCRIPTION, p.FULL_DESCRIPTION, p.PRODUCT_PRICE
+		$query = "SELECT p.id, p.name, p.IS_ACTIVE, b.brand, t.transmission, c.carcase, p.DATE_CREATION, p.DATE_UPDATE, p.FULL_DESCRIPTION, p.PRODUCT_PRICE
 					FROM products p
 					inner join brand b on p.ID_BRAND = b.id
 					inner join carcase c on p.ID_CARCASE = c.id
@@ -41,7 +41,7 @@ class sqlDB extends DB
 	function getProductDataByID($id) : ?Product
 	{
 		$id = mysqli_real_escape_string($this->connection, $id);
-		$query = "SELECT p.id, p.name, p.IS_ACTIVE, b.brand, t.transmission, c.carcase, p.DATE_CREATION, p.DATE_UPDATE, p.SHORT_DESCRIPTION, p.FULL_DESCRIPTION, p.PRODUCT_PRICE
+		$query = "SELECT p.id, p.name, p.IS_ACTIVE, b.brand, t.transmission, c.carcase, p.DATE_CREATION, p.DATE_UPDATE, p.FULL_DESCRIPTION, p.PRODUCT_PRICE
 					FROM products p
 					inner join brand b on p.ID_BRAND = b.id
 					inner join carcase c on p.ID_CARCASE = c.id
@@ -59,12 +59,12 @@ class sqlDB extends DB
 		$pageCount = $this->getPageCount(true,$sQuery);
 		$sQuery = mysqli_real_escape_string($this->connection, $sQuery);
 
-		$query = "SELECT p.id, p.name, p.IS_ACTIVE, b.brand, t.transmission, c.carcase, p.DATE_CREATION, p.DATE_UPDATE, p.SHORT_DESCRIPTION, p.FULL_DESCRIPTION, p.PRODUCT_PRICE
+		$query = "SELECT p.id, p.name, p.IS_ACTIVE, b.brand, t.transmission, c.carcase, p.DATE_CREATION, p.DATE_UPDATE, p.FULL_DESCRIPTION, p.PRODUCT_PRICE
 			FROM products p
 			inner join brand b on p.ID_BRAND = b.id
 			inner join carcase c on p.ID_CARCASE = c.id
 			inner join transmission t on p.ID_TRANSMISSION = t.id
-			where LOWER(p.name) LIKE '%$sQuery%' or LOWER(p.SHORT_DESCRIPTION) LIKE '%$sQuery%'
+			where LOWER(p.name) LIKE '%$sQuery%' or LOWER(p.FULL_DESCRIPTION) LIKE '%$sQuery%'
 			 limit $countProductOnPage offset $page";
 
 		$result = mysqli_query($this->connection, $query);
@@ -77,7 +77,7 @@ class sqlDB extends DB
 	{
 		$countProductOnPage = ConfigurationController::getConfig('CountProductsOnPage');
 		$page = ($page > 1) ? $page * $countProductOnPage - $countProductOnPage : 0;
-		$query = "SELECT p.id, p.name, p.IS_ACTIVE, b.brand, t.transmission, c.carcase, p.DATE_CREATION, p.DATE_UPDATE, p.SHORT_DESCRIPTION, p.FULL_DESCRIPTION, p.PRODUCT_PRICE
+		$query = "SELECT p.id, p.name, p.IS_ACTIVE, b.brand, t.transmission, c.carcase, p.DATE_CREATION, p.DATE_UPDATE,  p.FULL_DESCRIPTION, p.PRODUCT_PRICE
 					FROM products p
 	 				inner join brand b on p.ID_BRAND = b.id
 					inner join carcase c on p.ID_CARCASE = c.id
@@ -133,7 +133,6 @@ class sqlDB extends DB
 				$row['carcase'],
 				$row['DATE_CREATION'],
 				$row['DATE_UPDATE'],
-				$row['SHORT_DESCRIPTION'],
 				$row['FULL_DESCRIPTION'],
 				$row['PRODUCT_PRICE']
 			);
@@ -144,11 +143,11 @@ class sqlDB extends DB
 	function getPageCount($isQuery = false, $argument = null)
 	{
 		$countProductOnPage = ConfigurationController::getConfig('CountProductsOnPage');
-		$query = 'SELECT id, name, SHORT_DESCRIPTION
+		$query = 'SELECT id, name, FULL_DESCRIPTION
 					from products';
 		if ($isQuery)
 		{
-			$query .= "\n" . "where LOWER(name) LIKE '%$argument%' or LOWER(SHORT_DESCRIPTION) LIKE '%$argument%'";
+			$query .= "\n" . "where LOWER(name) LIKE '%$argument%' or LOWER(FULL_DESCRIPTION) LIKE '%$argument%'";
 		}
 		$result = mysqli_query($this->connection, $query);
 		return ceil(mysqli_num_rows($result) / $countProductOnPage);
