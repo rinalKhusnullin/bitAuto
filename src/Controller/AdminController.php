@@ -17,7 +17,13 @@ class AdminController extends BaseController
 				[
 					'columns' => $columns ,
 					'content' => TemplateEngine::view('components/adminTableRows',
-						['content' => $product1,])
+						[
+							'content' => $product1,
+							'pagination' => TemplateEngine::view('components/pagination', [
+								'currentPage' => $indexPage,
+								'countPage' => $pageCount,
+							]),
+						])
 				]
 			)
 		]);
