@@ -26,12 +26,12 @@ class sqlDB extends DB
 					inner join transmission t on p.ID_TRANSMISSION = t.id";
 		if ($isPublic)
 		{
-			$query .= "\n" ."where p.IS_ACTIVE = true
-				limit $countProductsOnPage offset $page";
+			$query .= "\n" ."where p.IS_ACTIVE = true" . "\n" .
+				"group by p.ID" . "\n" ."limit $countProductsOnPage offset $page";
 		}
 		else
 		{
-			$query .= "\n" . "limit $countProductsOnPage offset $page";
+			$query .= "\n" . "group by p.ID". "\n" ."limit $countProductsOnPage offset $page";
 		}
 		$result = mysqli_query($this->connection, $query);
 		return $this->buildProduct($result);
