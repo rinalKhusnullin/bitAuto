@@ -31,7 +31,7 @@
 		<li class="nav_li"><a href="/admin/?config">Конфигурация</a></li>
 	</ul>
 </nav>
-<wrapper>
+<div class="wrapper">
 	<header class="header">
 		<label class="search">
 			<input type="search" placeholder="Поиск по названию">
@@ -44,9 +44,9 @@
 
 		</label>
 	</header>
-	<container>
+	<div class="container">
 		<?= $content ?>
-	</container>
-</wrapper>
+	</div>
+</div>
 </body>
 <html>
