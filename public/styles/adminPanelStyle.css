@@ -47,7 +47,17 @@ HEADER
 .search > input {
 
 }
-
+.user-info > a {
+	text-decoration: none;
+	text-underline: none;
+	background: #2e3436;
+	margin: 5px;
+	color: #fff;
+	width: 80px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
 .search > input:first-of-type {
 	width: 500px;
 	height: 40px;
@@ -162,3 +172,4 @@ td > a{
 	width: 100%;
 	height: 100%;
 }
+
