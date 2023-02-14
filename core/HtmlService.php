@@ -4,7 +4,8 @@ namespace ES;
 
 class HtmlService
 {
- public static function getHtmlTag($item, $key) {
+ public static function getHtmlTag($item, $key) : ?string
+ {
 	 $db= new Model\sqlDAO\sqlDB();
 	 $categories = $db->getTegs();
 	 foreach ($categories[0] as $category)
