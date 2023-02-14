@@ -3,7 +3,9 @@
  * @var string $title
  * @var $content
  * @var array $tags
+ * @var string $role
  */
+
 ?>
 <!DOCTYPE html>
 <html lang="ru">
@@ -58,6 +60,9 @@
 					8-800-250-18-60
 				</p>
 			</div>
+			<?php if($role==='admin') : ?>
+			<a href="/admin/" class="header__admin">Admin</a>
+			<?php endif ?>
 		</div>
 	</div>
 	<div class="header__side-header">

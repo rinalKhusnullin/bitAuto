@@ -9,6 +9,8 @@ class IndexController extends BaseController
 {
 	public function indexAction(): void
 	{
+
+
 		$indexPage = (isset($_GET['page'])) ? (int)$_GET['page'] : 1;
 		$db = new sqlDB();
 		$tags = $db->getTegs();
@@ -39,10 +41,13 @@ class IndexController extends BaseController
 		{
 			// По хорошему тут нужно вывести что товары не найдены
 		}
+		session_start();
+		$role = array_key_exists('USER' , $_SESSION)? $_SESSION['USER']['role'] : 'user';
 
-		$this->render('layout', [
+			$this->render('layout', [
 			'title' => ConfigurationController::getConfig('TITLE'),
 			'tags' => $tags,
+			'role' => $role,
 			'content' => TemplateEngine::view('pages/index', [
 				'products' => $products,
 				'pagination' => TemplateEngine::view('components/pagination', [

@@ -135,6 +135,16 @@ footer{
     font-weight: 800;
 }
 
+.header__admin {
+	background: #c82333;
+	height: 30px;
+	color: #fff;
+	font-weight: 400;
+	display: flex;
+	align-items: center;
+	letter-spacing: 2px;
+}
+
 .header__address-description, .header__contacts-description{
     color: #3d3f44;
 }
@@ -795,6 +805,18 @@ footer{
     display: none;
 }
 
+/* login */
+.input__login {
+	margin-top: 15px;
+}
+
+.login {
+	display: flex;
+	flex: 1;
+	justify-content: center;
+	flex-direction: column;
+	align-items: center;
+}
 /* tags */
 .dropdown__form{
     display: flex;

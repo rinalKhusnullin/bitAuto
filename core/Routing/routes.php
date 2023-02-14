@@ -17,15 +17,21 @@ Router::get('/contacts/', [new \ES\Controller\ContactsController(),'getContactsA
 Router::get('/error/', [new \ES\Controller\ErrorController(),'getSystemErrorAction']);
 
 Router::get('/success/', function () {
+	session_start();
+	$role = array_key_exists('USER' , $_SESSION)? $_SESSION['USER']['role'] : 'user';
     echo TemplateEngine::view('layout', [
         'title' => ConfigurationController::getConfig('TITLE', 'AutoBit'),
+		'role' => $role,
         'content' => TemplateEngine::view('pages/success', []),
     ]);
 });
 
 Router::get('/failed/', function () {
+	session_start();
+	$role = array_key_exists('USER' , $_SESSION)? $_SESSION['USER']['role'] : 'user';
     echo TemplateEngine::view('layout',[
         'title' => ConfigurationController::getConfig('TITLE', 'AutoBit'),
+		'role' => $role,
         'content' => TemplateEngine::view('pages/failed', []),
     ]);
 });

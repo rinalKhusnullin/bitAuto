@@ -42,17 +42,19 @@ class LoginController extends BaseController
 
 					$_SESSION['USER'] = $user;
 					header('Location: /');
-					exit();
+
 				}
 			}
-
 		}
-
+		session_start();
+		$role = array_key_exists('USER' , $_SESSION)? $_SESSION['USER']['role'] : 'user';
 
 		$this->render('layout', [
 			'title' => ConfigurationController::getConfig('Title_Log_In', 'AutoBit Log In'),
+			'role' => $role,
 			'content' => TemplateEngine::view('pages/login', [
 					'errors' => $errors,
+
 				]),
 		]);
 	}
