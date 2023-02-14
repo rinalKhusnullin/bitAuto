@@ -1,5 +1,7 @@
 <?php
-/** @var $content */
+/** @var $tegs
+ * @var $content
+ */
 if (!is_array($content))
 {
 	echo $content;

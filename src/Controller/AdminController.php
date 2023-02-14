@@ -15,6 +15,7 @@ class AdminController extends BaseController
 
 		$indexPage = (isset($_GET['page'])) ? (int)$_GET['page'] : 1;
 		$db = new sqlDB;
+		$tegs = $db->getTegs();
 
 		if (isset($_GET['products']))
 		{
@@ -65,6 +66,7 @@ class AdminController extends BaseController
 					'content' => TemplateEngine::view('components/adminTableRows',
 						[
 							'content' => $content,
+							'tegs' => $tegs,
 							'pagination' => TemplateEngine::view('components/pagination', [
 								'currentPage' => '$indexPage',
 								'countPage' => '$pageCount',

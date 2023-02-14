@@ -13,6 +13,7 @@ class User
 					'id' => 1,
 					'login' => 'admin',
 					'password' => '111',
+					'role' => 'admin',
 				]
 			];
 		}

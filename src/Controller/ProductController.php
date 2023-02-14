@@ -17,9 +17,11 @@ class ProductController extends BaseController
 		{
 			header('Location: /error/');
 		}
-
+		session_start();
+		$role = array_key_exists('USER' , $_SESSION)? $_SESSION['USER']['role'] : 'user';
 		$this->render('layout', [
 			'title' => ConfigurationController::getConfig('TITLE'),
+			'role' => $role,
 			'content' => TemplateEngine::view('Product/product-detailed', (array)$product)
 		]);
 	}

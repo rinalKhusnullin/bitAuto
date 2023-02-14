@@ -3,7 +3,9 @@
  * @var string $title
  * @var $content
  * @var array $tags
+ * @var string $role
  */
+
 ?>
 <!DOCTYPE html>
 <html lang="ru">
@@ -58,12 +60,15 @@
 					8-800-250-18-60
 				</p>
 			</div>
+			<?php if($role==='admin') : ?>
+			<a href="/admin/" class="header__admin">Admin</a>
+			<?php endif ?>
 		</div>
 	</div>
 	<div class="header__side-header">
 		<div class="container">
 			<div class="mb__header-side">
-				<a class="mb__header-logo">
+				<a href="/" class="mb__header-logo">
 					<img src="/images/header/logo.svg" alt="">
 				</a>
 				
@@ -83,10 +88,27 @@
 				<li class="header__menu-item"><a href="/contacts/" class="header__menu-link">Контакты</a> 
 				</li> 
 			</ul>
-			<div class="mb__hamburger-icon">
-				<img src="/images/header/hamburger.png" alt="">
+			<a id="hamburger-btn" class="mb__hamburger-icon" onclick="ShowHamburger(); return false;">
+				Меню
+			</a>
+			<div id="hamburger-content" class="mb__hamburger">
+				<div class="hamburger__wrapper">
+					<ul class="hamburger__items">
+						<li class="hamburger__item">
+							<a href="/" class="hamburger__link">Каталог</a>
+						</li>
+						<li class="hamburger__item">
+							<a href="##" id="mb_dropdown" class="header__menu-link dropdown-btn undroped" onclick="mb_dropdown(); return false">Категории</a>
+							<div class="header__dropdown-tags di" id="mb_dropdown-content">
+								<?= \ES\Controller\TemplateEngine::view('components/tags', ['tags' => $tags]) ?>
+							</div>
+						</li>
+						<li class="hamburger__item">
+							<a href="/contacts/" class="hamburger__link">Контакты</a>
+						</li>
+					</ul>
+				</div>
 			</div>
-			<div class="mb__hamburger"></div>
 		</div>
 	</div>
 </header>
@@ -185,6 +207,28 @@
 </footer>
 
 <script src="/scripts/dropdown.js"></script>
+<script>
+	function ShowHamburger(){
+		document.getElementById('hamburger-content').classList.toggle('visible');
+	}
+
+	function mb_dropdown(){
+		document.getElementById("mb_dropdown-content").classList.toggle("visible");
+
+    if (document.getElementById("mb_dropdown").classList.contains("droped")) 
+    {
+        document.getElementById("mb_dropdown").classList.remove('droped');
+        document.getElementById("mb_dropdown").classList.add('undroped');
+    }
+    else if (document.getElementById("mb_dropdown").classList.contains("undroped")) 
+    {
+        document.getElementById("mb_dropdown").classList.remove('undroped');
+        document.getElementById("mb_dropdown").classList.add('droped');
+    } 
+}
+
+
+</script>
 </body>
 
 </html>

@@ -10,6 +10,27 @@
         text-align: center;
     }
 
+    .product-card__container{
+        flex-direction: column;
+        flex-wrap: nowrap;
+        justify-content: center;
+    }
+
+    .product-card{
+        width: 80%;
+        margin: 0 auto;
+        justify-content: center;
+    }
+
+    .product-card__hlink{
+        font-size: 40px;
+    }
+
+    .product-card__img-block{
+        width: 60%;
+        height: 400px;
+    }
+
     .footer{
         padding: 0;
     }
@@ -35,6 +56,7 @@
     .header__side-header .container{
         display: flex;
         justify-content: space-between;
+        align-items: center;
     }
 
     .mb__header-side{
@@ -68,9 +90,80 @@
 
 @media(max-width: 681px){
     .mb__hamburger-icon{
+        display: flex;
+    }
+
+    .header__menu{
+        display: none;
+    }
+
+    .product-card{
+        flex-direction: column;
+        margin-bottom: 20px;
+        height: auto;
+        align-items: flex-start;
+    }
+
+    .product-card__img-block{
+        width: 100%;
+        height: 200px;
+        margin-bottom: 15px;
+    }
+
+    .product-card__more{
+        display: block;
+        width: 100%;
+        padding: 15px 0;
+        text-align: center;
+    }
+
+    .product-card__title{
+        max-width: 100%;
         display: block;
     }
-    .header__menu{
+    .product-card__description{
+        width: 100%;
+    }
+
+    .visible{
+        display: block;
+    }
+
+    .header__dropdown-tags{
+        left: 0;
+        top: 180px;
+        width: 100%;
+    }
+
+    .dropdown__wraper{
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .dropdown__tag{
+        margin-bottom: 20px;
+    }
+
+    .dropdown__tag-name{
+        font-size: 25px;
+    }
+
+    .dropdown__tag-item{
+        font-size: 20px;
+        margin-bottom: 10px;
+    }
+
+    .footer__info-list{
+        display: none;
+    }
+
+    .pagination__item:not(:last-child){
+        margin-right: 0;
+    }
+}
+
+@media(max-width: 375px){
+    .icon{
         display: none;
     }
 }
