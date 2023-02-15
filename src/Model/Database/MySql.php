@@ -3,15 +3,14 @@
 namespace ES\Model\Database;
 
 use ES\Model\Database\SqlConnection;
-use ES\Model\Database\AdminSql;
-use ES\Model\Database\PublicSql;
-
-
+use ES\Model\Database\RequestSql;
 
 class MySql
 {
-    use PublicSql;
-    use AdminSql;
+    use RequestSql\ProductSql;
+    use RequestSql\OrderSql;
+	use RequestSql\TagsSql;
+	use RequestSql\UtilitySql;
 
     private static $connection;
 	private static ?MySql $_instance = null;
