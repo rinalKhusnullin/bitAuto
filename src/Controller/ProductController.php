@@ -3,15 +3,15 @@
 namespace ES\Controller;
 
 use ES\Model\Order;
-use ES\Model\sqlDAO\sqlDB;
 use ES\config\ConfigurationController;
+use ES\Model\Database\MySql;
 
 class ProductController extends BaseController
 {
 	public function getDetailAction($id): void
 	{
-		$db = new sqlDB();
-		$product = $db->getProductDataByID((int)$id);
+		$db = MySql::getInstance();
+		$product = $db->getProductByID((int)$id);
 
 		if ($product === null)
 		{
@@ -27,8 +27,8 @@ class ProductController extends BaseController
 	}
 	public function postDetailAction($id): void
 	{
-		$db = new sqlDB();
-		$product = $db->getProductDataByID((int)$id);
+		$db = MySql::getInstance();
+		$product = $db->getProductByID((int)$id);
 
 		if ($product === null)
 		{
