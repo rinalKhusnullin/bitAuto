@@ -44,7 +44,7 @@ class LoginController extends BaseController
 					session_start();
 
 					$_SESSION['USER'] = $user;
-					header('Location: /admin/');
+					header('Location: /admin/?products ');
 					exit();
 				}
 			}

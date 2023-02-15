@@ -37,7 +37,7 @@ class AdminController extends BaseController
 		{
 			
 			$content = $db->getBrands();
-			$columns = array_keys((array)$content);
+			$columns = array_keys((array)$content[0]);
 		}
 		elseif (isset($_GET['carcases']))
 		{
@@ -51,8 +51,8 @@ class AdminController extends BaseController
 		}
 		elseif (isset($_GET['config']))
 		{
-			$content = include ROOT . '/core/config/config.php';
-			$columns = array_keys($content);
+			$content[] = include ROOT . '/core/config/config.php';
+			$columns = array_keys($content[0]);
 		}
 		else
 		{

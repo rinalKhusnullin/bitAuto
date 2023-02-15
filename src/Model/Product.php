@@ -16,6 +16,12 @@ class Product
 		public string $fullDesc,
 		public int $price
 	)
+	{}
+
+	public function __toString()
+	{
+		return $this->id;
+	}
 	{
 	}
 

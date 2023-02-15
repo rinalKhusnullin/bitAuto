@@ -4,6 +4,7 @@ namespace ES\Model\Database;
 
 use ES\Model\Product;
 use ES\Model\Order;
+use ES\Model\User;
 
 class ObjectBuilder
 {
@@ -48,5 +49,23 @@ class ObjectBuilder
 			);
 		}
 		return $orders;
+	}
+
+	static function buildUsers($result)
+	{
+		$users = [];
+		while ($row = mysqli_fetch_assoc($result))
+		{
+			$users[] = new User(
+				$row['ID'],
+				$row['PASS'],
+				$row['LOGIN'],
+				$row['MAIL'],
+				$row['ROLE'],
+				$row['FIRST_NAME'],
+				$row['LAST_NAME']
+			);
+		}
+		return $users;
 	}
 }

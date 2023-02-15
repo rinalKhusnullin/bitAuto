@@ -32,7 +32,12 @@ trait AdminSql
 
 	function getUsers()
 	{
+		$query = "SELECT ID, PASS, LOGIN, MAIL, ROLE, FIRST_NAME, LAST_NAME 
+					FROM users";
 
+		$result = mysqli_query($this->connection, $query);
+
+		return ObjectBuilder::buildUsers($result);
 	}
 
 	function getBrands() : array
