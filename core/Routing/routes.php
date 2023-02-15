@@ -20,7 +20,7 @@ Router::get('/error/', [new \ES\Controller\ErrorController(),'getSystemErrorActi
 
 Router::get('/success/', function () {
 	session_start();
-	$role = array_key_exists('USER' , $_SESSION)? $_SESSION['USER']['role'] : 'user';
+	$role = array_key_exists('USER' , $_SESSION)? $_SESSION['USER']->role : 'user';
     echo TemplateEngine::view('layout', [
         'title' => ConfigurationController::getConfig('TITLE', 'AutoBit'),
 		'role' => $role,
@@ -30,7 +30,7 @@ Router::get('/success/', function () {
 
 Router::get('/failed/', function () {
 	session_start();
-	$role = array_key_exists('USER' , $_SESSION)? $_SESSION['USER']['role'] : 'user';
+	$role = array_key_exists('USER' , $_SESSION)? $_SESSION['USER']->role : 'user';
     echo TemplateEngine::view('layout',[
         'title' => ConfigurationController::getConfig('TITLE', 'AutoBit'),
 		'role' => $role,
