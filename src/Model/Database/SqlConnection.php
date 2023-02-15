@@ -1,12 +1,11 @@
 <?php
 
-namespace ES\Model\sqlDAO;
+namespace ES\Model\Database;
 
 use ES\config\ConfigurationController;
-use ES\Migration;
 use ES\Migrator;
 
-class DbConnection
+class SqlConnection
 {
 	private static $instance;
 
