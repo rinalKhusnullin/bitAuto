@@ -3,7 +3,7 @@
 namespace ES\Controller;
 
 use ES\config\ConfigurationController;
-use ES\Model\sqlDAO\sqlDB;
+use ES\Model\Database\MySql;
 
 class IndexController extends BaseController
 {
@@ -12,7 +12,7 @@ class IndexController extends BaseController
 
 
 		$indexPage = (isset($_GET['page'])) ? (int)$_GET['page'] : 1;
-		$db = new sqlDB();
+		$db = MySql::getInstance();
 		$tags = $db->getTegs();
 
 		if (isset($_GET['brand']) || isset($_GET['transmission']) || isset($_GET['carcase'])) //Если пользователь выбрал категории
@@ -22,19 +22,20 @@ class IndexController extends BaseController
 			$transmission =  isset($_GET['transmission']) ? $_GET['transmission'] : null;
 
 			// Возвращает массив из товаров и количества позиций
-			[$products, $pageCount] = $db->getProductDataByTeg($brand, $carcase, $transmission, $indexPage);
+			$products = $db->getProductsByTeg($brand, $carcase, $transmission, $indexPage);
+			$pageCount = $db->getPageCountByTegs($brand, $carcase, $transmission);
 		}
 		else if (isset($_GET['search_query']))
 		{
 			$searchQuery = $_GET['search_query'];
 
-			//Ищем по поисковой строке
-			[$products, $pageCount] = $db->getDataBySQuery($searchQuery, $indexPage);
+			$products = $db->getProductsByQuery($searchQuery, $indexPage);
+			$pageCount =  $db->getPageCountByQuery($searchQuery);
 		}
 		else
 		{
-			// Иначе получаем все товары
-			[$products, $pageCount] = [$db->getProductData(true, $indexPage), $db->getPageCount()];
+			$products = $db->getProducts($indexPage);
+			$pageCount = $db->getPageCount();
 		}
 
 		if (empty($products))
