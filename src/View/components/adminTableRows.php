@@ -12,7 +12,7 @@ foreach ($content as $items) {
 	if (is_object($items)) { ?>
 		<tr>
 			<?php foreach ($items as $key => $item) : ?>
-			<td> <?= ES\HtmlService::getHtmlTag($item, $key); ?> </td>
+			<td> <?= ES\HtmlService::getHtmlTag($key, $item); ?> </td>
 			<?php endforeach; ?>
 			<td><a href="#">Изменить</a></td>
 			<td><a href="#">Удалить</a></td>
