@@ -18,18 +18,16 @@ class Product
 	)
 	{}
 
-	public function __toString()
-	{
-		return $this->id;
-	}
-	{
-	}
-
 	public function equals(Product $product): bool
 	{
 		return $this->id === $product->id && $this->title === $product->title && $this->isActive === $product->isActive
 			&& $this->brand === $product->brand && $this->transmission === $product->transmission && $this->carcaseType === $product->carcaseType
 			&& $this->dateCreation === $product->dateCreation && $this->dateUpdate === $product->dateUpdate
 			&& $this->fullDesc === $product->fullDesc && $this->price === $product->price;
+	}
+
+	public function __toString()
+	{
+		return (string)$this->id;
 	}
 }
