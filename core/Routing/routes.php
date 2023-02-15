@@ -39,3 +39,5 @@ Router::get('/failed/', function () {
 });
 
 Router::get('/admin/', [new \ES\Controller\AdminController(), 'adminAction']);
+
+Router::get('/admin/edit/', [new \ES\Controller\AdminController(), 'adminEditAction']);

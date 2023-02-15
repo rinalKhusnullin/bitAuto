@@ -10,10 +10,10 @@ if(is_array($columns))
 	<caption> Редактирование продукции</caption>
 	<tr>
 		<?php foreach ($columns as $column) {?>
-		<th><?= $column?></th>
+			<th><?= $column?></th>
 		<?php } ?>
 		<th class="td__change"></th>
 
 	</tr>
-		<?php } echo $content; ?>
+	<?php } echo $content; ?>
 </table>

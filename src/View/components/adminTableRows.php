@@ -6,14 +6,13 @@
 <?php if (!is_array($content)) : ?>
 	<?= $content; ?>
 <?php else: ?>
-	<?php foreach ($content as $items) : ?>
+	<?php foreach ($content as $items) :  ?>
 		<?php if (is_object($items) || is_array($items)) : ?>
 			<tr>
-				<?php foreach ($items as $key => $item) : ?>
-				<td> <?= ES\HtmlService::getHtmlTag($key, $item); ?> </td>
+				<?php foreach ($items as $item) :  ?>
+				<td> <?= $item ?> </td>
 				<?php endforeach; ?>
-				<td><a href="#">Изменить</a></td>
-				<td><a href="#">Удалить</a></td>
+				<td><a href="/admin/edit/?<?= strtolower((new \ReflectionClass($items))->getShortName())?>= <?= $items->id?>">Изменить</a></td>
 			</tr>
 		<?php endif; ?>
 	<?php endforeach; ?>
