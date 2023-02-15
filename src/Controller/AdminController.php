@@ -16,11 +16,10 @@ class AdminController extends BaseController
 
 		$indexPage = (isset($_GET['page'])) ? (int)$_GET['page'] : 1;
 		$db = MySql::getInstance();
-		$tegs = $db->getTegs();
 
 		if (isset($_GET['products']))
 		{
-			$content = $db->getProductsForAdmin();
+			$content = $db->getProducts($indexPage, 'all');
 			$columns = array_keys((array)$content[0]);
 		}
 		elseif(isset($_GET['orders']))
@@ -68,7 +67,6 @@ class AdminController extends BaseController
 					'content' => TemplateEngine::view('components/adminTableRows',
 						[
 							'content' => $content,
-							'tegs' => $tegs,
 							'pagination' => TemplateEngine::view('components/pagination', [
 								'currentPage' => '$indexPage',
 								'countPage' => '$pageCount',

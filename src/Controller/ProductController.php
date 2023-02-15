@@ -12,7 +12,7 @@ class ProductController extends BaseController
 	{
 		$db = MySql::getInstance();
 		$product = $db->getProductByID((int)$id);
-		$tags = $db->getTegs();
+		$tags = $db->getTagList();
 
 		if ($product === null)
 		{
@@ -20,7 +20,7 @@ class ProductController extends BaseController
 			header('Location: /error/');
 		}
 		session_start();
-		$role = array_key_exists('USER' , $_SESSION)? $_SESSION['USER']['role'] : 'user';
+		$role = array_key_exists('USER' , $_SESSION) ? $_SESSION['USER']->role : 'user';
 		$this->render('layout', [
 			'title' => ConfigurationController::getConfig('TITLE'),
 			'role' => $role,
@@ -49,7 +49,8 @@ class ProductController extends BaseController
 				$_POST["userEmail"],
 				$_POST["userAddress"],
 				$_POST["userComment"],
-				$product,
+				$product->id,
+				$product->price,
 				date('Y-m-d H:i:s')
 			));
 			$result ? header('Location: /success/') : header('Location: /failed/');

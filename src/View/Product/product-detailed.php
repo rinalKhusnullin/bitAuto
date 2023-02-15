@@ -22,7 +22,7 @@
                     <li class="product-detailed__characteristic">
                         <div class="product-detailed__name">Марка</div>
                         <div class="product-detailed__underline"></div>
-                        <div class="product-detailed__value"><?= $brand ?></div>
+                        <div class="product-detailed__value"><?= $brandType ?></div>
                     </li>
                     <li class="product-detailed__characteristic">
                         <div class="product-detailed__name">Тип кузова</div>
@@ -32,7 +32,7 @@
                     <li class="product-detailed__characteristic">
                         <div class="product-detailed__name">КПП</div>
                         <div class="product-detailed__underline"></div>
-                        <div class="product-detailed__value"> <?= $transmission ?> </div>
+                        <div class="product-detailed__value"> <?= $transmissionType ?> </div>
                     </li>
                 </ul>
             </div>

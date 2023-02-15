@@ -43,7 +43,8 @@ class ObjectBuilder
 				$row['CUSTOMER_MAIL'],
 				$row['CUSTOMER_ADDRESS'],
 				$row['COMMENT'],
-				(MySql::getInstance())->getProductByID($row['PRODUCT_ID']), // Это очевидный костыль, я скорее всего буду делать функции MySql статическими
+				$row['PRODUCT_ID'],
+				$row['PRODUCT_PRICE'],
 				$row['DATE_CREATION'],
 				$row['STATUS']
 			);
