@@ -2,24 +2,21 @@
 /** @var $tegs
  * @var $content
  */
-if (!is_array($content))
-{
-	echo $content;
-}
-else
-{
-foreach ($content as $items) {
-	if (is_object($items)) { ?>
-		<tr>
-			<?php foreach ($items as $key => $item) : ?>
-			<td> <?= ES\HtmlService::getHtmlTag($key, $item); ?> </td>
-			<?php endforeach; ?>
-			<td><a href="#">Изменить</a></td>
-			<td><a href="#">Удалить</a></td>
-		</tr>
-
-	<?php }
-}}
 ?>
+<?php if (!is_array($content)) : ?>
+	<?= $content; ?>
+<?php else: ?>
+	<?php foreach ($content as $items) : ?>
+		<?php if (is_object($items) || is_array($items)) : ?>
+			<tr>
+				<?php foreach ($items as $key => $item) : ?>
+				<td> <?= ES\HtmlService::getHtmlTag($key, $item); ?> </td>
+				<?php endforeach; ?>
+				<td><a href="#">Изменить</a></td>
+				<td><a href="#">Удалить</a></td>
+			</tr>
+		<?php endif; ?>
+	<?php endforeach; ?>
+<?php endif; ?>
 
 

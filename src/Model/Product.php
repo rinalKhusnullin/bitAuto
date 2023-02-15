@@ -17,4 +17,9 @@ class Product
 		public int $price
 	)
 	{}
+
+	public function __toString()
+	{
+		return $this->id;
+	}
 }
