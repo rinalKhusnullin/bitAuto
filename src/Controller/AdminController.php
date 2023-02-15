@@ -88,7 +88,7 @@ class AdminController extends BaseController
 
 		$indexPage = (isset($_GET['page'])) ? (int)$_GET['page'] : 1;
 		$db = MySql::getInstance();
-		$tegs = $db->getTegs();
+		$tegs = $db->getTagList();
 
 		if (array_key_exists('product', $_GET))
 		{
