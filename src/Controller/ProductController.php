@@ -12,6 +12,7 @@ class ProductController extends BaseController
 	{
 		$db = MySql::getInstance();
 		$product = $db->getProductByID((int)$id);
+		$tags = $db->getTegs();
 
 		if ($product === null)
 		{
@@ -22,6 +23,7 @@ class ProductController extends BaseController
 		$this->render('layout', [
 			'title' => ConfigurationController::getConfig('TITLE'),
 			'role' => $role,
+			'tags' => $tags,
 			'content' => TemplateEngine::view('Product/product-detailed', (array)$product)
 		]);
 	}

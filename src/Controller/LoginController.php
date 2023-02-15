@@ -3,6 +3,7 @@
 namespace ES\Controller;
 
 use ES\config\ConfigurationController;
+use ES\Model\Database\MySql;
 use ES\Model\User;
 
 
@@ -10,6 +11,8 @@ class LoginController extends BaseController
 {
 	public function getLoginAction(): void
 	{
+		$tags = MySql::getInstance()->getTegs();
+
 		$errors = [];
 
 		if (isset($_POST['login']))
@@ -52,6 +55,7 @@ class LoginController extends BaseController
 		$this->render('layout', [
 			'title' => ConfigurationController::getConfig('TITLE_LOG_IN', 'AutoBit Log In'),
 			'role' => $role,
+			'tags' => $tags,
 			'content' => TemplateEngine::view('pages/login', [
 					'errors' => $errors,
 				]),

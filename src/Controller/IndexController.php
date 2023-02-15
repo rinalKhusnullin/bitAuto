@@ -29,23 +29,23 @@ class IndexController extends BaseController
 		{
 			$searchQuery = $_GET['search_query'];
 
-			$products = $db->getProductsByQuery($searchQuery, $indexPage);
-			$pageCount =  $db->getPageCountByQuery($searchQuery);
+			$products = $db->getPageCountByQuery($searchQuery);
+			$pageCount = $db->getProductsByQuery($searchQuery, $indexPage);
 		}
 		else
 		{
 			$products = $db->getProducts($indexPage);
 			$pageCount = $db->getPageCount();
 		}
-
 		if (empty($products))
 		{
 			// По хорошему тут нужно вывести что товары не найдены
 		}
+		
 		session_start();
-		$role = array_key_exists('USER' , $_SESSION)? $_SESSION['USER']['role'] : 'user';
+		$role = array_key_exists('USER' , $_SESSION) ? $_SESSION['USER']['role'] : 'user';
 
-			$this->render('layout', [
+		$this->render('layout', [
 			'title' => ConfigurationController::getConfig('TITLE'),
 			'tags' => $tags,
 			'role' => $role,
