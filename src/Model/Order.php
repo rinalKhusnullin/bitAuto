@@ -13,7 +13,8 @@ class Order
 		public string $mail,
 		public string $address,
 		public ?string $comment,
-		public \ES\Model\Product $product,
+		public string $productId,
+		public string $productPrice,
 		public ?string $dateCreation,
 		public string $status = 'processing',
 	)
