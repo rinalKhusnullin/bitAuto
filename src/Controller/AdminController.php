@@ -1,7 +1,8 @@
 <?php
 
 namespace ES\Controller;
-use ES\Model\sqlDAO\sqlDB;
+
+use ES\Model\Database\MySql;
 
 class AdminController extends BaseController
 {
@@ -14,38 +15,39 @@ class AdminController extends BaseController
 		}
 
 		$indexPage = (isset($_GET['page'])) ? (int)$_GET['page'] : 1;
-		$db = new sqlDB;
+		$db = MySql::getInstance();
 		$tegs = $db->getTegs();
 
 		if (isset($_GET['products']))
 		{
-			$content = $db->getProductData(false);
+			$content = $db->getProductsForAdmin();
 			$columns = array_keys((array)$content[0]);
 		}
 		elseif(isset($_GET['orders']))
 		{
-			$columns = '';
-			$content = 'ЗАКАЗЫ';
+			$content = $db->getOrders();
+			$columns = array_keys((array)$content[0]);
 		}
 		elseif (isset($_GET['users']))
 		{
-			$columns = '';
-			$content = 'МЕШКИ ДЕНЕГ';
+			$content = $db->getUsers();
+			$columns = array_keys((array)$content[0]);
 		}
 		elseif (isset($_GET['brands']))
 		{
-			$columns = '';
-			$content = 'БИБИКИ';
+			
+			$content = $db->getBrands();
+			$columns = array_keys((array)$content);
 		}
 		elseif (isset($_GET['carcases']))
 		{
-			$columns = '';
-			$content = 'каркасссы';
+			$content = $db->getCarcases();
+			$columns = array_keys((array)$content[0]);
 		}
 		elseif (isset($_GET['transmissions']))
 		{
-			$columns = '';
-			$content = 'КПППППППППППП';
+			$content = $db->getTransmissions();
+			$columns = array_keys((array)$content[0]);
 		}
 		elseif (isset($_GET['config']))
 		{
@@ -75,5 +77,6 @@ class AdminController extends BaseController
 				]
 			)
 		]);
+
 	}
 }
