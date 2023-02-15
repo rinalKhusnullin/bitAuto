@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 namespace ES\Model\Database;
 
@@ -23,7 +23,7 @@ class ObjectBuilder
 				$row['DATE_CREATION'],
 				$row['DATE_UPDATE'],
 				$row['FULL_DESCRIPTION'],
-				$row['PRODUCT_PRICE']
+				(int)$row['PRODUCT_PRICE']
 			);
 		}
 		return $products;
