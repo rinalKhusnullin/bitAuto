@@ -9,11 +9,11 @@ class HtmlService
 	public static function getHtmlTag($key, $value): ?string
 	{
 		$db = MySql::getInstance();
-		$tegs = $db->getTegs();
+		$tags = $db->getTagList();
 
-		$brand = $tegs['brand'];
-		$carcase = $tegs['carcase'];
-		$transmission = $tegs['transmission'];
+		$brand = $tags['brand'];
+		$carcase = $tags['carcase'];
+		$transmission = $tags['transmission'];
 
 		switch ($key) {
 			case 'id':
@@ -26,29 +26,32 @@ class HtmlService
 			case 'isActive':
 				return '<select> <option selected="selected">Да</option><option>Нет</option></select>';
 
-			case 'brand':
+			case 'brandType':
 				$result = '<select>';
+				$result .= '<option> ' . $value . '</option>';
 				foreach ($brand as $item)
 				{
-					$result .= '<option> ' . $item . '</option>';
+					$result .= ($value !== $item) ? '<option> ' . $item . '</option>' : '';
 				}
 				$result .= '</select>';
 				return $result;
 
 			case 'carcaseType':
 				$result = '<select>';
+				$result .= '<option> ' . $value . '</option>';
 				foreach ($carcase as $item)
 				{
-					$result .= '<option> ' . $item . '</option>';
+					$result .= ($value !== $item) ? '<option> ' . $item . '</option>' : '';
 				}
 				$result .= '</select>';
 				return $result;
 				
-			case 'transmission':
+			case 'transmissionType':
 				$result = '<select>';
+				$result .= '<option> ' . $value . '</option>';
 				foreach ($transmission as $item)
 				{
-					$result .= '<option> ' . $item . '</option>';
+					$result .= ($value !== $item) ? '<option> ' . $item . '</option>' : '';
 				}
 				$result .= '</select>';
 				return $result;
@@ -66,8 +69,3 @@ class HtmlService
 		}
 	}
 }
-
-
-// Я тут добавил, чтобы хотя бы что то в заказах выходило
-// Если кратко, то из-за того что в switch есть не все ключи, он ничего не отдает и все крашится
-// добавил default чтобы если вдруг он выводил хотя бы что то, и тут встает новая проблема - в order лежит обьект продукта
