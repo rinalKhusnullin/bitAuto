@@ -16,6 +16,7 @@ class ProductController extends BaseController
 
 		if ($product === null)
 		{
+			http_response_code(404);
 			header('Location: /error/');
 		}
 		session_start();
@@ -34,10 +35,12 @@ class ProductController extends BaseController
 
 		if ($product === null)
 		{
+			http_response_code(404);
 			header('Location: /error/');
 		}
 
-		if (!empty($_POST)) // its not working
+		if (!empty($_POST['userLastname']) && !empty($_POST['userName']) && !empty($_POST['userTel'])
+			&& !empty($_POST['userEmail']) && !empty($_POST['userAddress'])) // КОСТЫЛЬЬЬ
 		{
 			$result = $db->createOrder(new Order(
 				$_POST['userLastname'],
