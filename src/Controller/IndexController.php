@@ -13,7 +13,7 @@ class IndexController extends BaseController
 
 		$indexPage = (isset($_GET['page'])) ? (int)$_GET['page'] : 1;
 		$db = MySql::getInstance();
-		$tags = $db->getTegs();
+		$tags = $db->getTagList();
 
 		if (isset($_GET['brand']) || isset($_GET['transmission']) || isset($_GET['carcase'])) //Если пользователь выбрал категории
 		{
@@ -22,20 +22,20 @@ class IndexController extends BaseController
 			$transmission =  isset($_GET['transmission']) ? $_GET['transmission'] : null;
 
 			// Возвращает массив из товаров и количества позиций
-			$products = $db->getProductsByTeg($brand, $carcase, $transmission, $indexPage);
-			$pageCount = $db->getPageCountByTegs($brand, $carcase, $transmission);
+			$products = $db->getProductsByTags($brand, $carcase, $transmission, $indexPage, 'active');
+			$pageCount = $db->getPageCountByTags($brand, $carcase, $transmission, 'active');
 		}
 		else if (isset($_GET['search_query']))
 		{
 			$searchQuery = $_GET['search_query'];
 
-			$products = $db->getPageCountByQuery($searchQuery);
-			$pageCount = $db->getProductsByQuery($searchQuery, $indexPage);
+			$products = $db->getProductsByQuery($searchQuery, $indexPage, 'active');
+			$pageCount = $db->getPageCountByQuery($searchQuery, 'active');
 		}
 		else
 		{
-			$products = $db->getProducts($indexPage);
-			$pageCount = $db->getPageCount();
+			$products = $db->getProducts($indexPage, 'active');
+			$pageCount = $db->getPageCount('active');
 		}
 		if (empty($products))
 		{
@@ -43,7 +43,7 @@ class IndexController extends BaseController
 		}
 		
 		session_start();
-		$role = array_key_exists('USER' , $_SESSION) ? $_SESSION['USER']['role'] : 'user';
+		$role = array_key_exists('USER' , $_SESSION)? $_SESSION['USER']->role : 'user';
 
 		$this->render('layout', [
 			'title' => ConfigurationController::getConfig('TITLE'),
