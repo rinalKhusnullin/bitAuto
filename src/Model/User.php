@@ -2,23 +2,24 @@
 
 namespace ES\Model;
 
+use ES\Model\Database\MySql;
+
 class User
 {
-	public static function getUserByLogin(string $login): ?array
-	{
-		function getUserList(): array
-		{
-			return [
-				[
-					'id' => 1,
-					'login' => 'admin',
-					'password' => '111',
-					'role' => 'admin',
-				]
-			];
-		}
+	public function __construct(
+		public int $id,
+		public string $password,
+		public string $login,
+		public string $mail,
+		public string $role,
+		public string $firstName,
+		public string $lastName,
+	)
+	{}
 
-		$userList = getUserList();
+	public static function getUserByLogin(string $login): ?object
+	{
+		$userList = MySql::getInstance()->getUsers();
 
 		$userIndex = array_search($login, array_column($userList, 'login'), true);
 		if ($userIndex === false)
@@ -26,6 +27,8 @@ class User
 			return null;
 		}
 
-		return $userList[$userIndex];
+		$user = $userList[$userIndex];
+
+		return $user;
 	}
 }
