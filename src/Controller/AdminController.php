@@ -153,4 +153,11 @@ class AdminController extends BaseController
 			)
 		]);
 	}
+
+
+
+	public function adminDelitAction () :void
+	{
+
+	}
 }

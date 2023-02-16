@@ -31,7 +31,7 @@ trait UtilitySql
 			default:
 				$activityQuery = " WHERE (p.IS_ACTIVE IS NOT NULL) ";
 				break;
-		};
+		}
 
 		$countProductOnPage = ConfigurationController::getConfig('CountProductsOnPage');
 		$query = "SELECT COUNT(*)
@@ -57,7 +57,7 @@ trait UtilitySql
 			default:
 				$isActiveQuery = " (p.IS_ACTIVE IS NOT NULL) AND";
 				break;
-		};
+		}
 
         $countProductOnPage = ConfigurationController::getConfig('CountProductsOnPage');
         $query = "SELECT COUNT(*)
@@ -84,7 +84,11 @@ trait UtilitySql
             $tags[] = "(t.transmission = '$transmission')";
         }
 
-		if (empty($tags)) return $this->getPageCount();
+		if (empty($tags))
+		{
+			return $this->getPageCount();
+		}
+
         $query .= implode(' and ', $tags);
         $result = mysqli_query($this->connection, $query);
         $row = mysqli_fetch_row($result);
@@ -105,7 +109,8 @@ trait UtilitySql
 			default:
 				$isActiveQuery = " AND (p.IS_ACTIVE IS NOT NULL)";
 				break;
-		};
+		}
+
         $sQuery = mysqli_real_escape_string($this->connection, $sQuery);
         $countProductOnPage = ConfigurationController::getConfig('CountProductsOnPage');
 		$query = "SELECT COUNT(*)
@@ -116,4 +121,11 @@ trait UtilitySql
         $row = mysqli_fetch_row($result);
 		return ceil($row[0] / $countProductOnPage);
     }
+
+	function deliteItem(int $id, string $name): void
+	{
+		$query = "DELETE FROM '%$name%' WHERE `ID` = $id LIMIT 1";
+
+		mysqli_query($this->connection, $query);
+	}
 }
