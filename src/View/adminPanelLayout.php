@@ -22,12 +22,12 @@
 <nav class="nav">
 	<p>Панель управления</p>
 	<ul>
-		<li class="nav_li"><a href="/admin/?products">Продукция</a></li>
-		<li class="nav_li"><a href="/admin/?orders">Заказы</a></li>
-		<li class="nav_li"><a href="/admin/?users">Пользователи</a></li>
-		<li class="nav_li"><a href="/admin/?brands">Бренд</a></li>
-		<li class="nav_li"><a href="/admin/?carcases">Кузов</a></li>
-		<li class="nav_li"><a href="/admin/?transmissions">КПП</a></li>
+		<li class="nav_li"><a href="/admin/?product">Продукция</a></li>
+		<li class="nav_li"><a href="/admin/?order">Заказы</a></li>
+		<li class="nav_li"><a href="/admin/?user">Пользователи</a></li>
+		<li class="nav_li"><a href="/admin/?brand">Бренд</a></li>
+		<li class="nav_li"><a href="/admin/?carcase">Кузов</a></li>
+		<li class="nav_li"><a href="/admin/?transmission">КПП</a></li>
 		<li class="nav_li"><a href="/admin/?config">Конфигурация</a></li>
 	</ul>
 </nav>

@@ -1,1 +1,6 @@
 2023-02-16 22:48:14 1064You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'order (product_id, product_price, status, date_creation, customer_name, customer' at line 1 in file C:\OpenServer\domains\eshop\src\Model\Database\RequestSql\OrderSql.php on line 35
+2023-02-16 22:54:54 1146Table 'db_e_shop.products' doesn't exist in file C:\OpenServer\domains\eshop\src\Model\Database\RequestSql\UtilitySql.php on line 45
+2023-02-16 22:57:18 1146Table 'db_e_shop.products' doesn't exist in file C:\OpenServer\domains\eshop\src\Model\Database\RequestSql\UtilitySql.php on line 45
+2023-02-16 22:57:23 1146Table 'db_e_shop.products' doesn't exist in file C:\OpenServer\domains\eshop\src\Model\Database\RequestSql\UtilitySql.php on line 45
+2023-02-16 22:57:27 1146Table 'db_e_shop.products' doesn't exist in file C:\OpenServer\domains\eshop\src\Model\Database\RequestSql\UtilitySql.php on line 45
+2023-02-16 22:59:07 1146Table 'db_e_shop.products' doesn't exist in file C:\OpenServer\domains\eshop\src\Model\Database\RequestSql\UtilitySql.php on line 45

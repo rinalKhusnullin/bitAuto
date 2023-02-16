@@ -19,37 +19,37 @@ class AdminController extends BaseController
 
 		$pageCount = 0;
 
-		if (isset($_GET['products']))
+		if (isset($_GET['product']))
 		{
 			$content = $db->getProducts($indexPage, 'all');
 			$columns = array_keys((array)$content[0]);
 			$pageCount = $db->getPageCount('all');
 		}
-		elseif(isset($_GET['orders']))
+		elseif(isset($_GET['order']))
 		{
 			$content = $db->getOrders();
 			$columns = array_keys((array)$content[0]);
 			$pageCount = $db->getPageCount('orders');
 		}
-		elseif (isset($_GET['users']))
+		elseif (isset($_GET['user']))
 		{
 			$content = $db->getUsers();
 			$columns = array_keys((array)$content[0]);
 			$pageCount = $db->getPageCount('users');
 		}
-		elseif (isset($_GET['brands']))
+		elseif (isset($_GET['brand']))
 		{
 			$content = $db->getTags('Brand');
 			$columns = array_keys((array)$content[0]);
 			$pageCount = $db->getPageCount('brands');
 		}
-		elseif (isset($_GET['carcases']))
+		elseif (isset($_GET['carcase']))
 		{
 			$content = $db->getTags('Carcase');
 			$columns = array_keys((array)$content[0]);
 			$pageCount = $db->getPageCount('carcases');
 		}
-		elseif (isset($_GET['transmissions']))
+		elseif (isset($_GET['transmission']))
 		{
 			$content = $db->getTags('Transmission');
 			$columns = array_keys((array)$content[0]);
