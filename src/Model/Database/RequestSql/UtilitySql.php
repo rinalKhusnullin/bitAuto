@@ -10,37 +10,42 @@ trait UtilitySql
     function getUsers()
 	{
 		$query = "SELECT ID, PASS, LOGIN, MAIL, ROLE, FIRST_NAME, LAST_NAME 
-					FROM users";
+					FROM user";
 
 		$result = mysqli_query($this->connection, $query);
 
 		return ObjectBuilder::buildUsers($result);
 	}
 
-    function getPageCount(string $isActive = 'active')
+    function getPageCount(string $isActive = 'active', string $table = 'products')
 	{
-        switch ($isActive)
+		$activityQuery = '';
+		if ($table ==='products')
 		{
-			case 'all':
-				$activityQuery = "";
-				break;
-			case 'notActive':
-				$activityQuery = " WHERE (p.IS_ACTIVE IS NULL) ";
-				break;
-			case 'active':
-			default:
-				$activityQuery = " WHERE (p.IS_ACTIVE IS NOT NULL) ";
-				break;
-		};
-
+			switch ($isActive)
+			{
+				case 'all':
+					$activityQuery = "";
+					break;
+				case 'notActive':
+					$activityQuery = " WHERE (p.IS_ACTIVE IS NULL) ";
+					break;
+				case 'active':
+				default:
+					$activityQuery = " WHERE (p.IS_ACTIVE IS NOT NULL) ";
+					break;
+			};
+			$table .= ' p';
+		}
 		$countProductOnPage = ConfigurationController::getConfig('CountProductsOnPage');
 		$query = "SELECT COUNT(*)
-				FROM products p
+				FROM $table
                 $activityQuery";
 
 		$result = mysqli_query($this->connection, $query);
         $row = mysqli_fetch_row($result);
-		return ceil($row[0] / $countProductOnPage);
+		$result = ceil($row[0] / $countProductOnPage);
+		return ($result == 1) ? 0: $result;
 	}
 
     function getPageCountByTags($brand, $carcase, $transmission, string $isActive = 'active')
@@ -61,7 +66,7 @@ trait UtilitySql
 
         $countProductOnPage = ConfigurationController::getConfig('CountProductsOnPage');
         $query = "SELECT COUNT(*)
-					FROM products p
+					FROM product p
 	 				inner join brand b on p.ID_BRAND = b.id
 					inner join carcase c on p.ID_CARCASE = c.id
 					inner join transmission t on p.ID_TRANSMISSION = t.id
@@ -109,11 +114,18 @@ trait UtilitySql
         $sQuery = mysqli_real_escape_string($this->connection, $sQuery);
         $countProductOnPage = ConfigurationController::getConfig('CountProductsOnPage');
 		$query = "SELECT COUNT(*)
-					from products p
+					from product p
                     where (name LIKE '%$sQuery%' or FULL_DESCRIPTION LIKE '%$sQuery%')
                     $isActiveQuery";
         $result = mysqli_query($this->connection, $query);
         $row = mysqli_fetch_row($result);
 		return ceil($row[0] / $countProductOnPage);
     }
+
+	function deliteItem(int $id, string $name): void
+	{
+		$query = "DELETE FROM '%$name%' WHERE `ID` = $id LIMIT 1";
+
+		mysqli_query($this->connection, $query);
+	}
 }

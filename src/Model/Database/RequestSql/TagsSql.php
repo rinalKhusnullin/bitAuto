@@ -2,6 +2,9 @@
 
 namespace ES\Model\Database\RequestSql;
 
+use ES\Model\Database\ObjectBuilder;
+use ES\Model\Tag;
+
 trait TagsSql
 {
     function getTagList(): ?array
@@ -32,45 +35,24 @@ trait TagsSql
 		return $tags;
 	}
 
-    function getBrands() : array
+
+	function getTags(string $tag) : array
 	{
-		$query = "SELECT ID, BRAND FROM brand";
+		$query = "SELECT ID, $tag FROM $tag";
 
         $result = mysqli_query($this->connection, $query);
-		$brands = [];
-		while ($row = mysqli_fetch_assoc($result))
-        {
-            $brands[] = [ 'id' => $row['ID'], 'brand' => $row['BRAND']];
-        }
 
-		return $brands;
+		return ObjectBuilder::buildTags($result, $tag);
 	}
 
-	function getCarcases()
+	function getTagById($id, string $tag) : ?Tag 
 	{
-		$query = "SELECT ID, CARCASE FROM carcase";
+		$id = mysqli_real_escape_string($this->connection, $id);
+
+		$query = "SELECT ID, $tag FROM $tag WHERE ID = $id";
 
         $result = mysqli_query($this->connection, $query);
-		$carcases = [];
-		while ($row = mysqli_fetch_assoc($result))
-        {
-            $carcases[] = [ 'id' => $row['ID'], 'carcase' => $row['CARCASE']];
-        }
 
-		return $carcases;
-	}
-
-	function getTransmissions()
-	{
-		$query = "SELECT ID, TRANSMISSION FROM transmission";
-
-        $result = mysqli_query($this->connection, $query);
-		$transmissions = [];
-		while ($row = mysqli_fetch_assoc($result))
-        {
-            $transmissions[] = [ 'id' => $row['ID'], 'transmission' => $row['TRANSMISSION']];
-        }
-
-		return $transmissions;
+		return ObjectBuilder::buildTags($result, $tag)[0];
 	}
 }

@@ -34,7 +34,7 @@ class ProductSqlTest extends TestCase
 		$connection = SqlConnection::getInstance()->getConnection();
 		$numberProduct = ConfigurationController::getConfig('CountProductsOnPage');
 		$expected = mysqli_query($connection, "SELECT p.id, p.name, p.IS_ACTIVE, b.brand, t.transmission, c.carcase, p.DATE_CREATION, p.DATE_UPDATE, p.FULL_DESCRIPTION, p.PRODUCT_PRICE
-					FROM products p
+					FROM product p
 					inner join brand b on p.ID_BRAND = b.id
 					inner join carcase c on p.ID_CARCASE = c.id
 					inner join transmission t on p.ID_TRANSMISSION = t.id
@@ -121,7 +121,7 @@ class ProductSqlTest extends TestCase
 	public function testGetPageCount():void
 	{
 		$expected = ceil((int)mysqli_fetch_array(mysqli_query(SqlConnection::getInstance()->getConnection(),'SELECT COUNT(*)
-				FROM products p
+				FROM product p
                 WHERE p.IS_ACTIVE = true'))[0] / ConfigurationController::getConfig('CountProductsOnPage'));
 		$db = MySql::getInstance();
 		$actual = $db->getPageCount();

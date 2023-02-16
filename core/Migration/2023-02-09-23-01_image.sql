@@ -1,4 +1,4 @@
-CREATE TABLE IF NOT EXISTS images
+CREATE TABLE IF NOT EXISTS image
 (
 	ID int not null auto_increment,
 	PATH varchar(500) not null,
@@ -6,7 +6,7 @@ CREATE TABLE IF NOT EXISTS images
 	ID_PRODUCT int not null,
 	PRIMARY KEY (ID),
 	FOREIGN KEY FK_PT_PRODUCT (ID_PRODUCT)
-	REFERENCES products(ID)
+	REFERENCES product(ID)
 	ON UPDATE RESTRICT
 	ON DELETE RESTRICT
 );

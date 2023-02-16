@@ -2,6 +2,7 @@
 /**
  * @var array $columns
  * @var $content
+ * @var $pagination
  */
 if(is_array($columns))
 {
@@ -17,3 +18,4 @@ if(is_array($columns))
 	</tr>
 		<?php } echo $content; ?>
 </table>
+<?= $pagination ?>

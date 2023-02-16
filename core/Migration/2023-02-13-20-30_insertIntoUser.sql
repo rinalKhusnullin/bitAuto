@@ -1,4 +1,4 @@
-insert into users
+insert into user
 (
 	id,
 	pass,

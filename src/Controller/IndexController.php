@@ -52,6 +52,7 @@ class IndexController extends BaseController
 			'content' => TemplateEngine::view('pages/index', [
 				'products' => $products,
 				'pagination' => TemplateEngine::view('components/pagination', [
+					'link' => '/?',
 					'currentPage' => $indexPage,
 					'countPage' => $pageCount,
 				]),

@@ -12,7 +12,7 @@
 				<?php foreach ($items as $item) :  ?>
 				<td> <?= $item ?> </td>
 				<?php endforeach; ?>
-				<td><a href="/admin/edit/?<?= strtolower((new \ReflectionClass($items))->getShortName())?>= <?= $items->id?>">Изменить</a></td>
+				<td><a href="/admin/edit/?<?= strtolower((new \ReflectionClass($items))->getShortName())?>=<?= $items->id?>">Изменить</a></td>
 			</tr>
 		<?php endif; ?>
 	<?php endforeach; ?>

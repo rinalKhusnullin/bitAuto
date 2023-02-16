@@ -1,4 +1,4 @@
-CREATE TABLE IF NOT EXISTS users
+CREATE TABLE IF NOT EXISTS user
 (
 	ID int not null auto_increment,
 	PASS nvarchar(200) not null,

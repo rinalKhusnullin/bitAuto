@@ -30,7 +30,7 @@ class ObjectBuilderTest extends TestCase
 		foreach ($orders as $order)
 		{
 			$product = $order->product;
-			$query = "INSERT INTO orders (product_id, product_price, status, date_creation, customer_name, customer_phone, customer_mail, customer_address, comment)
+			$query = "INSERT INTO order (product_id, product_price, status, date_creation, customer_name, customer_phone, customer_mail, customer_address, comment)
 					values ( $product->id, $product->price, '$order->status', '$order->dateCreation', '$order->fullName', '$order->phone', '$order->mail', '$order->address', '$order->comment' )";
 			mysqli_query($connection, $query);
 		}
@@ -112,7 +112,7 @@ class ObjectBuilderTest extends TestCase
 	{
 		$connection = SqlConnection::getInstance()->getConnection();
 		$query = "SELECT p.id, p.name, p.IS_ACTIVE, b.brand, t.transmission, c.carcase, p.DATE_CREATION, p.DATE_UPDATE, p.FULL_DESCRIPTION, p.PRODUCT_PRICE
-					FROM products p
+					FROM product p
 					inner join brand b on p.ID_BRAND = b.id
 					inner join carcase c on p.ID_CARCASE = c.id
 					inner join transmission t on p.ID_TRANSMISSION = t.id

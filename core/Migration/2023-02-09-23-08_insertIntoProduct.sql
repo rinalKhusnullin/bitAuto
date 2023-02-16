@@ -1,4 +1,4 @@
-INSERT INTO products
+INSERT INTO product
 (
  	ID,
  	NAME,
