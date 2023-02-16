@@ -16,11 +16,12 @@ class AdminController extends BaseController
 
 		$indexPage = (isset($_GET['page'])) ? (int)$_GET['page'] : 1;
 		$db = MySql::getInstance();
-
+		$pageCount = 0;
 		if (isset($_GET['products']))
 		{
 			$content = $db->getProducts($indexPage, 'all');
 			$columns = array_keys((array)$content[0]);
+			$pageCount = $db->getPageCount('all');
 		}
 		elseif(isset($_GET['orders']))
 		{
@@ -34,7 +35,6 @@ class AdminController extends BaseController
 		}
 		elseif (isset($_GET['brands']))
 		{
-			
 			$content = $db->getBrands();
 			$columns = array_keys((array)$content[0]);
 		}
@@ -59,14 +59,14 @@ class AdminController extends BaseController
 			$content = 'Выберите пункт меню';
 		}
 
-		$pageCount = 3; //сделайте с этим что нибудь пожалуйста(( а еще стили почините
 
 		$this->render('adminPanelLayout',[
 			'title' => 'admin',
 			'content' => \ES\Controller\TemplateEngine::view('pages/adminTable' ,
 				[
 					'columns' => $columns ,
-					'pagination' => TemplateEngine::view('components/adminPagination', [
+					'pagination' => TemplateEngine::view('components/Pagination', [
+						'link' => '/admin/?',
 						'currentPage' => $indexPage,
 						'countPage' => $pageCount,
 					]),
@@ -95,7 +95,7 @@ class AdminController extends BaseController
 
 		if (array_key_exists('product', $_GET))
 		{
-			$content = $db->getProductByID($_GET['product']); // @TODO ЭКРАНИРОВАНИЕ!!!!!
+			$content = $db->getProductByID(mysqli_real_escape_string($_GET['product']));
 			$columns = array_keys((array)$content);
 		}
 		elseif(array_key_exists('order', $_GET))
@@ -144,10 +144,6 @@ class AdminController extends BaseController
 						[
 							'content' => $content,
 							'tegs' => $tegs,
-							'pagination' => TemplateEngine::view('components/pagination', [
-								'currentPage' => '$indexPage',
-								'countPage' => '$pageCount',
-							]),
 						])
 				]
 			)

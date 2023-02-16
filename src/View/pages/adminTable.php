@@ -6,7 +6,7 @@
 if(is_array($columns))
 {
 ?>
-<table>
+<table class="table">
 	<caption> Редактирование продукции</caption>
 	<tr>
 		<?php foreach ($columns as $column) {?>

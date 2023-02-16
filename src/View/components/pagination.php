@@ -2,9 +2,9 @@
 /**
  * @var int $countPage
  * @var int $currentPage
+ * @var $link
  */
 
-$link = '/?';
 foreach ($_GET as $key => $get)
 {
     if ($key === 'page') continue;

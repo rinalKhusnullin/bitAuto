@@ -202,9 +202,10 @@ CONTENT
 caption {
 	height: 30px;
 }
-table {
+.table {
 	border: 1px solid grey;
 	width: 100%;
+	margin-bottom: 30px;
 }
 /* границы ячеек первого ряда таблицы */
 th {
