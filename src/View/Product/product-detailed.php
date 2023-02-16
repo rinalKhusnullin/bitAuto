@@ -68,10 +68,8 @@
                 </div>
             </div>
             <form action="" method="post"> <!-- need to add handler -->
-                <div class="poppup__subtitle">Фамилия*</div>
-                <input type="text" class="poppup__input" name="userLastname" required>
-                <div class="poppup__subtitle">Имя*</div>
-                <input type="text" class="poppup__input" name="userName" required>
+                <div class="poppup__subtitle">ФИО*</div>
+                <input type="text" class="poppup__input" name="userFullname" required>
                 <div class="poppup__subtitle">Телефон*</div>
                 <input type="tel" class="poppup__input" name="userTel" required>
                 <div class="poppup__subtitle">Email*</div>

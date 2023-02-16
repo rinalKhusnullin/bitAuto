@@ -4,11 +4,11 @@ namespace ES\Model;
 
 class Order
 {
-	public string $fullName;
+
 
 	public function __construct(
-		public string $lastname,
-		public string $name,
+		public string $id,
+		public string $fullName,
 		public string $phone,
 		public string $mail,
 		public string $address,
@@ -19,7 +19,7 @@ class Order
 		public string $status = 'processing',
 	)
 	{
-		$this->fullName = $this->lastname . ' ' . $this->name;
+
 	}
 
 	public function equals(Order $o): bool

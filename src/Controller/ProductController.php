@@ -39,12 +39,12 @@ class ProductController extends BaseController
 			header('Location: /error/');
 		}
 
-		if (!empty($_POST['userLastname']) && !empty($_POST['userName']) && !empty($_POST['userTel'])
+		if (!empty($_POST['userFullname']) && !empty($_POST['userTel'])
 			&& !empty($_POST['userEmail']) && !empty($_POST['userAddress'])) // КОСТЫЛЬЬЬ
 		{
 			$result = $db->createOrder(new Order(
-				$_POST['userLastname'],
-				$_POST["userName"],
+				1,
+				$_POST['userFullname'],
 				$_POST["userTel"],
 				$_POST["userEmail"],
 				$_POST["userAddress"],

@@ -36,10 +36,9 @@ class ObjectBuilder
 		$orders = [];
 		while ($row = mysqli_fetch_assoc($result))
 		{
-			[$lastname, $name] = explode(' ', $row["CUSTOMER_NAME"]);
 			$orders[] = new Order(
-				$lastname,
-				$name,
+				$row['ID'],
+				$row['CUSTOMER_NAME'],
 				$row['CUSTOMER_PHONE'],
 				$row['CUSTOMER_MAIL'],
 				$row['CUSTOMER_ADDRESS'],
