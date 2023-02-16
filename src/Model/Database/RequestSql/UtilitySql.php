@@ -126,5 +126,7 @@ trait UtilitySql
 	{
 		$query = "DELETE FROM $name WHERE id = $id";
 		mysqli_query($this->connection, $query);
+		$success = "Товар id = {$id} успешно уданел";
+		header("Location: /admin/?{$name}s");
 	}
 }
