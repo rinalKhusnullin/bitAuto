@@ -24,9 +24,8 @@ class Order
 
 	public function equals(Order $o): bool
 	{
-		$isEqualProducts = $this->product->equals($o->product);
 		return $this->fullName === $o->fullName && $this->phone === $o->phone && $this->mail === $o->mail
-			&& $this->address === $o->address && $this->comment === $o->comment && $isEqualProducts
-			&& $this->dateCreation === $o->dateCreation && $this->status === $o->status;
+			&& $this->address === $o->address && $this->comment === $o->comment && $this->productId === $o->productId
+			&& $this->productPrice === $o->productPrice && $this->dateCreation === $o->dateCreation && $this->status === $o->status;
 	}
 }
