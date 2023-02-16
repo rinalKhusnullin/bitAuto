@@ -159,8 +159,12 @@ class AdminController extends BaseController
 
 
 
-	public function adminDelitAction () :void
+	public function adminDeleteAction () :void
 	{
+		$table = array_key_first($_GET);
+		$id = $_GET[$table];
+		$db = MySql::getInstance();
+		$db->deleteItem($table, $id);
 
 	}
 }

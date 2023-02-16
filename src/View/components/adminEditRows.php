@@ -15,11 +15,7 @@
 	<?php endforeach; ?>
 	<td><a href="#">Сохранить</a></td>
 	<td>
-		<form action="" method="post">
-			<input type="hidden" name="id" value="<?=$content->id?>">
-			<input type="hidden" name="table-name" value="products">
-			<button>Удалить</button>
-		</form>
+		<a href="/admin/edit/delete/?<?= array_key_first($_GET)?>=<?= $content->id?>">удалить</a>
 	</td>
 </tr>
 

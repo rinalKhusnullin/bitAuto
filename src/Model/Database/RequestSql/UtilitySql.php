@@ -122,10 +122,9 @@ trait UtilitySql
 		return ceil($row[0] / $countProductOnPage);
     }
 
-	function deliteItem(int $id, string $name): void
+	function deleteItem(string $name, int $id): void
 	{
-		$query = "DELETE FROM '%$name%' WHERE `ID` = $id LIMIT 1";
-
+		$query = "DELETE FROM $name WHERE id = $id";
 		mysqli_query($this->connection, $query);
 	}
 }
