@@ -11,16 +11,22 @@ class TemplateEngineTest extends TestCase
 		TemplateEngine::view('this is in!@#$%*()_correct path');
 	}
 
-	public function testFileNotFound() : void
+	public function testFileNotFound(): void
 	{
 		$this->expectExceptionMessage('Template not found');
 		TemplateEngine::view('thisIsNotExistentFileName');
 	}
 
-	public function testCorrectWork() : void
+	public function testCorrectWork(): void
 	{
-		$expected = require_once ROOT . '/src/View/layout.php';
-		$result = TemplateEngine::view('layout', []);
-		$this->assertStringContainsString($expected,$result);
+		$expected = '<div><div>var1<section>var2var3var4</section></div><section>var2var3var4</section></div>';
+		$result = TemplateEngine::view('test-layout', [
+			'var1' => TemplateEngine::view('test-layout', [
+				'var1' => 'var1',
+				'values' => ['var2', 'var3', 'var4'],
+			]),
+			'values' => ['var2', 'var3', 'var4'],
+		]);
+		$this->assertEquals($expected, str_replace(["\t","\n"],'',$result));
 	}
 }
