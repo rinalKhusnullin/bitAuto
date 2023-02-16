@@ -2,7 +2,7 @@
 /**
  * @var int $id
  * @var int $price
- * @var string $brand
+ * @var string $brandType
  * @var string $title
  * @var string $carcaseType
  * @var string $transmission

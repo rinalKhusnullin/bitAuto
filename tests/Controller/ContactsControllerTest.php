@@ -15,7 +15,7 @@ class ContactsControllerTest extends TestCase
 
 		$expected = TemplateEngine::view('layout', [
 			'title' => ConfigurationController::getConfig('TITLE'),
-			'tags' => MySql::getInstance()->getTegs(),
+			'tags' => MySql::getInstance()->getTagList(),
 			'role' => array_key_exists('USER', $_SESSION) ? $_SESSION['USER']['role'] : 'user',
 			'content' => TemplateEngine::view('pages/contacts', []),
 		]);

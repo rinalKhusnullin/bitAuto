@@ -101,7 +101,7 @@ class ProductControllerTest extends TestCase
 
 		$expected = TemplateEngine::view('layout', [
 			'title' => ConfigurationController::getConfig('TITLE'),
-			'tags' => MySql::getInstance()->getTegs(),
+			'tags' => MySql::getInstance()->getTagList(),
 			'role' => array_key_exists('USER', $_SESSION) ? $_SESSION['USER']['role'] : 'user',
 			'content' => TemplateEngine::view('Product/product-detailed', (array)$product),
 		]);
@@ -118,10 +118,10 @@ class ProductControllerTest extends TestCase
 				[
 					'id' => 7,
 					'price' => 500000,
-					'brand' => 'Mazda',
+					'brandType' => 'Mazda',
 					'title' => 'Mazda 6',
 					'carcaseType' => 'Седан',
-					'transmission' => 'АКПП',
+					'transmissionType' => 'АКПП',
 					'fullDesc' => 'Мазда 6- это модель Гольф класса, выпускающаяся в двух вариантах
 					исполнения: пятидверный хэтчбек и седан.
 					Его габаритные размеры составляют:
