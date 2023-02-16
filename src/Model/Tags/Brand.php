@@ -2,7 +2,9 @@
 
 namespace ES\Model\Tags;
 
-class Brand
+use ES\Model\Tag;
+
+class Brand extends Tag
 {
     public function __construct(
         public int $id,

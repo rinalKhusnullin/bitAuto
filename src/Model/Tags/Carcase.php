@@ -2,7 +2,9 @@
 
 namespace ES\Model\Tags;
 
-class Carcase
+use ES\Model\Tag;
+
+class Carcase extends Tag
 {
     public function __construct(
         public int $id,

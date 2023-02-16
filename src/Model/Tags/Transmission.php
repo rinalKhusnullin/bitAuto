@@ -2,7 +2,9 @@
 
 namespace ES\Model\Tags;
 
-class Transmission
+use ES\Model\Tag;
+
+class Transmission extends Tag
 {
     public function __construct(
         public int $id,
