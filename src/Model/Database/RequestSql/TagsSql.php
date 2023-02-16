@@ -2,6 +2,8 @@
 
 namespace ES\Model\Database\RequestSql;
 
+use ES\Model\Database\ObjectBuilder;
+
 trait TagsSql
 {
     function getTagList(): ?array
@@ -37,40 +39,25 @@ trait TagsSql
 		$query = "SELECT ID, BRAND FROM brand";
 
         $result = mysqli_query($this->connection, $query);
-		$brands = [];
-		while ($row = mysqli_fetch_assoc($result))
-        {
-            $brands[] = [ 'id' => $row['ID'], 'brand' => $row['BRAND']];
-        }
 
-		return $brands;
+		return ObjectBuilder::buildBrands($result);
 	}
 
-	function getCarcases()
+	function getCarcases() : array
 	{
 		$query = "SELECT ID, CARCASE FROM carcase";
 
         $result = mysqli_query($this->connection, $query);
-		$carcases = [];
-		while ($row = mysqli_fetch_assoc($result))
-        {
-            $carcases[] = [ 'id' => $row['ID'], 'carcase' => $row['CARCASE']];
-        }
 
-		return $carcases;
+		return ObjectBuilder::buildCarcases($result);
 	}
 
-	function getTransmissions()
+	function getTransmissions() : array
 	{
 		$query = "SELECT ID, TRANSMISSION FROM transmission";
 
         $result = mysqli_query($this->connection, $query);
-		$transmissions = [];
-		while ($row = mysqli_fetch_assoc($result))
-        {
-            $transmissions[] = [ 'id' => $row['ID'], 'transmission' => $row['TRANSMISSION']];
-        }
 
-		return $transmissions;
+		return ObjectBuilder::buildTransmissions($result);
 	}
 }
