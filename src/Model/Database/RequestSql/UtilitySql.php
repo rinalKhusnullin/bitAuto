@@ -17,30 +17,35 @@ trait UtilitySql
 		return ObjectBuilder::buildUsers($result);
 	}
 
-    function getPageCount(string $isActive = 'active')
+    function getPageCount(string $isActive = 'active', string $table = 'products')
 	{
-        switch ($isActive)
+		$activityQuery = '';
+		if ($table ==='products')
 		{
-			case 'all':
-				$activityQuery = "";
-				break;
-			case 'notActive':
-				$activityQuery = " WHERE (p.IS_ACTIVE IS NULL) ";
-				break;
-			case 'active':
-			default:
-				$activityQuery = " WHERE (p.IS_ACTIVE IS NOT NULL) ";
-				break;
-		};
-
+			switch ($isActive)
+			{
+				case 'all':
+					$activityQuery = "";
+					break;
+				case 'notActive':
+					$activityQuery = " WHERE (p.IS_ACTIVE IS NULL) ";
+					break;
+				case 'active':
+				default:
+					$activityQuery = " WHERE (p.IS_ACTIVE IS NOT NULL) ";
+					break;
+			};
+			$table .= ' p';
+		}
 		$countProductOnPage = ConfigurationController::getConfig('CountProductsOnPage');
 		$query = "SELECT COUNT(*)
-				FROM products p
+				FROM $table
                 $activityQuery";
 
 		$result = mysqli_query($this->connection, $query);
         $row = mysqli_fetch_row($result);
-		return ceil($row[0] / $countProductOnPage);
+		$result = ceil($row[0] / $countProductOnPage);
+		return ($result == 1) ? 0: $result;
 	}
 
     function getPageCountByTags($brand, $carcase, $transmission, string $isActive = 'active')

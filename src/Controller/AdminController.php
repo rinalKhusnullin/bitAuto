@@ -16,7 +16,9 @@ class AdminController extends BaseController
 
 		$indexPage = (isset($_GET['page'])) ? (int)$_GET['page'] : 1;
 		$db = MySql::getInstance();
+
 		$pageCount = 0;
+
 		if (isset($_GET['products']))
 		{
 			$content = $db->getProducts($indexPage, 'all');
@@ -27,26 +29,31 @@ class AdminController extends BaseController
 		{
 			$content = $db->getOrders();
 			$columns = array_keys((array)$content[0]);
+			$pageCount = $db->getPageCount('orders');
 		}
 		elseif (isset($_GET['users']))
 		{
 			$content = $db->getUsers();
 			$columns = array_keys((array)$content[0]);
+			$pageCount = $db->getPageCount('users');
 		}
 		elseif (isset($_GET['brands']))
 		{
 			$content = $db->getBrands();
 			$columns = array_keys((array)$content[0]);
+			$pageCount = $db->getPageCount('brands');
 		}
 		elseif (isset($_GET['carcases']))
 		{
 			$content = $db->getCarcases();
 			$columns = array_keys((array)$content[0]);
+			$pageCount = $db->getPageCount('carcases');
 		}
 		elseif (isset($_GET['transmissions']))
 		{
 			$content = $db->getTransmissions();
 			$columns = array_keys((array)$content[0]);
+			$pageCount = $db->getPageCount('transmissions');
 		}
 		elseif (isset($_GET['config']))
 		{
@@ -95,7 +102,7 @@ class AdminController extends BaseController
 
 		if (array_key_exists('product', $_GET))
 		{
-			$content = $db->getProductByID(mysqli_real_escape_string($_GET['product']));
+			$content = $db->getProductByID($_GET['product']); //@Todo сделать эксейп
 			$columns = array_keys((array)$content);
 		}
 		elseif(array_key_exists('order', $_GET))

@@ -2,11 +2,12 @@
 /**
  * @var array $columns
  * @var $content
+ * @var $pagination
  */
 if(is_array($columns))
 {
 ?>
-<table class="table">
+<table>
 	<caption> Редактирование продукции</caption>
 	<tr>
 		<?php foreach ($columns as $column) {?>
