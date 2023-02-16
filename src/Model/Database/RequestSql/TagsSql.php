@@ -3,6 +3,7 @@
 namespace ES\Model\Database\RequestSql;
 
 use ES\Model\Database\ObjectBuilder;
+use ES\Model\Tag;
 
 trait TagsSql
 {
@@ -34,30 +35,24 @@ trait TagsSql
 		return $tags;
 	}
 
-    function getBrands() : array
+
+	function getTags(string $tag) : array
 	{
-		$query = "SELECT ID, BRAND FROM brand";
+		$query = "SELECT ID, $tag FROM $tag";
 
         $result = mysqli_query($this->connection, $query);
 
-		return ObjectBuilder::buildBrands($result);
+		return ObjectBuilder::buildTags($result, $tag);
 	}
 
-	function getCarcases() : array
+	function getTagById($id, string $tag) : ?Tag 
 	{
-		$query = "SELECT ID, CARCASE FROM carcase";
+		$id = mysqli_real_escape_string($this->connection, $id);
+
+		$query = "SELECT ID, $tag FROM $tag WHERE ID = $id";
 
         $result = mysqli_query($this->connection, $query);
 
-		return ObjectBuilder::buildCarcases($result);
-	}
-
-	function getTransmissions() : array
-	{
-		$query = "SELECT ID, TRANSMISSION FROM transmission";
-
-        $result = mysqli_query($this->connection, $query);
-
-		return ObjectBuilder::buildTransmissions($result);
+		return ObjectBuilder::buildTags($result, $tag)[0];
 	}
 }
