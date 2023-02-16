@@ -2,6 +2,7 @@
 /**
  * @var array $columns
  * @var $content
+ * @var $pagination
  */
 if(is_array($columns))
 {

@@ -17,30 +17,35 @@ trait UtilitySql
 		return ObjectBuilder::buildUsers($result);
 	}
 
-    function getPageCount(string $isActive = 'active')
+    function getPageCount(string $isActive = 'active', string $table = 'products')
 	{
-        switch ($isActive)
+		$activityQuery = '';
+		if ($table ==='products')
 		{
-			case 'all':
-				$activityQuery = "";
-				break;
-			case 'notActive':
-				$activityQuery = " WHERE (p.IS_ACTIVE IS NULL) ";
-				break;
-			case 'active':
-			default:
-				$activityQuery = " WHERE (p.IS_ACTIVE IS NOT NULL) ";
-				break;
+			switch ($isActive)
+			{
+				case 'all':
+					$activityQuery = "";
+					break;
+				case 'notActive':
+					$activityQuery = " WHERE (p.IS_ACTIVE IS NULL) ";
+					break;
+				case 'active':
+				default:
+					$activityQuery = " WHERE (p.IS_ACTIVE IS NOT NULL) ";
+					break;
+			};
+			$table .= ' p';
 		}
-
 		$countProductOnPage = ConfigurationController::getConfig('CountProductsOnPage');
 		$query = "SELECT COUNT(*)
-				FROM product p
+				FROM $table
                 $activityQuery";
 
 		$result = mysqli_query($this->connection, $query);
         $row = mysqli_fetch_row($result);
-		return ceil($row[0] / $countProductOnPage);
+		$result = ceil($row[0] / $countProductOnPage);
+		return ($result == 1) ? 0: $result;
 	}
 
     function getPageCountByTags($brand, $carcase, $transmission, string $isActive = 'active')
@@ -57,7 +62,7 @@ trait UtilitySql
 			default:
 				$isActiveQuery = " (p.IS_ACTIVE IS NOT NULL) AND";
 				break;
-		}
+		};
 
         $countProductOnPage = ConfigurationController::getConfig('CountProductsOnPage');
         $query = "SELECT COUNT(*)
@@ -84,11 +89,7 @@ trait UtilitySql
             $tags[] = "(t.transmission = '$transmission')";
         }
 
-		if (empty($tags))
-		{
-			return $this->getPageCount();
-		}
-
+		if (empty($tags)) return $this->getPageCount();
         $query .= implode(' and ', $tags);
         $result = mysqli_query($this->connection, $query);
         $row = mysqli_fetch_row($result);
@@ -109,8 +110,7 @@ trait UtilitySql
 			default:
 				$isActiveQuery = " AND (p.IS_ACTIVE IS NOT NULL)";
 				break;
-		}
-
+		};
         $sQuery = mysqli_real_escape_string($this->connection, $sQuery);
         $countProductOnPage = ConfigurationController::getConfig('CountProductsOnPage');
 		$query = "SELECT COUNT(*)

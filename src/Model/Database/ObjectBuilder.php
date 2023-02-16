@@ -6,6 +6,7 @@ use ES\Model\Product;
 use ES\Model\Order;
 use ES\Model\User;
 
+
 class ObjectBuilder
 {
     static function buildProducts($result)
@@ -68,5 +69,18 @@ class ObjectBuilder
 			);
 		}
 		return $users;
+	}
+
+	static function buildTags($result, string $tag)
+	{
+		$className= 'ES\\Model\\Tags\\' . $tag;
+		$tags = [];
+		while ($row = mysqli_fetch_assoc($result)){
+			$tags[] = new $className(
+				$row['ID'],
+				$row[$tag]
+			);
+		}
+		return $tags;
 	}
 }
