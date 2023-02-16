@@ -22,7 +22,8 @@ class Migrator
 		$data = $connection->query($query);
 		$firstMigration = !$data->num_rows;
 
-		if ($firstMigration) {
+		if ($firstMigration)
+		{
 			$files = $allFiles;
 		}
 		else
@@ -36,7 +37,8 @@ class Migrator
 			);
 			$data = $connection->query($query)->fetch_all(MYSQLI_ASSOC);
 
-			foreach ($data as $row) {
+			foreach ($data as $row)
+			{
 				array_push($migrationFiles, $sqlFolder . $row['name']);
 			}
 
@@ -45,7 +47,8 @@ class Migrator
 
 		if (!empty($files))
 		{
-			foreach ($files as $file) {
+			foreach ($files as $file)
+			{
 				$fileContent = file_get_contents($file);
 				mysqli_query($connection, $fileContent);
 
