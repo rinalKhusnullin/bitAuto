@@ -4,11 +4,11 @@ namespace ES\Model;
 
 class Order
 {
-	public string $fullName;
+
 
 	public function __construct(
-		public string $lastname,
-		public string $name,
+		public string $id,
+		public string $fullName,
 		public string $phone,
 		public string $mail,
 		public string $address,
@@ -19,14 +19,13 @@ class Order
 		public string $status = 'processing',
 	)
 	{
-		$this->fullName = $this->lastname . ' ' . $this->name;
+
 	}
 
 	public function equals(Order $o): bool
 	{
-		$isEqualProducts = $this->product->equals($o->product);
 		return $this->fullName === $o->fullName && $this->phone === $o->phone && $this->mail === $o->mail
-			&& $this->address === $o->address && $this->comment === $o->comment && $isEqualProducts
-			&& $this->dateCreation === $o->dateCreation && $this->status === $o->status;
+			&& $this->address === $o->address && $this->comment === $o->comment && $this->productId === $o->productId
+			&& $this->productPrice === $o->productPrice && $this->dateCreation === $o->dateCreation && $this->status === $o->status;
 	}
 }

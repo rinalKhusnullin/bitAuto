@@ -4,6 +4,7 @@ namespace ES\Controller;
 
 use ES\Model\Database\MySql;
 
+
 class AdminController extends BaseController
 {
 	public function adminAction() : void

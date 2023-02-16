@@ -21,6 +21,13 @@ class HtmlService
 
 			case 'price':
 			case 'title':
+			case 'value':
+			case 'fullName':
+			case 'phone':
+			case 'mail':
+			case 'address':
+			case 'comment':
+			case 'status':
 				return '<input class="admin-input" type="text" value=" ' . $value . ' ">';
 
 			case 'isActive':
@@ -45,7 +52,7 @@ class HtmlService
 				}
 				$result .= '</select>';
 				return $result;
-				
+
 			case 'transmissionType':
 				$result = '<select>';
 				$result .= '<option> ' . $value . '</option>';

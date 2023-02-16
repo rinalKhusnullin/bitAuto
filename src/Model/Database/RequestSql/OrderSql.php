@@ -34,4 +34,14 @@ trait OrderSql
 
 		return mysqli_query($this->connection,$query);
 	}
+	function getOrderById($id)
+	{
+		$id = mysqli_real_escape_string($this->connection, $id);
+		$query = "SELECT ID, PRODUCT_ID, PRODUCT_PRICE, STATUS, DATE_CREATION, CUSTOMER_NAME, CUSTOMER_PHONE, CUSTOMER_MAIL, CUSTOMER_ADDRESS, COMMENT
+					FROM `order`
+					WHERE ID = $id
+					ORDER BY DATE_CREATION";
+		$result = mysqli_query($this->connection, $query);
+		return ObjectBuilder::buildOrders($result)[0];
+	}
 }
