@@ -29,7 +29,7 @@ class AdminController extends BaseController
 		{
 			$content = $db->getOrders();
 			$columns = array_keys((array)$content[0]);
-			$pageCount = $db->getPageCount('','order');
+			$pageCount = $db->getPageCount('',"`order`");
 		}
 		elseif (isset($_GET['users']))
 		{
