@@ -29,31 +29,31 @@ class AdminController extends BaseController
 		{
 			$content = $db->getOrders();
 			$columns = array_keys((array)$content[0]);
-			$pageCount = $db->getPageCount('orders');
+			$pageCount = $db->getPageCount('','order');
 		}
 		elseif (isset($_GET['users']))
 		{
 			$content = $db->getUsers();
 			$columns = array_keys((array)$content[0]);
-			$pageCount = $db->getPageCount('users');
+			$pageCount = $db->getPageCount('','user');
 		}
 		elseif (isset($_GET['brands']))
 		{
 			$content = $db->getTags('Brand');
 			$columns = array_keys((array)$content[0]);
-			$pageCount = $db->getPageCount('brands');
+			$pageCount = $db->getPageCount('','brand');
 		}
 		elseif (isset($_GET['carcases']))
 		{
 			$content = $db->getTags('Carcase');
 			$columns = array_keys((array)$content[0]);
-			$pageCount = $db->getPageCount('carcases');
+			$pageCount = $db->getPageCount('','carcase');
 		}
 		elseif (isset($_GET['transmissions']))
 		{
 			$content = $db->getTags('Transmission');
 			$columns = array_keys((array)$content[0]);
-			$pageCount = $db->getPageCount('transmissions');
+			$pageCount = $db->getPageCount('','transmission');
 		}
 		elseif (isset($_GET['config']))
 		{

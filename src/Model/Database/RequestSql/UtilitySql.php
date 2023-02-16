@@ -17,10 +17,10 @@ trait UtilitySql
 		return ObjectBuilder::buildUsers($result);
 	}
 
-    function getPageCount(string $isActive = 'active', string $table = 'products')
+    function getPageCount(string $isActive = 'active', string $table = 'product')
 	{
 		$activityQuery = '';
-		if ($table ==='products')
+		if ($table ==='product')
 		{
 			switch ($isActive)
 			{
