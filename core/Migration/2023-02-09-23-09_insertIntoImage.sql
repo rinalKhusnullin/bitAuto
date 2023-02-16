@@ -1,4 +1,4 @@
-insert into images(id, is_main, id_product, PATH)
+insert into image(id, is_main, id_product, PATH)
 values (1, true, 1, 'eshop/public/tmp-autoimg'),
 	   (2, true, 2, 'eshop/public/tmp-autoimg'),
 	   (3, true, 3, 'eshop/public/tmp-autoimg'),

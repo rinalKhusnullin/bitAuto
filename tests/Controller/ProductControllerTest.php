@@ -39,7 +39,7 @@ class ProductControllerTest extends TestCase
 		session_abort();
 
 		$connection = \ES\Model\Database\SqlConnection::getInstance()->getConnection();
-		$result = mysqli_query($connection,"SELECT * FROM orders WHERE ID = LAST_INSERT_ID()");
+		$result = mysqli_query($connection,"SELECT * FROM `order` WHERE ID = LAST_INSERT_ID()");
 		$result = mysqli_fetch_assoc($result);
 		extract($result);
 

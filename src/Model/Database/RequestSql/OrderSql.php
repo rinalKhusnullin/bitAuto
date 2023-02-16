@@ -11,7 +11,7 @@ trait OrderSql
     function getOrders()
 	{
 		$query = "SELECT ID, PRODUCT_ID, PRODUCT_PRICE, STATUS, DATE_CREATION, CUSTOMER_NAME, CUSTOMER_PHONE, CUSTOMER_MAIL, CUSTOMER_ADDRESS, COMMENT
-					FROM orders
+					FROM `order`
 					ORDER BY DATE_CREATION";
 		$result = mysqli_query($this->connection, $query);
 		return ObjectBuilder::buildOrders($result);
@@ -29,7 +29,7 @@ trait OrderSql
 		$address = mysqli_real_escape_string($this->connection, $order->address);
 		$comment = mysqli_real_escape_string($this->connection, $order->comment);
 
-		$query = "INSERT INTO orders (product_id, product_price, status, date_creation, customer_name, customer_phone, customer_mail, customer_address, comment)
+		$query = "INSERT INTO `order` (product_id, product_price, status, date_creation, customer_name, customer_phone, customer_mail, customer_address, comment)
 					values ( $productId, $productPrice, '$status', CURRENT_DATE(), '$fullName', '$phone', '$mail', '$address', '$comment' )";
 
 		return mysqli_query($this->connection,$query);

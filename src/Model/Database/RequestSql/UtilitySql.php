@@ -10,7 +10,7 @@ trait UtilitySql
     function getUsers()
 	{
 		$query = "SELECT ID, PASS, LOGIN, MAIL, ROLE, FIRST_NAME, LAST_NAME 
-					FROM users";
+					FROM user";
 
 		$result = mysqli_query($this->connection, $query);
 
@@ -35,7 +35,7 @@ trait UtilitySql
 
 		$countProductOnPage = ConfigurationController::getConfig('CountProductsOnPage');
 		$query = "SELECT COUNT(*)
-				FROM products p
+				FROM product p
                 $activityQuery";
 
 		$result = mysqli_query($this->connection, $query);
@@ -61,7 +61,7 @@ trait UtilitySql
 
         $countProductOnPage = ConfigurationController::getConfig('CountProductsOnPage');
         $query = "SELECT COUNT(*)
-					FROM products p
+					FROM product p
 	 				inner join brand b on p.ID_BRAND = b.id
 					inner join carcase c on p.ID_CARCASE = c.id
 					inner join transmission t on p.ID_TRANSMISSION = t.id
@@ -114,7 +114,7 @@ trait UtilitySql
         $sQuery = mysqli_real_escape_string($this->connection, $sQuery);
         $countProductOnPage = ConfigurationController::getConfig('CountProductsOnPage');
 		$query = "SELECT COUNT(*)
-					from products p
+					from product p
                     where (name LIKE '%$sQuery%' or FULL_DESCRIPTION LIKE '%$sQuery%')
                     $isActiveQuery";
         $result = mysqli_query($this->connection, $query);
