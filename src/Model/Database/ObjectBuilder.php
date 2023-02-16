@@ -5,7 +5,7 @@ namespace ES\Model\Database;
 use ES\Model\Product;
 use ES\Model\Order;
 use ES\Model\User;
-use ES\Model\Tags;
+
 
 class ObjectBuilder
 {
@@ -71,39 +71,16 @@ class ObjectBuilder
 		return $users;
 	}
 
-	static function buildBrands($result)
+	static function buildTags($result, string $tag)
 	{
-		$brands = [];
+		$className= 'ES\\Model\\Tags\\' . $tag;
+		$tags = [];
 		while ($row = mysqli_fetch_assoc($result)){
-			$brands[] = new Tags\Brand(
+			$tags[] = new $className(
 				$row['ID'],
-				$row['BRAND']
+				$row[$tag]
 			);
 		}
-		return $brands;
-	}
-
-	static function buildCarcases($result)
-	{
-		$carcases = [];
-		while ($row = mysqli_fetch_assoc($result)){
-			$carcases[] = new Tags\Carcase(
-				$row['ID'],
-				$row['CARCASE']
-			);
-		}
-		return $carcases;
-	}
-
-	static function buildTransmissions($result)
-	{
-		$transmissions = [];
-		while ($row = mysqli_fetch_assoc($result)){
-			$transmissions[] = new Tags\Brand(
-				$row['ID'],
-				$row['TRANSMISSION']
-			);
-		}
-		return $transmissions;
+		return $tags;
 	}
 }
