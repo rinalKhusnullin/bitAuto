@@ -39,19 +39,19 @@ class AdminController extends BaseController
 		}
 		elseif (isset($_GET['brands']))
 		{
-			$content = $db->getBrands();
+			$content = $db->getTags('Brand');
 			$columns = array_keys((array)$content[0]);
 			$pageCount = $db->getPageCount('brands');
 		}
 		elseif (isset($_GET['carcases']))
 		{
-			$content = $db->getCarcases();
+			$content = $db->getTags('Carcase');
 			$columns = array_keys((array)$content[0]);
 			$pageCount = $db->getPageCount('carcases');
 		}
 		elseif (isset($_GET['transmissions']))
 		{
-			$content = $db->getTransmissions();
+			$content = $db->getTags('Transmission');
 			$columns = array_keys((array)$content[0]);
 			$pageCount = $db->getPageCount('transmissions');
 		}
@@ -118,17 +118,17 @@ class AdminController extends BaseController
 		elseif (array_key_exists('brand', $_GET))
 		{
 
-			$content = $db->getBrandById($_GET['brand']);
+			$content = $db->getTagById($_GET['brand'], 'Brand');
 			$columns = array_keys((array)$content);
 		}
 		elseif (array_key_exists('carcase', $_GET))
 		{
-			$content = $db->getCarcaseById($_GET['carcase']);
+			$content = $db->getTagById($_GET['carcase'], 'Carcase');
 			$columns = array_keys((array)$content);
 		}
 		elseif (array_key_exists('transmission', $_GET))
 		{
-			$content = $db->getTransmissionById($_GET['transmission']);
+			$content = $db->getTagById($_GET['transmission'], 'Transmission');
 			$columns = array_keys((array)$content);
 		}
 		elseif (isset($_GET['config']))
