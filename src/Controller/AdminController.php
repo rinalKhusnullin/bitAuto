@@ -59,18 +59,21 @@ class AdminController extends BaseController
 			$content = 'Выберите пункт меню';
 		}
 
+		$pageCount = 3; //сделайте с этим что нибудь пожалуйста(( а еще стили почините
+
 		$this->render('adminPanelLayout',[
 			'title' => 'admin',
 			'content' => \ES\Controller\TemplateEngine::view('pages/adminTable' ,
 				[
 					'columns' => $columns ,
+					'pagination' => TemplateEngine::view('components/adminPagination', [
+						'currentPage' => $indexPage,
+						'countPage' => $pageCount,
+					]),
 					'content' => TemplateEngine::view('components/adminTableRows',
 						[
 							'content' => $content,
-							'pagination' => TemplateEngine::view('components/pagination', [
-								'currentPage' => '$indexPage',
-								'countPage' => '$pageCount',
-							]),
+
 						])
 				]
 			)

@@ -76,6 +76,61 @@ HEADER
 }
 /*
 
+PAGINATION
+
+*/
+.pagination{
+	margin: 0 auto;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin-bottom: 25px;
+
+}
+
+.pagination__item{
+	padding: 5px 10px;
+	outline: 2px solid #3d3f44;
+	color: #3d3f44;
+	transition: 0.5s;
+}
+
+.pagination__item:focus, .pagination__item:active{
+	outline: 2px solid #3d3f44;
+}
+
+.pagination__item:hover{
+	outline: 2px solid #c41230;
+	background: #c41230;
+	color: white;
+	transition: 0.5s;
+}
+
+.active-page-link{
+	background: #52555b;
+	color: white;
+}
+
+.active-page-link:hover{
+	background: #52555b;
+	color: white;
+	outline: 2px solid #3d3f44;
+}
+
+.active-page-link:hover{
+	cursor: default;
+}
+
+.pagination__item:not(:last-child), .pagination__item-dots{
+	margin-right: 15px;
+}
+
+.pagination__item-dots{
+	align-self: end;
+	font-size: 20px;
+}
+/*
+
 NAV MENU
 
 */

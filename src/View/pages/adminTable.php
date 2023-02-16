@@ -17,3 +17,4 @@ if(is_array($columns))
 	</tr>
 		<?php } echo $content; ?>
 </table>
+<?= $pagination ?>
