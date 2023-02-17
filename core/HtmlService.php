@@ -20,6 +20,8 @@ class HtmlService
 			case 'id':
 				return "<input class='admin-input' name='$key' type='hidden' value='$value'>$value";
 
+			case 'productId':
+			case 'productPrice':
 			case 'price':
 			case 'title':
 			case 'value':
