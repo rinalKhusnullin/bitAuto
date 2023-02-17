@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 namespace ES\Model\Database\RequestSql;
 
@@ -34,9 +34,9 @@ trait ProductSql
                     $activityQuery
 			        group by p.ID
                     limit $countProductsOnPage offset $page";
-		
+
         $result = mysqli_query($this->connection, $query);
-		return ObjectBuilder::buildProducts($result);
+		return ObjectBuilder::buildProducts(mysqli_fetch_all($result));
     }
 
     function getProductByID($id) : ?Product
@@ -49,7 +49,7 @@ trait ProductSql
 					inner join transmission t on p.ID_TRANSMISSION = t.id
 					where $id = p.id";
 		$result = mysqli_query($this->connection, $query);
-		return ObjectBuilder::buildProducts($result)[0];
+		return ObjectBuilder::buildProducts(mysqli_fetch_all($result))[0];
 	}
 
     function getProductsByQuery(string $sQuery, int $page = 0, string $isActive = 'active') : array
@@ -82,7 +82,7 @@ trait ProductSql
 
 		$result = mysqli_query($this->connection, $query);
 
-		return ObjectBuilder::buildProducts($result);
+		return ObjectBuilder::buildProducts(mysqli_fetch_all($result));
 
 	}
 
@@ -126,14 +126,14 @@ trait ProductSql
             $transmission = mysqli_real_escape_string($this->connection, $transmission);
             $tags[] = "(t.transmission = '$transmission')";
         }
-        
+
 
 		if (empty($tags)) return $this->getProducts(true);
 
 		$query .= implode(' and ', $tags) . " limit $countProductOnPage offset $page";
 
 		$result = mysqli_query($this->connection, $query);
-		return ObjectBuilder::buildProducts($result);
+		return ObjectBuilder::buildProducts(mysqli_fetch_all($result));
 	}
 
 	function UpdateProduct(Product $product)
@@ -142,7 +142,7 @@ trait ProductSql
 		{
 			$product->$key = mysqli_real_escape_string($this->connection, $value);
 		}
-		$isActive = ($product->isActive) ? 1 : 0; 
+		$isActive = ($product->isActive) ? 1 : 0;
 		$brandId = $this->getIdByTagValue('Brand', $product->brandType);
 		$carcaseId = $this->getIdByTagValue('Carcase', $product->carcaseType);
 		$transmissionId = $this->getIdByTagValue('Transmission', $product->transmissionType);

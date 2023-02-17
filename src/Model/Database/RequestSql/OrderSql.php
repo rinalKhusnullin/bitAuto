@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 namespace ES\Model\Database\RequestSql;
 
@@ -10,11 +10,11 @@ trait OrderSql
 
     function getOrders()
 	{
-		$query = "SELECT ID, PRODUCT_ID, PRODUCT_PRICE, STATUS, DATE_CREATION, CUSTOMER_NAME, CUSTOMER_PHONE, CUSTOMER_MAIL, CUSTOMER_ADDRESS, COMMENT
+		$query = "SELECT ID, CUSTOMER_NAME, CUSTOMER_PHONE, CUSTOMER_MAIL, CUSTOMER_ADDRESS, COMMENT, PRODUCT_ID, PRODUCT_PRICE, DATE_CREATION, STATUS
 					FROM `order`
 					ORDER BY DATE_CREATION";
 		$result = mysqli_query($this->connection, $query);
-		return ObjectBuilder::buildOrders($result);
+		return ObjectBuilder::buildOrders(mysqli_fetch_all($result));
 	}
 
     function createOrder(Order $order) : bool
@@ -37,11 +37,11 @@ trait OrderSql
 	function getOrderById($id)
 	{
 		$id = mysqli_real_escape_string($this->connection, $id);
-		$query = "SELECT ID, PRODUCT_ID, PRODUCT_PRICE, STATUS, DATE_CREATION, CUSTOMER_NAME, CUSTOMER_PHONE, CUSTOMER_MAIL, CUSTOMER_ADDRESS, COMMENT
+		$query = "SELECT ID, CUSTOMER_NAME, CUSTOMER_PHONE, CUSTOMER_MAIL, CUSTOMER_ADDRESS, COMMENT, PRODUCT_ID, PRODUCT_PRICE, DATE_CREATION, STATUS
 					FROM `order`
 					WHERE ID = $id
 					ORDER BY DATE_CREATION";
 		$result = mysqli_query($this->connection, $query);
-		return ObjectBuilder::buildOrders($result)[0];
+		return ObjectBuilder::buildOrders(mysqli_fetch_all($result))[0];
 	}
 }
