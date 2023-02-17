@@ -14,13 +14,13 @@ CREATE TABLE IF NOT EXISTS product
 	foreign key FK_PRODUCT_BRAND(ID_BRAND)
 	references brand(id)
 	on update restrict
-	on delete restrict,
+	on delete CASCADE,
 	foreign key FK_PRODUCT_TRANSMISSION(ID_TRANSMISSION)
 	references transmission(id)
 	on update restrict
-	on delete restrict,
+	on delete CASCADE,
 	foreign key FK_PRODUCT_CARCASE(ID_CARCASE)
 	references carcase(id)
 	on update restrict
-	on delete restrict
+	on delete CASCADE
 );

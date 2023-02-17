@@ -41,3 +41,7 @@ Router::get('/failed/', function () {
 Router::get('/admin/', [new \ES\Controller\AdminController(), 'adminAction']);
 
 Router::get('/admin/edit/', [new \ES\Controller\AdminController(), 'adminEditAction']);
+
+Router::post('/admin/edit/', [new \ES\Controller\AdminController(), 'adminChangeItem']);
+
+Router::get('/admin/edit/delete/', [new \ES\Controller\AdminController(),'adminDeleteAction']);

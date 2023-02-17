@@ -160,8 +160,69 @@ class AdminController extends BaseController
 
 
 
-	public function adminDelitAction () :void
+	public function adminDeleteAction () :void
 	{
+		$table = array_key_first($_GET);
+		$id = $_GET[$table];
+		$db = MySql::getInstance();
+		$db->deleteItem($table, $id);
 
+	}
+
+	public function adminChangeItem() : void
+	{
+		echo "<pre>";
+		print_r($_POST);
+		// $values = []; Тут я пытался сделать что то универсальное, решил пока оставить так и решить с Product [Для начала]
+		// foreach ($_POST as $key => $value)
+		// {
+		// 	if ($key === 'item')
+		// 	{
+		// 		$className = "ES\\Model\\{$_POST['item']}"; 
+		// 	}
+		// 	else
+		// 	{
+		// 		$values[] = $value;
+		// 	}
+		// }
+
+		// $item = new $className(...$values);
+		// var_dump($item);
+		
+		if (array_key_exists('item', $_POST))
+		{
+			if ($_POST['item'] === 'Product')
+			{
+				$changedProduct = new \ES\Model\Product(
+					$_POST['id'],
+					$_POST['title'],
+					$_POST['isActive'],
+					$_POST['brandType'],
+					$_POST['transmissionType'],
+					$_POST['carcaseType'],
+					$_POST['dateCreation'],
+					date('Y-m-d H:i:s'),
+					$_POST['fullDesc'],
+					$_POST['price']
+				);
+				if ((MySql::getInstance())->updateProduct($changedProduct))
+				{
+					echo "Товар изменен";
+				};
+			}
+			elseif ($_POST['item'] === 'User')
+			{
+				echo "Тут что то происходит с user";
+			}
+			else if ($_POST['item'] === 'Brand' || $_POST['item'] === 'carcase' || $_POST['item'] === 'Transmission')
+			{
+				echo "Тут что то происходит с Tag";
+			}
+			else if ($_POST['item'] === 'Order')
+			{
+				echo "Тут что то происходит с order";
+			};
+
+		}
 	}
 }

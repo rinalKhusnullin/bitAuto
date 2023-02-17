@@ -135,4 +135,29 @@ trait ProductSql
 		$result = mysqli_query($this->connection, $query);
 		return ObjectBuilder::buildProducts($result);
 	}
+
+	function UpdateProduct(Product $product)
+	{
+		foreach ($product as $key => $value)
+		{
+			$product->$key = mysqli_real_escape_string($this->connection, $value);
+		}
+		$isActive = ($product->isActive) ? 1 : 0; 
+		$brandId = $this->getIdByTagValue('Brand', $product->brandType);
+		$carcaseId = $this->getIdByTagValue('Carcase', $product->carcaseType);
+		$transmissionId = $this->getIdByTagValue('Transmission', $product->transmissionType);
+		$query = "UPDATE product
+				SET NAME = '$product->title',
+					FULL_DESCRIPTION = '$product->fullDesc',
+					PRODUCT_PRICE = '$product->price',
+					IS_ACTIVE = $isActive,
+					ID_BRAND = $brandId,
+					ID_CARCASE = $carcaseId,
+					ID_TRANSMISSION = $transmissionId,
+					DATE_CREATION = '$product->dateCreation',
+					DATE_UPDATE = '$product->dateUpdate'
+				WHERE ID = '$product->id'";
+
+		return mysqli_query($this->connection, $query);
+	}
 }
