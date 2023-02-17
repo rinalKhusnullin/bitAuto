@@ -9,50 +9,27 @@ use ES\Model\User;
 
 class ObjectBuilder
 {
-    static function buildProducts($result)
-    {
+    public static function buildProducts(array $goods): array
+	{
         $products = [];
-		while ($row = mysqli_fetch_assoc($result))
+		foreach ($goods as $good)
 		{
-            $isActive = (isset($row['IS_ACTIVE'])) ? true : false;
-			$products[] = new Product(
-				$row['id'],
-				$row['name'],
-				$isActive,
-				$row['brand'],
-				$row['transmission'],
-				$row['carcase'],
-				$row['DATE_CREATION'],
-				$row['DATE_UPDATE'],
-				$row['FULL_DESCRIPTION'],
-				(int)$row['PRODUCT_PRICE']
-			);
+			$products[] = new Product(...$good);
 		}
 		return $products;
     }
 
-	static function buildOrders($result)
+	public static function buildOrders(array $results): array
 	{
 		$orders = [];
-		while ($row = mysqli_fetch_assoc($result))
+		foreach ($results as $result)
 		{
-			$orders[] = new Order(
-				$row['ID'],
-				$row['CUSTOMER_NAME'],
-				$row['CUSTOMER_PHONE'],
-				$row['CUSTOMER_MAIL'],
-				$row['CUSTOMER_ADDRESS'],
-				$row['COMMENT'],
-				$row['PRODUCT_ID'],
-				$row['PRODUCT_PRICE'],
-				$row['DATE_CREATION'],
-				$row['STATUS']
-			);
+			$orders[] = new Order(...$result);
 		}
 		return $orders;
 	}
 
-	static function buildUsers($result)
+	public static function buildUsers($result)
 	{
 		$users = [];
 		while ($row = mysqli_fetch_assoc($result))
@@ -70,7 +47,7 @@ class ObjectBuilder
 		return $users;
 	}
 
-	static function buildTags($result, string $tag)
+	public static function buildTags($result, string $tag)
 	{
 		$className= 'ES\\Model\\Tags\\' . $tag;
 		$tags = [];
