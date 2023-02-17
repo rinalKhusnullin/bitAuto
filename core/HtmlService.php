@@ -47,6 +47,15 @@ class HtmlService
 				}
 				$result .= '</select>';
 				return $result;
+			case 'role':
+				$result = "<select name='$key'>";
+				$result .= "<option>$value</option>";
+				foreach (ConfigurationController::getConfig('roles') as $status)
+				{
+					$result .= ($value !== $status) ? "<option>$status</option>" : '';
+				}
+				$result .= '</select>';
+				return $result;
 			case 'brandType':
 				$result = "<select name='$key'>";
 				$result .= "<option>$value</option>";
