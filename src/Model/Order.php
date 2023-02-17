@@ -4,8 +4,6 @@ namespace ES\Model;
 
 class Order
 {
-
-
 	public function __construct(
 		public string $id,
 		public string $fullName,
@@ -19,7 +17,6 @@ class Order
 		public string $status = 'processing',
 	)
 	{
-
 	}
 
 	public function equals(Order $o): bool
