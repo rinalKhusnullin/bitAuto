@@ -188,22 +188,6 @@ class AdminController extends BaseController
 
 	public function adminChangeItem() : void
 	{
-		// $values = []; Тут я пытался сделать что то универсальное, решил пока оставить так и решить с Product [Для начала]
-		// foreach ($_POST as $key => $value)
-		// {
-		// 	if ($key === 'item')
-		// 	{
-		// 		$className = "ES\\Model\\{$_POST['item']}"; 
-		// 	}
-		// 	else
-		// 	{
-		// 		$values[] = $value;
-		// 	}
-		// }
-
-		// $item = new $className(...$values);
-		// var_dump($item);
-		
 		if (array_key_exists('item', $_POST))
 		{
 			if ($_POST['item'] === 'Product')
