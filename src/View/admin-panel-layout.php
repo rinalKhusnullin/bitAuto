@@ -32,10 +32,7 @@
 </nav>
 <div class="wrapper">
 	<header class="header">
-		<label class="search">
-			<input type="search" placeholder="Поиск по названию">
-			<input type="button" value="Искать">
-		</label>
+
 		<label class="user-info">
 			<span>Пользователь: admin</span> <!-- Имя пользователя -->
 			<a href="/" target="_blank">На сайт</a>
