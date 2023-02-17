@@ -184,8 +184,6 @@ class AdminController extends BaseController
 
 	public function adminChangeItem() : void
 	{
-		echo "<pre>";
-		print_r($_POST);
 		// $values = []; Тут я пытался сделать что то универсальное, решил пока оставить так и решить с Product [Для начала]
 		// foreach ($_POST as $key => $value)
 		// {
@@ -220,8 +218,11 @@ class AdminController extends BaseController
 				);
 				if ((MySql::getInstance())->updateProduct($changedProduct))
 				{
-					echo "Товар изменен";
-				};
+					$this->render('admin-panel-layout',[
+						'title' => 'admin',
+						'content' => '<h1> Товар успешно изменен. </h1>',
+					]);
+				}
 			}
 			elseif ($_POST['item'] === 'User')
 			{
