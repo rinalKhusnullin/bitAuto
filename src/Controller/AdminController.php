@@ -113,7 +113,7 @@ class AdminController extends BaseController
 
 		if (array_key_exists('product', $_GET))
 		{
-			$content = $db->getProductByID($_GET['product']); //@Todo сделать эксейп
+			$content = $db->getProductByID($_GET['product']);
 			$columns = array_keys((array)$content);
 			$tableName = 'продукции';
 		}
