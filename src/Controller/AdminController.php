@@ -62,11 +62,6 @@ class AdminController extends BaseController
 			$pageCount = $db->getPageCount('','transmission');
 			$tableName = 'Коробка передач';
 		}
-		elseif (isset($_GET['config']))
-		{
-			$content[] = include ROOT . '/core/config/config.php';
-			$columns = array_keys($content[0]);
-		}
 		else
 		{
 			$columns = '';
@@ -152,11 +147,6 @@ class AdminController extends BaseController
 			$content = $db->getTagById($_GET['transmission'], 'Transmission');
 			$columns = array_keys((array)$content);
 			$tableName = 'коробок передач';
-		}
-		elseif (isset($_GET['config']))
-		{
-			$content = include ROOT . '/core/config/config.php';
-			$columns = array_keys($content);
 		}
 		else
 		{
