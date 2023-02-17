@@ -243,7 +243,22 @@ class AdminController extends BaseController
 			}
 			else if ($_POST['item'] === 'Order')
 			{
-				echo "Тут что то происходит с order";
+				$changedOrder = new \ES\Model\Order(
+					$_POST['id'],
+					$_POST['fullName'],
+					$_POST['phone'],
+					$_POST['mail'],
+					$_POST['address'],
+					$_POST['comment'],
+					$_POST['productId'],
+					$_POST['productPrice'],
+					$_POST['dateCreation'],
+					$_POST['status']
+				);
+				if ((MySql::getInstance())->updateOrder($changedOrder))
+				{
+					echo "Заказ изменен";
+				}
 			};
 
 		}
