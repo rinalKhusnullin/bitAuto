@@ -66,6 +66,7 @@ class AdminController extends BaseController
 		{
 			$columns = '';
 			$content = 'Выберите пункт меню';
+			$tableName = '';
 		}
 
 		if (empty($content))
