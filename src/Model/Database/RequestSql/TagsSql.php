@@ -55,4 +55,11 @@ trait TagsSql
 
 		return ObjectBuilder::buildTags($result, $tag)[0];
 	}
+
+	function getIdByTagValue(string $tag, string $value) : int
+	{
+		$query = "SELECT ID FROM $tag WHERE $tag = '$value'";
+		$result = mysqli_query($this->connection, $query);
+		return mysqli_fetch_row($result)[0];
+	}
 }

@@ -4,10 +4,11 @@ namespace ES\Model\Database\RequestSql;
 
 use ES\config\ConfigurationController;
 use ES\Model\Database\ObjectBuilder;
+use ES\Model\User;
 
 trait UtilitySql
 {
-    function getUsers()
+    function getUsers() : array
 	{
 		$query = "SELECT ID, PASS, LOGIN, MAIL, ROLE, FIRST_NAME, LAST_NAME 
 					FROM user";
@@ -15,6 +16,17 @@ trait UtilitySql
 		$result = mysqli_query($this->connection, $query);
 
 		return ObjectBuilder::buildUsers($result);
+	}
+
+	function getUserById($id) : ?User 
+	{
+		$id = mysqli_real_escape_string($this->connection, $id);
+		$query = "SELECT ID, PASS, LOGIN, MAIL, ROLE, FIRST_NAME, LAST_NAME 
+					FROM user WHERE ID = $id";
+
+		$result = mysqli_query($this->connection, $query);
+
+		return ObjectBuilder::buildUsers($result)[0];
 	}
 
     function getPageCount(string $isActive = 'active', string $table = 'product')
