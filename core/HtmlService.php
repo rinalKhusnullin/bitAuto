@@ -2,6 +2,7 @@
 
 namespace ES;
 
+use ES\config\ConfigurationController;
 use ES\Model\Database\MySql;
 
 class HtmlService
@@ -19,6 +20,8 @@ class HtmlService
 			case 'id':
 				return "<input class='admin-input' name='$key' type='hidden' value='$value'>$value";
 
+			case 'productId':
+			case 'productPrice':
 			case 'price':
 			case 'title':
 			case 'value':
@@ -27,7 +30,6 @@ class HtmlService
 			case 'mail':
 			case 'address':
 			case 'comment':
-			case 'status':
 				return "<input name='$key' class='admin-input' type='text' value='$value'>";
 
 			case 'isActive':
@@ -36,7 +38,15 @@ class HtmlService
 
 				return "<select name='$key'> $isActive </select>";
 
-
+			case 'status':
+				$result = "<select name='$key'>";
+				$result .= "<option>$value</option>";
+				foreach (ConfigurationController::getConfig('statuses') as $status)
+				{
+					$result .= ($value !== $status) ? "<option>$status</option>" : '';
+				}
+				$result .= '</select>';
+				return $result;
 			case 'brandType':
 				$result = "<select name='$key'>";
 				$result .= "<option>$value</option>";
@@ -70,11 +80,10 @@ class HtmlService
 			case 'fullDesc':
 				return "<textarea rows = '10' cols='45' name='$key'>$value</textarea>";
 
+			case 'dateUpdate':
 			case 'dateCreation':
 				return "<input type='hidden' class='admin-input' name='$key' type='text' value='$value'>$value";
 
-			case 'dateUpdate':
-				return "<input type='hidden' class='admin-input' name='$key' type='text' value='$value'>$value";
 			default:
 				return $value;
 		}

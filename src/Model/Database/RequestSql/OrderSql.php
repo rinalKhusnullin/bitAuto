@@ -44,4 +44,24 @@ trait OrderSql
 		$result = mysqli_query($this->connection, $query);
 		return ObjectBuilder::buildOrders(mysqli_fetch_all($result))[0];
 	}
+
+	function updateOrder(Order $order)
+	{
+		foreach ($order as $key => $value)
+		{
+			$order->$key = mysqli_real_escape_string($this->connection, $value);
+		}
+		$query = "UPDATE `order`
+				SET PRODUCT_ID = $order->productId,
+					PRODUCT_PRICE = $order->productPrice,
+					`STATUS` = '$order->status',
+					DATE_CREATION = '$order->dateCreation',
+					CUSTOMER_NAME = '$order->fullName',
+					CUSTOMER_PHONE = '$order->phone',
+					CUSTOMER_MAIL = '$order->mail',
+					COMMENT = '$order->comment',
+					CUSTOMER_ADDRESS = '$order->address'
+				WHERE ID = $order->id";
+		return mysqli_query($this->connection, $query);
+	}
 }

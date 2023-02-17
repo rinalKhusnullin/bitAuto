@@ -28,15 +28,11 @@
 		<li class="nav_li"><a href="/admin/?brands">Бренд</a></li>
 		<li class="nav_li"><a href="/admin/?carcases">Кузов</a></li>
 		<li class="nav_li"><a href="/admin/?transmissions">КПП</a></li>
-		<li class="nav_li"><a href="/admin/?config">Конфигурация</a></li>
 	</ul>
 </nav>
 <div class="wrapper">
 	<header class="header">
-		<label class="search">
-			<input type="search" placeholder="Поиск по названию">
-			<input type="button" value="Искать">
-		</label>
+
 		<label class="user-info">
 			<span>Пользователь: admin</span> <!-- Имя пользователя -->
 			<a href="/" target="_blank">На сайт</a>

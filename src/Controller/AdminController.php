@@ -25,42 +25,42 @@ class AdminController extends BaseController
 			$content = $db->getProducts($indexPage, 'all');
 			$columns = (!empty($content)) ? array_keys((array)$content[0]) : '';
 			$pageCount = $db->getPageCount('all');
+			$tableName = 'Продукция';
 		}
 		elseif(isset($_GET['orders']))
 		{
 			$content = $db->getOrders();
 			$columns = (!empty($content)) ? array_keys((array)$content[0]) : '';
 			$pageCount = $db->getPageCount('',"`order`");
-			
+			$tableName = 'Заказы';
 		}
 		elseif (isset($_GET['users']))
 		{
 			$content = $db->getUsers();
 			$columns = (!empty($content)) ? array_keys((array)$content[0]) : '';
 			$pageCount = $db->getPageCount('','user');
+			$tableName = 'Пользователи';
 		}
 		elseif (isset($_GET['brands']))
 		{
 			$content = $db->getTags('Brand');
 			$columns = (!empty($content)) ? array_keys((array)$content[0]) : '';
 			$pageCount = $db->getPageCount('','brand');
+			$tableName = 'Бренды';
 		}
 		elseif (isset($_GET['carcases']))
 		{
 			$content = $db->getTags('Carcase');
 			$columns = (!empty($content)) ? array_keys((array)$content[0]) : '';
 			$pageCount = $db->getPageCount('','carcase');
+			$tableName = 'Кузов';
 		}
 		elseif (isset($_GET['transmissions']))
 		{
 			$content = $db->getTags('Transmission');
 			$columns = (!empty($content)) ? array_keys((array)$content[0]) : '';
 			$pageCount = $db->getPageCount('','transmission');
-		}
-		elseif (isset($_GET['config']))
-		{
-			$content[] = include ROOT . '/core/config/config.php';
-			$columns = array_keys($content[0]);
+			$tableName = 'Коробка передач';
 		}
 		else
 		{
@@ -73,6 +73,7 @@ class AdminController extends BaseController
 			$content = "Тут ничего нет";
 			$columns = '';
 			$pageCount = 0;
+			$tableName = '';
 		}
 
 
@@ -80,6 +81,7 @@ class AdminController extends BaseController
 			'title' => 'admin',
 			'content' => \ES\Controller\TemplateEngine::view('pages/admin-table' ,
 				[
+					'tableName' => $tableName,
 					'columns' => $columns ,
 					'pagination' => TemplateEngine::view('components/pagination', [
 						'link' => '/admin/?',
@@ -113,48 +115,51 @@ class AdminController extends BaseController
 		{
 			$content = $db->getProductByID($_GET['product']); //@Todo сделать эксейп
 			$columns = array_keys((array)$content);
+			$tableName = 'продукции';
 		}
 		elseif(array_key_exists('order', $_GET))
 		{
 			$content = $db->getOrderById($_GET['order']);
 			$columns = array_keys((array)$content);
+			$tableName = 'заказов';
 		}
 		elseif (array_key_exists('user', $_GET))
 		{
 			$content = $db->getUserById($_GET['user']);
 			$columns = array_keys((array)$content);
+			$tableName = 'пользователей';
 		}
 		elseif (array_key_exists('brand', $_GET))
 		{
 
 			$content = $db->getTagById($_GET['brand'], 'Brand');
 			$columns = array_keys((array)$content);
+			$tableName = 'брендов';
 		}
 		elseif (array_key_exists('carcase', $_GET))
 		{
 			$content = $db->getTagById($_GET['carcase'], 'Carcase');
 			$columns = array_keys((array)$content);
+			$tableName = 'кузовов';
 		}
 		elseif (array_key_exists('transmission', $_GET))
 		{
 			$content = $db->getTagById($_GET['transmission'], 'Transmission');
 			$columns = array_keys((array)$content);
-		}
-		elseif (isset($_GET['config']))
-		{
-			$content = include ROOT . '/core/config/config.php';
-			$columns = array_keys($content);
+			$tableName = 'коробок передач';
 		}
 		else
 		{
 			$columns = '';
 			$content = 'Выберите пункт меню';
+			$tableName = '';
 		}
 
 		$this->render('admin-panel-layout',[
 			'title' => 'admin',
 			'content' => \ES\Controller\TemplateEngine::view('pages/admin-edit' ,
 				[
+					'tableName' => $tableName,
 					'columns' => $columns ,
 					'content' => TemplateEngine::view('components/admin-edit-rows',
 						[
@@ -179,8 +184,6 @@ class AdminController extends BaseController
 
 	public function adminChangeItem() : void
 	{
-		echo "<pre>";
-		print_r($_POST);
 		// $values = []; Тут я пытался сделать что то универсальное, решил пока оставить так и решить с Product [Для начала]
 		// foreach ($_POST as $key => $value)
 		// {
@@ -215,8 +218,11 @@ class AdminController extends BaseController
 				);
 				if ((MySql::getInstance())->updateProduct($changedProduct))
 				{
-					echo "Товар изменен";
-				};
+					$this->render('admin-panel-layout',[
+						'title' => 'admin',
+						'content' => '<h1> Товар успешно изменен. </h1>',
+					]);
+				}
 			}
 			elseif ($_POST['item'] === 'User')
 			{
@@ -228,7 +234,22 @@ class AdminController extends BaseController
 			}
 			else if ($_POST['item'] === 'Order')
 			{
-				echo "Тут что то происходит с order";
+				$changedOrder = new \ES\Model\Order(
+					$_POST['id'],
+					$_POST['fullName'],
+					$_POST['phone'],
+					$_POST['mail'],
+					$_POST['address'],
+					$_POST['comment'],
+					$_POST['productId'],
+					$_POST['productPrice'],
+					$_POST['dateCreation'],
+					$_POST['status']
+				);
+				if ((MySql::getInstance())->updateOrder($changedOrder))
+				{
+					echo "Заказ изменен";
+				}
 			};
 
 		}

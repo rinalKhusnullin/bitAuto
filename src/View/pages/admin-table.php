@@ -1,5 +1,6 @@
 <?php
 /**
+ * @var $tableName
  * @var array $columns
  * @var $content
  * @var $pagination
@@ -8,7 +9,7 @@ if(is_array($columns))
 {
 ?>
 <table>
-	<caption><h1> Редактирование </h1></caption>
+	<caption><h1> <?= $tableName ?></h1></caption>
 	<tr>
 		<?php foreach ($columns as $column) {?>
 		<th><?= $column?></th>

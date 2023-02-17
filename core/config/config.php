@@ -6,4 +6,11 @@ return [
 	'CountProductsOnPage' => 10,
 	'PAGE_MAIN' => '/',
 	'PAGE_MAIN_TITLE' => 'Главная',
+	'statuses' => [
+		'processing',
+		'accepted',
+		'packed',
+		'sent',
+		'delivered	',
+	],
 ];
