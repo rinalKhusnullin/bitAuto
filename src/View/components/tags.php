@@ -1,7 +1,10 @@
 <?php
-    $brands = ['Mazda', 'Toyota', 'VolksWagen', 'Nissan', 'Lexus', 'Audi'];
-    $carceses = ['Хэтчбек', 'Кроссовер', 'Седан', 'Купе', 'Минивэн', 'Универсал', 'Пикап'];
-    $transmissions = ['АКПП', 'МКПП', 'Вариаторы'];
+	/**
+	 * @var array $tags
+	 */
+$brands = $tags['brand'];
+$carceses = $tags['carcase'];
+$transmissions = $tags['transmission'];
 ?>
 
 

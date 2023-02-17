@@ -2,7 +2,10 @@
 /**
  * @var string $title
  * @var $content
+ * @var array $tags
+ * @var string $role
  */
+
 ?>
 <!DOCTYPE html>
 <html lang="ru">
@@ -13,6 +16,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="stylesheet" href="/styles/reset.css">
 	<link rel="stylesheet" href="/styles/style.css">
+	<link rel="stylesheet" href="/styles/adaptive.css">
 	<link rel="shortcut icon" href="/images/header/logo.ico" type="image/x-icon">
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -56,10 +60,19 @@
 					8-800-250-18-60
 				</p>
 			</div>
+			<?php if($role==='admin') : ?>
+			<a href="/admin/" class="header__admin">Admin</a>
+			<?php endif ?>
 		</div>
 	</div>
 	<div class="header__side-header">
 		<div class="container">
+			<div class="mb__header-side">
+				<a href="/" class="mb__header-logo">
+					<img src="/images/header/logo.svg" alt="">
+				</a>
+				
+			</div>
 			<ul class="header__menu">
 				<li class="header__menu-item"><a href="/" class="header__menu-link">Каталог</a>
 				</li> <!--link to catalog -->
@@ -67,7 +80,7 @@
 					<div class="header__dropdown-menu">
 						<a href="##" id="dropdown-btn" class="header__menu-link dropdown-btn undroped" onclick="dropdown(); return false">Категории</a>
 						<div class="header__dropdown-tags di" id="dropdown-content">
-							<?= \ES\Controller\TemplateEngine::view('components/tags', []) ?>
+							<?= \ES\Controller\TemplateEngine::view('components/tags', ['tags' => $tags]) ?>
 						</div>
 					</div>
 				</li>
@@ -75,6 +88,27 @@
 				<li class="header__menu-item"><a href="/contacts/" class="header__menu-link">Контакты</a> 
 				</li> 
 			</ul>
+			<a id="hamburger-btn" class="mb__hamburger-icon" onclick="ShowHamburger(); return false;">
+				Меню
+			</a>
+			<div id="hamburger-content" class="mb__hamburger">
+				<div class="hamburger__wrapper">
+					<ul class="hamburger__items">
+						<li class="hamburger__item">
+							<a href="/" class="hamburger__link">Каталог</a>
+						</li>
+						<li class="hamburger__item">
+							<a href="##" id="mb_dropdown" class="header__menu-link dropdown-btn undroped" onclick="mb_dropdown(); return false">Категории</a>
+							<div class="header__dropdown-tags di" id="mb_dropdown-content">
+								<?= \ES\Controller\TemplateEngine::view('components/tags', ['tags' => $tags]) ?>
+							</div>
+						</li>
+						<li class="hamburger__item">
+							<a href="/contacts/" class="hamburger__link">Контакты</a>
+						</li>
+					</ul>
+				</div>
+			</div>
 		</div>
 	</div>
 </header>
@@ -173,6 +207,28 @@
 </footer>
 
 <script src="/scripts/dropdown.js"></script>
+<script>
+	function ShowHamburger(){
+		document.getElementById('hamburger-content').classList.toggle('visible');
+	}
+
+	function mb_dropdown(){
+		document.getElementById("mb_dropdown-content").classList.toggle("visible");
+
+    if (document.getElementById("mb_dropdown").classList.contains("droped")) 
+    {
+        document.getElementById("mb_dropdown").classList.remove('droped');
+        document.getElementById("mb_dropdown").classList.add('undroped');
+    }
+    else if (document.getElementById("mb_dropdown").classList.contains("undroped")) 
+    {
+        document.getElementById("mb_dropdown").classList.remove('undroped');
+        document.getElementById("mb_dropdown").classList.add('droped');
+    } 
+}
+
+
+</script>
 </body>
 
 </html>

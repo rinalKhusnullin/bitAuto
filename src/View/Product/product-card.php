@@ -21,7 +21,7 @@
 		<ul class="product-card__chr-list">
 			<li class="product-card__chr">
 				<div class="product-card__chr-title">Марка</div>
-				<div class="product-card__chr-value"><?= $brand ?></div>
+				<div class="product-card__chr-value"><?= $brandType ?></div>
 			</li>
 
 			<li class="product-card__chr">
@@ -31,7 +31,7 @@
 
 			<li class="product-card__chr">
 				<div class="product-card__chr-title">КПП</div>
-				<div class="product-card__chr-value"><?= $transmission ?></div>
+				<div class="product-card__chr-value"><?= $transmissionType ?></div>
 			</li>
 			<li class="product-card__chr">
 				<div class="product-card__chr-title">Цена</div>

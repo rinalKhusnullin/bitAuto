@@ -2,10 +2,15 @@
 
 return [
 	'TITLE' => 'BitAuto',
+	'TITLE_LOG_IN' => 'Log In',
 	'CountProductsOnPage' => 10,
-	'DB_HOST' => 'localhost',
-	'DB_NAME' => 'matavest_dbeshop',
-	'DB_USER' => 'matavest_dbeshop',
-	'DB_PASSWORD' => 'dbeshop_kdkb2',
-	'DB_TABLE_MIGRATION' => 'migration',
+	'PAGE_MAIN' => '/',
+	'PAGE_MAIN_TITLE' => 'Главная',
+	'statuses' => [
+		'processing',
+		'accepted',
+		'packed',
+		'sent',
+		'delivered	',
+	],
 ];

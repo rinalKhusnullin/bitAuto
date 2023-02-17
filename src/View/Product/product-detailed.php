@@ -2,7 +2,7 @@
 /**
  * @var int $id
  * @var int $price
- * @var string $brand
+ * @var string $brandType
  * @var string $title
  * @var string $carcaseType
  * @var string $transmission
@@ -22,7 +22,7 @@
                     <li class="product-detailed__characteristic">
                         <div class="product-detailed__name">Марка</div>
                         <div class="product-detailed__underline"></div>
-                        <div class="product-detailed__value"><?= $brand ?></div>
+                        <div class="product-detailed__value"><?= $brandType ?></div>
                     </li>
                     <li class="product-detailed__characteristic">
                         <div class="product-detailed__name">Тип кузова</div>
@@ -32,7 +32,7 @@
                     <li class="product-detailed__characteristic">
                         <div class="product-detailed__name">КПП</div>
                         <div class="product-detailed__underline"></div>
-                        <div class="product-detailed__value"> <?= $transmission ?> </div>
+                        <div class="product-detailed__value"> <?= $transmissionType ?> </div>
                     </li>
                 </ul>
             </div>
@@ -68,10 +68,8 @@
                 </div>
             </div>
             <form action="" method="post"> <!-- need to add handler -->
-                <div class="poppup__subtitle">Фамилия*</div>
-                <input type="text" class="poppup__input" name="userLastname" required>
-                <div class="poppup__subtitle">Имя*</div>
-                <input type="text" class="poppup__input" name="userName" required>
+                <div class="poppup__subtitle">ФИО*</div>
+                <input type="text" class="poppup__input" name="userFullname" required>
                 <div class="poppup__subtitle">Телефон*</div>
                 <input type="tel" class="poppup__input" name="userTel" required>
                 <div class="poppup__subtitle">Email*</div>

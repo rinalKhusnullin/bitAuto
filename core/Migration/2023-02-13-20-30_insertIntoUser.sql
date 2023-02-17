@@ -1,0 +1,20 @@
+insert into user
+(
+	id,
+	pass,
+	login,
+	mail,
+	role,
+	first_name,
+	last_name
+)
+values
+(
+	1,
+	'$2y$10$dCDKpBjOn3zAQhIv37hsCengsojjDD0MUankdmO7XsfKxBVmwEaIK',
+	'admin',
+	'dev@dev.bx',
+	'admin',
+	'Komand',
+	'2'
+);

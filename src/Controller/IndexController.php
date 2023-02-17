@@ -2,47 +2,57 @@
 
 namespace ES\Controller;
 
-use ES\Model\sqlDAO\sqlDB;
+use ES\config\ConfigurationController;
+use ES\Model\Database\MySql;
 
 class IndexController extends BaseController
 {
 	public function indexAction(): void
 	{
+
+
 		$indexPage = (isset($_GET['page'])) ? (int)$_GET['page'] : 1;
-		$db = new sqlDB();
+		$db = MySql::getInstance();
+		$tags = $db->getTagList();
 
 		if (isset($_GET['brand']) || isset($_GET['transmission']) || isset($_GET['carcase'])) //Если пользователь выбрал категории
 		{
-			$brand = isset($_GET['brand']) ? $_GET['brand'] : null; 
+			$brand = isset($_GET['brand']) ? $_GET['brand'] : null;
 			$carcase = isset($_GET['carcase']) ? $_GET['carcase'] : null;
 			$transmission =  isset($_GET['transmission']) ? $_GET['transmission'] : null;
 
 			// Возвращает массив из товаров и количества позиций
-			[$products, $pageCount] = $db->getDataByTeg($brand, $carcase, $transmission, $indexPage);
+			$products = $db->getProductsByTags($brand, $carcase, $transmission, $indexPage, 'active');
+			$pageCount = $db->getPageCountByTags($brand, $carcase, $transmission, 'active');
 		}
 		else if (isset($_GET['search_query']))
 		{
 			$searchQuery = $_GET['search_query'];
 
-			//Ищем по поисковой строке
-			[$products, $pageCount] = $db->getDataBySQuery($searchQuery, $indexPage); 
+			$products = $db->getProductsByQuery($searchQuery, $indexPage, 'active');
+			$pageCount = $db->getPageCountByQuery($searchQuery, 'active');
 		}
 		else
 		{
-			// Иначе получаем все товары
-			[$products, $pageCount] = [$db->getData(true, $indexPage), $db->getPageCount()];
+			$products = $db->getProducts($indexPage, 'active');
+			$pageCount = $db->getPageCount('active');
 		}
-
 		if (empty($products))
 		{
 			// По хорошему тут нужно вывести что товары не найдены
 		}
+		
+		session_start();
+		$role = array_key_exists('USER' , $_SESSION)? $_SESSION['USER']->role : 'user';
 
 		$this->render('layout', [
 			'title' => ConfigurationController::getConfig('TITLE'),
+			'tags' => $tags,
+			'role' => $role,
 			'content' => TemplateEngine::view('pages/index', [
 				'products' => $products,
 				'pagination' => TemplateEngine::view('components/pagination', [
+					'link' => '/?',
 					'currentPage' => $indexPage,
 					'countPage' => $pageCount,
 				]),

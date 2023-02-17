@@ -6,8 +6,6 @@ use ES\Exceptions\ConfigurationException;
 use ES\Exceptions\MySqlException;
 use ES\Exceptions\PathException;
 use ES\Routing\Router;
-use ES\Controller\TemplateEngine;
-use \ES\controller\ConfigurationController;
 
 class Application
 {
