@@ -136,7 +136,7 @@ trait ProductSql
 		return ObjectBuilder::buildProducts(mysqli_fetch_all($result));
 	}
 
-	function UpdateProduct(Product $product)
+	function updateProduct(Product $product)
 	{
 		foreach ($product as $key => $value)
 		{
