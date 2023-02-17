@@ -23,37 +23,38 @@ class AdminController extends BaseController
 		if (isset($_GET['products']))
 		{
 			$content = $db->getProducts($indexPage, 'all');
-			$columns = array_keys((array)$content[0]);
+			$columns = (!empty($content)) ? array_keys((array)$content[0]) : '';
 			$pageCount = $db->getPageCount('all');
 		}
 		elseif(isset($_GET['orders']))
 		{
 			$content = $db->getOrders();
-			$columns = array_keys((array)$content[0]);
+			$columns = (!empty($content)) ? array_keys((array)$content[0]) : '';
 			$pageCount = $db->getPageCount('',"`order`");
+			
 		}
 		elseif (isset($_GET['users']))
 		{
 			$content = $db->getUsers();
-			$columns = array_keys((array)$content[0]);
+			$columns = (!empty($content)) ? array_keys((array)$content[0]) : '';
 			$pageCount = $db->getPageCount('','user');
 		}
 		elseif (isset($_GET['brands']))
 		{
 			$content = $db->getTags('Brand');
-			$columns = array_keys((array)$content[0]);
+			$columns = (!empty($content)) ? array_keys((array)$content[0]) : '';
 			$pageCount = $db->getPageCount('','brand');
 		}
 		elseif (isset($_GET['carcases']))
 		{
 			$content = $db->getTags('Carcase');
-			$columns = array_keys((array)$content[0]);
+			$columns = (!empty($content)) ? array_keys((array)$content[0]) : '';
 			$pageCount = $db->getPageCount('','carcase');
 		}
 		elseif (isset($_GET['transmissions']))
 		{
 			$content = $db->getTags('Transmission');
-			$columns = array_keys((array)$content[0]);
+			$columns = (!empty($content)) ? array_keys((array)$content[0]) : '';
 			$pageCount = $db->getPageCount('','transmission');
 		}
 		elseif (isset($_GET['config']))
@@ -67,18 +68,25 @@ class AdminController extends BaseController
 			$content = 'Выберите пункт меню';
 		}
 
+		if (empty($content))
+		{
+			$content = "Тут ничего нет";
+			$columns = '';
+			$pageCount = 0;
+		}
 
-		$this->render('adminPanelLayout',[
+
+		$this->render('admin-panel-layout',[
 			'title' => 'admin',
-			'content' => \ES\Controller\TemplateEngine::view('pages/adminTable' ,
+			'content' => \ES\Controller\TemplateEngine::view('pages/admin-table' ,
 				[
 					'columns' => $columns ,
-					'pagination' => TemplateEngine::view('components/Pagination', [
+					'pagination' => TemplateEngine::view('components/pagination', [
 						'link' => '/admin/?',
 						'currentPage' => $indexPage,
 						'countPage' => $pageCount,
 					]),
-					'content' => TemplateEngine::view('components/adminTableRows',
+					'content' => TemplateEngine::view('components/admin-table-rows',
 						[
 							'content' => $content,
 
@@ -143,12 +151,12 @@ class AdminController extends BaseController
 			$content = 'Выберите пункт меню';
 		}
 
-		$this->render('adminPanelLayout',[
+		$this->render('admin-panel-layout',[
 			'title' => 'admin',
-			'content' => \ES\Controller\TemplateEngine::view('pages/adminEdit' ,
+			'content' => \ES\Controller\TemplateEngine::view('pages/admin-edit' ,
 				[
 					'columns' => $columns ,
-					'content' => TemplateEngine::view('components/adminEditRows',
+					'content' => TemplateEngine::view('components/admin-edit-rows',
 						[
 							'content' => $content,
 							'tegs' => $tegs,
