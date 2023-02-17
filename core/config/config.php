@@ -13,4 +13,9 @@ return [
 		'sent',
 		'delivered	',
 	],
+	'roles' => [
+		'admin',
+		'user',
+		'redactor',
+	],
 ];
