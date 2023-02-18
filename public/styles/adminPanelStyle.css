@@ -142,6 +142,7 @@ NAV MENU
 	position: fixed;
 	top: 0;
 	left: 0;
+	box-shadow: 0 0 15px 0px rgba(0, 0, 0, .42);
 }
 
 .nav > p {
@@ -151,6 +152,10 @@ NAV MENU
 	align-items: center;
 	font-size: 30px;
 	color: #fff;
+	box-sizing: border-box;
+	padding: 10px;
+	text-align: center;
+	border-bottom: 1px solid #000;
 }
 
 .nav_li,.nav_li-active {

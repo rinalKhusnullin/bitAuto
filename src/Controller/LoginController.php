@@ -11,6 +11,12 @@ class LoginController extends BaseController
 {
 	public function getLoginAction(): void
 	{
+		session_start();
+		if (isset($_SESSION['USER']))
+		{
+			header('Location: /admin/?products');
+		}
+
 		$tags = MySql::getInstance()->getTagList();
 
 		$errors = [];
@@ -49,7 +55,6 @@ class LoginController extends BaseController
 				}
 			}
 		}
-		session_start();
 		$role = array_key_exists('USER' , $_SESSION)? $_SESSION['USER']->role : 'user';
 
 		$this->render('layout', [

@@ -18,6 +18,7 @@ class AdminController extends BaseController
 		$indexPage = (isset($_GET['page'])) ? (int)$_GET['page'] : 1;
 		$db = MySql::getInstance();
 		$deleteMessage = [];
+		$tableName = '';
 
 		$pageCount = 0;
 
