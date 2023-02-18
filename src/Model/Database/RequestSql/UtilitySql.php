@@ -136,9 +136,17 @@ trait UtilitySql
 
 	function deleteItem(string $name, int $id): void
 	{
-		$query = "DELETE FROM $name WHERE id = $id";
-		mysqli_query($this->connection, $query);
-		$success = "Товар id = {$id} успешно уданел";
-		header("Location: /admin/?{$name}s");
+		session_start();
+		if (isset($_SESSION['USER']))
+		{
+			$query = "DELETE FROM $name WHERE id = $id";
+			mysqli_query($this->connection, $query);
+			$success = "Товар id = {$id} успешно уданел";
+			header("Location: /admin/?{$name}s");
+		}
+		else
+		{
+			header('Location: /login/');
+		}
 	}
 }
