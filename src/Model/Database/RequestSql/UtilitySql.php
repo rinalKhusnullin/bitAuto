@@ -134,15 +134,17 @@ trait UtilitySql
 		return ceil($row[0] / $countProductOnPage);
     }
 
-	function deleteItem(string $name, int $id): void
+	function deleteItem(string $name, int $id)
 	{
 		session_start();
 		if (isset($_SESSION['USER']))
 		{
-			$query = "DELETE FROM $name WHERE id = $id";
+			$tableName = mysqli_real_escape_string($this->connection, $name);
+			$idItem = mysqli_real_escape_string($this->connection, $id);
+			$query = "DELETE FROM $tableName WHERE id = $idItem";
+
 			mysqli_query($this->connection, $query);
-			$success = "Товар id = {$id} успешно уданел";
-			header("Location: /admin/?{$name}s");
+			header("Location: /admin/?{$name}s&delete={$id}");
 		}
 		else
 		{
