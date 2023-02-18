@@ -4,6 +4,7 @@ BODY
 
 */
 body {
+	min-height: 100vh;
 	display: flex;
 	flex-direction: row;
 }
@@ -211,14 +212,15 @@ table {
 th {
 	height: 40px;
 	border: 2px solid grey;
-
+	padding: 5px 5px;
+	vertical-align: middle;
 }
 /* границы ячеек тела таблицы */
 td {
 	height: 30px;
 	border: 2px solid grey;
-
-
+	padding: 5px 5px;
+	vertical-align: middle;
 }
 .td__change, .td__delete {
 	width: 80px;
