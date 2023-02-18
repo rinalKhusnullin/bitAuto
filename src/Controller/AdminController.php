@@ -17,6 +17,7 @@ class AdminController extends BaseController
 
 		$indexPage = (isset($_GET['page'])) ? (int)$_GET['page'] : 1;
 		$db = MySql::getInstance();
+		$deleteMessage = [];
 
 		$pageCount = 0;
 
@@ -76,6 +77,10 @@ class AdminController extends BaseController
 			$tableName = '';
 		}
 
+		if (isset($_GET['delete']))
+		{
+			$deleteMessage[] = "Элеиент id = {$_GET['delete']} успешно уданел";
+		}
 
 		$this->render('admin-panel-layout',[
 			'title' => 'admin',
@@ -83,6 +88,7 @@ class AdminController extends BaseController
 				[
 					'tableName' => $tableName,
 					'columns' => $columns ,
+					'deleteMessage' => $deleteMessage,
 					'pagination' => TemplateEngine::view('components/pagination', [
 						'link' => '/admin/?',
 						'currentPage' => $indexPage,
@@ -91,7 +97,6 @@ class AdminController extends BaseController
 					'content' => TemplateEngine::view('components/admin-table-rows',
 						[
 							'content' => $content,
-
 						])
 				]
 			)
@@ -171,15 +176,12 @@ class AdminController extends BaseController
 		]);
 	}
 
-
-
 	public function adminDeleteAction () :void
 	{
 		$table = array_key_first($_GET);
 		$id = $_GET[$table];
 		$db = MySql::getInstance();
 		$db->deleteItem($table, $id);
-
 	}
 
 	public function adminChangeItem() : void

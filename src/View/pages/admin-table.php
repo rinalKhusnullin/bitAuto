@@ -4,10 +4,17 @@
  * @var array $columns
  * @var $content
  * @var $pagination
+ * @var string $deleteMessage
  */
+
 if(is_array($columns))
 {
 ?>
+<?php if($deleteMessage):?>
+	<?php foreach ($deleteMessage as $message) :?>
+		<div><?= $message?></div>
+	<?php endforeach; ?>
+<?php endif; ?>
 <table>
 	<caption><h1> <?= $tableName ?></h1></caption>
 	<tr>
