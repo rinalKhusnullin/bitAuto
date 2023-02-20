@@ -33,7 +33,7 @@ class HtmlService
 				return "<input name='$key' class='admin-input' type='text' value='$value'>";
 
 			case 'isActive':
-				$isActive = ($value === true) ? "<option selected value='true'>Да</option><option value='false'>Нет</option>" 
+				$isActive = ($value === true) ? "<option selected value='true'>Да</option><option value='false'>Нет</option>"
 				:"<option value='true'>Да</option><option selected value='false'>Нет</option>";
 
 				return "<select name='$key'> $isActive </select>";
@@ -87,5 +87,21 @@ class HtmlService
 			default:
 				return $value;
 		}
+	}
+
+	public static function getPathImagesById(int $id):array
+	{
+		$path = ROOT . "/public/tmp-autoimg/$id";
+		$files = scandir($path);
+		$images = [];
+		foreach ($files as $file)
+		{
+			if(!preg_match('~^[0-9A-Za-z].[A-Za-z]+$~', $file))
+			{
+				continue;
+			}
+			$images[] = $file;
+		}
+		return $images;
 	}
 }
