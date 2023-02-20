@@ -31,7 +31,8 @@ class HtmlService
 			case 'address':
 			case 'comment':
 				return "<input name='$key' class='admin-input' type='text' value='$value'>";
-
+			case 'password':
+				return "<a href='#'>Изменить<a/>";
 			case 'isActive':
 				$isActive = ($value === true) ? "<option selected value='true'>Да</option><option value='false'>Нет</option>" 
 				:"<option value='true'>Да</option><option selected value='false'>Нет</option>";
