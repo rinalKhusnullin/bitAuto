@@ -25,8 +25,6 @@ class LoginController extends BaseController
 		{
 			$login = $_POST['login'];
 			$password = $_POST['password'];
-			$hash = password_hash('111', PASSWORD_DEFAULT);
-
 			$error = 'Не верный лониг или пароль';
 
 		//	Индетификация
@@ -39,7 +37,7 @@ class LoginController extends BaseController
 			else
 			{
 			//	аутентификация
-				$isPasswordCorrect = password_verify($password, $hash);
+				$isPasswordCorrect = password_verify($password, $user->password);
 
 				if (!$isPasswordCorrect)
 				{
