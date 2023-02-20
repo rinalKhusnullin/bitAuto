@@ -10,3 +10,4 @@ phpunit.xml
 core/config/config.local.php
 core/public/.htaccess
 /var/logs/errorLog.txt
+var/logs/errorLog.txt

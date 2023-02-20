@@ -28,4 +28,4 @@ values (1, true, 1, 'eshop/public/tmp-autoimg'),
        (27, true, 27, 'eshop/public/tmp-autoimg'),
        (28, true, 28, 'eshop/public/tmp-autoimg'),
        (29, true, 29, 'eshop/public/tmp-autoimg'),
-       (30, true, 20, 'eshop/public/tmp-autoimg');
+       (30, true, 30, 'eshop/public/tmp-autoimg');
