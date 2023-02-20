@@ -3,7 +3,8 @@
 namespace ES\Controller;
 
 use ES\Model\Database\MySql;
-
+use ES\Model\Order;
+use ES\Model\Product;
 
 class AdminController extends BaseController
 {
@@ -108,53 +109,53 @@ class AdminController extends BaseController
 			header('Location: /login/');
 		}
 
-		$indexPage = (isset($_GET['page'])) ? (int)$_GET['page'] : 1;
 		$db = MySql::getInstance();
 		$tegs = $db->getTagList();
 
 		if (array_key_exists('product', $_GET))
 		{
 			$content = $db->getProductByID($_GET['product']);
-			$columns = array_keys((array)$content);
 			$tableName = 'продукции';
+			$className = 'Product';
 		}
 		elseif(array_key_exists('order', $_GET))
 		{
 			$content = $db->getOrderById($_GET['order']);
-			$columns = array_keys((array)$content);
 			$tableName = 'заказов';
+			$className = 'Order';
 		}
 		elseif (array_key_exists('user', $_GET))
 		{
 			$content = $db->getUserById($_GET['user']);
-			$columns = array_keys((array)$content);
 			$tableName = 'пользователей';
+			$className = 'User';
 		}
 		elseif (array_key_exists('brand', $_GET))
 		{
 
 			$content = $db->getTagById($_GET['brand'], 'Brand');
-			$columns = array_keys((array)$content);
 			$tableName = 'брендов';
+			$className = 'Brand';
 		}
 		elseif (array_key_exists('carcase', $_GET))
 		{
 			$content = $db->getTagById($_GET['carcase'], 'Carcase');
-			$columns = array_keys((array)$content);
 			$tableName = 'кузовов';
+			$className = 'Carcase';
 		}
 		elseif (array_key_exists('transmission', $_GET))
 		{
 			$content = $db->getTagById($_GET['transmission'], 'Transmission');
-			$columns = array_keys((array)$content);
 			$tableName = 'коробок передач';
+			$className = 'Transmission';
 		}
 		else
 		{
-			$columns = '';
 			$content = 'Выберите пункт меню';
+			$className = '';
 			$tableName = '';
 		}
+		$columns = array_keys((array)$content) ?: '' ;
 
 		$this->render('admin-panel-layout',[
 			'title' => 'admin',
@@ -166,6 +167,7 @@ class AdminController extends BaseController
 						[
 							'content' => $content,
 							'tegs' => $tegs,
+							'className' => $className,
 						])
 				]
 			)
@@ -238,5 +240,125 @@ class AdminController extends BaseController
 			};
 
 		}
+	}
+
+	public function adminAddAction()
+	{
+		if (array_key_exists('product', $_GET))
+		{
+			$content = get_class_vars(Product::class);
+			$className = 'Product';
+			$tableName = 'продукции';
+		}
+		elseif(array_key_exists('order', $_GET))
+		{
+			$content = get_class_vars(Order::class);
+			$className = 'Order';
+			$tableName = 'заказов';
+		}
+		elseif (array_key_exists('user', $_GET))
+		{
+			$content = $db->getUserById($_GET['user']);
+			$tableName = 'пользователей';
+		}
+		elseif (array_key_exists('brand', $_GET))
+		{
+
+			$content = $db->getTagById($_GET['brand'], 'Brand');
+			$tableName = 'брендов';
+		}
+		elseif (array_key_exists('carcase', $_GET))
+		{
+			$content = $db->getTagById($_GET['carcase'], 'Carcase');
+			$tableName = 'кузовов';
+		}
+		elseif (array_key_exists('transmission', $_GET))
+		{
+			$content = $db->getTagById($_GET['transmission'], 'Transmission');
+			$tableName = 'коробок передач';
+		}
+		else
+		{
+			$content = 'Выберите пункт меню';
+			$tableName = '';
+		}
+		$columns = array_keys((array)$content) ?: '' ;
+		$db = MySql::getInstance();
+		$tegs = $db->getTagList();
+
+		$this->render('admin-panel-layout',[
+			'title' => 'admin',
+			'content' => \ES\Controller\TemplateEngine::view('pages/admin-edit' ,
+				[
+					'tableName' => $tableName,
+					'columns' => $columns ,
+					'content' => TemplateEngine::view('components/admin-edit-rows',
+						[
+							'content' => $content,
+							'tegs' => $tegs,
+							'className' => $className,
+						])
+				]
+			)
+		]);
+	}
+
+	function adminAddItem() {
+		if (array_key_exists('item', $_POST))
+		{
+			if ($_POST['item'] === 'Product')
+			{
+				$changedProduct = new \ES\Model\Product(
+					$_POST['id'],
+					$_POST['title'],
+					$_POST['isActive'],
+					$_POST['brandType'],
+					$_POST['transmissionType'],
+					$_POST['carcaseType'],
+					$_POST['dateCreation'],
+					date('Y-m-d H:i:s'),
+					$_POST['fullDesc'],
+					$_POST['price']
+				);
+				if ((MySql::getInstance())->updateProduct($changedProduct))
+				{
+					$this->render('admin-panel-layout',[
+						'title' => 'admin',
+						'content' => '<h1> Товар успешно изменен. </h1>',
+					]);
+				}
+			}
+			elseif ($_POST['item'] === 'User')
+			{
+				echo "Тут что то происходит с user";
+			}
+			else if ($_POST['item'] === 'Brand' || $_POST['item'] === 'carcase' || $_POST['item'] === 'Transmission')
+			{
+				echo "Тут что то происходит с Tag";
+			}
+			else if ($_POST['item'] === 'Order')
+			{
+				$changedOrder = new \ES\Model\Order(
+					1,
+					$_POST['fullName'],
+					$_POST['phone'],
+					$_POST['mail'],
+					$_POST['address'],
+					$_POST['comment'],
+					$_POST['productId'],
+					$_POST['productPrice'],
+					$_POST['dateCreation'],
+					$_POST['status']
+				);
+				if ((MySql::getInstance())->createOrder($changedOrder))
+				{
+					$this->render('admin-panel-layout',[
+						'title' => 'admin',
+						'content' => '<h1> Заказ создан. </h1>',
+					]);
+				}
+			};
+		}
+
 	}
 }
