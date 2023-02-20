@@ -7,6 +7,7 @@
  * @var string $carcaseType
  * @var string $transmission
  * @var string $fullDesc
+ * @var string $slider
  */
 ?>
 <div class="product-detailed__">
@@ -15,7 +16,7 @@
     </div>
     <div class="product-detailed">
         <div class="product-detailed__img">
-            <div class="product-detailed__slider"><?= \ES\Controller\TemplateEngine::view('components/slider', ['id' => $id]) ?></div>
+            <div class="product-detailed__slider"><?= $slider?></div>
             <h2 class="product-detailed__subtitle">Характеристики</h2>
             <div class="product-detailed__subdescription">
                 <ul class="product-detailed__characteristics">

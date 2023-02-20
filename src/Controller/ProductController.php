@@ -2,6 +2,7 @@
 
 namespace ES\Controller;
 
+use ES\HtmlService;
 use ES\Model\Order;
 use ES\config\ConfigurationController;
 use ES\Model\Database\MySql;
@@ -19,15 +20,24 @@ class ProductController extends BaseController
 			http_response_code(404);
 			header('Location: /error/');
 		}
+
+		$data = (array)$product;
+		$data['slider'] = TemplateEngine::view('components/slider', [
+			'id' => $id,
+			'images' => HtmlService::getPathImagesById($id),
+			]);
+
 		session_start();
-		$role = array_key_exists('USER' , $_SESSION) ? $_SESSION['USER']->role : 'user';
+		$role = array_key_exists('USER', $_SESSION) ? $_SESSION['USER']->role : 'user';
+
 		$this->render('layout', [
 			'title' => ConfigurationController::getConfig('TITLE'),
 			'role' => $role,
 			'tags' => $tags,
-			'content' => TemplateEngine::view('Product/product-detailed', (array)$product)
+			'content' => TemplateEngine::view('Product/product-detailed', $data),
 		]);
 	}
+
 	public function postDetailAction($id): void
 	{
 		$db = MySql::getInstance();
@@ -39,8 +49,11 @@ class ProductController extends BaseController
 			header('Location: /error/');
 		}
 
-		if (!empty($_POST['userFullname']) && !empty($_POST['userTel'])
-			&& !empty($_POST['userEmail']) && !empty($_POST['userAddress'])) // КОСТЫЛЬЬЬ
+		if (
+			!empty($_POST['userFullname']) && !empty($_POST['userTel'])
+			&& !empty($_POST['userEmail'])
+			&& !empty($_POST['userAddress'])
+		) // КОСТЫЛЬЬЬ
 		{
 			$result = $db->createOrder(new Order(
 				1,
