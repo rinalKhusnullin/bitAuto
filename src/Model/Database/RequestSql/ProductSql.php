@@ -136,28 +136,41 @@ trait ProductSql
 		return ObjectBuilder::buildProducts(mysqli_fetch_all($result));
 	}
 
-	function UpdateProduct(Product $product)
+	function updateProduct(Product $product)
 	{
 		foreach ($product as $key => $value)
 		{
 			$product->$key = mysqli_real_escape_string($this->connection, $value);
 		}
 		$isActive = ($product->isActive) ? 1 : 0;
-		$brandId = $this->getIdByTagValue('Brand', $product->brandType);
-		$carcaseId = $this->getIdByTagValue('Carcase', $product->carcaseType);
-		$transmissionId = $this->getIdByTagValue('Transmission', $product->transmissionType);
 		$query = "UPDATE product
 				SET NAME = '$product->title',
 					FULL_DESCRIPTION = '$product->fullDesc',
 					PRODUCT_PRICE = '$product->price',
 					IS_ACTIVE = $isActive,
-					ID_BRAND = $brandId,
-					ID_CARCASE = $carcaseId,
-					ID_TRANSMISSION = $transmissionId,
+					ID_BRAND = $product->brandType,
+					ID_CARCASE = $product->carcaseType,
+					ID_TRANSMISSION = $product->transmissionType,
 					DATE_CREATION = '$product->dateCreation',
 					DATE_UPDATE = '$product->dateUpdate'
 				WHERE ID = '$product->id'";
 
 		return mysqli_query($this->connection, $query);
+	}
+	function createProduct(Product $product)
+	{
+		$title = mysqli_real_escape_string($this->connection, $product->title);
+		$isActive = ($product->isActive) ? 1 : 0;
+		$brandType = mysqli_real_escape_string($this->connection, $product->brandType);
+		$transmissionType = mysqli_real_escape_string($this->connection, $product->transmissionType);
+		$carcaseType = mysqli_real_escape_string($this->connection, $product->carcaseType);
+		$dateCreation = date('Y-m-d H:i:s');
+		$fullDesc = mysqli_real_escape_string($this->connection, $product->fullDesc);
+		$price = $product->price;
+
+		$query = "INSERT INTO product (NAME, IS_ACTIVE, ID_BRAND,ID_TRANSMISSION, ID_CARCASE, DATE_CREATION, FULL_DESCRIPTION, PRODUCT_PRICE)
+					values ($title, $isActive, $brandType, $transmissionType, $carcaseType, $dateCreation, $fullDesc, $price)";
+
+		return mysqli_query($this->connection,$query);
 	}
 }
