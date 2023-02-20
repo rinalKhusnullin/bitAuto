@@ -99,6 +99,7 @@ class AdminController extends BaseController
 					'content' => TemplateEngine::view('components/admin-table-rows',
 						[
 							'content' => $content,
+
 						])
 				]
 			)
@@ -121,18 +122,21 @@ class AdminController extends BaseController
 		if (array_key_exists('product', $_GET))
 		{
 			$content = $db->getProductByID($_GET['product']);
+			$columns = array_keys((array)$content);
 			$tableName = 'продукции';
 			$className = 'Product';
 		}
 		elseif(array_key_exists('order', $_GET))
 		{
 			$content = $db->getOrderById($_GET['order']);
+			$columns = array_keys((array)$content);
 			$tableName = 'заказов';
 			$className = 'Order';
 		}
 		elseif (array_key_exists('user', $_GET))
 		{
 			$content = $db->getUserById($_GET['user']);
+			$columns = array_keys((array)$content);
 			$tableName = 'пользователей';
 			$className = 'User';
 		}
@@ -140,23 +144,27 @@ class AdminController extends BaseController
 		{
 
 			$content = $db->getTagById($_GET['brand'], 'Brand');
+			$columns = array_keys((array)$content);
 			$tableName = 'брендов';
 			$className = 'Brand';
 		}
 		elseif (array_key_exists('carcase', $_GET))
 		{
 			$content = $db->getTagById($_GET['carcase'], 'Carcase');
+			$columns = array_keys((array)$content);
 			$tableName = 'кузовов';
 			$className = 'Carcase';
 		}
 		elseif (array_key_exists('transmission', $_GET))
 		{
 			$content = $db->getTagById($_GET['transmission'], 'Transmission');
+			$columns = array_keys((array)$content);
 			$tableName = 'коробок передач';
 			$className = 'Transmission';
 		}
 		else
 		{
+			$columns = '';
 			$content = 'Выберите пункт меню';
 			$className = '';
 			$tableName = '';
