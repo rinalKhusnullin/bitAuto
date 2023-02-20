@@ -102,6 +102,10 @@ class HtmlService
 	public static function getPathImagesById(int $id):array
 	{
 		$path = ROOT . "/public/tmp-autoimg/$id";
+		if (!file_exists($path))
+		{
+			return []; // @todo добавить грустную машину
+		}
 		$files = scandir($path);
 		$images = [];
 		foreach ($files as $file)
