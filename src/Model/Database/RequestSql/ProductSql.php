@@ -164,12 +164,11 @@ trait ProductSql
 		$brandType = mysqli_real_escape_string($this->connection, $product->brandType);
 		$transmissionType = mysqli_real_escape_string($this->connection, $product->transmissionType);
 		$carcaseType = mysqli_real_escape_string($this->connection, $product->carcaseType);
-		$dateCreation = date('Y-m-d H:i:s');
 		$fullDesc = mysqli_real_escape_string($this->connection, $product->fullDesc);
 		$price = $product->price;
 
 		$query = "INSERT INTO product (NAME, IS_ACTIVE, ID_BRAND,ID_TRANSMISSION, ID_CARCASE, DATE_CREATION, FULL_DESCRIPTION, PRODUCT_PRICE)
-					values ($title, $isActive, $brandType, $transmissionType, $carcaseType, $dateCreation, $fullDesc, $price)";
+					values ($title, $isActive, $brandType, $transmissionType, $carcaseType, CURRENT_DATE(), $fullDesc, $price)";
 
 		return mysqli_query($this->connection,$query);
 	}
