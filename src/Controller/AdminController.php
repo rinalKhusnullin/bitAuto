@@ -121,38 +121,38 @@ class AdminController extends BaseController
 		{
 			$content = $db->getProductByID($_GET['product']);
 			$columns = array_keys((array)$content);
-			$tableName = 'продукции';
+			$tableName = 'Продукция';
 		}
 		elseif(array_key_exists('order', $_GET))
 		{
 			$content = $db->getOrderById($_GET['order']);
 			$columns = array_keys((array)$content);
-			$tableName = 'заказов';
+			$tableName = 'Заказы';
 		}
 		elseif (array_key_exists('user', $_GET))
 		{
 			$content = $db->getUserById($_GET['user']);
 			$columns = array_keys((array)$content);
-			$tableName = 'пользователей';
+			$tableName = 'Пользователи';
 		}
 		elseif (array_key_exists('brand', $_GET))
 		{
 
 			$content = $db->getTagById($_GET['brand'], 'Brand');
 			$columns = array_keys((array)$content);
-			$tableName = 'брендов';
+			$tableName = 'Бренды';
 		}
 		elseif (array_key_exists('carcase', $_GET))
 		{
 			$content = $db->getTagById($_GET['carcase'], 'Carcase');
 			$columns = array_keys((array)$content);
-			$tableName = 'кузовов';
+			$tableName = 'Кузова';
 		}
 		elseif (array_key_exists('transmission', $_GET))
 		{
 			$content = $db->getTagById($_GET['transmission'], 'Transmission');
 			$columns = array_keys((array)$content);
-			$tableName = 'коробок передач';
+			$tableName = 'КПП';
 		}
 		else
 		{

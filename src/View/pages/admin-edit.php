@@ -8,7 +8,7 @@ if(is_array($columns))
 {
 ?>
 <table>
-	<caption> <?= 'Редактирование ' . $tableName ?> </caption>
+	<caption> <?= $tableName ?> </caption>
 	<tr>
 		<?php foreach ($columns as $column) {?>
 			<th><?= $column?></th>
