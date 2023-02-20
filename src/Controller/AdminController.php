@@ -3,7 +3,7 @@
 namespace ES\Controller;
 
 use ES\Model\Database\MySql;
-
+use ES\Model\Product;
 
 class AdminController extends BaseController
 {
@@ -315,7 +315,7 @@ class AdminController extends BaseController
 			if ($_POST['item'] === 'Product')
 			{
 				$changedProduct = new \ES\Model\Product(
-					$_POST['id'],
+					1,
 					$_POST['title'],
 					$_POST['isActive'],
 					$_POST['brandType'],
@@ -326,7 +326,7 @@ class AdminController extends BaseController
 					$_POST['fullDesc'],
 					$_POST['price']
 				);
-				if ((MySql::getInstance())->updateProduct($changedProduct))
+				if ((MySql::getInstance())->createProduct($changedProduct))
 				{
 					$this->render('admin-panel-layout',[
 						'title' => 'admin',
