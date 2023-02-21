@@ -61,7 +61,7 @@
 				</p>
 			</div>
 			<?php if($role==='admin') : ?>
-			<a href="/admin/" class="header__admin">Admin</a>
+			<a href="/admin/?products" class="header__admin">Admin</a>
 			<?php endif ?>
 		</div>
 	</div>
