@@ -12,6 +12,7 @@ use ES\Model\User;
 
 class AdminController extends BaseController
 {
+
 	public function adminAction() : void
 	{
 		session_start();
@@ -19,6 +20,7 @@ class AdminController extends BaseController
 		{
 			header('Location: /login/');
 		}
+		$role = $_SESSION['USER'] ->role;
 
 		$indexPage = (isset($_GET['page'])) ? (int)$_GET['page'] : 1;
 		$db = MySql::getInstance();
@@ -99,6 +101,7 @@ class AdminController extends BaseController
 
 		$this->render('admin-panel-layout',[
 			'title' => 'admin',
+			'role' => $role,
 			'content' => \ES\Controller\TemplateEngine::view('pages/admin-table' ,
 				[
 					'addItemLink' => $addItemLink,
@@ -127,6 +130,7 @@ class AdminController extends BaseController
 		{
 			header('Location: /login/');
 		}
+		$role = $_SESSION['USER'] ->role;
 
 		$indexPage = (isset($_GET['page'])) ? (int)$_GET['page'] : 1;
 		$db = MySql::getInstance();
@@ -148,6 +152,15 @@ class AdminController extends BaseController
 		}
 		elseif (array_key_exists('user', $_GET))
 		{
+			if ($_SESSION['USER']->role!=='admin')
+			{
+				$this->render('admin-panel-layout',[
+					'title' => 'admin',
+					'role' => $role,
+					'content' => '<h1> Недостаточно прав </h1>',
+				]);
+				exit;
+			}
 			$content = $db->getUserById($_GET['user']);
 			$columns = array_keys((array)$content);
 			$tableName = 'Пользователи';
@@ -186,6 +199,7 @@ class AdminController extends BaseController
 
 		$this->render('admin-panel-layout',[
 			'title' => 'admin',
+			'role' => $role,
 			'content' => \ES\Controller\TemplateEngine::view('pages/admin-edit' ,
 				[
 					'tableName' => $tableName,
@@ -214,6 +228,8 @@ class AdminController extends BaseController
 
 	public function adminChangeItem() : void
 	{
+		session_start();
+		$role = $_SESSION['USER'] ->role;
 		if (array_key_exists('item', $_POST))
 		{
 			if ($_POST['item'] === 'Product')
@@ -234,6 +250,7 @@ class AdminController extends BaseController
 				{
 					$this->render('admin-panel-layout',[
 						'title' => 'admin',
+						'role' => $role,
 						'content' => '<h1> Данные изменены </h1>',
 					]);
 				}
@@ -255,6 +272,7 @@ class AdminController extends BaseController
 				{
 					$this->render('admin-panel-layout',[
 						'title' => 'admin',
+						'role' => $role,
 						'content' => '<h1> Данные изменены </h1>',
 					]);
 				}
@@ -277,6 +295,7 @@ class AdminController extends BaseController
 				{
 					$this->render('admin-panel-layout',[
 						'title' => 'admin',
+						'role' => $role,
 						'content' => '<h1> Данные изменены </h1>',
 					]);
 				}
@@ -287,6 +306,8 @@ class AdminController extends BaseController
 
 	public function adminAddAction()
 	{
+		session_start();
+		$role = $_SESSION['USER'] ->role;
 		if (array_key_exists('product', $_GET))
 		{
 			$content = get_class_vars(Product::class);
@@ -301,6 +322,15 @@ class AdminController extends BaseController
 		}
 		elseif (array_key_exists('user', $_GET))
 		{
+			if ($_SESSION['USER']->role!=='admin')
+			{
+				$this->render('admin-panel-layout',[
+					'title' => 'admin',
+					'role' => $role,
+					'content' => '<h1> Недостаточно прав </h1>',
+				]);
+				exit;
+			}
 			$content = get_class_vars(User::class);
 			$className = 'User';
 			$tableName = 'Пользователи';
@@ -335,6 +365,7 @@ class AdminController extends BaseController
 
 		$this->render('admin-panel-layout',[
 			'title' => 'admin',
+			'role' => $role,
 			'content' => \ES\Controller\TemplateEngine::view('pages/admin-edit' ,
 				[
 					'tableName' => $tableName,
@@ -352,6 +383,7 @@ class AdminController extends BaseController
 
 	function adminAddItem()
 	{
+		$role = $_SESSION['USER'] ->role;
 		if (array_key_exists('item', $_POST))
 		{
 			if ($_POST['item'] === 'Product')
@@ -372,6 +404,7 @@ class AdminController extends BaseController
 				{
 					$this->render('admin-panel-layout',[
 						'title' => 'admin',
+						'role' => $role,
 						'content' => '<h1> Данные добавлены </h1>',
 					]);
 				}
@@ -389,6 +422,7 @@ class AdminController extends BaseController
 				{
 					$this->render('admin-panel-layout',[
 						'title' => 'admin',
+						'role' => $role,
 						'content' => '<h1> Данные добавлены </h1>',
 					]);
 				}
@@ -411,6 +445,7 @@ class AdminController extends BaseController
 				{
 					$this->render('admin-panel-layout',[
 						'title' => 'admin',
+						'role' => $role,
 						'content' => '<h1> Данные добавлены </h1>',
 					]);
 				}

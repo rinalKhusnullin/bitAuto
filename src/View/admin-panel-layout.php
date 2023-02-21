@@ -5,6 +5,7 @@
  * @var string $title
  * @var $content
  * @var array $columns
+ * @var $role
  */
 
 ?>
@@ -16,6 +17,7 @@
 	<link rel="stylesheet" href="/styles/reset.css">
 	<link rel="stylesheet" href="/styles/adminPanelStyle.css">
 	<title><?= $title ?></title>
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
 </head>
 
 <body>
@@ -34,7 +36,7 @@
 	<header class="header">
 
 		<label class="user-info">
-			<span>Пользователь: admin</span> <!-- Имя пользователя -->
+			<span>Пользователь: <?=$role?> </span> <!-- Имя пользователя -->
 			<a href="/" target="_blank">На сайт</a>
 			<a href="/logout/">Logout</a>
 
@@ -44,5 +46,6 @@
 		<?= $content ?>
 	</div>
 </div>
+<script src="/scripts/hideShowPassword.js"></script>
 </body>
 </html>
