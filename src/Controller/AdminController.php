@@ -33,6 +33,7 @@ class AdminController extends BaseController
 			$columns = (!empty($content)) ? array_keys((array)$content[0]) : '';
 			$pageCount = $db->getPageCount('all');
 			$tableName = 'Продукция';
+			$addItemLink = 'product';
 		}
 		elseif(isset($_GET['orders']))
 		{
@@ -40,6 +41,7 @@ class AdminController extends BaseController
 			$columns = (!empty($content)) ? array_keys((array)$content[0]) : '';
 			$pageCount = $db->getPageCount('',"`order`");
 			$tableName = 'Заказы';
+			$addItemLink = 'order';
 		}
 		elseif (isset($_GET['users']))
 		{
@@ -47,6 +49,7 @@ class AdminController extends BaseController
 			$columns = (!empty($content)) ? array_keys((array)$content[0]) : '';
 			$pageCount = $db->getPageCount('','user');
 			$tableName = 'Пользователи';
+			$addItemLink = 'user';
 		}
 		elseif (isset($_GET['brands']))
 		{
@@ -54,6 +57,7 @@ class AdminController extends BaseController
 			$columns = (!empty($content)) ? array_keys((array)$content[0]) : '';
 			$pageCount = $db->getPageCount('','brand');
 			$tableName = 'Бренды';
+			$addItemLink = 'brand';
 		}
 		elseif (isset($_GET['carcases']))
 		{
@@ -61,6 +65,7 @@ class AdminController extends BaseController
 			$columns = (!empty($content)) ? array_keys((array)$content[0]) : '';
 			$pageCount = $db->getPageCount('','carcase');
 			$tableName = 'Кузов';
+			$addItemLink = 'carcase';
 		}
 		elseif (isset($_GET['transmissions']))
 		{
@@ -68,12 +73,14 @@ class AdminController extends BaseController
 			$columns = (!empty($content)) ? array_keys((array)$content[0]) : '';
 			$pageCount = $db->getPageCount('','transmission');
 			$tableName = 'Коробка передач';
+			$addItemLink = 'transmission';
 		}
 		else
 		{
 			$columns = '';
 			$content = 'Выберите пункт меню';
 			$tableName = '';
+			$addItemLink = '';
 		}
 
 		if (empty($content))
@@ -82,6 +89,7 @@ class AdminController extends BaseController
 			$columns = '';
 			$pageCount = 0;
 			$tableName = '';
+			$addItemLink = '';
 		}
 
 		if (isset($_GET['delete']))
@@ -93,6 +101,7 @@ class AdminController extends BaseController
 			'title' => 'admin',
 			'content' => \ES\Controller\TemplateEngine::view('pages/admin-table' ,
 				[
+					'addItemLink' => $addItemLink,
 					'tableName' => $tableName,
 					'columns' => $columns ,
 					'deleteMessage' => $deleteMessage,
