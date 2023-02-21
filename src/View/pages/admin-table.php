@@ -16,7 +16,7 @@ if(is_array($columns))
 	<?php endforeach; ?>
 <?php endif; ?>
 <table>
-	<caption><a href="/admin/add?" class="admin__add">Добавить новую строку <?= $tableName ?></a></caption>
+	<caption><a href="/admin/add/?<?=$addItemLink?>" class="admin__add">Добавить новую строку <?= $tableName ?></a></caption>
 	<tr>
 		<?php foreach ($columns as $column) {?>
 		<th><?= $column?></th>
