@@ -99,7 +99,6 @@ class AdminController extends BaseController
 					'content' => TemplateEngine::view('components/admin-table-rows',
 						[
 							'content' => $content,
-
 						])
 				]
 			)
@@ -123,21 +122,21 @@ class AdminController extends BaseController
 		{
 			$content = $db->getProductByID($_GET['product']);
 			$columns = array_keys((array)$content);
-			$tableName = 'продукции';
+			$tableName = 'Продукция';
 			$className = 'Product';
 		}
 		elseif(array_key_exists('order', $_GET))
 		{
 			$content = $db->getOrderById($_GET['order']);
 			$columns = array_keys((array)$content);
-			$tableName = 'заказов';
+			$tableName = 'Заказы';
 			$className = 'Order';
 		}
 		elseif (array_key_exists('user', $_GET))
 		{
 			$content = $db->getUserById($_GET['user']);
 			$columns = array_keys((array)$content);
-			$tableName = 'пользователей';
+			$tableName = 'Пользователи';
 			$className = 'User';
 		}
 		elseif (array_key_exists('brand', $_GET))
@@ -145,21 +144,21 @@ class AdminController extends BaseController
 
 			$content = $db->getTagById($_GET['brand'], 'Brand');
 			$columns = array_keys((array)$content);
-			$tableName = 'брендов';
+			$tableName = 'Бренды';
 			$className = 'Brand';
 		}
 		elseif (array_key_exists('carcase', $_GET))
 		{
 			$content = $db->getTagById($_GET['carcase'], 'Carcase');
 			$columns = array_keys((array)$content);
-			$tableName = 'кузовов';
+			$tableName = 'Кузова';
 			$className = 'Carcase';
 		}
 		elseif (array_key_exists('transmission', $_GET))
 		{
 			$content = $db->getTagById($_GET['transmission'], 'Transmission');
 			$columns = array_keys((array)$content);
-			$tableName = 'коробок передач';
+			$tableName = 'КПП';
 			$className = 'Transmission';
 		}
 		else
@@ -262,34 +261,34 @@ class AdminController extends BaseController
 		{
 			$content = get_class_vars(Product::class);
 			$className = 'Product';
-			$tableName = 'продукции';
+			$tableName = 'Продукция';
 		}
 		elseif(array_key_exists('order', $_GET))
 		{
 			$content = get_class_vars(Order::class);
 			$className = 'Order';
-			$tableName = 'заказов';
+			$tableName = 'Заказы';
 		}
 		elseif (array_key_exists('user', $_GET))
 		{
 			$content = $db->getUserById($_GET['user']);
-			$tableName = 'пользователей';
+			$tableName = 'Пользователи';
 		}
 		elseif (array_key_exists('brand', $_GET))
 		{
 
 			$content = $db->getTagById($_GET['brand'], 'Brand');
-			$tableName = 'брендов';
+			$tableName = 'Бренды';
 		}
 		elseif (array_key_exists('carcase', $_GET))
 		{
 			$content = $db->getTagById($_GET['carcase'], 'Carcase');
-			$tableName = 'кузовов';
+			$tableName = 'Кузова';
 		}
 		elseif (array_key_exists('transmission', $_GET))
 		{
 			$content = $db->getTagById($_GET['transmission'], 'Transmission');
-			$tableName = 'коробок передач';
+			$tableName = 'КПП';
 		}
 		else
 		{
