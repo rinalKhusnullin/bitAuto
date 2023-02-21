@@ -36,9 +36,9 @@ class HtmlService
 				return "<input name='$key' class='admin-input' type='text' value='$value'>";
 			case 'password':
 				return "
-					<input type='password' id='show1'> 
+					<input name='password' type='password' id='show1'> 
 					<button class='far fa-eye' type='button' id='show'></button>
-					"; // @TODO изменеие пароля
+					";
 			case 'isActive':
 				$isActive = ($value === true) ? "<option selected value='true'>Да</option><option value='false'>Нет</option>"
 				:"<option value='true'>Да</option><option selected value='false'>Нет</option>";

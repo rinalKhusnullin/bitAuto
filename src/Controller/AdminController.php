@@ -257,7 +257,25 @@ class AdminController extends BaseController
 			}
 			elseif ($_POST['item'] === 'User')
 			{
-				echo "Тут что то происходит с user";
+				$password = $_POST['password'] ?: MySql::getInstance()->getUserById($_GET['user'])->password;
+				$changedUser = new User(
+					$_POST['id'],
+					$password,
+					$_POST['login'],
+					$_POST['mail'],
+					$_POST['role'],
+					$_POST['firstName'],
+					$_POST['lastName']
+				);
+
+				if((MySql::getInstance())->updateUser($changedUser))
+				{
+					$this->render('admin-panel-layout',[
+						'title' => 'admin',
+						'role' => $role,
+						'content' => '<h1> Данные изменены </h1>',
+					]);
+				}
 			}
 			else if ($_POST['item'] === 'Brand' || $_POST['item'] === 'Carcase' || $_POST['item'] === 'Transmission')
 			{
@@ -383,6 +401,7 @@ class AdminController extends BaseController
 
 	function adminAddItem()
 	{
+		session_start();
 		$role = $_SESSION['USER'] ->role;
 		if (array_key_exists('item', $_POST))
 		{
@@ -411,7 +430,24 @@ class AdminController extends BaseController
 			}
 			elseif ($_POST['item'] === 'User')
 			{
-				echo "Тут что то происходит с user";
+				$password = $_POST['password'] ?: MySql::getInstance()->getUserById($_GET['user'])->password;
+				$changedUser = new User(
+					1,
+					$password,
+					$_POST['login'],
+					$_POST['mail'],
+					$_POST['role'],
+					$_POST['firstName'],
+					$_POST['lastName']
+				);
+				if((MySql::getInstance())->createUser($changedUser))
+				{
+					$this->render('admin-panel-layout',[
+						'title' => 'admin',
+						'role' => $role,
+						'content' => '<h1> Данные изменены </h1>',
+					]);
+				}
 			}
 			else if ($_POST['item'] === 'Brand' || $_POST['item'] === 'Carcase' || $_POST['item'] === 'Transmission')
 			{

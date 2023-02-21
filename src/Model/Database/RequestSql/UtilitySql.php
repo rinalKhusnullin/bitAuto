@@ -8,7 +8,7 @@ use ES\Model\User;
 
 trait UtilitySql
 {
-    function getUsers() : array
+	function getUsers(): array
 	{
 		$query = "SELECT ID, PASS, LOGIN, MAIL, ROLE, FIRST_NAME, LAST_NAME 
 					FROM user";
@@ -18,7 +18,7 @@ trait UtilitySql
 		return ObjectBuilder::buildUsers($result);
 	}
 
-	function getUserById($id) : ?User 
+	function getUserById($id): ?User
 	{
 		$id = mysqli_real_escape_string($this->connection, $id);
 		$query = "SELECT ID, PASS, LOGIN, MAIL, ROLE, FIRST_NAME, LAST_NAME 
@@ -27,6 +27,40 @@ trait UtilitySql
 		$result = mysqli_query($this->connection, $query);
 
 		return ObjectBuilder::buildUsers($result)[0];
+	}
+
+	function updateUser(User $user)
+	{
+		foreach ($user as $key => $value)
+		{
+			$user->$key = mysqli_real_escape_string($this->connection, $value);
+		}
+		$password = password_hash($user->password,PASSWORD_DEFAULT);
+		$query = "UPDATE user
+		SET PASS = '$password',
+		    LOGIN = '$user->login',
+		    MAIL = '$user->mail',
+		    ROLE = '$user->role',
+		    FIRST_NAME = '$user->firstName',
+		    LAST_NAME = '$user->lastName'
+		    where ID = '$user->id'";
+
+		return mysqli_query($this->connection, $query);
+	}
+
+	function createUser(User $user)
+	{
+		foreach ($user as $key => $value)
+		{
+			$user->$key = mysqli_real_escape_string($this->connection, $value);
+		}
+
+		$password = password_hash($user->password,PASSWORD_DEFAULT);
+
+		$query = "INSERT INTO user (PASS,LOGIN,MAIL,ROLE,FIRST_NAME,LAST_NAME)
+					values ('$password','$user->login','$user->mail','$user->role','$user->firstName','$user->lastName' )";
+
+		return mysqli_query($this->connection, $query);
 	}
 
     function getPageCount(string $isActive = 'active', string $table = 'product')
