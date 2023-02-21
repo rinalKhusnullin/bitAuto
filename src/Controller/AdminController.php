@@ -220,7 +220,7 @@ class AdminController extends BaseController
 				{
 					$this->render('admin-panel-layout',[
 						'title' => 'admin',
-						'content' => '<h1> Товар успешно изменен. </h1>',
+						'content' => '<h1> Данные изменены </h1>',
 					]);
 				}
 			}
@@ -230,7 +230,20 @@ class AdminController extends BaseController
 			}
 			else if ($_POST['item'] === 'Brand' || $_POST['item'] === 'carcase' || $_POST['item'] === 'Transmission')
 			{
-				echo "Тут что то происходит с Tag";
+				$id = (int)$_POST['id'];
+				$value = $_POST['value'];
+				$tag = $_POST['item'];
+				if ($id <= 0)
+				{
+					header ('Location: /admin/');
+				}
+				if ((MySql::getInstance())->updateTags($tag,$id,$value))
+				{
+					$this->render('admin-panel-layout',[
+						'title' => 'admin',
+						'content' => '<h1> Данные изменены </h1>',
+					]);
+				}
 			}
 			else if ($_POST['item'] === 'Order')
 			{
@@ -248,7 +261,10 @@ class AdminController extends BaseController
 				);
 				if ((MySql::getInstance())->updateOrder($changedOrder))
 				{
-					echo "Заказ изменен";
+					$this->render('admin-panel-layout',[
+						'title' => 'admin',
+						'content' => '<h1> Данные изменены </h1>',
+					]);
 				}
 			};
 

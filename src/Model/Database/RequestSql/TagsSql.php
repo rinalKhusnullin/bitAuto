@@ -55,4 +55,16 @@ trait TagsSql
 
 		return ObjectBuilder::buildTags($result, $tag)[0];
 	}
+
+	function updateTags(string $tag,int $id,string $value)
+	{
+		$title = mysqli_real_escape_string($this->connection, $value);
+		$tag = mysqli_real_escape_string($this->connection, $tag);
+
+		$query = "UPDATE $tag
+			SET $tag = '$value'
+			where ID = $id";
+
+		return mysqli_query($this->connection,$query);
+	}
 }
