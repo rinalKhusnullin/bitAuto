@@ -237,3 +237,14 @@ td > a{
 	height: 100%;
 }
 
+a.admin__add
+{
+	color: white;
+	background: #4e555b;
+	padding: 10px;
+}
+
+a.admin__add:hover {
+	background: #95999c;
+}
+
