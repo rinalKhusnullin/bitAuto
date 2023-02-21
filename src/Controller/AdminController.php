@@ -3,7 +3,12 @@
 namespace ES\Controller;
 
 use ES\Model\Database\MySql;
+use ES\Model\Order;
 use ES\Model\Product;
+use ES\Model\Tags\Brand;
+use ES\Model\Tags\Carcase;
+use ES\Model\Tags\Transmission;
+use ES\Model\User;
 
 class AdminController extends BaseController
 {
@@ -228,7 +233,7 @@ class AdminController extends BaseController
 			{
 				echo "Тут что то происходит с user";
 			}
-			else if ($_POST['item'] === 'Brand' || $_POST['item'] === 'carcase' || $_POST['item'] === 'Transmission')
+			else if ($_POST['item'] === 'Brand' || $_POST['item'] === 'Carcase' || $_POST['item'] === 'Transmission')
 			{
 				$id = (int)$_POST['id'];
 				$value = $_POST['value'];
@@ -287,23 +292,27 @@ class AdminController extends BaseController
 		}
 		elseif (array_key_exists('user', $_GET))
 		{
-			$content = $db->getUserById($_GET['user']);
+			$content = get_class_vars(User::class);
+			$className = 'User';
 			$tableName = 'Пользователи';
 		}
 		elseif (array_key_exists('brand', $_GET))
 		{
 
-			$content = $db->getTagById($_GET['brand'], 'Brand');
+			$content = get_class_vars(Brand::class);
+			$className = 'Brand';
 			$tableName = 'Бренды';
 		}
 		elseif (array_key_exists('carcase', $_GET))
 		{
-			$content = $db->getTagById($_GET['carcase'], 'Carcase');
+			$content = get_class_vars(Carcase::class);
+			$className = 'Carcase';
 			$tableName = 'Кузова';
 		}
 		elseif (array_key_exists('transmission', $_GET))
 		{
-			$content = $db->getTagById($_GET['transmission'], 'Transmission');
+			$content = get_class_vars(Transmission::class);
+			$className = 'Transmission';
 			$tableName = 'КПП';
 		}
 		else
@@ -332,7 +341,8 @@ class AdminController extends BaseController
 		]);
 	}
 
-	function adminAddItem() {
+	function adminAddItem()
+	{
 		if (array_key_exists('item', $_POST))
 		{
 			if ($_POST['item'] === 'Product')
@@ -353,7 +363,7 @@ class AdminController extends BaseController
 				{
 					$this->render('admin-panel-layout',[
 						'title' => 'admin',
-						'content' => '<h1> Товар успешно изменен. </h1>',
+						'content' => '<h1> Данные добавлены </h1>',
 					]);
 				}
 			}
@@ -361,9 +371,18 @@ class AdminController extends BaseController
 			{
 				echo "Тут что то происходит с user";
 			}
-			else if ($_POST['item'] === 'Brand' || $_POST['item'] === 'carcase' || $_POST['item'] === 'Transmission')
+			else if ($_POST['item'] === 'Brand' || $_POST['item'] === 'Carcase' || $_POST['item'] === 'Transmission')
 			{
-				echo "Тут что то происходит с Tag";
+				$value = $_POST['value'];
+				$tag = $_POST['item'];
+
+				if ((MySql::getInstance())->createTags($tag, $value))
+				{
+					$this->render('admin-panel-layout',[
+						'title' => 'admin',
+						'content' => '<h1> Данные добавлены </h1>',
+					]);
+				}
 			}
 			else if ($_POST['item'] === 'Order')
 			{
@@ -383,7 +402,7 @@ class AdminController extends BaseController
 				{
 					$this->render('admin-panel-layout',[
 						'title' => 'admin',
-						'content' => '<h1> Заказ создан. </h1>',
+						'content' => '<h1> Данные добавлены </h1>',
 					]);
 				}
 			};

@@ -67,4 +67,15 @@ trait TagsSql
 
 		return mysqli_query($this->connection,$query);
 	}
+
+	function createTags(string $tag,string $value)
+	{
+		$title = mysqli_real_escape_string($this->connection, $value);
+		$tag = mysqli_real_escape_string($this->connection, $tag);
+
+		$query = "INSERT INTO $tag ($tag)
+					VALUES ('$value')";
+
+		return mysqli_query($this->connection,$query);
+	}
 }
