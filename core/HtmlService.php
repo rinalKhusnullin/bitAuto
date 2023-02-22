@@ -105,12 +105,12 @@ class HtmlService
 		}
 	}
 
-	public static function getPathImagesById(int $id):array
+	public static function getPathImagesById(int $id): array
 	{
 		$path = ROOT . "/public/tmp-autoimg/$id";
 		if (!file_exists($path))
 		{
-			return []; // @todo добавить грустную машину
+			return [];
 		}
 		$files = scandir($path);
 		$images = [];

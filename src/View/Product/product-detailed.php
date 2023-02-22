@@ -69,7 +69,7 @@
                 </div>
             </div>
             <form action="" method="post"> <!-- need to add handler -->
-				<input type="hidden" name="token" value="<?= $_SESSION['token'] ?? '' ?>">
+				<input type="hidden" name="token" value="<?= $_SESSION['token'] ?? ''  // @TODO прокидывать?>">
                 <div class="poppup__subtitle">ФИО*</div>
                 <input type="text" class="poppup__input" name="userFullname" required>
                 <div class="poppup__subtitle">Телефон*</div>
