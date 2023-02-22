@@ -2,6 +2,7 @@
 	/**
 	 * @var array $tags
 	 */
+	// @todo убрать этот рудимент
 $brands = $tags['brand'];
 $carceses = $tags['carcase'];
 $transmissions = $tags['transmission'];
