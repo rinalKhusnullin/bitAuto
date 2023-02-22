@@ -61,7 +61,7 @@ class ProductController extends BaseController
 			!empty($_POST['userFullname']) && !empty($_POST['userTel'])
 			&& !empty($_POST['userEmail'])
 			&& !empty($_POST['userAddress'])
-		) // КОСТЫЛЬЬЬ
+		) // @todo КОСТЫЛЬЬЬ РИНАЛЬ НАДО СДЕЛАТЬ НОРМАЛЬНУЮ ВАЛИДАЦИЮ !!!!БЕЗ!!!! РЕГУЛЯРОК
 		{
 			$result = $db->createOrder(new Order(
 				1,
