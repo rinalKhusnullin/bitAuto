@@ -33,6 +33,7 @@ class AdminController extends BaseController
 		{
 			$content = $db->getProducts($indexPage, 'all');
 			$columns = (!empty($content)) ? array_keys((array)$content[0]) : '';
+			unset($columns[(int)array_key_last($columns)]);
 			$pageCount = $db->getPageCount('all');
 			$tableName = 'Продукция';
 			$addItemLink = 'product';
@@ -205,12 +206,9 @@ class AdminController extends BaseController
 				[
 					'tableName' => $tableName,
 					'columns' => $columns ,
-					'content' => TemplateEngine::view('components/admin-edit-rows',
-						[
-							'content' => $content,
-							'tegs' => $tegs,
-							'className' => $className,
-						])
+					'className' => $className,
+					'len' => count($columns),
+					'content' => (array)$content,
 				]
 			)
 		]);
@@ -402,12 +400,9 @@ class AdminController extends BaseController
 				[
 					'tableName' => $tableName,
 					'columns' => $columns ,
-					'content' => TemplateEngine::view('components/admin-edit-rows',
-						[
-							'content' => $content,
-							'tegs' => $tegs,
-							'className' => $className,
-						])
+					'content' => $content,
+					'len' => count($columns),
+					'className' => $className,
 				]
 			)
 		]);

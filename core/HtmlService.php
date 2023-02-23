@@ -16,9 +16,25 @@ class HtmlService
 		$carcase = $tags->getTags('carcase');
 		$transmission = $tags->getTags('transmission');
 
-		switch ($key) {
+		switch ($key)
+		{
 			case 'id':
 				return "<input class='admin-input' name='$key' type='hidden' value='$value'>$value";
+
+			case 'images':
+				//$form = "<input class='admin-input' name='$key' type='file' multiple accept='image/*' >";
+				$data = serialize($value);
+				$form = "<div class='admin-images'>";
+				// "<div class='admin-images'><input type='hidden' class='admin-input' name='$key' type='file' value='{$data}'>";
+				$id = 0;
+
+				foreach ($value as $image)
+				{
+					$form .= "<input type='radio' id='image{$id}' name='img' value='$image' style='display:none;'><label for='image{$id}'><img class='admin-img' src='$image' alt='$image'></label>";
+					$id++;
+				}
+
+				return $form . '</div>' . '<label>Изображения:</label><div class="img-list" id="js-file-list"></div><div class="img-list" id="js-file-list"></div><input id="js-file" type="file" name="file[]" multiple accept=".jpg,.jpeg,.png,.gif">';
 
 			case 'productId':
 			case 'productPrice':
@@ -40,8 +56,9 @@ class HtmlService
 					<button class='far fa-eye' type='button' id='show'></button>
 					";
 			case 'isActive':
-				$isActive = ($value === true) ? "<option selected value='true'>Да</option><option value='false'>Нет</option>"
-				:"<option value='true'>Да</option><option selected value='false'>Нет</option>";
+				$isActive = ($value === true)
+					? "<option selected value='true'>Да</option><option value='false'>Нет</option>"
+					: "<option value='true'>Да</option><option selected value='false'>Нет</option>";
 
 				return "<select name='$key'> $isActive </select>";
 
@@ -116,7 +133,7 @@ class HtmlService
 		$images = [];
 		foreach ($files as $file)
 		{
-			if(!preg_match('~^[0-9A-Za-z].[A-Za-z]+$~', $file))
+			if (!preg_match('~^[0-9A-Za-z].[A-Za-z]+$~', $file))
 			{
 				continue;
 			}

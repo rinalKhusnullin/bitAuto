@@ -140,6 +140,8 @@ trait ProductSql
 	{
 		foreach ($product as $key => $value)
 		{
+			if($key === 'images')
+				continue; ///@todo добавить работу с картинками
 			$product->$key = mysqli_real_escape_string($this->connection, $value);
 		}
 		$isActive = ($product->isActive) ? 1 : 0;
