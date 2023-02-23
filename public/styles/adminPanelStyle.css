@@ -248,3 +248,42 @@ a.admin__add:hover {
 	background: #95999c;
 }
 
+.admin-images {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	flex-wrap: wrap;
+	justify-content: flex-start;
+	height: 100%;
+	width: 100%;
+}
+
+.admin-img {
+	width: 250px;
+}
+
+.tbody_edit {
+	display: flex;
+	flex-direction: column;
+}
+
+.th_edit
+{
+	height: auto;
+	width:150px;
+}
+
+.td_edit
+{
+	height: fit-content;
+	flex: 1;
+}
+
+.tr_edit {
+	display: flex;
+	flex-direction: row;
+}
+
+input[type="radio"]:checked + label {
+	border: 3px solid rgba(255,100,100,50%);
+}
