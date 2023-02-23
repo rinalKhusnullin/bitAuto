@@ -2,22 +2,24 @@
 
 namespace ES\Model\Database;
 
+use ES\HtmlService;
 use ES\Model\Product;
 use ES\Model\Order;
 use ES\Model\User;
 
-
 class ObjectBuilder
 {
-    public static function buildProducts(array $goods): array
+	public static function buildProducts(array $goods): array
 	{
-        $products = [];
+		$products = [];
 		foreach ($goods as $good)
 		{
+			$good[] = array_map(fn ($path) => "/tmp-autoimg/{$good[0]}/$path",
+				HtmlService::getPathImagesById((int)$good[0]));
 			$products[] = new Product(...$good);
 		}
 		return $products;
-    }
+	}
 
 	public static function buildOrders(array $results): array
 	{
@@ -49,9 +51,10 @@ class ObjectBuilder
 
 	public static function buildTags($result, string $tag)
 	{
-		$className= 'ES\\Model\\Tags\\' . $tag;
+		$className = 'ES\\Model\\Tags\\' . $tag;
 		$tags = [];
-		while ($row = mysqli_fetch_assoc($result)){
+		while ($row = mysqli_fetch_assoc($result))
+		{
 			$tags[] = new $className(
 				$row['ID'],
 				$row[$tag]

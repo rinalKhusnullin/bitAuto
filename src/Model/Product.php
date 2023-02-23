@@ -14,7 +14,8 @@ class Product
 		public string $dateCreation,
 		public ?string $dateUpdate,
 		public string $fullDesc,
-		public int $price
+		public int $price,
+		public array $images = []
 	)
 	{}
 
