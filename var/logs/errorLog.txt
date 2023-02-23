@@ -1,0 +1,1 @@
+2023-02-21 19:08:21 1064You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 2 in file C:\OSPanel\domains\eshop\src\Model\Database\RequestSql\UtilitySql.php on line 27

@@ -170,19 +170,11 @@ trait UtilitySql
 
 	function deleteItem(string $name, int $id)
 	{
-		session_start();
-		if (isset($_SESSION['USER']))
-		{
-			$tableName = mysqli_real_escape_string($this->connection, $name);
-			$idItem = mysqli_real_escape_string($this->connection, $id);
-			$query = "DELETE FROM $tableName WHERE id = $idItem";
+		$tableName = mysqli_real_escape_string($this->connection, $name);
+		$idItem = mysqli_real_escape_string($this->connection, $id);
+		$query = "DELETE FROM $tableName WHERE id = $idItem";
 
-			mysqli_query($this->connection, $query);
-			header("Location: /admin/?{$name}s&delete={$id}");
-		}
-		else
-		{
-			header('Location: /login/');
-		}
+		mysqli_query($this->connection, $query);
+		header("Location: /admin/?{$name}s&delete={$id}");
 	}
 }

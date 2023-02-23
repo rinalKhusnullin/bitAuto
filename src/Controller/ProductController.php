@@ -40,6 +40,14 @@ class ProductController extends BaseController
 
 	public function postDetailAction($id): void
 	{
+		session_start();
+		$token = filter_input(INPUT_POST, 'token',);
+
+		if (!$token || $token !== $_SESSION['token']) {
+			header($_SERVER['SERVER_PROTOCOL'] . ' 405 Method Not Allowed');
+			exit;
+		}
+
 		$db = MySql::getInstance();
 		$product = $db->getProductByID((int)$id);
 
@@ -53,7 +61,7 @@ class ProductController extends BaseController
 			!empty($_POST['userFullname']) && !empty($_POST['userTel'])
 			&& !empty($_POST['userEmail'])
 			&& !empty($_POST['userAddress'])
-		) // КОСТЫЛЬЬЬ
+		) // @todo КОСТЫЛЬЬЬ РИНАЛЬ НАДО СДЕЛАТЬ НОРМАЛЬНУЮ ВАЛИДАЦИЮ !!!!БЕЗ!!!! РЕГУЛЯРОК
 		{
 			$result = $db->createOrder(new Order(
 				1,

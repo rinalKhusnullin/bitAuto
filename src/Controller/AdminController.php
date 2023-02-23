@@ -136,6 +136,7 @@ class AdminController extends BaseController
 		$indexPage = (isset($_GET['page'])) ? (int)$_GET['page'] : 1;
 		$db = MySql::getInstance();
 		$tegs = $db->getTagList();
+		$_SESSION['token'] = md5(uniqid(mt_rand(), true));
 
 		if (array_key_exists('product', $_GET))
 		{
@@ -217,17 +218,31 @@ class AdminController extends BaseController
 
 	public function adminDeleteAction () :void
 	{
-		$table = array_key_first($_GET);
-		$id = $_GET[$table];
+		session_start();
+		$token = filter_input(INPUT_POST, 'token',);
+
+		if (!$token || $token !== $_SESSION['token']) {
+			header($_SERVER['SERVER_PROTOCOL'] . ' 405 Method Not Allowed');
+			exit;
+		}
+
+		$table = $_POST['table'];
+		$id = $_POST['id'];
 		$db = MySql::getInstance();
 		$db->deleteItem($table, $id);
-
 	}
 
 	public function adminChangeItem() : void
 	{
 		session_start();
+		$token = filter_input(INPUT_POST, 'token',);
 		$role = $_SESSION['USER'] ->role;
+
+		if (!$token || $token !== $_SESSION['token']) {
+			header($_SERVER['SERVER_PROTOCOL'] . ' 405 Method Not Allowed');
+			exit;
+		}
+
 		if (array_key_exists('item', $_POST))
 		{
 			if ($_POST['item'] === 'Product')
@@ -315,8 +330,7 @@ class AdminController extends BaseController
 						'content' => '<h1> Данные изменены </h1>',
 					]);
 				}
-			};
-
+			}
 		}
 	}
 
@@ -398,6 +412,13 @@ class AdminController extends BaseController
 	{
 		session_start();
 		$role = $_SESSION['USER'] ->role;
+		$token = filter_input(INPUT_POST, 'token',);
+
+		if (!$token || $token !== $_SESSION['token']) {
+			header($_SERVER['SERVER_PROTOCOL'] . ' 405 Method Not Allowed');
+			exit;
+		}
+
 		if (array_key_exists('item', $_POST))
 		{
 			if ($_POST['item'] === 'Product')
@@ -480,8 +501,7 @@ class AdminController extends BaseController
 						'content' => '<h1> Данные добавлены </h1>',
 					]);
 				}
-			};
+			}
 		}
-
 	}
 }

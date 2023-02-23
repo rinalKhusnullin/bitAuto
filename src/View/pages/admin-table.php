@@ -5,6 +5,7 @@
  * @var $content
  * @var $pagination
  * @var string $deleteMessage
+ * @var string $addItemLink
  */
 
 if(is_array($columns))

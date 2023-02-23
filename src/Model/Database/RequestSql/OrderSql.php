@@ -30,7 +30,7 @@ trait OrderSql
 		$comment = mysqli_real_escape_string($this->connection, $order->comment);
 
 		$query = "INSERT INTO `order` (product_id, product_price, status, date_creation, customer_name, customer_phone, customer_mail, customer_address, comment)
-					values ( $productId, $productPrice, '$status', CURRENT_DATE(), '$fullName', '$phone', '$mail', '$address', '$comment' )";
+					values ( $productId, $productPrice, '$status', CURRENT_TIMESTAMP(), '$fullName', '$phone', '$mail', '$address', '$comment' )";
 
 		return mysqli_query($this->connection,$query);
 	}

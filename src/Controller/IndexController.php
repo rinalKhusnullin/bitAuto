@@ -39,7 +39,7 @@ class IndexController extends BaseController
 		}
 		if (empty($products))
 		{
-			// По хорошему тут нужно вывести что товары не найдены
+			// @Todo По хорошему тут нужно вывести что товары не найдены
 		}
 		
 		session_start();
@@ -52,7 +52,7 @@ class IndexController extends BaseController
 			'content' => TemplateEngine::view('pages/index', [
 				'products' => $products,
 				'pagination' => TemplateEngine::view('components/pagination', [
-					'link' => '/?',
+					'link' => '/?', // @Todo прокидывать линк динамически, убрать из пагинации логику
 					'currentPage' => $indexPage,
 					'countPage' => $pageCount,
 				]),

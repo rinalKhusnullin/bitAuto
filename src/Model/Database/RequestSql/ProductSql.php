@@ -170,7 +170,7 @@ trait ProductSql
 		$price = $product->price;
 
 		$query = "INSERT INTO product (NAME, IS_ACTIVE, ID_BRAND,ID_TRANSMISSION, ID_CARCASE, DATE_CREATION, FULL_DESCRIPTION, PRODUCT_PRICE)
-					values ('$title', $isActive, $brandType, $transmissionType, $carcaseType, CURRENT_DATE(), '$fullDesc', $price)";
+					values ('$title', $isActive, $brandType, $transmissionType, $carcaseType, CURRENT_TIMESTAMP(), '$fullDesc', $price)";
 
 		return mysqli_query($this->connection,$query);
 	}
