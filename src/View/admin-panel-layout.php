@@ -47,5 +47,6 @@
 	</div>
 </div>
 <script src="/scripts/hideShowPassword.js"></script>
+<script src="/scripts/workWithImages.js"></script>
 </body>
 </html>
