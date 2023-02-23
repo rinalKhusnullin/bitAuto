@@ -1,7 +1,5 @@
 <?php
 
-echo 565656;
-
 //ini_set('display_errors', 1);
 
 // Название <input type="file">

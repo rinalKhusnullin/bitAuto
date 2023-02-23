@@ -34,7 +34,7 @@ class HtmlService
 					$id++;
 				}
 
-				return $form . '</div>' . '<label>Изображения:</label><div class="img-list" id="js-file-list"></div><div class="img-list" id="js-file-list"></div><input id="js-file" type="file" name="file[]" multiple accept=".jpg,.jpeg,.png,.gif">';
+				return $form . '</div>' . '<label>Изображения:</label><div class="img-list" id="js-file-list"></div><input id="js-file" type="file" name="file[]" multiple accept=".jpg,.jpeg,.png,.gif">';
 
 			case 'productId':
 			case 'productPrice':
