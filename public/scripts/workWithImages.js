@@ -8,7 +8,7 @@ form.onchange = function() {
 	{
 		let formData = new FormData();
 		let files = form.files;
-		[...files].forEach(elemnt => formData.append('file[]', input));
+		[...files].forEach(element => formData.append('file[]', element));
 
 		fetch('/upload.php', {
 			method: "POST",
