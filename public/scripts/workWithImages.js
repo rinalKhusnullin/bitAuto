@@ -7,10 +7,8 @@ form.onchange = function() {
 	else
 	{
 		let formData = new FormData();
-		console.log(form[0].files);
-		document.each(form[0].files, function(key, input) {
-			formData.append('file[]', input);
-		});
+		let files = form.files;
+		[...files].forEach(elemnt =>formData.append('file[]', input));
 
 		document.ajax({
 			type: 'POST',
