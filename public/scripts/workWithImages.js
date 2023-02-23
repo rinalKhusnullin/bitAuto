@@ -8,15 +8,11 @@ form.onchange = function() {
 	{
 		let formData = new FormData();
 		let files = form.files;
-		[...files].forEach(elemnt =>formData.append('file[]', input));
+		[...files].forEach(elemnt => formData.append('file[]', input));
 
-		document.ajax({
-			type: 'POST',
-			url: '/upload_image.php',
-			cache: false,
-			contentType: false,
-			processData: false,
-			data: formData,
+		fetch('/upload.php', {
+			method: "POST",
+			body: formData,
 			dataType: 'json',
 			success: function(msg) {
 				msg.forEach(function(row) {
@@ -34,10 +30,4 @@ form.onchange = function() {
 			},
 		});
 	}
-};
-
-/* Удаление загруженной картинки */
-function remove_img(target)
-{
-	$(target).parent().remove();
 }
