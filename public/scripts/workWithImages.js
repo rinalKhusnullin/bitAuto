@@ -10,7 +10,7 @@ form.onchange = function() {
 		let files = form.files;
 		[...files].forEach(element => formData.append('file[]', element));
 
-		fetch('/upload.php', {
+		fetch('/upload_image.php', {
 			method: "POST",
 			body: formData,
 			dataType: 'json',
