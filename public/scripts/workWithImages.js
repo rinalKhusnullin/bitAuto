@@ -14,7 +14,6 @@ form.addEventListener('change', evt => {
 			if (row.error == '')
 			{
 				let imgList = document.getElementById('js-file-list');
-				console.log(row.data);
 				let range = document.createRange();
 				range.selectNodeContents(imgList);
 				let imgBlock = range.createContextualFragment(row.data);
@@ -28,3 +27,7 @@ form.addEventListener('change', evt => {
 		//form.val('');
 	})
 })
+
+function remove_img(target){
+	target.parentNode.remove();
+}
