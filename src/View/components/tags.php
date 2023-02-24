@@ -16,7 +16,7 @@ $transmissions = $tags['transmission'];
             <?php foreach ($brands as $brand): ?>
                 <div class="dropdown__tag-item di">
                     <input class="dropdown__radio di" id="brand_<?=$brand?>" type="radio" name="brand" value="<?=$brand?>">
-                    <label class="dropdown__radio di" for="brand_<?=$brand?>"><?=$brand?></label>
+                    <label class="dropdown__radio di" for="brand_<?=$brand?>"><?= htmlspecialchars($brand) ?></label>
                 </div>
             <?php endforeach ?>
         </div>
@@ -25,7 +25,7 @@ $transmissions = $tags['transmission'];
             <?php foreach ($carceses as $carcase): ?>
                 <div class="dropdown__tag-item di">
                     <input class="dropdown__radio di" id="carcase_<?=$carcase?>" type="radio" name="carcase" value="<?=$carcase?>">
-                    <label class="dropdown__radio di" for="carcase_<?=$carcase?>"><?=$carcase?></label>
+                    <label class="dropdown__radio di" for="carcase_<?=$carcase?>"><?= htmlspecialchars($carcase) ?></label>
                 </div>
             <?php endforeach ?>
         </div>
@@ -34,7 +34,7 @@ $transmissions = $tags['transmission'];
             <?php foreach ($transmissions as $transmission): ?>
                 <div class="dropdown__tag-item di">
                     <input class="dropdown__radio di" id="transmission_<?=$transmission?>" type="radio" name="transmission" value="<?=$transmission?>">
-                    <label class="dropdown__radio di" for="transmission_<?=$transmission?>"><?=$transmission?></label>
+                    <label class="dropdown__radio di" for="transmission_<?=$transmission?>"><?= htmlspecialchars($transmission) ?></label>
                 </div>
             <?php endforeach ?>
         </div>

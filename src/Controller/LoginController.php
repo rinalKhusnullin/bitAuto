@@ -25,7 +25,7 @@ class LoginController extends BaseController
 		{
 			$login = $_POST['login'];
 			$password = $_POST['password'];
-			$error = 'Не верный лониг или пароль';
+			$error = 'Неверный логин или пароль';
 
 		//	Индетификация
 			$user = User::getUserByLogin($login);
