@@ -275,8 +275,11 @@ a.admin__add:hover {
 
 .td_edit
 {
-	height: fit-content;
+	height: initial;
 	flex: 1;
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
 }
 
 .tr_edit {
@@ -311,4 +314,8 @@ input[type="radio"]:checked + label {
 	width:20px;
 	height: 20px;
 	cursor: pointer;
+}
+
+.a_delete {
+	display: d;
 }

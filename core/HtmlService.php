@@ -30,7 +30,7 @@ class HtmlService
 
 				foreach ($value as $image)
 				{
-					$form .= "<input type='radio' id='image{$id}' name='img' value='$image' style='display:none;'><label for='image{$id}'><img class='admin-img' src='$image' alt='$image'></label>";
+					$form .= "<input type='radio' id='image{$id}' name='main_image' value='$image' style='display:none;'><label for='image{$id}'><input type='hidden' name='prev_images[]' value='$image'><img class='admin-img' src='$image' alt='$image'></label>";
 					$id++;
 				}
 
