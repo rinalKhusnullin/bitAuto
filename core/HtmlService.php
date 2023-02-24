@@ -24,17 +24,22 @@ class HtmlService
 			case 'images':
 				//$form = "<input class='admin-input' name='$key' type='file' multiple accept='image/*' >";
 				$data = serialize($value);
-				$form = "<div class='admin-images'>";
+				$form = "<div class='admin-images' id='js-file-list'>";
 				// "<div class='admin-images'><input type='hidden' class='admin-input' name='$key' type='file' value='{$data}'>";
 				$id = 0;
 
 				foreach ($value as $image)
 				{
-					$form .= "<input type='radio' id='image{$id}' name='main_image' value='$image' style='display:none;'><label for='image{$id}'><input type='hidden' name='prev_images[]' value='$image'><img class='admin-img' src='$image' alt='$image'></label>";
+					$form .= "<div class='img-item'><input type='hidden' name='images[]' value='$image'>
+								<input type='radio' id='image{$id}' name='main-image' value='$image' style='display:none;'>
+								<label for='image{$id}'>
+									<img class='admin-img' src='$image' alt='$image'>
+									<a href='#' class='delete-icon' onclick='remove_img(this); return false;'></a>
+								</label></div>";
 					$id++;
 				}
 
-				return $form . '</div>' . '<label>Изображения:</label><div class="img-list" id="js-file-list"></div><input id="js-file" type="file" name="file[]" multiple accept=".jpg,.jpeg,.png,.gif">';
+				return $form . '</div><input id="js-file" type="file" name="file[]" multiple accept=".jpg,.jpeg,.png,.gif">';
 
 			case 'productId':
 			case 'productPrice':

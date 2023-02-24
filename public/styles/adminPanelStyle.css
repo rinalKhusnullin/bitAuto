@@ -259,7 +259,8 @@ a.admin__add:hover {
 }
 
 .admin-img {
-	width: 250px;
+	max-width: 250px;
+	border: 1px solid #b8b8b8;
 }
 
 .tbody_edit {
@@ -305,7 +306,7 @@ input[type="radio"]:checked + label {
 	margin: 5px;
 }
 
-.img-item a {
+.delete-icon {
 	display: inline-block;
 	background: url('/images/icons/remove.png') 0 0 no-repeat;
 	position: absolute;
@@ -316,6 +317,6 @@ input[type="radio"]:checked + label {
 	cursor: pointer;
 }
 
-.a_delete {
-	display: d;
+.delete-table {
+	margin-top: -31px;
 }

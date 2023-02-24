@@ -133,22 +133,18 @@ class AdminController extends BaseController
 		}
 		$role = $_SESSION['USER'] ->role;
 
-		$indexPage = (isset($_GET['page'])) ? (int)$_GET['page'] : 1;
 		$db = MySql::getInstance();
-		$tegs = $db->getTagList();
 		$_SESSION['token'] = md5(uniqid(mt_rand(), true));
 
 		if (array_key_exists('product', $_GET))
 		{
 			$content = $db->getProductByID($_GET['product']);
-			$columns = array_keys((array)$content);
 			$tableName = 'Продукция';
 			$className = 'product';
 		}
 		elseif(array_key_exists('order', $_GET))
 		{
 			$content = $db->getOrderById($_GET['order']);
-			$columns = array_keys((array)$content);
 			$tableName = 'Заказы';
 			$className = 'Order';
 		}
@@ -164,7 +160,6 @@ class AdminController extends BaseController
 				exit;
 			}
 			$content = $db->getUserById($_GET['user']);
-			$columns = array_keys((array)$content);
 			$tableName = 'Пользователи';
 			$className = 'User';
 		}
@@ -172,27 +167,23 @@ class AdminController extends BaseController
 		{
 
 			$content = $db->getTagById($_GET['brand'], 'Brand');
-			$columns = array_keys((array)$content);
 			$tableName = 'Бренды';
 			$className = 'Brand';
 		}
 		elseif (array_key_exists('carcase', $_GET))
 		{
 			$content = $db->getTagById($_GET['carcase'], 'Carcase');
-			$columns = array_keys((array)$content);
 			$tableName = 'Кузова';
 			$className = 'Carcase';
 		}
 		elseif (array_key_exists('transmission', $_GET))
 		{
 			$content = $db->getTagById($_GET['transmission'], 'Transmission');
-			$columns = array_keys((array)$content);
 			$tableName = 'КПП';
 			$className = 'Transmission';
 		}
 		else
 		{
-			$columns = '';
 			$content = 'Выберите пункт меню';
 			$className = '';
 			$tableName = '';
@@ -669,11 +660,11 @@ class AdminController extends BaseController
 						// Вывод в форму: превью, кнопка для удаления и скрытое поле.
 						$data = '
 							<div class="img-item">
-							<input type="hidden" name="new-images[]" value="' . $name . '.' . $ext . '" >
-								<input id="' . $name . '" type="radio" name="new-main-img" value="' . $name . '.' . $ext . '" ' . $checked . ' >
+							<input type="hidden" name="images[]" value="' . $name . '.' . $ext . '" >
+								<input id="' . $name . '" type="radio" name="main-image" value="' . $name . '.' . $ext . '" ' . $checked . ' >
 								<label for="' . $name . '" class="">
-									<img src="' . $url_path . $name . '-thumb.' . $ext . '">
-									<a herf="#" onclick="remove_img(this); return false;"></a>
+									<img class="admin-img" src="' . $url_path . $name . '-thumb.' . $ext . '">
+									<a href="#" class="delete-icon" onclick="remove_img(this); return false;"></a>
 								</label>
 							</div>';
 					}

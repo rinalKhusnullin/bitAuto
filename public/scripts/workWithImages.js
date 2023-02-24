@@ -29,5 +29,7 @@ form.addEventListener('change', evt => {
 })
 
 function remove_img(target){
-	target.parentNode.remove();
+	let parent = target.parentElement;
+	let grand = parent.parentNode;
+	grand.remove();
 }
