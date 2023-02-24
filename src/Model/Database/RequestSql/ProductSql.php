@@ -140,7 +140,11 @@ trait ProductSql
 	{
 		foreach ($product as $key => $value)
 		{
+
 			if($key === 'images')
+			{
+var_dump($key);
+			}
 				continue; ///@todo добавить работу с картинками
 			$product->$key = mysqli_real_escape_string($this->connection, $value);
 		}

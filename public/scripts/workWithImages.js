@@ -4,7 +4,7 @@ form.addEventListener('change', evt => {
 	let formData = new FormData();
 	let files = form.files;
 	[...files].forEach(element => formData.append('file[]', element));
-	fetch('/upload_image.php', {
+	fetch('/admin/upload-image/', {
 		method: 'POST',
 		body: formData,
 	})

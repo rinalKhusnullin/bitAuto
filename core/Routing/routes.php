@@ -48,3 +48,6 @@ Router::post('/admin/edit/delete/', [new \ES\Controller\AdminController(),'admin
 
 Router::get('/admin/add/', [new \ES\Controller\AdminController(), 'adminAddAction']);
 Router::post('/admin/add/', [new \ES\Controller\AdminController(), 'adminAddItem']);
+
+
+Router::post('/admin/upload-image/', [new \ES\Controller\AdminController(), 'adminUploadImage']);
