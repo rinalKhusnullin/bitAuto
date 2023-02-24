@@ -669,7 +669,8 @@ class AdminController extends BaseController
 						// Вывод в форму: превью, кнопка для удаления и скрытое поле.
 						$data = '
 							<div class="img-item">
-								<input id="' . $name . '" type="radio" name="images" value="' . $name . '.' . $ext . '" ' . $checked . ' >
+							<input type="hidden" name="new-images[]" value="' . $name . '.' . $ext . '" >
+								<input id="' . $name . '" type="radio" name="new-main-img" value="' . $name . '.' . $ext . '" ' . $checked . ' >
 								<label for="' . $name . '" class="">
 									<img src="' . $url_path . $name . '-thumb.' . $ext . '">
 									<a herf="#" onclick="remove_img(this); return false;"></a>
