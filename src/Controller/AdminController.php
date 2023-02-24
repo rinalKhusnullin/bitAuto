@@ -243,9 +243,6 @@ class AdminController extends BaseController
 		{
 			if ($_POST['item'] === 'product')
 			{
-				echo '<pre>';
-				var_dump($_POST);
-				die;
 				$changedProduct = new \ES\Model\Product(
 					$_POST['id'],
 					$_POST['title'],
