@@ -23,30 +23,30 @@
                     <li class="product-detailed__characteristic">
                         <div class="product-detailed__name">Марка</div>
                         <div class="product-detailed__underline"></div>
-                        <div class="product-detailed__value"><?= $brandType ?></div>
+                        <div class="product-detailed__value"><?= htmlspecialchars($brandType) ?></div>
                     </li>
                     <li class="product-detailed__characteristic">
                         <div class="product-detailed__name">Тип кузова</div>
                         <div class="product-detailed__underline"></div>
-                        <div class="product-detailed__value"> <?= $carcaseType ?> </div>
+                        <div class="product-detailed__value"> <?= htmlspecialchars($carcaseType) ?> </div>
                     </li>
                     <li class="product-detailed__characteristic">
                         <div class="product-detailed__name">КПП</div>
                         <div class="product-detailed__underline"></div>
-                        <div class="product-detailed__value"> <?= $transmissionType ?> </div>
+                        <div class="product-detailed__value"> <?= htmlspecialchars($transmissionType) ?> </div>
                     </li>
                 </ul>
             </div>
             <div class="product-detailed__price">
                 <div class="product-detailed__price-title">Цена</div>
                 <div class="product-detailed__underline"></div>
-                <div class="product-detailed__price-value"><?= $price ?> &#8381</div>
+                <div class="product-detailed__price-value"><?= htmlspecialchars($price) ?> &#8381</div>
             </div>
             <button id="buy-btn" onclick="PopUpShow();" class="product-detailed__buy-btn">Купить</button>
         </div>
         <div class="product-detailed__description">
             <h2 class="product-detailed__subtitle">Описание</h2>
-            <div class="product-detailed__subdescription"> <?= $fullDesc ?>
+            <div class="product-detailed__subdescription"> <?= htmlspecialchars($fullDesc) ?>
             </div>
         </div>
     </div>
@@ -61,7 +61,7 @@
                 <div class="poppup__img">
                     <img src="/tmp-autoimg/<?=$id?>/1.png" alt="">
                 </div>
-                <h2 class="poppup__product-name"><?= $title ?></h2>
+                <h2 class="poppup__product-name"><?= htmlspecialchars($title) ?></h2>
                 <div class="poppup__price">
                     <div class="poppup__price-title">Цена</div>
                     <div class="product-detailed__underline"></div>
