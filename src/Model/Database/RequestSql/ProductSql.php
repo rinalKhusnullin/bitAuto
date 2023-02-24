@@ -145,6 +145,8 @@ trait ProductSql
 			{
 var_dump($key);
 			}
+			echo 88686;
+			die;
 				continue; ///@todo добавить работу с картинками
 			$product->$key = mysqli_real_escape_string($this->connection, $value);
 		}

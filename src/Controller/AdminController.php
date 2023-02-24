@@ -143,7 +143,7 @@ class AdminController extends BaseController
 			$content = $db->getProductByID($_GET['product']);
 			$columns = array_keys((array)$content);
 			$tableName = 'Продукция';
-			$className = 'Product';
+			$className = 'product';
 		}
 		elseif(array_key_exists('order', $_GET))
 		{
@@ -250,8 +250,11 @@ class AdminController extends BaseController
 
 		if (array_key_exists('item', $_POST))
 		{
-			if ($_POST['item'] === 'Product')
+			if ($_POST['item'] === 'product')
 			{
+				echo '<pre>';
+				var_dump($_POST);
+				die;
 				$changedProduct = new \ES\Model\Product(
 					$_POST['id'],
 					$_POST['title'],
@@ -666,7 +669,7 @@ class AdminController extends BaseController
 						// Вывод в форму: превью, кнопка для удаления и скрытое поле.
 						$data = '
 							<div class="img-item">
-								<input id="' . $name . '" type="radio" name="images[]" value="' . $name . '.' . $ext . '" ' . $checked . ' >
+								<input id="' . $name . '" type="radio" name="images" value="' . $name . '.' . $ext . '" ' . $checked . ' >
 								<label for="' . $name . '" class="">
 									<img src="' . $url_path . $name . '-thumb.' . $ext . '">
 									<a herf="#" onclick="remove_img(this); return false;"></a>

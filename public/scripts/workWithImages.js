@@ -17,7 +17,7 @@ form.addEventListener('change', evt => {
 				let range = document.createRange();
 				range.selectNodeContents(imgList);
 				let imgBlock = range.createContextualFragment(row.data);
-				imgList.appendChild(imgBlock);
+				imgList.append(imgBlock);
 			}
 			else
 			{
