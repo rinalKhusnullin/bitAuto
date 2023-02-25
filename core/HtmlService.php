@@ -50,7 +50,7 @@ class HtmlService
 
 
 
-				return $form . '</div><input id="js-file" type="file" name="file[]" multiple accept=".jpg,.jpeg,.png,.gif">';
+				return $form . '</div><input id="js-file" class="add-input" type="file" name="file[]" multiple accept=".jpg,.jpeg,.png,.gif">';
 
 			case 'productId':
 			case 'productPrice':
