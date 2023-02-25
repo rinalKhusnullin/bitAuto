@@ -5,11 +5,12 @@ namespace ES\Controller;
 use ES\HtmlService;
 use ES\Model\Order;
 use ES\config\ConfigurationController;
+use ES\Handler\Handler;
 use ES\Model\Database\MySql;
 
 class ProductController extends BaseController
 {
-	public function getDetailAction($id): void
+	public function getDetailAction($id, $errors = []): void
 	{
 		$db = MySql::getInstance();
 		$product = $db->getProductByID((int)$id);
@@ -25,7 +26,8 @@ class ProductController extends BaseController
 		$data['slider'] = TemplateEngine::view('components/slider', [
 			'id' => $id,
 			'images' => $product->images,
-			]);
+		]);
+		$data['errors'] = $errors;
 
 		session_start();
 		$role = array_key_exists('USER', $_SESSION) ? $_SESSION['USER']->role : 'user';
@@ -57,11 +59,15 @@ class ProductController extends BaseController
 			header('Location: /error/');
 		}
 
-		if (
-			!empty($_POST['userFullname']) && !empty($_POST['userTel'])
-			&& !empty($_POST['userEmail'])
-			&& !empty($_POST['userAddress'])
-		) // @todo КОСТЫЛЬЬЬ РИНАЛЬ НАДО СДЕЛАТЬ НОРМАЛЬНУЮ ВАЛИДАЦИЮ !!!!БЕЗ!!!! РЕГУЛЯРОК
+		$errors = Handler::handleOrder(
+			$_POST['userFullname'],
+			$_POST['userTel'],
+			$_POST['userEmail'],
+			$_POST['userAddress'],
+			$_POST['userComment']
+		);
+
+		if (empty($errors))
 		{
 			$result = $db->createOrder(new Order(
 				1,
@@ -78,7 +84,7 @@ class ProductController extends BaseController
 		}
 		else
 		{
-			header("Location: /product/$product->id/");
+			$this->getDetailAction($product->id, $errors);
 		}
 	}
 }
