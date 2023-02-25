@@ -392,7 +392,13 @@ class AdminController extends BaseController
 			$content = 'Выберите пункт меню';
 			$tableName = '';
 		}
-		$columns = array_keys((array)$content) ?: '' ;
+		$content = (array)$content;
+		$columns = array_keys($content) ?: '' ;
+		if (!array_key_exists('mainImage', $content))
+		{
+			$content['mainImage'] = '';
+		}
+
 		$db = MySql::getInstance();
 		$tegs = $db->getTagList();
 
