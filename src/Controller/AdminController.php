@@ -188,8 +188,12 @@ class AdminController extends BaseController
 			$className = '';
 			$tableName = '';
 		}
-		$columns = array_keys((array)$content) ?: '' ;
-
+		$content = (array)$content;
+		$columns = array_keys($content) ?: '' ;
+		if (!array_key_exists('mainImage', $content))
+		{
+			$content['mainImage'] = '';
+		}
 		$this->render('admin-panel-layout',[
 			'title' => 'admin',
 			'role' => $role,
@@ -199,7 +203,7 @@ class AdminController extends BaseController
 					'columns' => $columns ,
 					'className' => $className,
 					'len' => count($columns),
-					'content' => (array)$content,
+					'content' => $content,
 				]
 			)
 		]);
@@ -388,7 +392,13 @@ class AdminController extends BaseController
 			$content = 'Выберите пункт меню';
 			$tableName = '';
 		}
-		$columns = array_keys((array)$content) ?: '' ;
+		$content = (array)$content;
+		$columns = array_keys($content) ?: '' ;
+		if (!array_key_exists('mainImage', $content))
+		{
+			$content['mainImage'] = '';
+		}
+
 		$db = MySql::getInstance();
 		$tegs = $db->getTagList();
 
