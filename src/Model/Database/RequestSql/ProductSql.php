@@ -11,7 +11,7 @@ trait ProductSql
 
 	public function getImagesById(string $id) : array
 	{
-		$query = "SELECT PATH, IS_MAIN, ID_PRODUCT FROM image where ID_PRODUCT in ('$id')";
+		$query = "SELECT PATH, IS_MAIN, ID_PRODUCT FROM image where ID_PRODUCT having ('$id')";
 		$result = mysqli_query($this->connection, $query);
 		$images = [];
 
@@ -173,29 +173,35 @@ trait ProductSql
 				// Постоянная директория.
 				$path = $_SERVER['DOCUMENT_ROOT'] . '/uploads/main/';
 
-				if (empty($result))
+				if (!empty($result))
 				{
-					$query = "INSERT INTO image (is_main, id_product, PATH)
-										values ";
+					$query = "DELETE FROM image WHERE ID_PRODUCT = $product->id;";
+
+					mysqli_query($this->connection, $query);
+				}
+
+				if (!empty($product->images))
+				{
+					$query = "INSERT INTO image (is_main, id_product, PATH) values ";
 
 					foreach ($product->images as $row)
 					{
-						$filename = preg_replace("/[^a-z0-9\.-]/i", '', $row);
-						$mainImage = $product->mainImage === $filename ? 'true' : 'false';
+						$product->mainImage = ($product->mainImage === '') ? $row : $product->mainImage;
 
-						if (!empty($filename) && is_file($tmp_path . $filename))
+
+						$mainImage = $product->mainImage === $row ? 'true' : 'false';
+
+						$query .= " ($mainImage, '$product->id', '$row'),";
+						if (is_file($tmp_path . $row))
 						{
-							$query .= " ($mainImage, '$product->id', '$filename'),";
-
 							// Перенос оригинального файла
-							rename($tmp_path . $filename, $path . $filename);
+							rename($tmp_path . $row, $path . $row);
 
 							// Перенос превью
-							$file_name = pathinfo($filename, PATHINFO_FILENAME);
-							$file_ext = pathinfo($filename, PATHINFO_EXTENSION);
+							$file_name = pathinfo($row, PATHINFO_FILENAME);
+							$file_ext = pathinfo($row, PATHINFO_EXTENSION);
 							$thumb = $file_name . '-thumb.' . $file_ext;
 							rename($tmp_path . $thumb, $path . $thumb);
-
 						}
 					}
 					$query = rtrim($query, ",") . ';';
@@ -208,10 +214,6 @@ trait ProductSql
 					}
 
 					mysqli_query($this->connection, $query);
-				}
-				else
-				{
-				//другие сценарии
 				}
 			}
 
@@ -243,10 +245,54 @@ trait ProductSql
 		$carcaseType = mysqli_real_escape_string($this->connection, $product->carcaseType);
 		$fullDesc = mysqli_real_escape_string($this->connection, $product->fullDesc);
 		$price = $product->price;
+		$images = $product->images;
+		$mainImage = $product->mainImage;
+
+		// Временная директория.
+		$tmp_path = $_SERVER['DOCUMENT_ROOT'] . '/uploads/tmp/';
+
+		// Постоянная директория.
+		$path = $_SERVER['DOCUMENT_ROOT'] . '/uploads/main/';
+
 
 		$query = "INSERT INTO product (NAME, IS_ACTIVE, ID_BRAND,ID_TRANSMISSION, ID_CARCASE, DATE_CREATION, FULL_DESCRIPTION, PRODUCT_PRICE)
-					values ('$title', $isActive, $brandType, $transmissionType, $carcaseType, CURRENT_TIMESTAMP(), '$fullDesc', $price)";
+					values ('$title', $isActive, $brandType, $transmissionType, $carcaseType, CURRENT_TIMESTAMP(), '$fullDesc', $price);";
 
-		return mysqli_query($this->connection,$query);
+		$product = mysqli_query($this->connection,$query);
+
+		if ($product && !empty($images)) {
+
+			$queryId = "SELECT MAX(ID) FROM product;";
+			$idPro = (int) mysqli_fetch_column(mysqli_query($this->connection, $queryId));
+			$queryImage = "INSERT INTO image (PATH, IS_MAIN, ID_PRODUCT) values";
+
+			foreach ($images as $image)
+			{
+				$filename = preg_replace("/[^a-z0-9\.-]/i", '', $image);
+				$mainImage = $image === $mainImage ? 'true' : 'false';
+				$queryImage .= " ('$image', $mainImage, $idPro),";
+
+				// Перенос оригинального файла
+				rename($tmp_path . $filename, $path . $filename);
+
+				// Перенос превью
+				$file_name = pathinfo($filename, PATHINFO_FILENAME);
+				$file_ext = pathinfo($filename, PATHINFO_EXTENSION);
+				$thumb = $file_name . '-thumb.' . $file_ext;
+				rename($tmp_path . $thumb, $path . $thumb);
+			}
+			if (file_exists($tmp_path)) {
+				$pattern = $tmp_path . '*';
+				foreach (glob($pattern) as $file) {
+					unlink($file);
+				}
+			}
+
+			$queryImage = rtrim($queryImage, ",") . ';';
+
+			mysqli_query($this->connection,$queryImage);
+		}
+
+		return $product;
 	}
 }

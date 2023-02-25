@@ -16,7 +16,7 @@ class Product
 		public string $fullDesc,
 		public int $price,
 		public ?string $mainImage = '',
-		public array $images = []
+		public ?array $images = []
 	)
 	{}
 

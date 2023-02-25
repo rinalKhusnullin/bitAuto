@@ -255,8 +255,8 @@ class AdminController extends BaseController
 					date('Y-m-d H:i:s'),
 					$_POST['fullDesc'],
 					$_POST['price'],
-					$_POST['main-image'],
-					$_POST['images']
+					$_POST['main-image'] ?? '',
+					$_POST['images'] ?? []
 				);
 				if ((MySql::getInstance())->updateProduct($changedProduct))
 				{
@@ -420,7 +420,7 @@ class AdminController extends BaseController
 
 		if (array_key_exists('item', $_POST))
 		{
-			if ($_POST['item'] === 'Product')
+			if ($_POST['item'] === 'product')
 			{
 				$changedProduct = new \ES\Model\Product(
 					1,
@@ -432,8 +432,11 @@ class AdminController extends BaseController
 					$_POST['dateCreation'],
 					date('Y-m-d H:i:s'),
 					$_POST['fullDesc'],
-					$_POST['price']
+					$_POST['price'],
+					$_POST['main-image'] ?? '',
+					$_POST['images'] ?? []
 				);
+
 				if ((MySql::getInstance())->createProduct($changedProduct))
 				{
 					$this->render('admin-panel-layout',[
