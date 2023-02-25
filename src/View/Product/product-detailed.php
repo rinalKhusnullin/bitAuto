@@ -70,28 +70,28 @@
                 </div>
             </div>
 
-            <form name="orderForm" action="" method="post"> <!-- need to add handler -->
+            <form name="orderForm" onsubmit="return orderValidate();" action="" method="post"> <!-- need to add handler -->
 				<input type="hidden" name="token" value="<?= $_SESSION['token'] ?? ''  // @TODO прокидывать?>">
 
                 <div class="poppup__subtitle">ФИО*</div>
-                <input id='name_input' type="text" class="poppup__input" name="userFullname">
+                <input id='name_input' type="text" class="poppup__input" name="userFullname" required>
                 <div id='name_error' class="poppup__error"><?= (!empty($errors['name'])) ? $errors['name'] : '' ?></div>
 
                 <div class="poppup__subtitle">Телефон*</div>
-                <input id="tel" type="tel" class="poppup__input" name="userTel" data-phone-pattern data-phone-clear = "false">
+                <input id="tel" type="tel" class="poppup__input" name="userTel" data-phone-pattern data-phone-clear = "false" required>
                 <div id='tel_error' class="poppup__error"> <?= (!empty($errors['numberPhone'])) ? $errors['numberPhone'] : '' ?> </div>
 
                 <div class="poppup__subtitle">Email*</div>
-                <input type="email" class="poppup__input" name="userEmail">
+                <input type="email" class="poppup__input" name="userEmail" required>
                 <div id='email_error' class="poppup__error"> <?= (!empty($errors['email'])) ? $errors['email'] : '' ?> </div>
 
                 <div class="poppup__subtitle">Адрес*</div>
-                <input type="text" class="poppup__input" name="userAddress">
+                <input type="text" class="poppup__input" name="userAddress" required>
                 <div id='address_error' class="poppup__error"> <?= (!empty($errors['address'])) ? $errors['address'] : '' ?> </div>
 
                 <div class="poppup__subtitle">Пожелания к заказу</div>
                 <textarea type="textarea" class="poppup__input big-input" name="userComment"></textarea>
-                <button type="submit" onclick="return orderValidate();" class="poppup__input send-btn">Оформить заказ</button>
+                <button type="submit" class="poppup__input send-btn">Оформить заказ</button>
             </form>
         </div>
     </div>
