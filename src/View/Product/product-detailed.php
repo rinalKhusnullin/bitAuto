@@ -12,7 +12,7 @@
 ?>
 <div class="product-detailed__">
     <div class="product-detailed__main">
-        <h1 class="product-detailed__main-title"> <?= $title ?> </h1>
+        <h1 class="product-detailed__main-title"> <?= htmlspecialchars($title) ?> </h1>
     </div>
     <div class="product-detailed">
         <div class="product-detailed__img">
@@ -68,16 +68,26 @@
                     <div class="poppup__price-value"><?= $price ?> &#8381</div>
                 </div>
             </div>
+
             <form action="" method="post"> <!-- need to add handler -->
 				<input type="hidden" name="token" value="<?= $_SESSION['token'] ?? ''  // @TODO прокидывать?>">
+
                 <div class="poppup__subtitle">ФИО*</div>
                 <input type="text" class="poppup__input" name="userFullname" required>
+                <div class="poppup__error"><?= (!empty($errors['name'])) ? $errors['name'] : '' ?></div>
+
                 <div class="poppup__subtitle">Телефон*</div>
                 <input type="tel" class="poppup__input" name="userTel" required>
+                <div class="poppup__error"> <?= (!empty($errors['numberPhone'])) ? $errors['numberPhone'] : '' ?> </div>
+
                 <div class="poppup__subtitle">Email*</div>
                 <input type="email" class="poppup__input" name="userEmail" required>
+                <div class="poppup__error"> <?= (!empty($errors['email'])) ? $errors['email'] : '' ?> </div>
+
                 <div class="poppup__subtitle">Адрес*</div>
                 <input type="text" class="poppup__input" name="userAddress" required>
+                <div class="poppup__error"> <?= (!empty($errors['address'])) ? $errors['address'] : '' ?> </div>
+
                 <div class="poppup__subtitle">Пожелания к заказу</div>
                 <textarea type="textarea" class="poppup__input big-input" name="userComment"></textarea>
                 <button type="submit" class="poppup__input send-btn">Оформить заказ</button>
@@ -96,3 +106,9 @@
         $("#popup").hide();
     }
 </script>
+
+<?php if (!empty($errors)) : ?>
+    <script> 
+        $("#popup").show();
+    </script>
+<?php endif ?>
