@@ -661,11 +661,17 @@ footer{
     border: 1.5px solid rgba(34, 34, 34, 0.7);
     border-radius: 6px;
     padding: 3px 15px;
-    margin-bottom: 18px;
+    margin-bottom: 5px;
     width: 400px;
     height: 30px;
     font-size: 20px;
     color: #3d3f44;
+}
+
+.poppup__error{
+    color: #c41230;
+    font-size: 12px;
+    margin-bottom: 18px;
 }
 
 .send-btn{
