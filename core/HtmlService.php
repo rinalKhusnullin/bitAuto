@@ -8,7 +8,7 @@ use ES\Model\Database\RequestSql\TagsSql;
 
 class HtmlService
 {
-	public static function getHtmlTag($key, $value): ?string
+	public static function getHtmlTag($key, $value, $mainImage): ?string
 	{
 		$tags = MySql::getInstance();
 
@@ -28,16 +28,27 @@ class HtmlService
 				// "<div class='admin-images'><input type='hidden' class='admin-input' name='$key' type='file' value='{$data}'>";
 				$id = 0;
 
-				foreach ($value as $image)
+				if ($value)
 				{
-					$form .= "<div class='img-item'><input type='hidden' name='images[]' value='$image'>
-								<input type='radio' id='image{$id}' name='main-image' value='$image' style='display:none;'>
+					foreach ($value as $image)
+					{
+						$isMain = $image === $mainImage ? 'checked' : '';
+
+						// <img class="admin-img" src="' . $url_path . $name . '-thumb.' . $ext . '">
+						$imagePathArray = explode('.', $image);
+						$imagePath = implode('-thumb.', $imagePathArray);
+						$form .= "<div class='img-item'><input type='hidden' name='images[]' value='{$image}'>
+								<input type='radio' id='image{$id}' name='main-image' value='{$image}' style='display:none;' {$isMain}>
 								<label for='image{$id}'>
-									<img class='admin-img' src='$image' alt='$image'>
+									<img class='admin-img' src='/uploads/main/{$imagePath}' alt='{$image}'>
+									
 									<a href='#' class='delete-icon' onclick='remove_img(this); return false;'></a>
 								</label></div>";
-					$id++;
+						$id++;
+					}
 				}
+
+
 
 				return $form . '</div><input id="js-file" type="file" name="file[]" multiple accept=".jpg,.jpeg,.png,.gif">';
 

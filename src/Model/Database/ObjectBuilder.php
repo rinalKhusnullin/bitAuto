@@ -6,18 +6,57 @@ use ES\HtmlService;
 use ES\Model\Product;
 use ES\Model\Order;
 use ES\Model\User;
+use ES\Model\Database\RequestSql;
 
 class ObjectBuilder
 {
-	public static function buildProducts(array $goods): array
+	public static function buildProducts( $result): array
 	{
-		$products = [];
-		foreach ($goods as $good)
+		while ($row = mysqli_fetch_assoc($result))
 		{
-			$good[] = array_map(fn ($path) => "/tmp-autoimg/{$good[0]}/$path",
-				HtmlService::getPathImagesById((int)$good[0]));
-			$products[] = new Product(...$good);
+			$products[] = new Product(
+				$row['id'],
+				$row['name'],
+				$row['IS_ACTIVE'],
+				$row['brand'],
+				$row['transmission'],
+				$row['carcase'],
+				$row['DATE_CREATION'],
+				$row['DATE_UPDATE'],
+				$row['FULL_DESCRIPTION'],
+				$row['PRODUCT_PRICE'],
+				'',
+				[],
+			);
 		}
+
+		$db=MySql::getInstance();
+
+		$id = '';
+
+		foreach ($products as $product)
+		{
+			$id .= $product->id . ', ';
+		}
+		$id = substr($id, 0, -2);
+
+		$images = $db->getImagesById($id);
+
+		foreach ($products as $product)
+		{
+			foreach ($images as $image)
+			{
+				if ((int)$image['id'] === $product->id)
+				{
+					$product->images[] = $image['path'];
+					if($image['isMain'] === '1')
+					{
+						$product->mainImage = $image['path'];
+					}
+				}
+			}
+		}
+
 		return $products;
 	}
 

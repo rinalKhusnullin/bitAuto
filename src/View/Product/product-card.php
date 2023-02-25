@@ -6,12 +6,13 @@
  * @var string $carcaseType ,
  * @var string $transmission ,
  * @var int $price
+ * @var string $mainImage
  */
 ?>
 
 <div class="product-card">
 	<div class="product-card__img-block">
-		<img src="/tmp-autoimg/<?= $id ?>/<?= 1 ?>.png" alt="/tmp-autoimg/ImageHolder.png" class="product-card__img">
+		<img src="/uploads/main/<?= $mainImage ?>" alt="<?= htmlspecialchars($title) ?>" class="product-card__img">
 	</div>
 	<div class="product-card__description">
 		<h2 class="product-card__title">

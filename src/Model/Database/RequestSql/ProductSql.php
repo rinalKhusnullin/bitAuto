@@ -8,6 +8,24 @@ use ES\Model\Database\ObjectBuilder;
 
 trait ProductSql
 {
+
+	public function getImagesById(string $id) : array
+	{
+		$query = "SELECT PATH, IS_MAIN, ID_PRODUCT FROM image where ID_PRODUCT in ('$id')";
+		$result = mysqli_query($this->connection, $query);
+		$images = [];
+
+		while ($row = mysqli_fetch_assoc($result))
+		{
+			$images[] = [
+				'id' => $row['ID_PRODUCT'],
+				'path' => $row['PATH'],
+				'isMain' => $row['IS_MAIN']
+			];
+		}
+		return $images;
+	}
+
     public function getProducts(int $page = 0, string $isActive = 'active') : array
 	{
 		switch ($isActive)
@@ -22,7 +40,7 @@ trait ProductSql
 			default:
 				$activityQuery = " WHERE (p.IS_ACTIVE IS NOT NULL) ";
 				break;
-		};
+		}
 
 		$countProductsOnPage = ConfigurationController::getConfig('CountProductsOnPage');
 		$page = ($page > 1) ? $page * $countProductsOnPage - $countProductsOnPage : 0;
@@ -36,7 +54,7 @@ trait ProductSql
                     limit $countProductsOnPage offset $page";
 
         $result = mysqli_query($this->connection, $query);
-		return ObjectBuilder::buildProducts(mysqli_fetch_all($result));
+		return ObjectBuilder::buildProducts($result);
     }
 
     function getProductByID($id) : ?Product
@@ -49,7 +67,8 @@ trait ProductSql
 					inner join transmission t on p.ID_TRANSMISSION = t.id
 					where $id = p.id";
 		$result = mysqli_query($this->connection, $query);
-		return ObjectBuilder::buildProducts(mysqli_fetch_all($result))[0];
+		$productById = ObjectBuilder::buildProducts($result);
+		return $productById[0];
 	}
 
     function getProductsByQuery(string $sQuery, int $page = 0, string $isActive = 'active') : array
@@ -81,8 +100,7 @@ trait ProductSql
             limit $countProductOnPage offset $page";
 
 		$result = mysqli_query($this->connection, $query);
-
-		return ObjectBuilder::buildProducts(mysqli_fetch_all($result));
+		return ObjectBuilder::buildProducts($result);
 
 	}
 
@@ -133,20 +151,70 @@ trait ProductSql
 		$query .= implode(' and ', $tags) . " limit $countProductOnPage offset $page";
 
 		$result = mysqli_query($this->connection, $query);
-		return ObjectBuilder::buildProducts(mysqli_fetch_all($result));
+		return ObjectBuilder::buildProducts($result);
 	}
 
 	function updateProduct(Product $product)
 	{
 		foreach ($product as $key => $value)
 		{
-
 			if($key === 'images')
 			{
-var_dump($key);
+				$query = "SELECT
+					PATH,
+					IS_MAIN
+				FROM image
+				WHERE ID_PRODUCT = '$product->id'";
+				$result = mysqli_fetch_all(mysqli_query($this->connection, $query));
+
+				// Временная директория.
+				$tmp_path = $_SERVER['DOCUMENT_ROOT'] . '/uploads/tmp/';
+
+				// Постоянная директория.
+				$path = $_SERVER['DOCUMENT_ROOT'] . '/uploads/main/';
+
+				if (empty($result))
+				{
+					$query = "INSERT INTO image (is_main, id_product, PATH)
+										values ";
+
+					foreach ($product->images as $row)
+					{
+						$filename = preg_replace("/[^a-z0-9\.-]/i", '', $row);
+						$mainImage = $product->mainImage === $filename ? 'true' : 'false';
+
+						if (!empty($filename) && is_file($tmp_path . $filename))
+						{
+							$query .= " ($mainImage, '$product->id', '$filename'),";
+
+							// Перенос оригинального файла
+							rename($tmp_path . $filename, $path . $filename);
+
+							// Перенос превью
+							$file_name = pathinfo($filename, PATHINFO_FILENAME);
+							$file_ext = pathinfo($filename, PATHINFO_EXTENSION);
+							$thumb = $file_name . '-thumb.' . $file_ext;
+							rename($tmp_path . $thumb, $path . $thumb);
+
+						}
+					}
+					$query = rtrim($query, ",") . ';';
+
+					if (file_exists($tmp_path)) {
+						$pattern = $tmp_path . '*';
+						foreach (glob($pattern) as $file) {
+							unlink($file);
+						}
+					}
+
+					mysqli_query($this->connection, $query);
+				}
+				else
+				{
+				//другие сценарии
+				}
 			}
-			echo 88686;
-			die;
+
 				continue; ///@todo добавить работу с картинками
 			$product->$key = mysqli_real_escape_string($this->connection, $value);
 		}
@@ -165,6 +233,7 @@ var_dump($key);
 
 		return mysqli_query($this->connection, $query);
 	}
+
 	function createProduct(Product $product)
 	{
 		$title = mysqli_real_escape_string($this->connection, $product->title);

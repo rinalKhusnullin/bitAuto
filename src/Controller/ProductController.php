@@ -24,7 +24,7 @@ class ProductController extends BaseController
 		$data = (array)$product;
 		$data['slider'] = TemplateEngine::view('components/slider', [
 			'id' => $id,
-			'images' => HtmlService::getPathImagesById($id),
+			'images' => $product->images,
 			]);
 
 		session_start();

@@ -228,6 +228,7 @@ class AdminController extends BaseController
 		$db->deleteItem($table, $id);
 	}
 
+	//eeee
 	public function adminChangeItem() : void
 	{
 		session_start();
@@ -253,7 +254,9 @@ class AdminController extends BaseController
 					$_POST['dateCreation'],
 					date('Y-m-d H:i:s'),
 					$_POST['fullDesc'],
-					$_POST['price']
+					$_POST['price'],
+					$_POST['main-image'],
+					$_POST['images']
 				);
 				if ((MySql::getInstance())->updateProduct($changedProduct))
 				{
@@ -337,7 +340,7 @@ class AdminController extends BaseController
 		if (array_key_exists('product', $_GET))
 		{
 			$content = get_class_vars(Product::class);
-			$className = 'Product';
+			$className = 'product';
 			$tableName = 'Продукция';
 		}
 		elseif(array_key_exists('order', $_GET))
@@ -547,6 +550,7 @@ class AdminController extends BaseController
 			}
 		}
 
+		// @TODO ощраничить размер картинок на входе
 		$response = array();
 		foreach ($files as $key => $file)
 		{
@@ -657,8 +661,8 @@ class AdminController extends BaseController
 						// Вывод в форму: превью, кнопка для удаления и скрытое поле.
 						$data = '
 							<div class="img-item">
-							<input type="hidden" name="images[]" value="' . $name . '.' . $ext . '" >
-								<input id="' . $name . '" type="radio" name="main-image" value="' . $name . '.' . $ext . '" ' . $checked . ' >
+								<input type="hidden" name="images[]" value="' . $name . '.' . $ext . '" >
+								<input id="' . $name . '" type="radio" name="main-image" value="' . $name . '.' . $ext . '" ' . $checked . ' style="display:none;">
 								<label for="' . $name . '" class="">
 									<img class="admin-img" src="' . $url_path . $name . '-thumb.' . $ext . '">
 									<a href="#" class="delete-icon" onclick="remove_img(this); return false;"></a>

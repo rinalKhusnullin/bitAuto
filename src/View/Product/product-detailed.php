@@ -8,6 +8,7 @@
  * @var string $transmission
  * @var string $fullDesc
  * @var string $slider
+ * @var string $mainImage
  */
 ?>
 <div class="product-detailed__">
@@ -59,7 +60,7 @@
 
             <div class="poppup__product-info">
                 <div class="poppup__img">
-                    <img src="/tmp-autoimg/<?=$id?>/1.png" alt="">
+                    <img src="/uploads/main/<?= $mainImage ?>" alt="<?= htmlspecialchars($title) ?>">
                 </div>
                 <h2 class="poppup__product-name"><?= htmlspecialchars($title) ?></h2>
                 <div class="poppup__price">
