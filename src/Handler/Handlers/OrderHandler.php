@@ -14,11 +14,6 @@ trait OrderHandler
         {
             $errors['name'] = "Введите поле ФИО";
         }
-        else 
-        {
-            if (!Validator::isValidName($name))
-                $errors['name'] = 'Некорректное значение ФИО';
-        }
 
         if (empty(trim($tel)))
         {
