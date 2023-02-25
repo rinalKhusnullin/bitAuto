@@ -10,7 +10,7 @@ use ES\Model\Database\RequestSql;
 
 class ObjectBuilder
 {
-	public static function buildProducts( $result): array
+	public static function buildProducts($result): array
 	{
 		while ($row = mysqli_fetch_assoc($result))
 		{

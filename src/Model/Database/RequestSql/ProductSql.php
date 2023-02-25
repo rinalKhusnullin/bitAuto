@@ -11,7 +11,7 @@ trait ProductSql
 
 	public function getImagesById(string $id) : array
 	{
-		$query = "SELECT PATH, IS_MAIN, ID_PRODUCT FROM image where ID_PRODUCT in ('$id')";
+		$query = "SELECT PATH, IS_MAIN, ID_PRODUCT FROM image where ID_PRODUCT having ('$id')";
 		$result = mysqli_query($this->connection, $query);
 		$images = [];
 
