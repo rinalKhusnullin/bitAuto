@@ -26,7 +26,7 @@ class AdminController extends BaseController
 		$indexPage = (isset($_GET['page'])) ? (int)$_GET['page'] : 1;
 		$db = MySql::getInstance();
 		$deleteMessage = [];
-		$tableName = '';
+
 
 		$pageCount = 0;
 
@@ -105,7 +105,7 @@ class AdminController extends BaseController
 		$this->render('admin-panel-layout',[
 			'title' => 'admin',
 			'role' => $role,
-			'content' => \ES\Controller\TemplateEngine::view('pages/admin-table' ,
+			'content' => TemplateEngine::view('pages/admin-table' ,
 				[
 					'addItemLink' => $addItemLink,
 					'tableName' => $tableName,
@@ -196,7 +196,7 @@ class AdminController extends BaseController
 		$this->render('admin-panel-layout',[
 			'title' => 'admin',
 			'role' => $role,
-			'content' => \ES\Controller\TemplateEngine::view('pages/admin-edit' ,
+			'content' => TemplateEngine::view('pages/admin-edit' ,
 				[
 					'tableName' => $tableName,
 					'columns' => $columns ,
@@ -247,7 +247,7 @@ class AdminController extends BaseController
 		{
 			if ($_POST['item'] === 'product')
 			{
-				$changedProduct = new \ES\Model\Product(
+				$changedProduct = new Product(
 					$_POST['id'],
 					$_POST['title'],
 					$_POST['isActive'],
@@ -312,7 +312,7 @@ class AdminController extends BaseController
 			}
 			else if ($_POST['item'] === 'Order')
 			{
-				$changedOrder = new \ES\Model\Order(
+				$changedOrder = new Order(
 					$_POST['id'],
 					$_POST['fullName'],
 					$_POST['phone'],
@@ -398,12 +398,10 @@ class AdminController extends BaseController
 			$content['mainImage'] = '';
 		}
 
-		$db = MySql::getInstance();
-
 		$this->render('admin-panel-layout',[
 			'title' => 'admin',
 			'role' => $role,
-			'content' => \ES\Controller\TemplateEngine::view('pages/admin-edit' ,
+			'content' => TemplateEngine::view('pages/admin-edit' ,
 				[
 					'tableName' => $tableName,
 					'columns' => $columns ,
@@ -430,7 +428,7 @@ class AdminController extends BaseController
 		{
 			if ($_POST['item'] === 'product')
 			{
-				$changedProduct = new \ES\Model\Product(
+				$changedProduct = new Product(
 					1,
 					$_POST['title'],
 					$_POST['isActive'],
@@ -491,7 +489,7 @@ class AdminController extends BaseController
 			}
 			else if ($_POST['item'] === 'Order')
 			{
-				$changedOrder = new \ES\Model\Order(
+				$changedOrder = new Order(
 					1,
 					$_POST['fullName'],
 					$_POST['phone'],
