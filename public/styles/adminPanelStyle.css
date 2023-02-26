@@ -33,6 +33,14 @@ HEADER
 	justify-content: space-between;
 }
 
+.header-admin-clear {
+	background: #871111;
+	color: #dedede;
+	padding: 1px 7px 1px 7px;
+	border-radius: 10px;
+	margin-right: 20px;
+}
+
 
 .user-info > span {
 	width: 300px;
@@ -75,6 +83,7 @@ HEADER
 
 .user-info {
 	display: flex;
+	flex: 1;
 }
 /*
 
@@ -341,4 +350,10 @@ input[type="radio"]:checked + label {
 	margin: 2px 2px 7px 2px;
 	background: #ffcccc;
 	padding: 3px;
+}
+
+.clear-block {
+	flex: 1;
+	display: flex;
+	justify-content: flex-end;
 }

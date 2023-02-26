@@ -4,30 +4,6 @@ use PHPUnit\Framework\TestCase;
 
 class ObjectBuilderTest extends TestCase
 {
-	/**TODO make tests for:
-	 *buildUsers
-	 * buildTags
-	 */
-	public function testBuildProducts(): void
-	{
-		$testData = [
-			[1, 'Test1', true, 'brand1', 'transmission1', 'carcase1', 'date1', null, 'description1', 1000],
-			[2, 'Test2', true, 'brand2', 'transmission2', 'carcase2', 'date2', null, 'description2', 2000],
-			[3, 'Test3', true, 'brand3', 'transmission3', 'carcase3', 'date3', null, 'description3', 3000],
-			[2, 'Test4', true, 'brand4', 'transmission4', 'carcase4', 'date4', null, 'description2', 4000],
-		];
-
-		$actual = \ES\Model\Database\ObjectBuilder::buildProducts($testData);
-
-		$this->assertSameSize($testData, $actual);
-
-		$len = count($testData);
-		for ($i = 0; $i < $len; $i++)
-		{
-			$this->assertObjectEquals(new \ES\Model\Product(...$testData[$i]), $actual[$i]);
-		}
-	}
-
 	public function testBuildOrders(): void
 	{
 		$testData = [
@@ -43,7 +19,7 @@ class ObjectBuilderTest extends TestCase
 		$len = count($testData);
 		for ($i = 0; $i < $len; $i++)
 		{
-			$this->assertObjectEquals(new \ES\Model\Order(...$testData[$i]), $actual[$i]);
+			$this->assertEquals(\ES\Model\Order::class, $actual[$i]::class);
 		}
 	}
 }

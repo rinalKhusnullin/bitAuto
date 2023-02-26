@@ -40,7 +40,9 @@
 			<span>Пользователь: <?=$role?> </span> <!-- Имя пользователя -->
 			<a href="/" target="_blank">На сайт</a>
 			<a href="/logout/">Logout</a>
-
+			<?php if($role==='admin') : ?>
+				<div class="clear-block"><a href="/admin/clear/" class="header-admin-clear">Очистка<br>данных</a></div>
+			<?php endif ?>
 		</label>
 	</header>
 	<div class="container">
