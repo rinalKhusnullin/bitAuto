@@ -71,7 +71,7 @@
             </div>
 
             <form name="orderForm" onsubmit="return orderValidate();" action="" method="post"> <!-- need to add handler -->
-				<input type="hidden" name="token" value="<?= $_SESSION['token'] ?? ''  // @TODO прокидывать?>">
+				<input type="hidden" name="token" value="<?= $_SESSION['token'] ?? '' ?>">
 
                 <div class="poppup__subtitle">ФИО*</div>
                 <input id='name_input' type="text" class="poppup__input" name="userFullname" required>

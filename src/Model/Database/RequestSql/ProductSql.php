@@ -217,7 +217,7 @@ trait ProductSql
 				}
 			}
 
-				continue; ///@todo добавить работу с картинками
+				continue;
 			$product->$key = mysqli_real_escape_string($this->connection, $value);
 		}
 		$isActive = ($product->isActive) ? 1 : 0;
