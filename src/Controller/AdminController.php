@@ -692,4 +692,10 @@ class AdminController extends BaseController
 		echo json_encode($response, JSON_UNESCAPED_UNICODE);
 		exit();
 	}
+
+	public function adminClearImages() : void
+	{
+		ES\Model\Database\MySql::clearUnusedImages();
+		header('Location: /admin/');
+	}
 }

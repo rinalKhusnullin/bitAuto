@@ -51,3 +51,5 @@ Router::post('/admin/add/', [new \ES\Controller\AdminController(), 'adminAddItem
 
 
 Router::post('/admin/upload-image/', [new \ES\Controller\AdminController(), 'adminUploadImage']);
+
+Router::get('/admin/clear/', [new \ES\Controller\AdminController(), 'adminClearImages']);

@@ -183,4 +183,29 @@ trait UtilitySql
 		mysqli_query($this->connection, $query);
 		header("Location: /admin/?{$name}s&delete={$id}");
 	}
+
+	static public function clearUnusedImages()
+	{
+		$query = "SELECT PATH FROM image";
+		$actualyImages = mysqli_fetch_all(mysqli_query(self::getInstance()->connection,$query));
+		$actualyImages = array_map(fn($image)=>$image[0],$actualyImages);
+
+		$path = ROOT . '/public/uploads/main/';
+		$allImages = scandir($path);
+
+		$diff = array_diff($allImages,$actualyImages);
+
+		unset($diff[0],$diff[1]);
+
+		foreach($diff as $item)
+		{
+			if (stristr($item, '-thumb')) continue;
+			if (!file_exists($path . $item)) continue;
+			unlink($path . $item);
+
+			$item = str_replace('.', '-thumb.', $item);
+			if (!file_exists($path . $item)) continue;
+			unlink($path . $item);
+		}
+	}
 }
