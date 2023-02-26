@@ -560,7 +560,6 @@ class AdminController extends BaseController
 			}
 		}
 
-		// @TODO ощраничить размер картинок на входе
 		$response = array();
 		foreach ($files as $key => $file)
 		{

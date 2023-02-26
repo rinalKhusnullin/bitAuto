@@ -420,6 +420,12 @@ footer{
     transition: .6s;
 }
 
+.product-not-found {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
 /* pagination */
 .pagination{
     margin: 0 auto;

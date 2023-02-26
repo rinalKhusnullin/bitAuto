@@ -9,11 +9,10 @@ class IndexController extends BaseController
 {
 	public function indexAction(): void
 	{
-
-
 		$indexPage = (isset($_GET['page'])) ? (int)$_GET['page'] : 1;
 		$db = MySql::getInstance();
 		$tags = $db->getTagList();
+		$emptyProduct = false;
 
 		if (isset($_GET['brand']) || isset($_GET['transmission']) || isset($_GET['carcase'])) //Если пользователь выбрал категории
 		{
@@ -28,7 +27,6 @@ class IndexController extends BaseController
 		else if (isset($_GET['search_query']))
 		{
 			$searchQuery = $_GET['search_query'];
-
 			$products = $db->getProductsByQuery($searchQuery, $indexPage, 'active');
 			$pageCount = $db->getPageCountByQuery($searchQuery, 'active');
 		}
@@ -39,8 +37,10 @@ class IndexController extends BaseController
 		}
 		if (empty($products))
 		{
-			// @Todo По хорошему тут нужно вывести что товары не найдены
+			$products = 'Товар не найден';
+			$emptyProduct = true;
 		}
+		$products = (array)$products;
 		
 		session_start();
 		$role = array_key_exists('USER' , $_SESSION)? $_SESSION['USER']->role : 'user';
@@ -51,6 +51,7 @@ class IndexController extends BaseController
 			'role' => $role,
 			'content' => TemplateEngine::view('pages/index', [
 				'products' => $products,
+				'emptyProduct' => $emptyProduct,
 				'pagination' => TemplateEngine::view('components/pagination', [
 					'link' => '/?', // @Todo прокидывать линк динамически, убрать из пагинации логику
 					'currentPage' => $indexPage,

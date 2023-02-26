@@ -101,7 +101,6 @@ trait ProductSql
 
 		$result = mysqli_query($this->connection, $query);
 		return ObjectBuilder::buildProducts($result);
-
 	}
 
     function getProductsByTags($brand, $carcase, $transmission, int $page = 0, string $isActive = 'active'): array

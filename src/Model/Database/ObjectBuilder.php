@@ -12,6 +12,7 @@ class ObjectBuilder
 {
 	public static function buildProducts($result): array
 	{
+		$products = [];
 		while ($row = mysqli_fetch_assoc($result))
 		{
 			$products[] = new Product(
@@ -29,6 +30,7 @@ class ObjectBuilder
 				[],
 			);
 		}
+		$products = (array)$products;
 
 		$db=MySql::getInstance();
 
