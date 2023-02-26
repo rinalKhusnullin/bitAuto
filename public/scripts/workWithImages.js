@@ -9,26 +9,33 @@ form.addEventListener('change', evt => {
 		body: formData,
 	})
 		.then((response) => response.json())
-		.then((msg) =>{
-		msg.forEach(function(row) {
-			if (row.error == '')
-			{
-				let imgList = document.getElementById('js-file-list');
-				let range = document.createRange();
-				range.selectNodeContents(imgList);
-				let imgBlock = range.createContextualFragment(row.data);
-				imgList.append(imgBlock);
-			}
-			else
-			{
-				alert(row.error);
-			}
-		});
-		//form.val('');
-	})
-})
+		.then((msg) => {
+			msg.forEach(function(row) {
+				if (row.error == '')
+				{
+					let imgList = document.getElementById('js-file-list');
+					let range = document.createRange();
+					range.selectNodeContents(imgList);
+					let imgBlock = range.createContextualFragment(row.data);
+					imgList.append(imgBlock);
+				}
+				else
+				{
+					let input = document.getElementById('js-file');
+					let parent = input.parentNode;
 
-function remove_img(target){
+					let need = document.createElement('div');
+					need.className = 'error-img';
+					need.innerHTML = '<div>'+row.error + '</div>' + '<div><a href="#" class="delete-icon-alert" onClick="remove_img(this); return false;"></a></div>';
+
+					parent.insertBefore(need, input);
+				}
+			});
+		});
+});
+
+function remove_img(target)
+{
 	let parent = target.parentElement;
 	let grand = parent.parentNode;
 	grand.remove();

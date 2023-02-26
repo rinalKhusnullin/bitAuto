@@ -8,6 +8,10 @@
  */
 ?>
 
+<?php if(count($content) <= 1):?>
+	<div><?= $content[0]?></div>
+<?php return; endif;?>
+
 <form action="" method="POST">
 	<table>
 		<caption> <?= $tableName ?> </caption>
@@ -19,7 +23,7 @@
 			<tr class="tr_edit">
 				<th class="th_edit"><?= $columns[$i] ?></th>
 
-				<td class="td_edit"> <?= ES\HtmlService::getHtmlTag($columns[$i], $content[$columns[$i]], $content["mainImage"]) ?> </td>
+				<td class="td_edit"> <?= ES\HtmlService::getHtmlTag($columns[$i], $content[$columns[$i]], $content["mainImage"]??'') ?> </td>
 			</tr>
 		<?php endfor; ?>
 		<tr class="tr_edit">

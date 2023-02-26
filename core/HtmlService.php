@@ -8,7 +8,7 @@ use ES\Model\Database\RequestSql\TagsSql;
 
 class HtmlService
 {
-	public static function getHtmlTag($key, $value, $mainImage): ?string
+	public static function getHtmlTag($key, $value, $mainImage=''): ?string
 	{
 		$tags = MySql::getInstance();
 
@@ -22,10 +22,8 @@ class HtmlService
 				return "<input class='admin-input' name='$key' type='hidden' value='$value'>$value";
 
 			case 'images':
-				//$form = "<input class='admin-input' name='$key' type='file' multiple accept='image/*' >";
 				$data = serialize($value);
 				$form = "<div class='admin-images' id='js-file-list'>";
-				// "<div class='admin-images'><input type='hidden' class='admin-input' name='$key' type='file' value='{$data}'>";
 				$id = 0;
 
 				if ($value)
@@ -34,7 +32,6 @@ class HtmlService
 					{
 						$isMain = $image === $mainImage ? 'checked' : '';
 
-						// <img class="admin-img" src="' . $url_path . $name . '-thumb.' . $ext . '">
 						$imagePathArray = explode('.', $image);
 						$imagePath = implode('-thumb.', $imagePathArray);
 						$form .= "<div class='img-item'><input type='hidden' name='images[]' value='{$image}'>

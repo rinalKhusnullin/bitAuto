@@ -190,10 +190,7 @@ class AdminController extends BaseController
 		}
 		$content = (array)$content;
 		$columns = array_keys($content) ?: '' ;
-		if (!array_key_exists('mainImage', $content))
-		{
-			$content['mainImage'] = '';
-		}
+
 		$this->render('admin-panel-layout',[
 			'title' => 'admin',
 			'role' => $role,
