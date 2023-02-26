@@ -378,7 +378,7 @@ footer{
 
 .product-card__title{
     margin-bottom: 10px;
-    max-width: 220px;
+    width: 220px;
 }
 
 .product-card__hlink{
@@ -593,7 +593,7 @@ footer{
     width:100%;
     height:100%;
     background-color: rgba(0,0,0,0.8);
-    overflow:hidden;
+    overflow:auto;
     top: 0;
     left: 0;
     position:fixed;
@@ -601,26 +601,33 @@ footer{
 }
 
 .popup__content{
-    margin: 20px auto auto auto;
+    margin: 20px auto 20px auto;
     border-radius: 10px;
-    width: 1300px;
-    min-height: 650px;
-    padding:10px;
+    width: 90%;
+    min-height: 90%;
+    height: auto;
+    padding:20px;
     background-color: white;
     box-shadow: 0px 0px 10px #000;
 }
 
 .poppup__container{
-    width: 1200px;
     margin: 0 auto;
     display: flex;
+    justify-content: center;
+}
+
+.poppup__main-title{
+    display: flex;
+    align-items: center;
     justify-content: space-between;
+    text-align: center;
 }
 
 .popup__exit{
-    margin-left: 1275px;
     border: 0;
     background: white;
+    font-size: 25px;
 }
 
 .poppup__img{
@@ -632,12 +639,11 @@ footer{
 
 .poppup__img img{
     width: 100%;
+    height: 100%;
     object-fit: contain;
 }
 
 .poppup__title{
-    margin-bottom: 20px;
-    margin-left: 50px;
     font-size: 30px;
     font-weight: 500;
 }
@@ -650,6 +656,7 @@ footer{
 .poppup__product-info {
     padding-top: 30px;
     width: 45%;
+    margin-right: 50px;
 }
 
 .poppup__product-name {
@@ -666,12 +673,11 @@ footer{
 .poppup__input{
     border: 1.5px solid rgba(34, 34, 34, 0.7);
     border-radius: 6px;
-    padding: 3px 15px;
+    padding: 10px 15px;
     margin-bottom: 5px;
     width: 400px;
-    height: 30px;
-    font-size: 20px;
-    color: #3d3f44;
+    font-size: 22px;
+    color: #3d3f44dc;
 }
 
 .poppup__error{
@@ -770,9 +776,6 @@ footer{
 }
 
 /* swiper */
-.swiper{
-    height: 400px;
-}
 
 .swiper-slide{
     text-align: center;
