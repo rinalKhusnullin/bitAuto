@@ -134,4 +134,15 @@ class HtmlService
 				return $value;
 		}
 	}
+
+	public static function getLink(array $args, $link = '') :string
+	{
+		$link .= '?';
+		foreach ($args as $key => $get)
+		{
+			if ($key === 'page') continue;
+			$link .= "$key=$get&";
+		}
+		return $link;
+	}
 }

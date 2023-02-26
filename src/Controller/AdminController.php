@@ -9,6 +9,7 @@ use ES\Model\Tags\Brand;
 use ES\Model\Tags\Carcase;
 use ES\Model\Tags\Transmission;
 use ES\Model\User;
+use ES;
 
 class AdminController extends BaseController
 {
@@ -97,9 +98,10 @@ class AdminController extends BaseController
 
 		if (isset($_GET['delete']))
 		{
-			$deleteMessage[] = "Элеиент id = {$_GET['delete']} успешно уданел";
+			$deleteMessage[] = "Элеиент id = {$_GET['delete']} успешно удален";
 		}
 
+		$link = ES\HtmlService::getLink($_GET,$_SERVER['REDIRECT_URL']);
 		$this->render('admin-panel-layout',[
 			'title' => 'admin',
 			'role' => $role,
@@ -110,7 +112,7 @@ class AdminController extends BaseController
 					'columns' => $columns ,
 					'deleteMessage' => $deleteMessage,
 					'pagination' => TemplateEngine::view('components/pagination', [
-						'link' => '/admin/?',
+						'link' => $link,
 						'currentPage' => $indexPage,
 						'countPage' => $pageCount,
 					]),

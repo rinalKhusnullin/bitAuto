@@ -4,6 +4,8 @@ namespace ES\Controller;
 
 use ES\config\ConfigurationController;
 use ES\Model\Database\MySql;
+use ES;
+
 
 class IndexController extends BaseController
 {
@@ -21,6 +23,7 @@ class IndexController extends BaseController
 			$brand = isset($_GET['brand']) ? $_GET['brand'] : null;
 			$carcase = isset($_GET['carcase']) ? $_GET['carcase'] : null;
 			$transmission =  isset($_GET['transmission']) ? $_GET['transmission'] : null;
+
 
 			// Возвращает массив из товаров и количества позиций
 			$products = $db->getProductsByTags($brand, $carcase, $transmission, $indexPage, 'active');
@@ -43,7 +46,7 @@ class IndexController extends BaseController
 			$emptyProduct = true;
 		}
 		$products = (array)$products;
-		
+		$link = ES\HtmlService::getLink($_GET);
 		session_start();
 		$role = array_key_exists('USER' , $_SESSION)? $_SESSION['USER']->role : 'user';
 
@@ -59,7 +62,7 @@ class IndexController extends BaseController
 				'products' => $products,
 				'emptyProduct' => $emptyProduct,
 				'pagination' => TemplateEngine::view('components/pagination', [
-					'link' => '/?', // @Todo прокидывать линк динамически, убрать из пагинации логику
+					'link' => $link,
 					'currentPage' => $indexPage,
 					'countPage' => $pageCount,
 				]),
