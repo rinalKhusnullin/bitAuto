@@ -54,8 +54,10 @@
 </div>
 <div class="popup" id="popup">
     <div class="popup__content">
-        <button class="popup__exit" onclick="PopUpHide();">✖</button>
-        <h1 class="poppup__title">Форма заказа</h1>
+        <div class="poppup__main-title">
+            <h1 class="poppup__title">Форма заказа</h1>
+            <button class="popup__exit" onclick="PopUpHide();">✖</button>
+        </div>
         <div class="poppup__container">
 
             <div class="poppup__product-info">
@@ -70,8 +72,8 @@
                 </div>
             </div>
 
-            <form name="orderForm" onsubmit="return orderValidate();" action="" method="post"> <!-- need to add handler -->
-				<input type="hidden" name="token" value="<?= $_SESSION['token'] ?? '' ?>">
+            <form class="poppup__form" name="orderForm" onsubmit="return orderValidate();" action="" method="post"> <!-- need to add handler -->
+				<input type="hidden" name="token" value="<?= $_SESSION['token'] ?? ''?>">
 
                 <div class="poppup__subtitle">ФИО*</div>
                 <input id='name_input' type="text" class="poppup__input" name="userFullname" required>
