@@ -1029,3 +1029,17 @@ label{
     border-radius: 5px;
 }
 
+.send-btn{
+    transition: 0.5s;
+}
+
+.send-btn:hover{
+    font-size: 27px;
+    transition: .5s;
+}
+
+.send-btn:active{
+    background: #3d3f44;
+    transition: background .3s, font-size .2s;
+    font-size: 26px;
+}
