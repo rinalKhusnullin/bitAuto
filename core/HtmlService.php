@@ -12,9 +12,9 @@ class HtmlService
 	{
 		$tags = MySql::getInstance();
 
-		$brand = $tags->getTags('brand');
-		$carcase = $tags->getTags('carcase');
-		$transmission = $tags->getTags('transmission');
+		$brand = $tags->getTagByName('brand');
+		$carcase = $tags->getTagByName('carcase');
+		$transmission = $tags->getTagByName('transmission');
 
 		switch ($key)
 		{

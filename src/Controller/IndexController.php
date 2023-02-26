@@ -11,7 +11,9 @@ class IndexController extends BaseController
 	{
 		$indexPage = (isset($_GET['page'])) ? (int)$_GET['page'] : 1;
 		$db = MySql::getInstance();
-		$tags = $db->getTagList();
+		$brands = $db->getTagByName('brand');
+		$carcases = $db->getTagByName('carcase');
+		$transmissions = $db->getTagByName('transmission');
 		$emptyProduct = false;
 
 		if (isset($_GET['brand']) || isset($_GET['transmission']) || isset($_GET['carcase'])) //Если пользователь выбрал категории
@@ -47,7 +49,11 @@ class IndexController extends BaseController
 
 		$this->render('layout', [
 			'title' => ConfigurationController::getConfig('TITLE'),
-			'tags' => $tags,
+			'tags' => TemplateEngine::view('components/tags', [
+				'brands' => $brands,
+				'carcases' => $carcases,
+				'transmissions' => $transmissions,
+			]),
 			'role' => $role,
 			'content' => TemplateEngine::view('pages/index', [
 				'products' => $products,

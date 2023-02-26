@@ -17,7 +17,10 @@ class LoginController extends BaseController
 			header('Location: /admin/?products');
 		}
 
-		$tags = MySql::getInstance()->getTagList();
+		$db = MySql::getInstance();
+		$brands = $db->getTagByName('brand');
+		$carcases = $db->getTagByName('carcase');
+		$transmissions = $db->getTagByName('transmission');
 
 		$errors = [];
 
@@ -58,7 +61,11 @@ class LoginController extends BaseController
 		$this->render('layout', [
 			'title' => ConfigurationController::getConfig('TITLE_LOG_IN', 'AutoBit Log In'),
 			'role' => $role,
-			'tags' => $tags,
+			'tags' => TemplateEngine::view('components/tags', [
+				'brands' => $brands,
+				'carcases' => $carcases,
+				'transmissions' => $transmissions,
+			]),
 			'content' => TemplateEngine::view('pages/login', [
 					'errors' => $errors,
 				]),

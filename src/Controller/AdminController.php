@@ -56,7 +56,7 @@ class AdminController extends BaseController
 		}
 		elseif (isset($_GET['brands']))
 		{
-			$content = $db->getTags('Brand');
+			$content = $db->getTagByName('Brand');
 			$columns = (!empty($content)) ? array_keys((array)$content[0]) : '';
 			$pageCount = $db->getPageCount('','brand');
 			$tableName = 'Бренды';
@@ -64,7 +64,7 @@ class AdminController extends BaseController
 		}
 		elseif (isset($_GET['carcases']))
 		{
-			$content = $db->getTags('Carcase');
+			$content = $db->getTagByName('Carcase');
 			$columns = (!empty($content)) ? array_keys((array)$content[0]) : '';
 			$pageCount = $db->getPageCount('','carcase');
 			$tableName = 'Кузов';
@@ -72,7 +72,7 @@ class AdminController extends BaseController
 		}
 		elseif (isset($_GET['transmissions']))
 		{
-			$content = $db->getTags('Transmission');
+			$content = $db->getTagByName('Transmission');
 			$columns = (!empty($content)) ? array_keys((array)$content[0]) : '';
 			$pageCount = $db->getPageCount('','transmission');
 			$tableName = 'Коробка передач';
@@ -397,7 +397,6 @@ class AdminController extends BaseController
 		}
 
 		$db = MySql::getInstance();
-		$tegs = $db->getTagList();
 
 		$this->render('admin-panel-layout',[
 			'title' => 'admin',

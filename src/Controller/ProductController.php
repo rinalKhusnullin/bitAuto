@@ -14,7 +14,9 @@ class ProductController extends BaseController
 	{
 		$db = MySql::getInstance();
 		$product = $db->getProductByID((int)$id);
-		$tags = $db->getTagList();
+		$brands = $db->getTagByName('brand');
+		$carcases = $db->getTagByName('carcase');
+		$transmissions = $db->getTagByName('transmission');
 
 		if ($product === null)
 		{
@@ -35,7 +37,11 @@ class ProductController extends BaseController
 		$this->render('layout', [
 			'title' => ConfigurationController::getConfig('TITLE'),
 			'role' => $role,
-			'tags' => $tags,
+			'tags' => TemplateEngine::view('components/tags', [
+				'brands' => $brands,
+				'carcases' => $carcases,
+				'transmissions' => $transmissions,
+			]),
 			'content' => TemplateEngine::view('Product/product-detailed', $data),
 		]);
 	}
