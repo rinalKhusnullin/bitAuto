@@ -134,24 +134,4 @@ class HtmlService
 				return $value;
 		}
 	}
-
-	public static function getPathImagesById(int $id): array
-	{
-		$path = ROOT . "/public/tmp-autoimg/$id";
-		if (!file_exists($path))
-		{
-			return [];
-		}
-		$files = scandir($path);
-		$images = [];
-		foreach ($files as $file)
-		{
-			if (!preg_match('~^[0-9A-Za-z].[A-Za-z]+$~', $file))
-			{
-				continue;
-			}
-			$images[] = $file;
-		}
-		return $images;
-	}
 }
