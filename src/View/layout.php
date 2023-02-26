@@ -100,7 +100,7 @@
 						<li class="hamburger__item">
 							<a href="##" id="mb_dropdown" class="header__menu-link dropdown-btn undroped" onclick="mb_dropdown(); return false">Категории</a>
 							<div class="header__dropdown-tags di" id="mb_dropdown-content">
-								<?= \ES\Controller\TemplateEngine::view('components/tags', ['tags' => $tags]) // @TODO Убрать логику из всех шаблонов в контролеры ?>
+								<?= $tags ?>
 							</div>
 						</li>
 						<li class="hamburger__item">
