@@ -43,6 +43,7 @@ HEADER
 	border-radius: 10px;
 	margin-right: 20px;
 	transition: .5s;
+	text-align: center;
 }
 
 .header-admin-clear:hover{
@@ -431,12 +432,12 @@ input[type="radio"]:checked + label {
 	background:#4e555b;
 	color: white;
 	border-radius: 10px;
-	transition: .3s; 
+	transition: .3s;
 }
 
 .change-btn:hover{
 	background:#c41230;
-	transition: .3s; 
+	transition: .3s;
 }
 
 .td_edit select {
