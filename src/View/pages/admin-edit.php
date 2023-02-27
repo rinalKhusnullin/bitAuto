@@ -14,7 +14,7 @@
 
 <form action="" method="POST">
 	<table>
-		<caption> <?= $tableName ?> </caption>
+		<caption class="edit_caption"> <?= $tableName ?> </caption>
 		<tbody class="tbody_edit">
 
 		<input type="hidden" name="item" value="<?= $className ?>">
@@ -29,7 +29,7 @@
 		<tr class="tr_edit">
 			<th class="th_edit"></th>
 			<td class="td_edit">
-				<button type="submit">Сохранить</button>
+				<button class="save-btn" type="submit">Сохранить</button>
 			</td>
 		</tr>
 
@@ -46,7 +46,7 @@
 				<input type="hidden" name="token" value="<?= $_SESSION['token'] ?? '' ?>">
 				<input type="hidden" name="table" value="<?= $className ?>">
 				<input type="hidden" name="id" value="<?= $content['id'] ?>">
-				<input type="submit" value="Удалить">
+				<input class="delete-btn" type="submit" value="Удалить">
 			</form>
 		</td>
 	</tr>
