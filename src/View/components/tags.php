@@ -1,10 +1,10 @@
 <?php
 	/**
 	 * @var array $tags
+	 * @var $brands
+	 * @var $carcases
+	 * @var $transmissions
 	 */
-$brands = $tags['brand'];
-$carceses = $tags['carcase'];
-$transmissions = $tags['transmission'];
 ?>
 
 
@@ -14,17 +14,21 @@ $transmissions = $tags['transmission'];
             <div class="dropdown__tag-name di">Марка</div>
             <?php foreach ($brands as $brand): ?>
                 <div class="dropdown__tag-item di">
-                    <input class="dropdown__radio di" id="brand_<?=$brand?>" type="radio" name="brand" value="<?=$brand?>">
-                    <label class="dropdown__radio di" for="brand_<?=$brand?>"><?=$brand?></label>
+                    <label class="dropdown__radio di">
+                        <input class="dropdown__radio di" id="brand_<?=$brand->id?>" type="radio" name="brand" value="<?=$brand->value?>">
+                        <?= htmlspecialchars($brand->value) ?>
+                    </label>
                 </div>
             <?php endforeach ?>
         </div>
         <div class="dropdown__tag di">
             <div class="dropdown__tag-name di">Тип кузова</div>
-            <?php foreach ($carceses as $carcase): ?>
+            <?php foreach ($carcases as $carcase): ?>
                 <div class="dropdown__tag-item di">
-                    <input class="dropdown__radio di" id="carcase_<?=$carcase?>" type="radio" name="carcase" value="<?=$carcase?>">
-                    <label class="dropdown__radio di" for="carcase_<?=$carcase?>"><?=$carcase?></label>
+                    <label class="dropdown__radio di">
+                        <input class="dropdown__radio di" id="carcase_<?=$carcase->id?>" type="radio" name="carcase" value="<?=$carcase->value?>">
+                        <?= htmlspecialchars($carcase->value) ?>
+                    </label>
                 </div>
             <?php endforeach ?>
         </div>
@@ -32,8 +36,10 @@ $transmissions = $tags['transmission'];
             <div class="dropdown__tag-name di">КПП</div>
             <?php foreach ($transmissions as $transmission): ?>
                 <div class="dropdown__tag-item di">
-                    <input class="dropdown__radio di" id="transmission_<?=$transmission?>" type="radio" name="transmission" value="<?=$transmission?>">
-                    <label class="dropdown__radio di" for="transmission_<?=$transmission?>"><?=$transmission?></label>
+                    <label class="dropdown__radio di">
+                        <input class="dropdown__radio di" id="transmission_<?=$transmission->id?>" type="radio" name="transmission" value="<?=$transmission->value?>">
+                        <?= htmlspecialchars($transmission->value) ?>
+                    </label>
                 </div>
             <?php endforeach ?>
         </div>

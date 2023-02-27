@@ -11,7 +11,16 @@ class LoginController extends BaseController
 {
 	public function getLoginAction(): void
 	{
-		$tags = MySql::getInstance()->getTagList();
+		session_start();
+		if (isset($_SESSION['USER']))
+		{
+			header('Location: /admin/?products');
+		}
+
+		$db = MySql::getInstance();
+		$brands = $db->getTagByName('brand');
+		$carcases = $db->getTagByName('carcase');
+		$transmissions = $db->getTagByName('transmission');
 
 		$errors = [];
 
@@ -19,9 +28,7 @@ class LoginController extends BaseController
 		{
 			$login = $_POST['login'];
 			$password = $_POST['password'];
-			$hash = password_hash('111', PASSWORD_DEFAULT);
-
-			$error = 'Не верный лониг или пароль';
+			$error = 'Неверный логин или пароль';
 
 		//	Индетификация
 			$user = User::getUserByLogin($login);
@@ -33,7 +40,7 @@ class LoginController extends BaseController
 			else
 			{
 			//	аутентификация
-				$isPasswordCorrect = password_verify($password, $hash);
+				$isPasswordCorrect = password_verify($password, $user->password);
 
 				if (!$isPasswordCorrect)
 				{
@@ -49,13 +56,16 @@ class LoginController extends BaseController
 				}
 			}
 		}
-		session_start();
 		$role = array_key_exists('USER' , $_SESSION)? $_SESSION['USER']->role : 'user';
 
 		$this->render('layout', [
 			'title' => ConfigurationController::getConfig('TITLE_LOG_IN', 'AutoBit Log In'),
 			'role' => $role,
-			'tags' => $tags,
+			'tags' => TemplateEngine::view('components/tags', [
+				'brands' => $brands,
+				'carcases' => $carcases,
+				'transmissions' => $transmissions,
+			]),
 			'content' => TemplateEngine::view('pages/login', [
 					'errors' => $errors,
 				]),

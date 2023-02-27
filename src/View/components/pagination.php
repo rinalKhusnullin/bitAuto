@@ -4,12 +4,6 @@
  * @var int $currentPage
  * @var $link
  */
-
-foreach ($_GET as $key => $get)
-{
-    if ($key === 'page') continue;
-    $link .= "$key=$get&";
-}
 ?>
 
 <div class="pagination">

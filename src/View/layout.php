@@ -2,7 +2,7 @@
 /**
  * @var string $title
  * @var $content
- * @var array $tags
+ * @var $tags
  * @var string $role
  */
 
@@ -61,7 +61,7 @@
 				</p>
 			</div>
 			<?php if($role==='admin') : ?>
-			<a href="/admin/" class="header__admin">Admin</a>
+			<a href="/admin/?products" class="header__admin">Admin</a>
 			<?php endif ?>
 		</div>
 	</div>
@@ -80,7 +80,7 @@
 					<div class="header__dropdown-menu">
 						<a href="##" id="dropdown-btn" class="header__menu-link dropdown-btn undroped" onclick="dropdown(); return false">Категории</a>
 						<div class="header__dropdown-tags di" id="dropdown-content">
-							<?= \ES\Controller\TemplateEngine::view('components/tags', ['tags' => $tags]) ?>
+							<?= $tags ?>
 						</div>
 					</div>
 				</li>
@@ -100,7 +100,7 @@
 						<li class="hamburger__item">
 							<a href="##" id="mb_dropdown" class="header__menu-link dropdown-btn undroped" onclick="mb_dropdown(); return false">Категории</a>
 							<div class="header__dropdown-tags di" id="mb_dropdown-content">
-								<?= \ES\Controller\TemplateEngine::view('components/tags', ['tags' => $tags]) ?>
+								<?= $tags ?>
 							</div>
 						</li>
 						<li class="hamburger__item">

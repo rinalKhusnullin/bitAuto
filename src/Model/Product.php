@@ -14,14 +14,17 @@ class Product
 		public string $dateCreation,
 		public ?string $dateUpdate,
 		public string $fullDesc,
-		public int $price
+		public int $price,
+		public ?string $mainImage = '',
+		public ?array $images = []
 	)
 	{}
 
 	public function equals(Product $product): bool
 	{
 		return $this->id === $product->id && $this->title === $product->title && $this->isActive === $product->isActive
-			&& $this->brandType === $product->brandType && $this->transmissionType === $product->transmissionType && $this->carcaseType === $product->carcaseType
+			&& $this->brandType === $product->brandType && $this->transmissionType === $product->transmissionType
+			&& $this->carcaseType === $product->carcaseType
 			&& $this->dateCreation === $product->dateCreation && $this->dateUpdate === $product->dateUpdate
 			&& $this->fullDesc === $product->fullDesc && $this->price === $product->price;
 	}

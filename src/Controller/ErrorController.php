@@ -9,7 +9,10 @@ class ErrorController extends BaseController
 {
 	public function getSystemErrorAction(\Exception $e = null) : void
 	{
-		$tags = MySql::getInstance()->getTagList();
+		$db = MySql::getInstance();
+		$brands = $db->getTagByName('brand');
+		$carcases = $db->getTagByName('carcase');
+		$transmissions = $db->getTagByName('transmission');
 		if($e !== null)
 		{
 			$log = date('Y-m-d H:i:s') .' '. $e->getCode() . $e->getMessage() . ' in file ' . $e->getFile() . ' on line ' . $e->getLine() .PHP_EOL;
@@ -21,7 +24,11 @@ class ErrorController extends BaseController
 		echo TemplateEngine::view('layout', [
 			'title' => ConfigurationController::getConfig('TITLE'),
 			'role' => $role,
-			'tags' => $tags,
+			'tags' => TemplateEngine::view('components/tags', [
+				'brands' => $brands,
+				'carcases' => $carcases,
+				'transmissions' => $transmissions,
+			]),
 			'content' => TemplateEngine::view('pages/404', []),
 		]);
 	}

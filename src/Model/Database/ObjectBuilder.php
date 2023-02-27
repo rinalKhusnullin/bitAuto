@@ -2,22 +2,65 @@
 
 namespace ES\Model\Database;
 
+use ES\HtmlService;
 use ES\Model\Product;
 use ES\Model\Order;
 use ES\Model\User;
-
+use ES\Model\Database\RequestSql;
 
 class ObjectBuilder
 {
-    public static function buildProducts(array $goods): array
+	public static function buildProducts($result): array
 	{
-        $products = [];
-		foreach ($goods as $good)
+		$products = [];
+		while ($row = mysqli_fetch_assoc($result))
 		{
-			$products[] = new Product(...$good);
+			$products[] = new Product(
+				$row['id'],
+				$row['name'],
+				$row['IS_ACTIVE'],
+				$row['brand'],
+				$row['transmission'],
+				$row['carcase'],
+				$row['DATE_CREATION'],
+				$row['DATE_UPDATE'],
+				$row['FULL_DESCRIPTION'],
+				$row['PRODUCT_PRICE'],
+				'',
+				[],
+			);
 		}
+		$products = (array)$products;
+
+		$db=MySql::getInstance();
+
+		$id = '';
+
+		foreach ($products as $product)
+		{
+			$id .= $product->id . ', ';
+		}
+		$id = substr($id, 0, -2);
+
+		$images = $db->getImagesById($id);
+
+		foreach ($products as $product)
+		{
+			foreach ($images as $image)
+			{
+				if ((int)$image['id'] === $product->id)
+				{
+					$product->images[] = $image['path'];
+					if($image['isMain'] === '1')
+					{
+						$product->mainImage = $image['path'];
+					}
+				}
+			}
+		}
+
 		return $products;
-    }
+	}
 
 	public static function buildOrders(array $results): array
 	{
@@ -49,9 +92,10 @@ class ObjectBuilder
 
 	public static function buildTags($result, string $tag)
 	{
-		$className= 'ES\\Model\\Tags\\' . $tag;
+		$className = 'ES\\Model\\Tags\\' . $tag;
 		$tags = [];
-		while ($row = mysqli_fetch_assoc($result)){
+		while ($row = mysqli_fetch_assoc($result))
+		{
 			$tags[] = new $className(
 				$row['ID'],
 				$row[$tag]

@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 namespace ES\Model\Database\RequestSql;
 
@@ -8,7 +8,7 @@ use ES\Model\User;
 
 trait UtilitySql
 {
-    function getUsers() : array
+	function getUsers(): array
 	{
 		$query = "SELECT ID, PASS, LOGIN, MAIL, ROLE, FIRST_NAME, LAST_NAME 
 					FROM user";
@@ -18,7 +18,7 @@ trait UtilitySql
 		return ObjectBuilder::buildUsers($result);
 	}
 
-	function getUserById($id) : ?User 
+	function getUserById($id): ?User
 	{
 		$id = mysqli_real_escape_string($this->connection, $id);
 		$query = "SELECT ID, PASS, LOGIN, MAIL, ROLE, FIRST_NAME, LAST_NAME 
@@ -29,10 +29,44 @@ trait UtilitySql
 		return ObjectBuilder::buildUsers($result)[0];
 	}
 
-    function getPageCount(string $isActive = 'active', string $table = 'product')
+	function updateUser(User $user)
+	{
+		foreach ($user as $key => $value)
+		{
+			$user->$key = mysqli_real_escape_string($this->connection, $value);
+		}
+		$password = password_hash($user->password, PASSWORD_DEFAULT);
+		$query = "UPDATE user
+		SET PASS = '$password',
+		    LOGIN = '$user->login',
+		    MAIL = '$user->mail',
+		    ROLE = '$user->role',
+		    FIRST_NAME = '$user->firstName',
+		    LAST_NAME = '$user->lastName'
+		    where ID = '$user->id'";
+
+		return mysqli_query($this->connection, $query);
+	}
+
+	function createUser(User $user)
+	{
+		foreach ($user as $key => $value)
+		{
+			$user->$key = mysqli_real_escape_string($this->connection, $value);
+		}
+
+		$password = password_hash($user->password, PASSWORD_DEFAULT);
+
+		$query = "INSERT INTO user (PASS,LOGIN,MAIL,ROLE,FIRST_NAME,LAST_NAME)
+					values ('$password','$user->login','$user->mail','$user->role','$user->firstName','$user->lastName' )";
+
+		return mysqli_query($this->connection, $query);
+	}
+
+	function getPageCount(string $isActive = 'active', string $table = 'product')
 	{
 		$activityQuery = '';
-		if ($table ==='product')
+		if ($table === 'product')
 		{
 			switch ($isActive)
 			{
@@ -55,14 +89,14 @@ trait UtilitySql
                 $activityQuery";
 
 		$result = mysqli_query($this->connection, $query);
-        $row = mysqli_fetch_row($result);
+		$row = mysqli_fetch_row($result);
 		$result = ceil($row[0] / $countProductOnPage);
-		return ($result == 1) ? 0: $result;
+		return ($result == 1) ? 0 : $result;
 	}
 
-    function getPageCountByTags($brand, $carcase, $transmission, string $isActive = 'active')
-    {
-        switch ($isActive)
+	function getPageCountByTags($brand, $carcase, $transmission, string $isActive = 'active')
+	{
+		switch ($isActive)
 		{
 			case 'all':
 				$isActiveQuery = "";
@@ -76,41 +110,44 @@ trait UtilitySql
 				break;
 		};
 
-        $countProductOnPage = ConfigurationController::getConfig('CountProductsOnPage');
-        $query = "SELECT COUNT(*)
+		$countProductOnPage = ConfigurationController::getConfig('CountProductsOnPage');
+		$query = "SELECT COUNT(*)
 					FROM product p
 	 				inner join brand b on p.ID_BRAND = b.id
 					inner join carcase c on p.ID_CARCASE = c.id
 					inner join transmission t on p.ID_TRANSMISSION = t.id
 					where $isActiveQuery";
-                    
-        $tags = [];
+
+		$tags = [];
 		if (isset($brand))
-        {
-            $brand = mysqli_real_escape_string($this->connection, $brand);
-            $tags[] = "(b.brand = '$brand')";
-        }
+		{
+			$brand = mysqli_real_escape_string($this->connection, $brand);
+			$tags[] = "(b.brand = '$brand')";
+		}
 		if (isset($carcase))
-        {
-            $carcase = mysqli_real_escape_string($this->connection, $carcase);
-            $tags[] = "(c.carcase = '$carcase')";
-        }
+		{
+			$carcase = mysqli_real_escape_string($this->connection, $carcase);
+			$tags[] = "(c.carcase = '$carcase')";
+		}
 		if (isset($transmission))
-        {
-            $transmission = mysqli_real_escape_string($this->connection, $transmission);
-            $tags[] = "(t.transmission = '$transmission')";
-        }
+		{
+			$transmission = mysqli_real_escape_string($this->connection, $transmission);
+			$tags[] = "(t.transmission = '$transmission')";
+		}
 
-		if (empty($tags)) return $this->getPageCount();
-        $query .= implode(' and ', $tags);
-        $result = mysqli_query($this->connection, $query);
-        $row = mysqli_fetch_row($result);
+		if (empty($tags))
+		{
+			return $this->getPageCount();
+		}
+		$query .= implode(' and ', $tags);
+		$result = mysqli_query($this->connection, $query);
+		$row = mysqli_fetch_row($result);
 		return ceil($row[0] / $countProductOnPage);
-    }
+	}
 
-    function getPageCountByQuery(string $sQuery, string $isActive = 'active')
-    {
-        switch ($isActive)
+	function getPageCountByQuery(string $sQuery, string $isActive = 'active')
+	{
+		switch ($isActive)
 		{
 			case 'all':
 				$isActiveQuery = "";
@@ -123,22 +160,52 @@ trait UtilitySql
 				$isActiveQuery = " AND (p.IS_ACTIVE IS NOT NULL)";
 				break;
 		};
-        $sQuery = mysqli_real_escape_string($this->connection, $sQuery);
-        $countProductOnPage = ConfigurationController::getConfig('CountProductsOnPage');
+		$sQuery = mysqli_real_escape_string($this->connection, $sQuery);
+		$countProductOnPage = ConfigurationController::getConfig('CountProductsOnPage');
 		$query = "SELECT COUNT(*)
 					from product p
                     where (name LIKE '%$sQuery%' or FULL_DESCRIPTION LIKE '%$sQuery%')
                     $isActiveQuery";
-        $result = mysqli_query($this->connection, $query);
-        $row = mysqli_fetch_row($result);
+		$result = mysqli_query($this->connection, $query);
+		$row = mysqli_fetch_row($result);
 		return ceil($row[0] / $countProductOnPage);
-    }
+	}
 
-	function deleteItem(string $name, int $id): void
+	function deleteItem(string $name, int $id)
 	{
-		$query = "DELETE FROM $name WHERE id = $id";
+		$tableName = mysqli_real_escape_string($this->connection, $name);
+		$idItem = mysqli_real_escape_string($this->connection, $id);
+
+		$tableName = '`' . strtolower($tableName) . '`';
+
+		$query = "DELETE FROM $tableName WHERE id = $idItem";
+
 		mysqli_query($this->connection, $query);
-		$success = "Товар id = {$id} успешно уданел";
-		header("Location: /admin/?{$name}s");
+		header("Location: /admin/?{$name}s&delete={$id}");
+	}
+
+	static public function clearUnusedImages()
+	{
+		$query = "SELECT PATH FROM image";
+		$actualyImages = mysqli_fetch_all(mysqli_query(self::getInstance()->connection,$query));
+		$actualyImages = array_map(fn($image)=>$image[0],$actualyImages);
+
+		$path = ROOT . '/public/uploads/main/';
+		$allImages = scandir($path);
+
+		$diff = array_diff($allImages,$actualyImages);
+
+		unset($diff[0],$diff[1]);
+
+		foreach($diff as $item)
+		{
+			if (stristr($item, '-thumb')) continue;
+			if (!file_exists($path . $item)) continue;
+			unlink($path . $item);
+
+			$item = str_replace('.', '-thumb.', $item);
+			if (!file_exists($path . $item)) continue;
+			unlink($path . $item);
+		}
 	}
 }

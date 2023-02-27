@@ -19,16 +19,6 @@ class Application
 				$action = $route->action;
 				$variables = $route->getVariables();
 
-				// Проверку на число до сих пор не реализовал, но оставлю это здесь
-				// if (empty($variables))
-				// {
-				// 	echo TemplateEngine::view('layout', [
-				// 		'title' => ConfigurationController::getConfig('TITLE'),
-				// 		'content' => 'Ошибка: неверный тип данных для ID',
-				// 	]);
-				// 	exit;
-				// }
-
 				echo $action(...$variables);
 			}
 			else

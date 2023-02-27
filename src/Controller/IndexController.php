@@ -4,22 +4,26 @@ namespace ES\Controller;
 
 use ES\config\ConfigurationController;
 use ES\Model\Database\MySql;
+use ES;
+
 
 class IndexController extends BaseController
 {
 	public function indexAction(): void
 	{
-
-
 		$indexPage = (isset($_GET['page'])) ? (int)$_GET['page'] : 1;
 		$db = MySql::getInstance();
-		$tags = $db->getTagList();
+		$brands = $db->getTagByName('brand');
+		$carcases = $db->getTagByName('carcase');
+		$transmissions = $db->getTagByName('transmission');
+		$emptyProduct = false;
 
 		if (isset($_GET['brand']) || isset($_GET['transmission']) || isset($_GET['carcase'])) //Если пользователь выбрал категории
 		{
 			$brand = isset($_GET['brand']) ? $_GET['brand'] : null;
 			$carcase = isset($_GET['carcase']) ? $_GET['carcase'] : null;
 			$transmission =  isset($_GET['transmission']) ? $_GET['transmission'] : null;
+
 
 			// Возвращает массив из товаров и количества позиций
 			$products = $db->getProductsByTags($brand, $carcase, $transmission, $indexPage, 'active');
@@ -28,7 +32,6 @@ class IndexController extends BaseController
 		else if (isset($_GET['search_query']))
 		{
 			$searchQuery = $_GET['search_query'];
-
 			$products = $db->getProductsByQuery($searchQuery, $indexPage, 'active');
 			$pageCount = $db->getPageCountByQuery($searchQuery, 'active');
 		}
@@ -39,20 +42,27 @@ class IndexController extends BaseController
 		}
 		if (empty($products))
 		{
-			// По хорошему тут нужно вывести что товары не найдены
+			$products = 'Товар не найден';
+			$emptyProduct = true;
 		}
-		
+		$products = (array)$products;
+		$link = ES\HtmlService::getLink($_GET);
 		session_start();
 		$role = array_key_exists('USER' , $_SESSION)? $_SESSION['USER']->role : 'user';
 
 		$this->render('layout', [
 			'title' => ConfigurationController::getConfig('TITLE'),
-			'tags' => $tags,
+			'tags' => TemplateEngine::view('components/tags', [
+				'brands' => $brands,
+				'carcases' => $carcases,
+				'transmissions' => $transmissions,
+			]),
 			'role' => $role,
 			'content' => TemplateEngine::view('pages/index', [
 				'products' => $products,
+				'emptyProduct' => $emptyProduct,
 				'pagination' => TemplateEngine::view('components/pagination', [
-					'link' => '/?',
+					'link' => $link,
 					'currentPage' => $indexPage,
 					'countPage' => $pageCount,
 				]),

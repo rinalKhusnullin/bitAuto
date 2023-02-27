@@ -44,7 +44,12 @@ Router::get('/admin/edit/', [new \ES\Controller\AdminController(), 'adminEditAct
 
 Router::post('/admin/edit/', [new \ES\Controller\AdminController(), 'adminChangeItem']);
 
-Router::get('/admin/edit/delete/', [new \ES\Controller\AdminController(),'adminDeleteAction']);
+Router::post('/admin/edit/delete/', [new \ES\Controller\AdminController(),'adminDeleteAction']);
 
 Router::get('/admin/add/', [new \ES\Controller\AdminController(), 'adminAddAction']);
 Router::post('/admin/add/', [new \ES\Controller\AdminController(), 'adminAddItem']);
+
+
+Router::post('/admin/upload-image/', [new \ES\Controller\AdminController(), 'adminUploadImage']);
+
+Router::get('/admin/clear/', [new \ES\Controller\AdminController(), 'adminClearImages']);
