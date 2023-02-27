@@ -101,7 +101,7 @@ class AdminController extends BaseController
 			$deleteMessage[] = "Элемент id = {$_GET['delete']} успешно удален";
 		}
 
-		$link = ES\HtmlService::getLink($_GET,$_SERVER['REDIRECT_URL']);
+		$link = ES\HtmlService::getLink($_GET,$_SERVER['PATH_INFO']);
 		$this->render('admin-panel-layout',[
 			'title' => 'admin',
 			'role' => $role,
@@ -231,7 +231,6 @@ class AdminController extends BaseController
 		$db->deleteItem($table, $id);
 	}
 
-	//eeee
 	public function adminChangeItem() : void
 	{
 		session_start();

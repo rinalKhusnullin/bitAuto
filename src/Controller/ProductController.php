@@ -49,12 +49,6 @@ class ProductController extends BaseController
 	public function postDetailAction($id): void
 	{
 		session_start();
-		$token = filter_input(INPUT_POST, 'token',);
-
-		if (!$token || $token !== $_SESSION['token']) {
-			header($_SERVER['SERVER_PROTOCOL'] . ' 405 Method Not Allowed');
-			exit;
-		}
 
 		$db = MySql::getInstance();
 		$product = $db->getProductByID((int)$id);
