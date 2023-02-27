@@ -156,6 +156,11 @@
 }
 
 @media(max-width: 681px){
+
+    .contacts__team-tel, .contacats__team-email{
+        display: block;
+    }
+
     .dropdown__radio{
         padding-left: 10px;
     }

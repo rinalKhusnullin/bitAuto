@@ -8,6 +8,8 @@ body {
 	display: flex;
 	flex-direction: row;
 	background: #e7e7e7;
+	font-family: 'Anonymous Pro', monospace;
+	line-height: 20px;
 }
 
 .wrapper{
@@ -35,10 +37,17 @@ HEADER
 
 .header-admin-clear {
 	background: #871111;
-	color: #dedede;
-	padding: 1px 7px 1px 7px;
+	display: block;
+	color: white;
+	padding: 5px 10px 5px 10px;
 	border-radius: 10px;
 	margin-right: 20px;
+	transition: .5s;
+}
+
+.header-admin-clear:hover{
+	background:#c41230;
+	transition: .5s;
 }
 
 
@@ -59,15 +68,22 @@ HEADER
 }
 .user-info > a {
 	text-decoration: none;
-	text-underline: none;
 	background: #2e3436;
+	border-radius: 10px;
 	margin: 5px;
 	color: #fff;
 	width: 80px;
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	transition: .5s;
 }
+
+.user-info > a:hover{
+	background:#c41230;
+	transition: .5s;
+}
+
 .search > input:first-of-type {
 	width: 500px;
 	height: 40px;
@@ -166,6 +182,7 @@ NAV MENU
 	padding: 10px;
 	text-align: center;
 	border-bottom: 1px solid #000;
+	font-weight: 600;
 }
 
 .nav_li,.nav_li-active {
@@ -176,14 +193,9 @@ NAV MENU
 	border-bottom: 1px solid black;
 }
 
-.nav_li:last-child{
-	border-bottom: none;
-}
-
 .nav_li > a,
 .nav_li-active > a{
 	text-decoration: none;
-	text-underline: none;
 	text-transform: uppercase;
 	color: white;
 	width: 100vw;
@@ -191,6 +203,8 @@ NAV MENU
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	font-weight: 700;
+    font-size: 18px;
 }
 
 .nav_li-active > a,
@@ -205,35 +219,75 @@ CONTENT
 
 */
 
+.fullDesc{
+	position: relative;
+}
+
+.table-content{
+	font-size: 15px;
+}
+
+.hidden_fullDesc{
+	display: none;
+	top: 0;
+	left: 0;
+	position: absolute;
+    border: 1px solid black;
+	box-shadow: 2px 2px 3px black;
+    padding: 5px 5px;
+	background: #e7e7e7;
+	z-index: 1000;
+}
+
+.fullDesc:hover .hidden_fullDesc{
+	display: block;
+}
+
+
+.columns{
+	background: #4e555b;
+}
+
+.column{
+	font-size: 16px;
+    text-transform: uppercase;
+    padding: 10px 5px;
+	color: white;
+}
+
 .admin-input {
-	width: 110px;
+	background: #e7e7e7;
+    border: 0;
+    height: 100%;
+	font-family: 'Anonymous Pro', monospace;
 }
 
 .container {
-	height: 100%;
 	background: #e7e7e7;
 	padding: 20px;
 	box-sizing: border-box;
 }
 caption {
-	height: 30px;
+	color: white;
+	padding: 8px;
+	margin-bottom: 10px;
 }
+
 table {
-	border: 1px solid grey;
+	border: 1px solid #898E93;
 	width: 100%;
 	margin-bottom: 30px;
 }
 /* границы ячеек первого ряда таблицы */
 th {
-	height: 40px;
-	border: 2px solid grey;
+	border: 2px solid #898E93;
 	padding: 5px 5px;
 	vertical-align: middle;
 }
 /* границы ячеек тела таблицы */
 td {
 	height: 30px;
-	border: 2px solid grey;
+	border: 2px solid #898E93;
 	padding: 5px 5px;
 	vertical-align: middle;
 }
@@ -251,10 +305,20 @@ a.admin__add
 	color: white;
 	background: #4e555b;
 	padding: 8px;
+	margin-bottom: 20px;
+	transition: .3s;
 }
 
 a.admin__add:hover {
-	background: #95999c;
+	background:#c41230;
+	transition: .3s;
+}
+
+.edit_caption{
+	background: #4e555b;
+	width: 100%;
+	box-sizing: border-box;
+	border: 2px solid #898E93;
 }
 
 .admin-images {
@@ -281,6 +345,11 @@ a.admin__add:hover {
 {
 	height: auto;
 	width:150px;
+	font-size: 16px;
+    text-transform: uppercase;
+    padding: 10px 5px;
+    color: white;
+	background: #4e555b;
 }
 
 .td_edit
@@ -289,7 +358,6 @@ a.admin__add:hover {
 	flex: 1;
 	display: flex;
 	flex-direction: column;
-	align-items: flex-start;
 }
 
 .tr_edit {
@@ -356,4 +424,51 @@ input[type="radio"]:checked + label {
 	flex: 1;
 	display: flex;
 	justify-content: flex-end;
+}
+
+.change-btn{
+	padding: 5px 10px 5px 10px;
+	background:#4e555b;
+	color: white;
+	border-radius: 10px;
+	transition: .3s; 
+}
+
+.change-btn:hover{
+	background:#c41230;
+	transition: .3s; 
+}
+
+.td_edit select {
+	font-family: 'Anonymous Pro', monospace;
+	height: 100%;
+    background: #e7e7e7;
+    border: none;
+    font-size: 17px;
+	cursor: pointer;
+}
+
+td textarea{
+	font-family: 'Anonymous Pro', monospace;
+	font-size: 17px;
+}
+
+.delete-btn{
+	width: 100%;
+}
+
+.save-btn, .delete-btn{
+	font-weight: 700;
+	padding: 10px 5px 10px 5px;
+	border: 0;
+	border-radius: 10px;
+	background:#4e555b;
+	color: white;
+	font-family: 'Anonymous Pro', monospace;
+	transition: .5s;
+}
+
+.save-btn:hover, .delete-btn:hover{
+	background:#c41230;
+	transition: .5s;
 }
