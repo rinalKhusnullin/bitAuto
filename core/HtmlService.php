@@ -4,7 +4,6 @@ namespace ES;
 
 use ES\config\ConfigurationController;
 use ES\Model\Database\MySql;
-use ES\Model\Database\RequestSql\TagsSql;
 
 class HtmlService
 {
@@ -132,6 +131,39 @@ class HtmlService
 
 			default:
 				return $value;
+		}
+	}
+
+	public static function renderAdminTable($key, $value)
+	{
+		switch ($key)
+		{
+			case 'mainImage':
+			case 'images':
+				return '';
+
+			case 'password':
+				return '<td>Скрыт</td>';
+
+			case 'fullDesc':
+				$shortDesc = mb_substr($value, 0, 120);
+				return "<td class = 'fullDesc'>$shortDesc...<div class = 'hidden_fullDesc'> $value </div></td>";
+
+			default:
+				return "<td>$value</td>";
+		}
+
+	}
+
+	public static function renderColumn($column)
+	{
+		switch ($column)
+		{
+			case 'mainImage':
+				return '';
+
+			default:
+				return "<th class='column'>$column</th>";
 		}
 	}
 
