@@ -16,6 +16,7 @@ class Application
 			$route = Router::find($_SERVER['REQUEST_METHOD'], $_SERVER['REQUEST_URI']);
 			if ($route)
 			{
+				session_start();
 				$action = $route->action;
 				$variables = $route->getVariables();
 

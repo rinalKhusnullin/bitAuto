@@ -16,7 +16,6 @@ class AdminController extends BaseController
 
 	public function adminAction() : void
 	{
-		session_start();
 		if (!isset($_SESSION['USER']))
 		{
 			header('Location: /login/');
@@ -101,7 +100,8 @@ class AdminController extends BaseController
 			$deleteMessage[] = "Элемент id = {$_GET['delete']} успешно удален";
 		}
 
-		$link = ES\HtmlService::getLink($_GET,$_SERVER['PATH_INFO']);
+		// PATH_INFO
+		$link = ES\HtmlService::getLink($_GET,$_SERVER['REDIRECT_URL']);
 		$this->render('admin-panel-layout',[
 			'title' => 'admin',
 			'role' => $role,
@@ -128,7 +128,6 @@ class AdminController extends BaseController
 
 	public function adminEditAction () :void
 	{
-		session_start();
 		if (!isset($_SESSION['USER']))
 		{
 			header('Location: /login/');
@@ -212,7 +211,6 @@ class AdminController extends BaseController
 
 	public function adminDeleteAction () :void
 	{
-		session_start();
 		if (!isset($_SESSION['USER']))
 		{
 			header('Location: /login/');
@@ -233,9 +231,8 @@ class AdminController extends BaseController
 
 	public function adminChangeItem() : void
 	{
-		session_start();
 		$token = filter_input(INPUT_POST, 'token',);
-		$role = $_SESSION['USER'] ->role;
+		$role = $_SESSION['USER']->role;
 
 		if (!$token || $token !== $_SESSION['token']) {
 			header($_SERVER['SERVER_PROTOCOL'] . ' 405 Method Not Allowed');
@@ -337,7 +334,6 @@ class AdminController extends BaseController
 
 	public function adminAddAction()
 	{
-		session_start();
 		$role = $_SESSION['USER'] ->role;
 		if (array_key_exists('product', $_GET))
 		{
@@ -414,7 +410,6 @@ class AdminController extends BaseController
 
 	function adminAddItem()
 	{
-		session_start();
 		$role = $_SESSION['USER'] ->role;
 		$token = filter_input(INPUT_POST, 'token',);
 
@@ -515,7 +510,6 @@ class AdminController extends BaseController
 
 	public function adminUploadImage(): string
 	{
-		session_start();
 		if (!isset($_SESSION['USER']))
 		{
 			header('Location: /login/');
