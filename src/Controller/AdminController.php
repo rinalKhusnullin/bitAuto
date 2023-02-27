@@ -98,7 +98,7 @@ class AdminController extends BaseController
 
 		if (isset($_GET['delete']))
 		{
-			$deleteMessage[] = "Элеиент id = {$_GET['delete']} успешно удален";
+			$deleteMessage[] = "Элемент id = {$_GET['delete']} успешно удален";
 		}
 
 		$link = ES\HtmlService::getLink($_GET,$_SERVER['REDIRECT_URL']);

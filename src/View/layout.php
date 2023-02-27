@@ -131,7 +131,7 @@
 					<div class="info-item__socials">
 						<div class="info-item__social">
 							<a href="#" class="info-item__link vk"></a> <!--link to matvey vk -->
-							<a href="#" class="info-item__link bitrix"></a> <!--link to matvey bitrix -->
+							<a href="https://www.bitrix24.ru/" class="info-item__link bitrix"></a> <!--link to matvey bitrix -->
 						</div>
 					</div>
 					<h4 class="info-item__name">Матвей</h4>
@@ -145,8 +145,8 @@
 				<div class="info-item__description">
 					<div class="info-item__socials">
 						<div class="info-item__social">
-							<a href="#" class="info-item__link vk"></a> <!--link to gleb vk -->
-							<a href="#" class="info-item__link bitrix"></a> <!--link to gleb bitrix -->
+							<a href="https://vk.com/splitikus" class="info-item__link vk"></a> <!--link to gleb vk -->
+							<a href="https://www.bitrix24.ru/" class="info-item__link bitrix"></a> <!--link to gleb bitrix -->
 						</div>
 					</div>
 					<h4 class="info-item__name">Глеб</h4>
@@ -161,7 +161,7 @@
 					<div class="info-item__socials">
 						<div class="info-item__social">
 							<a href="#" class="info-item__link vk"></a> <!--link to tatyana vk -->
-							<a href="#" class="info-item__link bitrix"></a> <!--link to tatyana bitrix -->
+							<a href="https://www.bitrix24.ru/" class="info-item__link bitrix"></a> <!--link to tatyana bitrix -->
 						</div>
 					</div>
 					<h4 class="info-item__name">Татьяна</h4>
@@ -176,7 +176,7 @@
 					<div class="info-item__socials">
 						<div class="info-item__social">
 							<a href="#" class="info-item__link vk"></a> <!--link to daniil vk -->
-							<a href="#" class="info-item__link bitrix"></a> <!--link to daniil bitrix -->
+							<a href="https://www.bitrix24.ru/" class="info-item__link bitrix"></a> <!--link to daniil bitrix -->
 						</div>
 					</div>
 					<h4 class="info-item__name">Даниил</h4>
@@ -191,7 +191,7 @@
 					<div class="info-item__socials">
 						<div class="info-item__social">
 							<a href="#" class="info-item__link vk"></a> <!--link to rinal vk -->
-							<a href="#" class="info-item__link bitrix"></a> <!--link to rinal bitrix -->
+							<a href="https://www.bitrix24.ru/" class="info-item__link bitrix"></a> <!--link to rinal bitrix -->
 						</div>
 					</div>
 					<h4 class="info-item__name">Риналь</h4>
