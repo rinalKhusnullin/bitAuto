@@ -12,7 +12,7 @@
 	<div><?= $content[0]?></div>
 <?php return; endif;?>
 
-<form action="" method="POST">
+<form name="admin_edit" action="" method="POST">
 	<table class="edit_table">
 		<caption class="edit_caption"> <?= $tableName ?> </caption>
 		<tbody class="tbody_edit">
