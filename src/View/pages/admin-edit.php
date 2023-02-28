@@ -13,7 +13,7 @@
 <?php return; endif;?>
 
 <form action="" method="POST">
-	<table>
+	<table class="edit_table">
 		<caption class="edit_caption"> <?= $tableName ?> </caption>
 		<tbody class="tbody_edit">
 
@@ -24,12 +24,12 @@
 				<th class="th_edit"><?= $columns[$i] ?></th>
 
 				<td class="td_edit"> <?= ES\HtmlService::getHtmlTag($columns[$i], $content[$columns[$i]], $content["mainImage"]??'') ?> </td>
-			</tr>
+			</tr>	
 		<?php endfor; ?>
 		<tr class="tr_edit">
 			<th class="th_edit"></th>
 			<td class="td_edit">
-				<button class="save-btn" type="submit">Сохранить</button>
+				<button class="save-btn" type="submit" onclick="return editValidate();">Сохранить</button>
 			</td>
 		</tr>
 
