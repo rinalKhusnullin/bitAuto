@@ -1,27 +1,29 @@
 function editValidate()
 {
-    ignoreInputs = ['id', 'dateCreation', 'dateUpdate', 'file[]']; // file[] для images 
     wasNoError = true;
-    input = document.querySelectorAll('input, textarea');
-    input.forEach(element => {
-        if (ignoreInputs.includes(element.name)) return;
-
-        if (element.value === '')
+    form = document.forms['admin_edit'];
+    for (let i = 0; i < form.length; i++)
+    {
+        if (form[i].nodeName === 'INPUT' || form[i].nodeName === 'TEXTAREA')
         {
-            elementName = element.name.toUpperCase();
-            element.parentElement.classList.add('empty');
-            element.classList.add('red-placeholder');
-            element.placeholder = 'Please, enter ' + elementName;
-            wasNoError = false;
-        } 
-        else
-        {
-            element.parentElement.classList.remove('empty');
-            element.placeholder = '';
+            if (form[i].type === 'text')
+            {
+                if (form[i].value === '')
+                {
+                    elementName = form[i].name.toUpperCase();
+                    form[i].parentElement.classList.add('empty');
+                    form[i].classList.add('red-placeholder');
+                    form[i].placeholder = 'Please, enter ' + elementName;
+                    wasNoError = false;
+                } 
+                else
+                {
+                    form[i].parentElement.classList.remove('empty');
+                    form[i].placeholder = '';
+                }
+            }
         }
-
-    });
-
+    }
     return wasNoError;
 }
 
