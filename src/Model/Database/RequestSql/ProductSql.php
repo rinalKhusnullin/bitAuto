@@ -238,7 +238,7 @@ trait ProductSql
 	function createProduct(Product $product)
 	{
 		$title = mysqli_real_escape_string($this->connection, $product->title);
-		$isActive = ($product->isActive);
+		$isActive = ($product->isActive) ? 1 : 0;
 		$brandType = mysqli_real_escape_string($this->connection, $product->brandType);
 		$transmissionType = mysqli_real_escape_string($this->connection, $product->transmissionType);
 		$carcaseType = mysqli_real_escape_string($this->connection, $product->carcaseType);
@@ -255,7 +255,7 @@ trait ProductSql
 
 
 		$query = "INSERT INTO product (NAME, IS_ACTIVE, ID_BRAND,ID_TRANSMISSION, ID_CARCASE, DATE_CREATION, FULL_DESCRIPTION, PRODUCT_PRICE)
-					values ('$title', '$isActive', $brandType, $transmissionType, $carcaseType, CURRENT_TIMESTAMP(), '$fullDesc', $price);";
+					values ('$title', $isActive, $brandType, $transmissionType, $carcaseType, CURRENT_TIMESTAMP(), '$fullDesc', $price);";
 
 		$product = mysqli_query($this->connection,$query);
 
