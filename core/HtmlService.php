@@ -18,7 +18,7 @@ class HtmlService
 		switch ($key)
 		{
 			case 'id':
-				return "<input class='admin-input' name='$key' type='hidden' value='$value'>$value";
+				return "<input class='admin-input' name='$key' type='hidden' value='$value'><div class='td_value'>$value</div>";
 
 			case 'images':
 				$data = serialize($value);
@@ -127,10 +127,11 @@ class HtmlService
 
 			case 'dateUpdate':
 			case 'dateCreation':
-				return "<input type='hidden' class='admin-input' name='$key' type='text' value='$value'>$value";
+				return "<input type='hidden' class='admin-input' name='$key' type='text' value='$value'>
+					<div class='td_value'>$value</div>";
 
 			default:
-				return $value;
+				return "<div class='td_value'>$value</div>";
 		}
 	}
 
