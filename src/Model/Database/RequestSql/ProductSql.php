@@ -34,11 +34,11 @@ trait ProductSql
 				$activityQuery = "";
 				break;
 			case 'notActive':
-				$activityQuery = " WHERE (p.IS_ACTIVE IS NULL) ";
+				$activityQuery = " WHERE (p.IS_ACTIVE = false) ";
 				break;
 			case 'active':
 			default:
-				$activityQuery = " WHERE (p.IS_ACTIVE IS NOT NULL) ";
+				$activityQuery = " WHERE (p.IS_ACTIVE = true) ";
 				break;
 		}
 
@@ -79,11 +79,11 @@ trait ProductSql
 				$isActiveQuery = "";
 				break;
 			case 'notActive':
-				$isActiveQuery = " AND (p.IS_ACTIVE IS NULL)";
+				$isActiveQuery = " AND (p.IS_ACTIVE = false)";
 				break;
 			case 'active':
 			default:
-				$isActiveQuery = " AND (p.IS_ACTIVE IS NOT NULL)";
+				$isActiveQuery = " AND (p.IS_ACTIVE = true)";
 				break;
 		};
 		$countProductOnPage = ConfigurationController::getConfig('CountProductsOnPage');
@@ -111,11 +111,11 @@ trait ProductSql
 				$isActiveQuery = "";
 				break;
 			case 'notActive':
-				$isActiveQuery = " (p.IS_ACTIVE IS NULL) AND ";
+				$isActiveQuery = " AND (p.IS_ACTIVE = false)";
 				break;
 			case 'active':
 			default:
-				$isActiveQuery = " (p.IS_ACTIVE IS NOT NULL) AND ";
+				$isActiveQuery = " AND (p.IS_ACTIVE = true)";
 				break;
 		};
 		$countProductOnPage = ConfigurationController::getConfig('CountProductsOnPage');
@@ -238,7 +238,7 @@ trait ProductSql
 	function createProduct(Product $product)
 	{
 		$title = mysqli_real_escape_string($this->connection, $product->title);
-		$isActive = ($product->isActive) ? 1 : 0;
+		$isActive = ($product->isActive);
 		$brandType = mysqli_real_escape_string($this->connection, $product->brandType);
 		$transmissionType = mysqli_real_escape_string($this->connection, $product->transmissionType);
 		$carcaseType = mysqli_real_escape_string($this->connection, $product->carcaseType);
@@ -255,7 +255,7 @@ trait ProductSql
 
 
 		$query = "INSERT INTO product (NAME, IS_ACTIVE, ID_BRAND,ID_TRANSMISSION, ID_CARCASE, DATE_CREATION, FULL_DESCRIPTION, PRODUCT_PRICE)
-					values ('$title', $isActive, $brandType, $transmissionType, $carcaseType, CURRENT_TIMESTAMP(), '$fullDesc', $price);";
+					values ('$title', '$isActive', $brandType, $transmissionType, $carcaseType, CURRENT_TIMESTAMP(), '$fullDesc', $price);";
 
 		$product = mysqli_query($this->connection,$query);
 
