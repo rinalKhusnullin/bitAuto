@@ -111,11 +111,11 @@ trait ProductSql
 				$isActiveQuery = "";
 				break;
 			case 'notActive':
-				$isActiveQuery = " AND (p.IS_ACTIVE = false)";
+				$isActiveQuery = " (p.IS_ACTIVE = false) AND ";
 				break;
 			case 'active':
 			default:
-				$isActiveQuery = " AND (p.IS_ACTIVE = true)";
+				$isActiveQuery = " (p.IS_ACTIVE = true) AND ";
 				break;
 		};
 		$countProductOnPage = ConfigurationController::getConfig('CountProductsOnPage');
