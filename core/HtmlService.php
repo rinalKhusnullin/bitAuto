@@ -69,26 +69,26 @@ class HtmlService
 					";
 			case 'isActive':
 				$isActive = ($value === true)
-					? "<option selected value='true'>Да</option><option value=''>Нет</option>"
-					: "<option value='true'>Да</option><option selected value=''>Нет</option>";
+					? "<option selected value='true'>Да</option><option value='false'>Нет</option>"
+					: "<option value='true'>Да</option><option selected value='false'>Нет</option>";
 
 				return "<select name='$key'> $isActive </select>";
 
 			case 'status':
 				$result = "<select name='$key'>";
-				$result .= "<option>$value</option>";
 				foreach (ConfigurationController::getConfig('statuses') as $status)
 				{
-					$result .= ($value !== $status) ? "<option>$status</option>" : '';
+					$selected = ($status === $value) ? 'selected' : '';
+					$result .= "<option $selected>$status</option>";
 				}
 				$result .= '</select>';
 				return $result;
 			case 'role':
 				$result = "<select name='$key'>";
-				$result .= "<option>$value</option>";
-				foreach (ConfigurationController::getConfig('roles') as $status)
+				foreach (ConfigurationController::getConfig('roles') as $role)
 				{
-					$result .= ($value !== $status) ? "<option>$status</option>" : '';
+					$selected = ($role === $value) ? 'selected' : '';
+					$result .= "<option $selected>$role</option>";
 				}
 				$result .= '</select>';
 				return $result;
