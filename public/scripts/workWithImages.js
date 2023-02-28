@@ -20,7 +20,6 @@ form.addEventListener('change', evt => {
 					let imgBlock = range.createContextualFragment(row.data);
 					imgList.append(imgBlock);
 					addListenerToImages();
-					updateListenerToImages();
 				}
 				else
 				{
@@ -33,6 +32,7 @@ form.addEventListener('change', evt => {
 
 					parent.insertBefore(need, input);
 				}
+				updateListenerToImages();
 			});
 		});
 });
@@ -42,6 +42,7 @@ function remove_img(target)
 	let parent = target.parentElement;
 	let grand = parent.parentNode;
 	grand.remove();
+	firstElemToChecked();
 }
 
 function getElemByColumn(column)
@@ -96,4 +97,23 @@ function updateListenerToImages()
 		imageName = image.value;
 		getElemByColumn('mainImage').innerHTML = imageName;
 	}
+	if (images.length === 0)
+	{	
+		getElemByColumn('mainImage').innerHTML = '';
+	}
+}
+
+function firstElemToChecked()
+{
+	images = document.forms[0]['main-image'] ?? [];
+
+	if (images.constructor.name === 'RadioNodeList')
+	{
+		images[0].checked = true;
+	}
+	else if (images.constructor.name === 'HTMLInputElement')
+	{
+		images.checked = true;
+	}
+	updateListenerToImages();
 }
