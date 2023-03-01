@@ -495,3 +495,8 @@ td textarea{
 .red-placeholder::placeholder{
 	color: red;
 }
+
+.far{
+	height: 30px;
+    width: 30px;
+}
