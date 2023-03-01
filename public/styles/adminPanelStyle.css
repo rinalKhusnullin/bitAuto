@@ -366,7 +366,7 @@ a.admin__add:hover {
 }
 
 input[type="radio"]:checked + label {
-	outline: 3px solid rgba(255,100,100,50%);
+	border: 3px solid rgba(255,100,100,50%);
 }
 
 .img-list {
