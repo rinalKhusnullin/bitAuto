@@ -1,7 +1,6 @@
 <?php
 
-namespace ES\Controller;
-
+namespace ES\Services;
 
 use ES\Exceptions\PathException;
 
