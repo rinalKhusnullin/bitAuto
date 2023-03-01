@@ -2,11 +2,9 @@
 
 namespace ES\Model\Database;
 
-use ES\HtmlService;
-use ES\Model\Product;
 use ES\Model\Order;
+use ES\Model\Product;
 use ES\Model\User;
-use ES\Model\Database\RequestSql;
 
 class ObjectBuilder
 {
@@ -92,7 +90,7 @@ class ObjectBuilder
 
 	public static function buildTags($result, string $tag)
 	{
-		$className = 'ES\\Model\\Tags\\' . $tag;
+		$className = 'ES\\Model\\' . $tag;
 		$tags = [];
 		while ($row = mysqli_fetch_assoc($result))
 		{

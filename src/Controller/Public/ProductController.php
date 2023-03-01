@@ -1,12 +1,13 @@
 <?php
 
-namespace ES\Controller;
+namespace ES\Controller\Public;
 
-use ES\HtmlService;
-use ES\Model\Order;
-use ES\config\ConfigurationController;
+use ES\Controller\BaseController;
 use ES\Handler\Handler;
 use ES\Model\Database\MySql;
+use ES\Model\Order;
+use ES\Services\ConfigurationService;
+use ES\Services\TemplateEngine;
 
 class ProductController extends BaseController
 {
@@ -35,7 +36,7 @@ class ProductController extends BaseController
 		$role = array_key_exists('USER', $_SESSION) ? $_SESSION['USER']->role : 'user';
 
 		$this->render('layout', [
-			'title' => ConfigurationController::getConfig('TITLE'),
+			'title' => ConfigurationService::getConfig('TITLE'),
 			'role' => $role,
 			'tags' => TemplateEngine::view('components/tags', [
 				'brands' => $brands,

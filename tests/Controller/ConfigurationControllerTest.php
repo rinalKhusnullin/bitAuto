@@ -1,7 +1,7 @@
 <?php
 
-use ES\config\ConfigurationController;
 use ES\Exceptions\ConfigurationException;
+use ES\Services\ConfigurationService;
 use PHPUnit\Framework\TestCase;
 
 class ConfigurationControllerTest extends TestCase
@@ -13,13 +13,13 @@ class ConfigurationControllerTest extends TestCase
 	 */
 	public function testParameterFound($expected,$parameter) : void
 	{
-		$this->assertEquals($expected, ConfigurationController::getConfig($parameter));
+		$this->assertEquals($expected, ConfigurationService::getConfig($parameter));
 	}
 
 	public function testParameterNotFound() : void
 	{
 		$this->expectExceptionMessage("Configuration option NO_EXISTS_PARAMETER not found");
-		ConfigurationController::getConfig('NO_EXISTS_PARAMETER');
+		ConfigurationService::getConfig('NO_EXISTS_PARAMETER');
 	}
 
 	public static function configParameterProvider(): array

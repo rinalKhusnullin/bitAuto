@@ -1,8 +1,7 @@
 <?php
 
-namespace ES;
+namespace ES\Services;
 
-use ES\config\ConfigurationController;
 use ES\Model\Database\MySql;
 
 class HtmlService
@@ -77,7 +76,7 @@ class HtmlService
 			case 'status':
 				$result = "<select name='$key'>";
 				$result .= "<option>$value</option>";
-				foreach (ConfigurationController::getConfig('statuses') as $status)
+				foreach (ConfigurationService::getConfig('statuses') as $status)
 				{
 					$result .= ($value !== $status) ? "<option>$status</option>" : '';
 				}
@@ -86,7 +85,7 @@ class HtmlService
 			case 'role':
 				$result = "<select name='$key'>";
 				$result .= "<option>$value</option>";
-				foreach (ConfigurationController::getConfig('roles') as $status)
+				foreach (ConfigurationService::getConfig('roles') as $status)
 				{
 					$result .= ($value !== $status) ? "<option>$status</option>" : '';
 				}

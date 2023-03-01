@@ -1,9 +1,9 @@
 <?php
-/** @var $tegs
+/**
  * @var $content
  */
 
-use ES\HtmlService;
+use ES\Services\HtmlService;
 
 ?>
 <?php if (!is_array($content)) : ?>
@@ -16,7 +16,7 @@ use ES\HtmlService;
 		<?= HtmlService::renderAdminTable($key, $item) ?>
 	<?php endforeach; ?>
 			<td>
-				<a class="change-btn" href="/admin/edit/?<?= strtolower((new \ReflectionClass($items))->getShortName()) ?>=<?= $items->id ?>">Изменить</a>
+				<a class="change-btn" href="/admin/edit/<?= strtolower((new \ReflectionClass($items))->getShortName()) ?>s/<?= $items->id ?>/">Изменить</a>
 			</td>
 			</tr>
 		<?php endif; ?>

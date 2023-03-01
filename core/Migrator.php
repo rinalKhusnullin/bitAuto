@@ -2,7 +2,7 @@
 
 namespace ES;
 
-use ES\config\ConfigurationController;
+use ES\Services\ConfigurationService;
 
 class Migrator
 {
@@ -16,8 +16,8 @@ class Migrator
 		$query = sprintf
 		(
 			'show tables from `%s` like "%s"',
-			ConfigurationController::getConfig('DB_NAME'),
-			ConfigurationController::getConfig('DB_TABLE_MIGRATION')
+			ConfigurationService::getConfig('DB_NAME'),
+			ConfigurationService::getConfig('DB_TABLE_MIGRATION')
 		);
 		$data = $connection->query($query);
 		$firstMigration = !$data->num_rows;
@@ -33,7 +33,7 @@ class Migrator
 			$query = sprintf
 			(
 				'select `name` from `%s`',
-				ConfigurationController::getConfig('DB_TABLE_MIGRATION')
+				ConfigurationService::getConfig('DB_TABLE_MIGRATION')
 			);
 			$data = $connection->query($query)->fetch_all(MYSQLI_ASSOC);
 
@@ -57,7 +57,7 @@ class Migrator
 				$query = sprintf
 				(
 					'insert into `%s` (`name`) values("%s")',
-					ConfigurationController::getConfig('DB_TABLE_MIGRATION'),
+					ConfigurationService::getConfig('DB_TABLE_MIGRATION'),
 					$baseName
 				);
 				$connection->query($query);

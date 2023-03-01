@@ -1,8 +1,8 @@
 <?php
 
-use ES\config\ConfigurationController;
 use ES\Model\Database\MySql;
 use ES\Model\Product;
+use ES\Services\ConfigurationService;
 use PHPUnit\Framework\TestCase;
 
 class ProductSqlTest extends TestCase
@@ -15,7 +15,7 @@ class ProductSqlTest extends TestCase
 	public function testGetProduct(): void
 	{
 		$products = MySql::getInstance()->getProducts();
-		$this->assertTrue(ConfigurationController::getConfig('CountProductsOnPage')>=count($products));
+		$this->assertTrue(ConfigurationService::getConfig('CountProductsOnPage')>=count($products));
 		foreach ($products as $product)
 		{
 			$this->assertEquals(Product::class,$product::class);

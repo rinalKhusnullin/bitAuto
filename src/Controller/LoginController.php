@@ -2,10 +2,10 @@
 
 namespace ES\Controller;
 
-use ES\config\ConfigurationController;
 use ES\Model\Database\MySql;
 use ES\Model\User;
-
+use ES\Services\ConfigurationService;
+use ES\Services\TemplateEngine;
 
 class LoginController extends BaseController
 {
@@ -59,7 +59,7 @@ class LoginController extends BaseController
 		$role = array_key_exists('USER' , $_SESSION)? $_SESSION['USER']->role : 'user';
 
 		$this->render('layout', [
-			'title' => ConfigurationController::getConfig('TITLE_LOG_IN', 'AutoBit Log In'),
+			'title' => ConfigurationService::getConfig('TITLE_LOG_IN', 'AutoBit Log In'),
 			'role' => $role,
 			'tags' => TemplateEngine::view('components/tags', [
 				'brands' => $brands,

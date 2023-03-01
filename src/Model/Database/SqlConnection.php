@@ -2,8 +2,8 @@
 
 namespace ES\Model\Database;
 
-use ES\config\ConfigurationController;
 use ES\Migrator;
+use ES\Services\ConfigurationService;
 
 class SqlConnection
 {
@@ -17,10 +17,10 @@ class SqlConnection
 	private function __construct()
 	{
 		$this->createConnection(
-			ConfigurationController::getConfig('DB_HOST'),
-			ConfigurationController::getConfig('DB_USER'),
-			ConfigurationController::getConfig('DB_PASSWORD'),
-			ConfigurationController::getConfig('DB_NAME'),
+			ConfigurationService::getConfig('DB_HOST'),
+			ConfigurationService::getConfig('DB_USER'),
+			ConfigurationService::getConfig('DB_PASSWORD'),
+			ConfigurationService::getConfig('DB_NAME'),
 		);
 	}
 

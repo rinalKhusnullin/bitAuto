@@ -1,10 +1,10 @@
 <?php
 
-namespace ES\config;
+namespace ES\Services;
 
 use ES\Exceptions\ConfigurationException;
 
-class ConfigurationController
+class ConfigurationService
 {
 	/**
 	 * @throws ConfigurationException

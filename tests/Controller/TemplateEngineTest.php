@@ -1,6 +1,6 @@
 <?php
 
-use ES\Controller\TemplateEngine;
+use ES\Services\TemplateEngine;
 use PHPUnit\Framework\TestCase;
 
 class TemplateEngineTest extends TestCase
