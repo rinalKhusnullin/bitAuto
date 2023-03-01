@@ -1,11 +1,12 @@
 <?php
 
-namespace ES\Controller;
+namespace ES\Controller\Public;
 
-use ES\config\ConfigurationController;
-use ES\Model\Database\MySql;
 use ES;
-
+use ES\Controller\BaseController;
+use ES\Model\Database\MySql;
+use ES\Services\ConfigurationService;
+use ES\Services\TemplateEngine;
 
 class IndexController extends BaseController
 {
@@ -23,7 +24,6 @@ class IndexController extends BaseController
 			$brand = isset($_GET['brand']) ? $_GET['brand'] : null;
 			$carcase = isset($_GET['carcase']) ? $_GET['carcase'] : null;
 			$transmission =  isset($_GET['transmission']) ? $_GET['transmission'] : null;
-
 
 			// Возвращает массив из товаров и количества позиций
 			$products = $db->getProductsByTags($brand, $carcase, $transmission, $indexPage, 'active');
@@ -46,12 +46,12 @@ class IndexController extends BaseController
 			$emptyProduct = true;
 		}
 		$products = (array)$products;
-		$link = ES\HtmlService::getLink($_GET);
+		$link = ES\Services\HtmlService::getLink($_GET);
 		session_start();
 		$role = array_key_exists('USER' , $_SESSION)? $_SESSION['USER']->role : 'user';
 
 		$this->render('layout', [
-			'title' => ConfigurationController::getConfig('TITLE'),
+			'title' => ConfigurationService::getConfig('TITLE'),
 			'tags' => TemplateEngine::view('components/tags', [
 				'brands' => $brands,
 				'carcases' => $carcases,

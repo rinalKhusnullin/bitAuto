@@ -2,9 +2,9 @@
 
 namespace ES\Model\Database\RequestSql;
 
-use ES\config\ConfigurationController;
 use ES\Model\Database\ObjectBuilder;
 use ES\Model\User;
+use ES\Services\ConfigurationService;
 
 trait UtilitySql
 {
@@ -74,16 +74,16 @@ trait UtilitySql
 					$activityQuery = "";
 					break;
 				case 'notActive':
-					$activityQuery = " WHERE (p.IS_ACTIVE IS NULL) ";
+					$activityQuery = " WHERE (p.IS_ACTIVE = false) ";
 					break;
 				case 'active':
 				default:
-					$activityQuery = " WHERE (p.IS_ACTIVE IS NOT NULL) ";
+					$activityQuery = " WHERE (p.IS_ACTIVE = true) ";
 					break;
 			};
 			$table .= ' p';
 		}
-		$countProductOnPage = ConfigurationController::getConfig('CountProductsOnPage');
+		$countProductOnPage = ConfigurationService::getConfig('CountProductsOnPage');
 		$query = "SELECT COUNT(*)
 				FROM $table
                 $activityQuery";
@@ -102,15 +102,15 @@ trait UtilitySql
 				$isActiveQuery = "";
 				break;
 			case 'notActive':
-				$isActiveQuery = " (p.IS_ACTIVE IS NULL) AND";
+				$isActiveQuery = " (p.IS_ACTIVE = false) AND";
 				break;
 			case 'active':
 			default:
-				$isActiveQuery = " (p.IS_ACTIVE IS NOT NULL) AND";
+				$isActiveQuery = " (p.IS_ACTIVE = true) AND";
 				break;
 		};
 
-		$countProductOnPage = ConfigurationController::getConfig('CountProductsOnPage');
+		$countProductOnPage = ConfigurationService::getConfig('CountProductsOnPage');
 		$query = "SELECT COUNT(*)
 					FROM product p
 	 				inner join brand b on p.ID_BRAND = b.id
@@ -153,15 +153,15 @@ trait UtilitySql
 				$isActiveQuery = "";
 				break;
 			case 'notActive':
-				$isActiveQuery = " AND (p.IS_ACTIVE IS NULL)";
+				$isActiveQuery = " AND (p.IS_ACTIVE = false)";
 				break;
 			case 'active':
 			default:
-				$isActiveQuery = " AND (p.IS_ACTIVE IS NOT NULL)";
+				$isActiveQuery = " AND (p.IS_ACTIVE = true)";
 				break;
 		};
 		$sQuery = mysqli_real_escape_string($this->connection, $sQuery);
-		$countProductOnPage = ConfigurationController::getConfig('CountProductsOnPage');
+		$countProductOnPage = ConfigurationService::getConfig('CountProductsOnPage');
 		$query = "SELECT COUNT(*)
 					from product p
                     where (name LIKE '%$sQuery%' or FULL_DESCRIPTION LIKE '%$sQuery%')

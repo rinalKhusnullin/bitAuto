@@ -1,8 +1,7 @@
 <?php
 
-namespace ES;
+namespace ES\Services;
 
-use ES\config\ConfigurationController;
 use ES\Model\Database\MySql;
 
 class HtmlService
@@ -18,7 +17,7 @@ class HtmlService
 		switch ($key)
 		{
 			case 'id':
-				return "<input class='admin-input' name='$key' type='hidden' value='$value'>$value";
+				return "<input class='admin-input' name='$key' type='hidden' value='$value'><div class='td_value'>$value</div>";
 
 			case 'images':
 				$data = serialize($value);
@@ -77,7 +76,7 @@ class HtmlService
 			case 'status':
 				$result = "<select name='$key'>";
 				$result .= "<option>$value</option>";
-				foreach (ConfigurationController::getConfig('statuses') as $status)
+				foreach (ConfigurationService::getConfig('statuses') as $status)
 				{
 					$result .= ($value !== $status) ? "<option>$status</option>" : '';
 				}
@@ -86,7 +85,7 @@ class HtmlService
 			case 'role':
 				$result = "<select name='$key'>";
 				$result .= "<option>$value</option>";
-				foreach (ConfigurationController::getConfig('roles') as $status)
+				foreach (ConfigurationService::getConfig('roles') as $status)
 				{
 					$result .= ($value !== $status) ? "<option>$status</option>" : '';
 				}
@@ -127,10 +126,11 @@ class HtmlService
 
 			case 'dateUpdate':
 			case 'dateCreation':
-				return "<input type='hidden' class='admin-input' name='$key' type='text' value='$value'>$value";
+				return "<input type='hidden' class='admin-input' name='$key' type='text' value='$value'>
+					<div class='td_value'>$value</div>";
 
 			default:
-				return $value;
+				return "<div class='td_value'>$value</div>";
 		}
 	}
 

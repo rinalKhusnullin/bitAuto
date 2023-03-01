@@ -1,15 +1,12 @@
 var button = document.getElementById("show");
-button.onclick = show;
-var input = document.getElementById("show1");
-var icon = document.getElementById("i");
-function show () {
-	if(input.getAttribute('type') == 'password') {
-		input.removeAttribute('type');
-		input.setAttribute('type', 'text');
+button.onclick = show1;
+
+function show1(){
+	if(document.getElementById("show1").type === 'password') {
+		document.getElementById("show1").type = 'text';
 		button.className = 'far fa-eye-slash';
 	} else {
-		input.removeAttribute('type');
-		input.setAttribute('type', 'password');
+		document.getElementById("show1").type = 'password';
 		button.className = 'far fa-eye';
 	}
-}
+};

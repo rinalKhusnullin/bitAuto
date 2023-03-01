@@ -1,10 +1,8 @@
-<?php 
+<?php
 
-namespace ES\Model\Tags;
+namespace ES\Model;
 
-use ES\Model\Tag;
-
-class Brand extends Tag
+class Carcase
 {
     public function __construct(
         public int $id,

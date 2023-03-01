@@ -28,12 +28,12 @@
 <nav class="nav">
 	<p>Панель управления</p>
 	<ul>
-		<li class="nav_li"><a href="/admin/?products">Продукция</a></li>
-		<li class="nav_li"><a href="/admin/?orders">Заказы</a></li>
-		<li class="nav_li"><a href="/admin/?users">Пользователи</a></li>
-		<li class="nav_li"><a href="/admin/?brands">Бренд</a></li>
-		<li class="nav_li"><a href="/admin/?carcases">Кузов</a></li>
-		<li class="nav_li"><a href="/admin/?transmissions">КПП</a></li>
+		<li class="nav_li"><a href="/admin/products/">Продукция</a></li>
+		<li class="nav_li"><a href="/admin/orders/">Заказы</a></li>
+		<li class="nav_li"><a href="/admin/users/">Пользователи</a></li>
+		<li class="nav_li"><a href="/admin/brands/">Бренд</a></li>
+		<li class="nav_li"><a href="/admin/carcases/">Кузов</a></li>
+		<li class="nav_li"><a href="/admin/transmissions/">КПП</a></li>
 	</ul>
 </nav>
 <div class="wrapper">
@@ -54,5 +54,6 @@
 </div>
 <script src="/scripts/hideShowPassword.js"></script>
 <script src="/scripts/workWithImages.js"></script>
+<script src="/scripts/editValidate.js"></script>
 </body>
 </html>

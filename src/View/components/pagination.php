@@ -11,7 +11,7 @@
         <?php for ($i = 1; $i <= $countPage; $i++):?>
             <a href='<?=$link?>page=<?=$i?>' class='pagination__item <?=($i == $currentPage) ? "active-page-link" : ""?>'>
                 <?=$i?>
-            </a>     
+            </a>
         <?php endfor ?>
     <?php else: ?>
         <?php if ($currentPage >= 7 && $currentPage <= $countPage - 6): ?>
@@ -47,4 +47,4 @@
             <?php endfor; ?>
         <?php endif; ?>
     <?php endif; ?>
-</div> 
+</div>

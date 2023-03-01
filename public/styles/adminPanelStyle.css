@@ -43,6 +43,7 @@ HEADER
 	border-radius: 10px;
 	margin-right: 20px;
 	transition: .5s;
+	text-align: center;
 }
 
 .header-admin-clear:hover{
@@ -327,7 +328,6 @@ a.admin__add:hover {
 	align-items: center;
 	flex-wrap: wrap;
 	justify-content: flex-start;
-	height: 100%;
 	width: 100%;
 }
 
@@ -431,12 +431,12 @@ input[type="radio"]:checked + label {
 	background:#4e555b;
 	color: white;
 	border-radius: 10px;
-	transition: .3s; 
+	transition: .3s;
 }
 
 .change-btn:hover{
 	background:#c41230;
-	transition: .3s; 
+	transition: .3s;
 }
 
 .td_edit select {
@@ -461,7 +461,6 @@ td textarea{
 	font-weight: 700;
 	padding: 10px 5px 10px 5px;
 	border: 0;
-	border-radius: 10px;
 	background:#4e555b;
 	color: white;
 	font-family: 'Anonymous Pro', monospace;
@@ -471,4 +470,33 @@ td textarea{
 .save-btn:hover, .delete-btn:hover{
 	background:#c41230;
 	transition: .5s;
+}
+
+.edit_table td, .delete-table td{
+	padding: 0;
+}
+
+.edit_table input, .edit_table select, .edit_table textarea{
+	background-color: white;
+	padding: 10px 5px;
+}
+
+.td_value{
+	height: 100%;
+    display: flex;
+    align-items: center;
+    padding: 10px;
+}
+
+.empty{
+	border: 2px solid red;
+}
+
+.red-placeholder::placeholder{
+	color: red;
+}
+
+.far{
+	height: 30px;
+    width: 30px;
 }

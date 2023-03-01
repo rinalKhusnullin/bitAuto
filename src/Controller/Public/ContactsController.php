@@ -1,9 +1,11 @@
 <?php
 
-namespace ES\Controller;
+namespace ES\Controller\Public;
 
-use ES\config\ConfigurationController;
+use ES\Controller\BaseController;
 use ES\Model\Database\MySql;
+use ES\Services\ConfigurationService;
+use ES\Services\TemplateEngine;
 
 class ContactsController extends BaseController
 {
@@ -16,7 +18,7 @@ class ContactsController extends BaseController
 		session_start();
 		$role = array_key_exists('USER' , $_SESSION)? $_SESSION['USER']->role : 'user';
 		$this->render('layout', [
-			'title' => ConfigurationController::getConfig('TITLE', 'AutoBit'),
+			'title' => ConfigurationService::getConfig('TITLE', 'AutoBit'),
 			'role' => $role,
 			'tags' => TemplateEngine::view('components/tags', [
 				'brands' => $brands,

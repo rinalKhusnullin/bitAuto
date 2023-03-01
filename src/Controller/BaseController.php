@@ -2,7 +2,6 @@
 
 namespace ES\Controller;
 
-
 use ES\Exceptions\PathException;
 
 abstract class BaseController

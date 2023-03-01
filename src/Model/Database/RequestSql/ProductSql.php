@@ -2,9 +2,9 @@
 
 namespace ES\Model\Database\RequestSql;
 
-use ES\config\ConfigurationController;
-use ES\Model\Product;
 use ES\Model\Database\ObjectBuilder;
+use ES\Model\Product;
+use ES\Services\ConfigurationService;
 
 trait ProductSql
 {
@@ -34,15 +34,15 @@ trait ProductSql
 				$activityQuery = "";
 				break;
 			case 'notActive':
-				$activityQuery = " WHERE (p.IS_ACTIVE IS NULL) ";
+				$activityQuery = " WHERE (p.IS_ACTIVE = false) ";
 				break;
 			case 'active':
 			default:
-				$activityQuery = " WHERE (p.IS_ACTIVE IS NOT NULL) ";
+				$activityQuery = " WHERE (p.IS_ACTIVE = true) ";
 				break;
 		}
 
-		$countProductsOnPage = ConfigurationController::getConfig('CountProductsOnPage');
+		$countProductsOnPage = ConfigurationService::getConfig('CountProductsOnPage');
 		$page = ($page > 1) ? $page * $countProductsOnPage - $countProductsOnPage : 0;
 		$query = "SELECT p.id, p.name, p.IS_ACTIVE, b.brand, t.transmission, c.carcase, p.DATE_CREATION, p.DATE_UPDATE, p.FULL_DESCRIPTION, p.PRODUCT_PRICE
 					FROM product p
@@ -79,14 +79,14 @@ trait ProductSql
 				$isActiveQuery = "";
 				break;
 			case 'notActive':
-				$isActiveQuery = " AND (p.IS_ACTIVE IS NULL)";
+				$isActiveQuery = " AND (p.IS_ACTIVE = false)";
 				break;
 			case 'active':
 			default:
-				$isActiveQuery = " AND (p.IS_ACTIVE IS NOT NULL)";
+				$isActiveQuery = " AND (p.IS_ACTIVE = true)";
 				break;
 		};
-		$countProductOnPage = ConfigurationController::getConfig('CountProductsOnPage');
+		$countProductOnPage = ConfigurationService::getConfig('CountProductsOnPage');
 		$page = ($page > 1) ? $page * $countProductOnPage - $countProductOnPage : 0;
 		$sQuery = mysqli_real_escape_string($this->connection, $sQuery);
 
@@ -111,14 +111,14 @@ trait ProductSql
 				$isActiveQuery = "";
 				break;
 			case 'notActive':
-				$isActiveQuery = " (p.IS_ACTIVE IS NULL) AND ";
+				$isActiveQuery = " (p.IS_ACTIVE = false) AND ";
 				break;
 			case 'active':
 			default:
-				$isActiveQuery = " (p.IS_ACTIVE IS NOT NULL) AND ";
+				$isActiveQuery = " (p.IS_ACTIVE = true) AND ";
 				break;
 		};
-		$countProductOnPage = ConfigurationController::getConfig('CountProductsOnPage');
+		$countProductOnPage = ConfigurationService::getConfig('CountProductsOnPage');
 		$page = ($page > 1) ? $page * $countProductOnPage - $countProductOnPage : 0;
 		$query = "SELECT p.id, p.name, p.IS_ACTIVE, b.brand, t.transmission, c.carcase, p.DATE_CREATION, p.DATE_UPDATE,  p.FULL_DESCRIPTION, p.PRODUCT_PRICE
 					FROM product p

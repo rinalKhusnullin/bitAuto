@@ -1,13 +1,11 @@
-<?php 
+<?php
 
 namespace ES\Model\Database\RequestSql;
 
 use ES\Model\Database\ObjectBuilder;
-use ES\Model\Tag;
 
 trait TagsSql
 {
-
 	function getTagByName(string $tag) : array
 	{
 		$query = "SELECT ID, $tag FROM $tag";
@@ -17,7 +15,7 @@ trait TagsSql
 		return ObjectBuilder::buildTags($result, $tag);
 	}
 
-	function getTagById($id, string $tag) : ?Tag 
+	function getTagById($id, string $tag)
 	{
 		$id = mysqli_real_escape_string($this->connection, $id);
 
