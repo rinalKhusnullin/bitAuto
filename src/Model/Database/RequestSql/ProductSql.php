@@ -34,11 +34,11 @@ trait ProductSql
 				$activityQuery = "";
 				break;
 			case 'notActive':
-				$activityQuery = " WHERE (p.IS_ACTIVE IS NULL) ";
+				$activityQuery = " WHERE (p.IS_ACTIVE = false) ";
 				break;
 			case 'active':
 			default:
-				$activityQuery = " WHERE (p.IS_ACTIVE IS NOT NULL) ";
+				$activityQuery = " WHERE (p.IS_ACTIVE = true) ";
 				break;
 		}
 
@@ -79,11 +79,11 @@ trait ProductSql
 				$isActiveQuery = "";
 				break;
 			case 'notActive':
-				$isActiveQuery = " AND (p.IS_ACTIVE IS NULL)";
+				$isActiveQuery = " AND (p.IS_ACTIVE = false)";
 				break;
 			case 'active':
 			default:
-				$isActiveQuery = " AND (p.IS_ACTIVE IS NOT NULL)";
+				$isActiveQuery = " AND (p.IS_ACTIVE = true)";
 				break;
 		};
 		$countProductOnPage = ConfigurationService::getConfig('CountProductsOnPage');
@@ -111,11 +111,11 @@ trait ProductSql
 				$isActiveQuery = "";
 				break;
 			case 'notActive':
-				$isActiveQuery = " (p.IS_ACTIVE IS NULL) AND ";
+				$isActiveQuery = " (p.IS_ACTIVE = false) AND ";
 				break;
 			case 'active':
 			default:
-				$isActiveQuery = " (p.IS_ACTIVE IS NOT NULL) AND ";
+				$isActiveQuery = " (p.IS_ACTIVE = true) AND ";
 				break;
 		};
 		$countProductOnPage = ConfigurationService::getConfig('CountProductsOnPage');

@@ -1,7 +1,7 @@
 <?php
 
 return [
-	'TITLE' => 'BitAuto',
+	'TITLE' => 'AutoBit',
 	'TITLE_LOG_IN' => 'Log In',
 	'CountProductsOnPage' => 10,
 	'PAGE_MAIN' => '/',
