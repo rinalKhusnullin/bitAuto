@@ -2,9 +2,9 @@
 
 namespace ES\Model\Database\RequestSql;
 
-use ES\config\ConfigurationController;
 use ES\Model\Database\ObjectBuilder;
 use ES\Model\User;
+use ES\Services\ConfigurationService;
 
 trait UtilitySql
 {
@@ -83,7 +83,7 @@ trait UtilitySql
 			};
 			$table .= ' p';
 		}
-		$countProductOnPage = ConfigurationController::getConfig('CountProductsOnPage');
+		$countProductOnPage = ConfigurationService::getConfig('CountProductsOnPage');
 		$query = "SELECT COUNT(*)
 				FROM $table
                 $activityQuery";
@@ -110,7 +110,7 @@ trait UtilitySql
 				break;
 		};
 
-		$countProductOnPage = ConfigurationController::getConfig('CountProductsOnPage');
+		$countProductOnPage = ConfigurationService::getConfig('CountProductsOnPage');
 		$query = "SELECT COUNT(*)
 					FROM product p
 	 				inner join brand b on p.ID_BRAND = b.id
@@ -161,7 +161,7 @@ trait UtilitySql
 				break;
 		};
 		$sQuery = mysqli_real_escape_string($this->connection, $sQuery);
-		$countProductOnPage = ConfigurationController::getConfig('CountProductsOnPage');
+		$countProductOnPage = ConfigurationService::getConfig('CountProductsOnPage');
 		$query = "SELECT COUNT(*)
 					from product p
                     where (name LIKE '%$sQuery%' or FULL_DESCRIPTION LIKE '%$sQuery%')

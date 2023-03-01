@@ -2,9 +2,9 @@
 
 namespace ES\Model\Database\RequestSql;
 
-use ES\config\ConfigurationController;
-use ES\Model\Product;
 use ES\Model\Database\ObjectBuilder;
+use ES\Model\Product;
+use ES\Services\ConfigurationService;
 
 trait ProductSql
 {
@@ -42,7 +42,7 @@ trait ProductSql
 				break;
 		}
 
-		$countProductsOnPage = ConfigurationController::getConfig('CountProductsOnPage');
+		$countProductsOnPage = ConfigurationService::getConfig('CountProductsOnPage');
 		$page = ($page > 1) ? $page * $countProductsOnPage - $countProductsOnPage : 0;
 		$query = "SELECT p.id, p.name, p.IS_ACTIVE, b.brand, t.transmission, c.carcase, p.DATE_CREATION, p.DATE_UPDATE, p.FULL_DESCRIPTION, p.PRODUCT_PRICE
 					FROM product p
@@ -86,7 +86,7 @@ trait ProductSql
 				$isActiveQuery = " AND (p.IS_ACTIVE IS NOT NULL)";
 				break;
 		};
-		$countProductOnPage = ConfigurationController::getConfig('CountProductsOnPage');
+		$countProductOnPage = ConfigurationService::getConfig('CountProductsOnPage');
 		$page = ($page > 1) ? $page * $countProductOnPage - $countProductOnPage : 0;
 		$sQuery = mysqli_real_escape_string($this->connection, $sQuery);
 
@@ -118,7 +118,7 @@ trait ProductSql
 				$isActiveQuery = " (p.IS_ACTIVE IS NOT NULL) AND ";
 				break;
 		};
-		$countProductOnPage = ConfigurationController::getConfig('CountProductsOnPage');
+		$countProductOnPage = ConfigurationService::getConfig('CountProductsOnPage');
 		$page = ($page > 1) ? $page * $countProductOnPage - $countProductOnPage : 0;
 		$query = "SELECT p.id, p.name, p.IS_ACTIVE, b.brand, t.transmission, c.carcase, p.DATE_CREATION, p.DATE_UPDATE,  p.FULL_DESCRIPTION, p.PRODUCT_PRICE
 					FROM product p
