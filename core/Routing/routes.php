@@ -15,6 +15,7 @@ Router::post('/product/:id/', [new \ES\Controller\Public\ProductController(), 'p
 Router::get('/contacts/', [new \ES\Controller\Public\ContactsController(), 'getContactsAction']);
 
 Router::get('/error/', [new \ES\Controller\Public\ErrorController(), 'getSystemErrorAction']);
+Router::get('/500/', [new \ES\Controller\Public\ErrorController(), 'getSystemErrorAction']);
 
 Router::get('/success/', [new \ES\Controller\Public\FormController(),'successAction']);
 

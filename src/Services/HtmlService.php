@@ -160,6 +160,7 @@ class HtmlService
 		switch ($column)
 		{
 			case 'mainImage':
+			case 'images':
 				return '';
 
 			default:

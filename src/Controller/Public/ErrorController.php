@@ -33,7 +33,7 @@ class ErrorController extends BaseController
 				'carcases' => $carcases,
 				'transmissions' => $transmissions,
 			]),
-			'content' => TemplateEngine::view('pages/404', []),
+			'content' => TemplateEngine::view('pages/500', []),
 		]);
 	}
 }

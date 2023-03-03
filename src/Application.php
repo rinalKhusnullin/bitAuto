@@ -32,8 +32,8 @@ class Application
 		}
 		catch (\Exception|MySqlException|\mysqli_sql_exception|ConfigurationException|PathException $e)
 		{
-			http_response_code(404);
-			$action = Router::find('GET','/error/')->action;
+			http_response_code(500);
+			$action = Router::find('GET','/500/')->action;
 			$action($e);
 		}
 	}

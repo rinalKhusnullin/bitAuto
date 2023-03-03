@@ -4,7 +4,7 @@
  * @var array $columns
  * @var $content
  * @var $pagination
- * @var string $deleteMessage
+ * @var $deleteMessage
  * @var string $addItemLink
  */
 
