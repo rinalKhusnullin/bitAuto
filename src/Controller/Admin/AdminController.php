@@ -77,8 +77,10 @@ class AdminController extends BaseController
 
 		$role = $_SESSION['USER']->role;
 
-		$_SESSION['token'] = md5(uniqid(mt_rand(), true));
-
+		if (!array_key_exists('token',$_SESSION))
+		{
+			$_SESSION['token'] = md5(uniqid(mt_rand(), true));
+		}
 		$content = (array)$this->getContentById($id);
 
 		$columns = (!empty($content)) ? array_keys($content) : '';
@@ -149,6 +151,11 @@ class AdminController extends BaseController
 	public function addItemAction(string $type): void
 	{
 		$role = $_SESSION['USER']->role;
+
+		if (!array_key_exists('token', $_SESSION))
+		{
+			$_SESSION['token'] = md5(uniqid(mt_rand(), true));
+		}
 
 		$type = ucfirst($type);
 		$class = 'ES\Model\\' . $type;
