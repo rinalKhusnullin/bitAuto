@@ -68,8 +68,8 @@ class HtmlService
 					";
 			case 'isActive':
 				$isActive = ($value === true)
-					? "<option selected value='true'>Да</option><option value='false'>Нет</option>"
-					: "<option value='true'>Да</option><option selected value='false'>Нет</option>";
+					? "<option selected value='true'>Да</option><option value=''>Нет</option>"
+					: "<option value='true'>Да</option><option selected value=''>Нет</option>";
 
 				return "<select name='$key'> $isActive </select>";
 
