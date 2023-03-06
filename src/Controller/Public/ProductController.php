@@ -43,7 +43,7 @@ class ProductController extends BaseController
 				'carcases' => $carcases,
 				'transmissions' => $transmissions,
 			]),
-			'content' => TemplateEngine::view('Product/product-detailed', $data),
+			'content' => TemplateEngine::view('product/product-detailed', $data),
 		]);
 	}
 

@@ -18,7 +18,7 @@
 
 <div class="product-card__container">
 	<?php foreach ($products as $product):?>
-		<?= \ES\Services\TemplateEngine::view('/Product/product-card', (array)$product)?>
+		<?= \ES\Services\TemplateEngine::view('/product/product-card', (array)$product)?>
 	<?php endforeach?>
 </div>
 
