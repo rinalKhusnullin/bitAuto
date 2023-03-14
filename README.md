@@ -25,10 +25,10 @@ Open Server версии не ниже **5.4.3**
 ```{PHP} {
 <?php
 return [
-   	'DB_HOST' => '<Ваш IP адрес(для Apache сервера) или хост>',
+   	'DB_HOST' => '<Ваш IP адрес>',
    	'DB_NAME' => '<Название базы данных>',
    	'DB_USER' => '<Логин для доступа в БД>',
-   	'DB_PASSWORD' => ' <Пароль для доступа в БД> ',
+   	'DB_PASSWORD' => ' <Пароль для доступа в БД>',
    	'DB_TABLE_MIGRATION' => 'migration',
 	];
 ```
